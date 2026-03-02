@@ -4,140 +4,129 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>OAB Santana de Parnaíba – Painel Cássia Kelly</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root {
-  --manto:       #1a2a6c;
-  --manto-deep:  #0e1840;
-  --manto-mid:   #243482;
-  --manto-light: #2e429e;
-  --gold:        #c9a84c;
-  --gold-light:  #e8c96d;
-  --gold-pale:   #f5e8c0;
-  --white:       #ffffff;
-  --dim:         #a8b4d8;
-  --muted:       #6b7db0;
-  --success:     #25d366;
-  --border:      rgba(201,168,76,0.25);
-  --card:        rgba(255,255,255,0.05);
-  --card-hover:  rgba(255,255,255,0.09);
+:root{
+  --manto:#1a2a6c;--manto-deep:#0e1840;--manto-mid:#243482;--manto-light:#2e429e;
+  --gold:#c9a84c;--gold-light:#e8c96d;--white:#ffffff;
+  --dim:#a8b4d8;--muted:#6b7db0;--success:#25d366;
+  --border:rgba(201,168,76,0.25);--card:rgba(255,255,255,0.05);--card-hover:rgba(255,255,255,0.09);
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
 body{font-family:'Jost',sans-serif;background:var(--manto-deep);color:var(--white);min-height:100vh;overflow-x:hidden}
-body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 60% at 10% 0%,rgba(46,66,158,0.55) 0%,transparent 60%),radial-gradient(ellipse 60% 80% at 90% 100%,rgba(13,24,64,0.8) 0%,transparent 60%),radial-gradient(ellipse 40% 40% at 50% 50%,rgba(201,168,76,0.04) 0%,transparent 70%);pointer-events:none;z-index:0}
-body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(255,255,255,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.025) 1px,transparent 1px);background-size:48px 48px;pointer-events:none;z-index:0}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 60% at 10% 0%,rgba(46,66,158,0.55) 0%,transparent 60%),radial-gradient(ellipse 60% 80% at 90% 100%,rgba(13,24,64,0.8) 0%,transparent 60%);pointer-events:none;z-index:0}
+body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.02) 1px,transparent 1px);background-size:48px 48px;pointer-events:none;z-index:0}
 
 /* HEADER */
-header{position:relative;z-index:50;background:linear-gradient(135deg,var(--manto-deep) 0%,var(--manto) 60%,var(--manto-mid) 100%);border-bottom:1px solid var(--gold);padding:22px 48px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 4px 40px rgba(0,0,0,0.5)}
+header{position:relative;z-index:50;background:linear-gradient(135deg,var(--manto-deep) 0%,var(--manto) 60%,var(--manto-mid) 100%);border-bottom:1px solid var(--gold);padding:20px 48px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 4px 40px rgba(0,0,0,0.5)}
 .logo-wrap{display:flex;align-items:center;gap:18px}
-.seal{width:62px;height:62px;border-radius:50%;border:2px solid var(--gold);display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(201,168,76,0.1);font-family:'Cormorant Garamond',serif;font-weight:700;color:var(--gold);line-height:1;flex-shrink:0}
+.seal{width:60px;height:60px;border-radius:50%;border:2px solid var(--gold);display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(201,168,76,0.1);font-family:'Cormorant Garamond',serif;font-weight:700;color:var(--gold);line-height:1;flex-shrink:0}
 .seal span:first-child{font-size:20px;letter-spacing:1px}
 .seal span:last-child{font-size:8px;letter-spacing:2px;color:var(--gold-light);margin-top:2px}
-.logo-text h1{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--white);line-height:1.2}
+.logo-text h1{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:700;color:var(--white);line-height:1.2}
 .logo-text p{font-size:11px;font-weight:300;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-top:3px}
-.header-right{text-align:right}
-.header-right .hname{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:600;color:var(--gold-light)}
-.header-right .hrole{font-size:10px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-top:3px}
-.header-right .htime{font-size:11px;color:var(--dim);margin-top:6px}
+.hright{text-align:right}
+.hright .hname{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:var(--gold-light)}
+.hright .hrole{font-size:10px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-top:3px}
+.hright .htime{font-size:11px;color:var(--dim);margin-top:5px}
 
 /* MAIN */
-main{position:relative;z-index:10;max-width:1400px;margin:0 auto;padding:32px 40px 64px}
+main{position:relative;z-index:10;max-width:1400px;margin:0 auto;padding:28px 40px 64px}
 
 /* STATS */
-.stats-row{display:flex;gap:12px;margin-bottom:28px;flex-wrap:wrap}
-.stat-chip{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 20px;display:flex;align-items:center;gap:12px;flex:1;min-width:160px}
-.stat-icon{font-size:22px}
-.stat-val{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:var(--gold-light)}
-.stat-lbl{font-size:11px;color:var(--muted);margin-top:2px}
+.stats-row{display:flex;gap:12px;margin-bottom:26px;flex-wrap:wrap}
+.stat-chip{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:13px 18px;display:flex;align-items:center;gap:12px;flex:1;min-width:150px}
+.stat-icon{font-size:20px}
+.stat-val{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:700;color:var(--gold-light)}
+.stat-lbl{font-size:10.5px;color:var(--muted);margin-top:1px}
 
 /* TABS */
-.tabs{display:flex;gap:4px;margin-bottom:32px;background:rgba(0,0,0,0.25);padding:5px;border-radius:14px;border:1px solid var(--border);width:fit-content;flex-wrap:wrap}
-.tab{padding:10px 20px;border-radius:10px;font-size:12.5px;font-weight:500;letter-spacing:.3px;cursor:pointer;border:none;background:transparent;color:var(--muted);transition:all .22s ease;display:flex;align-items:center;gap:7px;font-family:'Jost',sans-serif}
+.tabs{display:flex;gap:4px;margin-bottom:28px;background:rgba(0,0,0,0.25);padding:5px;border-radius:14px;border:1px solid var(--border);width:fit-content;flex-wrap:wrap}
+.tab{padding:9px 18px;border-radius:10px;font-size:12px;font-weight:500;letter-spacing:.3px;cursor:pointer;border:none;background:transparent;color:var(--muted);transition:all .2s;display:flex;align-items:center;gap:7px;font-family:'Jost',sans-serif}
 .tab:hover{color:var(--white);background:rgba(255,255,255,0.06)}
 .tab.active{background:linear-gradient(135deg,var(--manto-light),var(--manto-mid));color:var(--white);box-shadow:0 4px 18px rgba(26,42,108,0.6);border:1px solid var(--border)}
 
-/* TAB CONTENT */
 .tab-content{display:none;animation:fadeUp .3s ease}
 .tab-content.active{display:block}
-@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
-/* GRID */
-.two-col{display:grid;grid-template-columns:330px 1fr;gap:22px;align-items:start}
+/* LAYOUT */
+.two-col{display:grid;grid-template-columns:310px 1fr;gap:20px;align-items:start}
 
 /* CARD */
-.card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:26px;backdrop-filter:blur(10px);transition:border-color .2s}
-.card:hover{border-color:rgba(201,168,76,0.4)}
-.card-title{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:600;color:var(--gold-light);margin-bottom:20px;display:flex;align-items:center;gap:9px;padding-bottom:14px;border-bottom:1px solid rgba(201,168,76,0.15)}
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;backdrop-filter:blur(10px)}
+.card-title{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:600;color:var(--gold-light);margin-bottom:18px;display:flex;align-items:center;gap:8px;padding-bottom:12px;border-bottom:1px solid rgba(201,168,76,0.15)}
 
 /* FORM */
-.fg{margin-bottom:14px}
-label{display:block;font-size:10.5px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
-input,select,textarea{width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(201,168,76,0.2);border-radius:10px;padding:11px 13px;font-family:'Jost',sans-serif;font-size:13.5px;color:var(--white);outline:none;transition:border-color .2s,background .2s}
+.fg{margin-bottom:13px}
+label{display:block;font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+input,select,textarea{width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(201,168,76,0.2);border-radius:9px;padding:10px 12px;font-family:'Jost',sans-serif;font-size:13px;color:var(--white);outline:none;transition:border-color .2s,background .2s}
 input::placeholder,textarea::placeholder{color:var(--muted)}
 input:focus,select:focus,textarea:focus{border-color:var(--gold);background:rgba(201,168,76,0.07)}
 select option{background:var(--manto-deep);color:var(--white)}
-textarea{resize:vertical;min-height:80px}
+textarea{resize:vertical;min-height:75px}
 .check-group{display:flex;flex-direction:column;gap:7px;margin-top:4px}
-.check-label{display:flex;align-items:center;gap:9px;cursor:pointer;font-size:13px;color:var(--dim);text-transform:none;letter-spacing:0;font-weight:400}
-.check-label input[type=checkbox]{width:15px;height:15px;flex-shrink:0;accent-color:var(--gold)}
+.check-label{display:flex;align-items:center;gap:8px;cursor:pointer;font-size:12.5px;color:var(--dim);text-transform:none;letter-spacing:0;font-weight:400}
+.check-label input[type=checkbox]{width:14px;height:14px;flex-shrink:0;accent-color:var(--gold)}
 
 /* BUTTONS */
-.btn-row{display:flex;gap:9px;margin-top:18px;flex-wrap:wrap}
-.btn{padding:11px 20px;border-radius:10px;font-family:'Jost',sans-serif;font-size:12.5px;font-weight:600;letter-spacing:.4px;cursor:pointer;border:none;transition:all .2s ease;display:flex;align-items:center;gap:7px;justify-content:center}
+.btn-row{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}
+.btn{padding:10px 18px;border-radius:9px;font-family:'Jost',sans-serif;font-size:12px;font-weight:600;letter-spacing:.3px;cursor:pointer;border:none;transition:all .2s;display:flex;align-items:center;gap:7px;justify-content:center}
 .btn:hover{transform:translateY(-2px)}
 .btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--manto-deep);flex:1}
-.btn-gold:hover{box-shadow:0 6px 22px rgba(201,168,76,0.4)}
+.btn-gold:hover{box-shadow:0 6px 20px rgba(201,168,76,0.4)}
 .btn-wpp{background:linear-gradient(135deg,#1ab050,#25D366);color:#fff}
-.btn-wpp:hover{box-shadow:0 6px 20px rgba(37,211,102,0.4)}
+.btn-wpp:hover{box-shadow:0 6px 18px rgba(37,211,102,0.4)}
 .btn-email{background:linear-gradient(135deg,#2960c8,#4285f4);color:#fff}
-.btn-email:hover{box-shadow:0 6px 20px rgba(66,133,244,0.35)}
+.btn-email:hover{box-shadow:0 6px 18px rgba(66,133,244,0.35)}
 .btn-ghost{background:rgba(255,255,255,0.07);color:var(--dim);border:1px solid var(--border)}
 .btn-ghost:hover{background:rgba(255,255,255,0.13);color:var(--white)}
 
 /* OUTPUT */
-.out-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.out-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
 .out-label{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
-.copied-badge{font-size:11px;color:var(--success);font-weight:600;opacity:0;transition:opacity .3s;display:flex;align-items:center;gap:5px}
+.copied-badge{font-size:11px;color:var(--success);font-weight:600;opacity:0;transition:opacity .3s}
 .copied-badge.show{opacity:1}
-.out-box{background:rgba(0,0,0,0.3);border:1px solid rgba(201,168,76,0.12);border-radius:12px;padding:20px;font-size:13.5px;line-height:1.8;color:#d0d8f0;white-space:pre-wrap;min-height:160px;max-height:500px;overflow-y:auto;user-select:all;font-family:'Jost',sans-serif}
+.out-box{background:rgba(0,0,0,0.3);border:1px solid rgba(201,168,76,0.12);border-radius:11px;padding:18px;font-size:13px;line-height:1.8;color:#d0d8f0;white-space:pre-wrap;min-height:160px;max-height:500px;overflow-y:auto;user-select:all;font-family:'Jost',sans-serif}
 .out-box::-webkit-scrollbar{width:4px}
 .out-box::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px}
-.out-box .placeholder{color:var(--muted);font-style:italic;font-size:13px}
+.placeholder{color:var(--muted);font-style:italic;font-size:13px}
 
-/* QUICK MESSAGE CARDS */
-.sec-head{margin-bottom:24px}
-.sec-head h2{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;color:var(--white);display:flex;align-items:center;gap:12px}
-.sec-head p{font-size:13px;color:var(--muted);margin-top:6px}
+/* SECTION HEAD */
+.sec-head{margin-bottom:20px}
+.sec-head h2{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;color:var(--white);display:flex;align-items:center;gap:10px}
+.sec-head p{font-size:12.5px;color:var(--muted);margin-top:5px}
 
-.cat-filter{display:flex;gap:8px;margin-bottom:22px;flex-wrap:wrap}
-.cat-btn{padding:7px 16px;border-radius:20px;font-size:11.5px;font-weight:600;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--muted);font-family:'Jost',sans-serif;transition:all .2s;letter-spacing:.3px}
+/* CATEGORY FILTER */
+.cat-filter{display:flex;gap:7px;margin-bottom:20px;flex-wrap:wrap}
+.cat-btn{padding:6px 14px;border-radius:20px;font-size:11px;font-weight:600;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--muted);font-family:'Jost',sans-serif;transition:all .2s;letter-spacing:.3px}
 .cat-btn:hover{color:var(--white);border-color:var(--dim)}
 .cat-btn.active{background:var(--gold);color:var(--manto-deep);border-color:var(--gold)}
 
-.qm-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}
-.qm-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;cursor:pointer;transition:all .22s ease;position:relative;overflow:hidden}
+/* QUICK MESSAGE CARDS */
+.qm-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(265px,1fr));gap:13px}
+.qm-card{background:var(--card);border:1px solid var(--border);border-radius:13px;padding:18px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
 .qm-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--gold);opacity:0;transition:opacity .2s}
-.qm-card:hover{border-color:var(--gold);background:var(--card-hover);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.3)}
+.qm-card:hover{border-color:var(--gold);background:var(--card-hover);transform:translateY(-2px);box-shadow:0 8px 22px rgba(0,0,0,0.3)}
 .qm-card:hover::before{opacity:1}
 .qm-card:active{transform:translateY(0)}
 
-.qm-tag{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;padding:3px 9px;border-radius:20px;margin-bottom:10px}
+.qm-tag{display:inline-flex;align-items:center;gap:5px;font-size:9.5px;font-weight:600;letter-spacing:1px;text-transform:uppercase;padding:3px 8px;border-radius:20px;margin-bottom:9px}
 .tag-wpp{background:rgba(37,211,102,0.15);color:#25D366}
 .tag-info{background:rgba(201,168,76,0.15);color:var(--gold-light)}
-.tag-alert{background:rgba(224,82,82,0.15);color:#e08080}
+.tag-nao{background:rgba(224,82,82,0.18);color:#e08080}
 .tag-neutral{background:rgba(100,130,200,0.15);color:#90aaee}
+.tag-ok{background:rgba(60,180,120,0.15);color:#60c890}
 
-.qm-title{font-size:14px;font-weight:600;color:var(--white);margin-bottom:6px}
-.qm-preview{font-size:12px;color:var(--muted);line-height:1.55;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-.qm-footer{display:flex;align-items:center;justify-content:space-between;margin-top:14px}
-.qm-hint{font-size:10.5px;color:var(--muted);display:flex;align-items:center;gap:5px;transition:color .2s}
+.qm-title{font-size:13.5px;font-weight:600;color:var(--white);margin-bottom:5px}
+.qm-preview{font-size:11.5px;color:var(--muted);line-height:1.55;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.qm-hint{font-size:10px;color:var(--muted);margin-top:12px;transition:color .2s;display:flex;align-items:center;gap:5px}
 .qm-card:hover .qm-hint{color:var(--gold-light)}
-.qm-copied{font-size:10.5px;color:var(--success);font-weight:600;opacity:0;transition:opacity .3s;position:absolute;bottom:18px;right:18px}
+.qm-copied{font-size:10px;color:var(--success);font-weight:600;opacity:0;transition:opacity .3s;position:absolute;bottom:16px;right:16px}
 .qm-copied.show{opacity:1}
 
 /* TOAST */
-.toast{position:fixed;bottom:28px;right:28px;background:var(--manto-mid);border:1px solid var(--gold);color:var(--white);padding:13px 20px;border-radius:12px;font-size:13px;font-weight:500;z-index:9999;transform:translateY(80px);opacity:0;transition:all .35s cubic-bezier(.34,1.56,.64,1);display:flex;align-items:center;gap:10px;box-shadow:0 8px 32px rgba(0,0,0,0.4);max-width:320px}
+.toast{position:fixed;bottom:26px;right:26px;background:var(--manto-mid);border:1px solid var(--gold);color:var(--white);padding:12px 18px;border-radius:11px;font-size:13px;font-weight:500;z-index:9999;transform:translateY(80px);opacity:0;transition:all .35s cubic-bezier(.34,1.56,.64,1);display:flex;align-items:center;gap:9px;box-shadow:0 8px 30px rgba(0,0,0,0.4);max-width:300px}
 .toast.show{transform:translateY(0);opacity:1}
 
 ::-webkit-scrollbar{width:6px}
@@ -155,7 +144,7 @@ textarea{resize:vertical;min-height:80px}
       <p>Subseção Santana de Parnaíba &nbsp;·&nbsp; Assistência Judiciária Gratuita</p>
     </div>
   </div>
-  <div class="header-right">
+  <div class="hright">
     <div class="hname">Cássia Kelly Lins Reis</div>
     <div class="hrole">Auxiliar Administrativo</div>
     <div class="htime" id="live-time"></div>
@@ -183,16 +172,17 @@ textarea{resize:vertical;min-height:80px}
   <div id="rapidas" class="tab-content active">
     <div class="sec-head">
       <h2>⚡ Mensagens Rápidas</h2>
-      <p>Clique em qualquer cartão para copiar instantaneamente. Use os filtros para encontrar a mensagem certa.</p>
+      <p>Clique no cartão para copiar instantaneamente. Use os filtros para localizar a mensagem.</p>
     </div>
     <div class="cat-filter">
       <button class="cat-btn active" onclick="filtrar('todas',this)">Todas</button>
       <button class="cat-btn" onclick="filtrar('boasvindas',this)">👋 Boas-vindas</button>
+      <button class="cat-btn" onclick="filtrar('atende',this)">✅ O que atendemos</button>
+      <button class="cat-btn" onclick="filtrar('naoatende',this)">🚫 Não atendemos</button>
       <button class="cat-btn" onclick="filtrar('documentos',this)">📋 Documentos</button>
       <button class="cat-btn" onclick="filtrar('urgente',this)">🚨 Urgente</button>
       <button class="cat-btn" onclick="filtrar('agendamento',this)">📅 Agendamento</button>
       <button class="cat-btn" onclick="filtrar('delicado',this)">🤝 Situações delicadas</button>
-      <button class="cat-btn" onclick="filtrar('outros',this)">📌 Outros</button>
     </div>
     <div class="qm-grid" id="qm-grid"></div>
   </div>
@@ -206,22 +196,21 @@ textarea{resize:vertical;min-height:80px}
     <div class="two-col">
       <div class="card">
         <div class="card-title">⚙️ Personalizar</div>
-        <div class="fg"><label>Nome do destinatário</label><input type="text" id="wg-nome" placeholder="Ex: Maria, Sr. João..."></div>
+        <div class="fg"><label>Nome do assistido (opcional)</label><input type="text" id="wg-nome" placeholder="Ex: João Silva"></div>
         <div class="fg"><label>Tipo de caso</label>
           <select id="wg-caso">
             <option value="geral">Geral</option>
             <option value="alimentos">Alimentos / Pensão</option>
             <option value="divorcio">Divórcio</option>
-            <option value="criminal">Criminal</option>
-            <option value="trabalhista">Trabalhista</option>
-            <option value="civel">Cível</option>
+            <option value="guarda">Guarda de filhos</option>
+            <option value="civel">Cível em geral</option>
             <option value="inventario">Inventário / Herança</option>
-            <option value="previdenciario">Previdenciário / INSS</option>
+            <option value="violencia">Violência doméstica</option>
+            <option value="habitacional">Habitacional</option>
           </select>
         </div>
-        <div class="fg"><label>Incluir na mensagem</label>
+        <div class="fg"><label>Incluir</label>
           <div class="check-group">
-            <label class="check-label"><input type="checkbox" id="wg-boasvindas" checked> Boas-vindas</label>
             <label class="check-label"><input type="checkbox" id="wg-gratuito" checked> Informar que é gratuito</label>
             <label class="check-label"><input type="checkbox" id="wg-horario" checked> Horário de atendimento</label>
             <label class="check-label"><input type="checkbox" id="wg-aviso" checked> Aviso de limite de vagas</label>
@@ -246,14 +235,14 @@ textarea{resize:vertical;min-height:80px}
   <div id="confirmacao" class="tab-content">
     <div class="sec-head">
       <h2>✅ Confirmação de Atendimento</h2>
-      <p>Confirme, lembre, reagende ou cancele com mensagem personalizada.</p>
+      <p>Confirme, lembre, reagende ou cancele atendimentos.</p>
     </div>
     <div class="two-col">
       <div class="card">
-        <div class="card-title">⚙️ Dados do atendimento</div>
-        <div class="fg"><label>Nome da pessoa</label><input type="text" id="cf-nome" placeholder="Ex: Maria Silva"></div>
+        <div class="card-title">⚙️ Dados</div>
+        <div class="fg"><label>Nome do assistido</label><input type="text" id="cf-nome" placeholder="Ex: João Silva"></div>
         <div class="fg"><label>Data</label><input type="date" id="cf-data"></div>
-        <div class="fg"><label>Tipo de mensagem</label>
+        <div class="fg"><label>Tipo</label>
           <select id="cf-tipo">
             <option value="confirmar">✅ Confirmar atendimento</option>
             <option value="lembrete">🔔 Lembrete</option>
@@ -261,7 +250,7 @@ textarea{resize:vertical;min-height:80px}
             <option value="cancelar">❌ Cancelamento</option>
           </select>
         </div>
-        <div class="fg"><label>Observação (opcional)</label><textarea id="cf-obs" placeholder="Ex: Não esqueça de trazer documentos originais."></textarea></div>
+        <div class="fg"><label>Observação (opcional)</label><textarea id="cf-obs" placeholder="Informação adicional..."></textarea></div>
         <div class="btn-row"><button class="btn btn-gold" onclick="gerarConfirmacao()">⚡ Gerar</button></div>
       </div>
       <div class="card">
@@ -283,14 +272,13 @@ textarea{resize:vertical;min-height:80px}
     </div>
     <div class="two-col">
       <div class="card">
-        <div class="card-title">⚙️ Dados do e-mail</div>
-        <div class="fg"><label>Destinatário</label><input type="text" id="em-dest" placeholder="Ex: Dra. Ana Lima"></div>
+        <div class="card-title">⚙️ Dados</div>
+        <div class="fg"><label>Destinatário</label><input type="text" id="em-dest" placeholder="Ex: Dr. Carlos Lima"></div>
         <div class="fg"><label>Tratamento</label>
           <select id="em-trat">
-            <option value="Prezado(a)">Prezado(a)</option>
+            <option value="Prezado(a) Senhor(a)">Prezado(a) Senhor(a)</option>
             <option value="Excelentíssimo(a) Senhor(a)">Excelentíssimo(a) – autoridades</option>
             <option value="Doutor(a)">Doutor(a)</option>
-            <option value="Senhor(a)">Senhor(a)</option>
           </select>
         </div>
         <div class="fg"><label>Tipo</label>
@@ -304,7 +292,7 @@ textarea{resize:vertical;min-height:80px}
           </select>
         </div>
         <div class="fg"><label>Conteúdo</label><textarea id="em-corpo" rows="5" placeholder="Descreva o conteúdo principal..."></textarea></div>
-        <div class="btn-row"><button class="btn btn-gold" onclick="gerarEmail()">⚡ Gerar E-mail</button></div>
+        <div class="btn-row"><button class="btn btn-gold" onclick="gerarEmail()">⚡ Gerar</button></div>
       </div>
       <div class="card">
         <div class="out-header"><span class="out-label">E-mail Gerado</span><span class="copied-badge" id="st-em">✓ Copiado!</span></div>
@@ -321,7 +309,7 @@ textarea{resize:vertical;min-height:80px}
   <div id="faq" class="tab-content">
     <div class="sec-head">
       <h2>❓ Dúvidas Frequentes</h2>
-      <p>Clique para copiar a resposta direto para o WhatsApp.</p>
+      <p>Clique para copiar a resposta diretamente para o WhatsApp.</p>
     </div>
     <div class="qm-grid" id="faq-grid"></div>
   </div>
@@ -331,204 +319,434 @@ textarea{resize:vertical;min-height:80px}
 <div class="toast" id="toast"></div>
 
 <script>
-// ── MENSAGENS RÁPIDAS ─────────────────────────────────────────────
+// ══════════════════════════════════════════════════════════
+// BLOCO FIXO — endereço + docs (usado no fim de várias msgs)
+// ══════════════════════════════════════════════════════════
+const BLOCO = `
+━━━━━━━━━━━━━━━━━━━━
+📍 Av. Tenente Marques, 5297 – Jardim do Luar
+   Santana de Parnaíba/SP _(dentro do POUPATEMPO)_
+📞 (11) 4154-5191
+🕘 Segunda a Sexta-feira | 09h00 às 12h00
+⚠️ Limite: 30 pessoas por dia
+━━━━━━━━━━━━━━━━━━━━
+
+📋 *DOCUMENTOS OBRIGATÓRIOS:*
+✅ RG original + CPF
+✅ Comprovante de residência atualizado
+✅ Comprovante de renda de todos da família
+✅ Comprovante de patrimônio _(se houver)_
+
+🚫 Sem os documentos, o atendimento NÃO será realizado.`;
+
+const BLOCO_CURTO = `
+━━━━━━━━━━━━━━━━━━━━
+📍 Av. Tenente Marques, 5297 – Jardim do Luar
+   Santana de Parnaíba/SP _(dentro do POUPATEMPO)_
+📞 (11) 4154-5191
+🕘 Segunda a Sexta-feira | 09h00 às 12h00
+⚠️ Limite: 30 pessoas por dia
+━━━━━━━━━━━━━━━━━━━━`;
+
+// ══════════════════════════════════════════════════════════
+// MENSAGENS RÁPIDAS
+// ══════════════════════════════════════════════════════════
 const msgs = [
-  {cat:'boasvindas',tag:'tag-wpp',tagLabel:'WhatsApp',title:'Boas-vindas – 1ª mensagem',
-   preview:'Saudação inicial acolhedora para quem entrou em contato pela primeira vez.',
-   text:`👋 Olá! Seja muito bem-vindo(a)!\n\nAqui é a *OAB – Assistência Judiciária Gratuita*\n📍 Subseção Santana de Parnaíba\n\nEstou à disposição para ajudá-lo(a). Como posso te ajudar hoje? 😊\n\nPode me contar um pouco sobre o que aconteceu ou qual é a sua dúvida.`},
 
-  {cat:'boasvindas',tag:'tag-wpp',tagLabel:'WhatsApp',title:'Boas-vindas – Como posso ajudar?',
-   preview:'Apresentação com convite para a pessoa relatar o caso.',
-   text:`Olá! Tudo bem? 😊\n\nSou a *Cássia Kelly*, da *OAB – Assistência Judiciária Gratuita*\n📍 Subseção Santana de Parnaíba\n\nNosso atendimento é *totalmente gratuito* para quem não tem condições de pagar um advogado particular.\n\nMe conta: como posso te ajudar? 🙏`},
+  // ── BOAS-VINDAS ──────────────────────────────────────────
+  {cat:'boasvindas',tag:'tag-wpp',tagLabel:'WhatsApp',
+   title:'Boas-vindas – 1ª mensagem',
+   preview:'Saudação inicial informando o serviço, horário e como proceder.',
+   text:`Bom dia.
 
-  {cat:'boasvindas',tag:'tag-wpp',tagLabel:'WhatsApp',title:'Apresentação completa da OAB',
-   preview:'Explica o que é a Assistência Judiciária, horários e localização.',
-   text:`Olá! Seja bem-vindo(a) à *OAB – Assistência Judiciária Gratuita*! 🏛️\n\nA Assistência Judiciária da OAB oferece orientação e representação jurídica *sem custo algum* para cidadãos que não têm condições de contratar um advogado particular.\n\n📅 *Atendimento:* Segunda a Sexta-feira\n🕘 *Horário:* 09h00 às 12h00\n⚠️ *Limite:* 30 pessoas por dia – chegue cedo!\n\n📍 Av. Tenente Marques, 5297 – Jardim do Luar\n_(Dentro do POUPATEMPO – Santana de Parnaíba/SP)_\n📞 (11) 4154-5191\n\nComo posso te ajudar? 😊`},
+Este é o canal de atendimento da *OAB – Assistência Judiciária Gratuita*
+📍 Subseção Santana de Parnaíba
 
-  {cat:'documentos',tag:'tag-info',tagLabel:'Documentos',title:'Documentação incompleta',
-   preview:'Informa que faltam documentos e orienta como providenciá-los.',
-   text:`Olá! 😊\n\nAnalisamos sua solicitação e identificamos que *faltam alguns documentos* para darmos início ao atendimento.\n\n📋 *Documentos que ainda precisamos:*\n_(preencha conforme o caso)_\n\n❗ *Importante:* sem os documentos completos, infelizmente não conseguimos realizar o atendimento.\n\nAssim que providenciá-los, pode nos procurar:\n📍 Av. Tenente Marques, 5297 – _(POUPATEMPO)_\n🕘 Segunda a Sexta – 09h às 12h\n\nQualquer dúvida, estamos aqui! 🙏`},
+O serviço é *gratuito* para cidadãos sem condições de contratar advogado particular.
 
-  {cat:'documentos',tag:'tag-info',tagLabel:'Documentos',title:'Lista completa de documentos',
-   preview:'Envia a lista de todos os documentos obrigatórios.',
-   text:`📋 *DOCUMENTOS OBRIGATÓRIOS – OAB Santana de Parnaíba*\n\n✅ RG original + CPF\n✅ Comprovante de residência atualizado\n   _(água, luz, gás, telefone ou aluguel)_\n✅ Comprovante de renda de todos da família:\n   • *Registrado:* 3 últimos holerites\n   • *Não registrado:* carteira de trabalho, extrato bancário (3 meses), declaração do empregador ou carta de próprio punho reconhecida em cartório\n✅ Comprovante de patrimônio _(se houver)_:\n   certidão do valor venal, IPTU, veículos, extrato de poupança\n\n━━━━━━━━━━━━━━━━━━━━\n❗ Documentos extras poderão ser pedidos conforme o caso.\n🚫 Sem os documentos, o atendimento *NÃO* será realizado.\n━━━━━━━━━━━━━━━━━━━━`},
+Para ser atendido(a), compareça presencialmente com a documentação exigida:${BLOCO}`},
 
-  {cat:'documentos',tag:'tag-info',tagLabel:'Documentos',title:'Documentos – Alimentos / Pensão',
-   preview:'Lista específica para processos de pensão alimentícia.',
-   text:`📋 *Para caso de ALIMENTOS / PENSÃO*\n\nAlém dos documentos básicos (RG, CPF, residência e renda), traga:\n\n✅ Certidão de nascimento da criança\n✅ Endereço completo da parte contrária\n✅ Se possível: informações sobre renda e patrimônio da parte contrária\n\n📍 Av. Tenente Marques, 5297 – _(POUPATEMPO)_\n🕘 Segunda a Sexta – 09h às 12h | ⚠️ 30 vagas/dia\n\nQualquer dúvida, estamos aqui! 😊`},
+  {cat:'boasvindas',tag:'tag-wpp',tagLabel:'WhatsApp',
+   title:'Boas-vindas – O que a OAB atende',
+   preview:'Apresenta as áreas de atuação da Assistência Judiciária e orienta sobre o comparecimento.',
+   text:`Bom dia.
 
-  {cat:'documentos',tag:'tag-info',tagLabel:'Documentos',title:'Documentos – Divórcio',
-   preview:'Documentação necessária para processo de divórcio.',
-   text:`📋 *Para caso de DIVÓRCIO*\n\nAlém dos documentos básicos (RG, CPF, residência e renda), traga:\n\n✅ Certidão de casamento *atualizada* _(máx. 90 dias)_\n✅ Se houver filhos menores: certidão de nascimento de cada um\n✅ Se houver bens: documentação do imóvel ou veículo\n\n📍 Av. Tenente Marques, 5297 – _(POUPATEMPO)_\n🕘 Segunda a Sexta – 09h às 12h\n\nEstamos à disposição! 🙏`},
+Este é o canal da *OAB – Assistência Judiciária Gratuita* | Subseção Santana de Parnaíba.
 
-  {cat:'urgente',tag:'tag-alert',tagLabel:'Urgente',title:'Orientação para caso urgente',
-   preview:'Direciona a pessoa para canais adequados em situações que precisam de atenção imediata.',
-   text:`⚠️ *CASO URGENTE – Orientações*\n\nEntendemos que sua situação é urgente e queremos ajudar.\n\nCompareça *pessoalmente* à nossa sede o mais rápido possível:\n📍 Av. Tenente Marques, 5297 – _(POUPATEMPO)_\n🕘 Segunda a Sexta – 09h às 12h\n⚠️ Chegue cedo! São apenas 30 vagas por dia.\n\n📞 Para emergências imediatas:\n• *Violência doméstica:* 180\n• *Emergência policial:* 190\n• *SAMU:* 192\n\nEstamos aqui dentro do nosso horário. 🙏`},
+A Assistência Judiciária atende nas seguintes áreas:
+✅ Direito de Família _(divórcio, pensão, guarda)_
+✅ Cível em geral
+✅ Inventário e Herança
+✅ Violência Doméstica
+✅ Habitacional
 
-  {cat:'urgente',tag:'tag-alert',tagLabel:'Urgente',title:'Violência doméstica – orientação',
-   preview:'Acolhe mulheres em situação de violência e informa sobre direitos e serviços.',
-   text:`🆘 *Você não está sozinha. Podemos ajudar.*\n\nSe você está em *situação de violência doméstica*, saiba que existem recursos disponíveis:\n\n📞 *Central da Mulher:* 180 _(gratuito, 24h)_\n📞 *Polícia:* 190\n📞 *Delegacia da Mulher:* procure a DDM mais próxima\n\nA OAB pode ajudá-la com:\n✅ Medida protetiva de urgência (Lei Maria da Penha)\n✅ Orientação jurídica gratuita\n✅ Encaminhamento para defesa\n\n📍 Av. Tenente Marques, 5297 – _(POUPATEMPO)_\n🕘 Segunda a Sexta – 09h às 12h\n\n*Você merece proteção e dignidade.* 💙`},
+O atendimento é *presencial*, por ordem de chegada, mediante apresentação dos documentos exigidos.${BLOCO}`},
 
-  {cat:'agendamento',tag:'tag-neutral',tagLabel:'Agendamento',title:'Não precisa agendar',
-   preview:'Explica que o atendimento é por ordem de chegada, sem agendamento prévio.',
-   text:`Olá! 😊\n\nBoa notícia: *não é necessário agendar*!\n\nO atendimento é por *ordem de chegada*:\n\n📅 *Dias:* Segunda a Sexta-feira\n🕘 *Horário:* 09h00 às 12h00\n⚠️ *Atenção:* apenas *30 vagas por dia!*\n\n👉 Recomendamos chegar com antecedência para garantir sua vaga!\n\n📍 Av. Tenente Marques, 5297 – Jardim do Luar _(POUPATEMPO)_\n\nQualquer dúvida, é só perguntar! 😊`},
+  // ── O QUE ATENDEMOS ──────────────────────────────────────
+  {cat:'atende',tag:'tag-ok',tagLabel:'Atendemos',
+   title:'Áreas que a OAB atende',
+   preview:'Lista objetiva das áreas cobertas pela Assistência Judiciária Gratuita.',
+   text:`*OAB – Assistência Judiciária Gratuita*
+Subseção Santana de Parnaíba
 
-  {cat:'agendamento',tag:'tag-neutral',tagLabel:'Agendamento',title:'Vagas esgotadas no dia',
-   preview:'Informa que as vagas acabaram e orienta para o próximo dia.',
-   text:`Olá! 😊\n\nInfelizmente, as *30 vagas de hoje já foram preenchidas*. 😔\n\nMas não se preocupe! Você pode:\n\n📅 *Voltar amanhã* mais cedo para garantir sua vaga\n🕘 Chegue antes das 09h para maior chance de atendimento\n\n📍 Av. Tenente Marques, 5297 – _(POUPATEMPO)_\n🕘 Segunda a Sexta – 09h às 12h\n\nPedimos desculpas pela espera. Estamos aqui para ajudar! 🙏`},
+A Assistência Judiciária atende nas seguintes áreas:
 
-  {cat:'agendamento',tag:'tag-neutral',tagLabel:'Agendamento',title:'Fora do horário de atendimento',
-   preview:'Resposta automática para mensagens recebidas fora do expediente.',
-   text:`Olá! Obrigada por entrar em contato com a *OAB – Assistência Judiciária Gratuita* 😊\n\nNo momento estamos *fora do horário de atendimento*.\n\n📅 *Atendemos:* Segunda a Sexta-feira\n🕘 *Horário:* 09h00 às 12h00\n\nRetornaremos sua mensagem no próximo dia útil, ou você pode nos procurar:\n📍 Av. Tenente Marques, 5297 – _(POUPATEMPO)_ – Santana de Parnaíba/SP\n\nAté breve! 🙏`},
+✅ *Família:* divórcio, separação, pensão alimentícia, guarda de filhos
+✅ *Cível:* cobranças, contratos, indenizações em geral
+✅ *Inventário e Herança*
+✅ *Violência Doméstica* _(Lei Maria da Penha)_
+✅ *Habitacional:* ações possessórias, regularização de imóvel${BLOCO}`},
 
-  {cat:'delicado',tag:'tag-alert',tagLabel:'Situação delicada',title:'Pessoa nervosa ou reclamando',
-   preview:'Resposta empática para pessoas em estado de estresse ou frustração.',
-   text:`Olá! Entendo como você deve estar se sentindo, e lamento muito que esteja passando por isso. 🙏\n\nQuero que saiba que *estamos aqui para te ajudar da melhor forma possível*.\n\nPor favor, me conte com mais detalhes o que aconteceu para que eu possa te orientar corretamente.\n\nFaremos tudo ao nosso alcance para resolver sua situação. 💙`},
+  {cat:'atende',tag:'tag-ok',tagLabel:'Atendemos',
+   title:'Família – Divórcio / Pensão / Guarda',
+   preview:'Confirma atendimento em casos de família e orienta sobre documentação específica.',
+   text:`*OAB – Assistência Judiciária Gratuita*
+Subseção Santana de Parnaíba
 
-  {cat:'delicado',tag:'tag-alert',tagLabel:'Situação delicada',title:'Pessoa em vulnerabilidade',
-   preview:'Mensagem acolhedora para pessoas em situação muito difícil.',
-   text:`Olá. Obrigada por confiar na *OAB* para te ajudar neste momento. 🙏\n\nEstamos aqui e vamos fazer o possível para te orientar.\n\nPor favor, venha nos visitar pessoalmente para que possamos entender seu caso:\n\n📍 Av. Tenente Marques, 5297 – _(POUPATEMPO)_\n🕘 Segunda a Sexta – 09h às 12h\n⚠️ Chegue cedo para garantir sua vaga _(30 vagas/dia)_\n\nVocê *não está sozinho(a)*. 💙`},
+A Assistência Judiciária *atende* casos de:
+✅ Divórcio
+✅ Pensão alimentícia
+✅ Guarda de filhos
 
-  {cat:'delicado',tag:'tag-alert',tagLabel:'Situação delicada',title:'Pedido de retorno / acompanhamento',
-   preview:'Orienta sobre como acompanhar o andamento de um caso.',
-   text:`Olá! 😊\n\nAgradecemos o contato para saber sobre seu caso.\n\nPara acompanhamento, pedimos que compareça pessoalmente com seus documentos:\n\n📍 Av. Tenente Marques, 5297 – _(POUPATEMPO)_\n🕘 Segunda a Sexta – 09h às 12h\n📞 (11) 4154-5191\n\nCaso tenha um *protocolo de atendimento*, por favor informe-o para agilizarmos.\n\nEstamos à disposição! 🙏`},
+Além dos documentos básicos, traga conforme o caso:
+• *Divórcio:* certidão de casamento atualizada _(máx. 90 dias)_
+• *Alimentos/Guarda:* certidão de nascimento da(s) criança(s) e endereço da parte contrária${BLOCO}`},
 
-  {cat:'outros',tag:'tag-neutral',tagLabel:'Outros',title:'Caso fora da competência da OAB',
-   preview:'Orienta quando o caso não é da competência da Assistência Judiciária.',
-   text:`Olá! 😊\n\nAgradecemos o contato com a *OAB – Assistência Judiciária Gratuita* da Subseção Santana de Parnaíba.\n\nInfelizmente, *este tipo de caso não está dentro da nossa área de atuação* no momento.\n\nPara casos como o seu, recomendamos:\n📌 *CRAS* – Centro de Referência de Assistência Social do seu bairro\n📌 *Defensoria Pública SP:* 0800-723-0148\n📌 *PROCON* – questões de consumidor: 151\n\nPedimos desculpas por não podermos ajudar desta vez. Qualquer dúvida jurídica, estamos à disposição! 🙏`},
+  {cat:'atende',tag:'tag-ok',tagLabel:'Atendemos',
+   title:'Violência Doméstica',
+   preview:'Informa sobre o atendimento em casos de violência doméstica e documentação necessária.',
+   text:`*OAB – Assistência Judiciária Gratuita*
+Subseção Santana de Parnaíba
 
-  {cat:'outros',tag:'tag-neutral',tagLabel:'Outros',title:'Encerramento de conversa',
-   preview:'Mensagem educada de encerramento após resolver a dúvida.',
-   text:`Fico feliz em ter podido ajudar! 😊\n\nSe tiver mais dúvidas no futuro, pode entrar em contato a qualquer momento.\n\n*OAB – Assistência Judiciária Gratuita*\n📍 Subseção Santana de Parnaíba\n📞 (11) 4154-5191\n🕘 Segunda a Sexta – 09h às 12h\n\nTenha um ótimo dia! 🙏💙`},
+A Assistência Judiciária *atende* casos de Violência Doméstica _(Lei Maria da Penha)_, incluindo pedidos de medida protetiva de urgência.
+
+Em caso de risco imediato, acione antes:
+📞 *Central da Mulher:* 180 _(24h, gratuito)_
+📞 *Polícia Militar:* 190${BLOCO}`},
+
+  // ── NÃO ATENDEMOS ────────────────────────────────────────
+  {cat:'naoatende',tag:'tag-nao',tagLabel:'Não atendemos',
+   title:'Não atendemos – Trabalhista',
+   preview:'Informa que casos trabalhistas não são atendidos pela Assistência Judiciária.',
+   text:`*OAB – Assistência Judiciária Gratuita*
+Subseção Santana de Parnaíba
+
+Informamos que a Assistência Judiciária Gratuita desta Subseção *não realiza atendimento em casos de Direito do Trabalho (Trabalhista)*.
+
+Esta área não está na competência da nossa unidade.
+
+Para outros casos jurídicos que atendemos _(família, cível, inventário, violência doméstica, habitacional)_, compareça presencialmente:${BLOCO_CURTO}`},
+
+  {cat:'naoatende',tag:'tag-nao',tagLabel:'Não atendemos',
+   title:'Não atendemos – Previdenciário / INSS',
+   preview:'Informa que casos previdenciários e de INSS não são atendidos.',
+   text:`*OAB – Assistência Judiciária Gratuita*
+Subseção Santana de Parnaíba
+
+Informamos que a Assistência Judiciária Gratuita desta Subseção *não realiza atendimento em casos Previdenciários (INSS, aposentadoria, benefícios)*.
+
+Esta área não está na competência da nossa unidade.
+
+Para outros casos jurídicos que atendemos _(família, cível, inventário, violência doméstica, habitacional)_, compareça presencialmente:${BLOCO_CURTO}`},
+
+  {cat:'naoatende',tag:'tag-nao',tagLabel:'Não atendemos',
+   title:'Não atendemos – Criminal',
+   preview:'Informa que a maioria dos casos criminais não são atendidos.',
+   text:`*OAB – Assistência Judiciária Gratuita*
+Subseção Santana de Parnaíba
+
+Informamos que a Assistência Judiciária Gratuita desta Subseção *não realiza atendimento na área Criminal*.
+
+Para casos criminais, recomendamos buscar a *Defensoria Pública do Estado de São Paulo*.
+
+Para outros casos jurídicos que atendemos _(família, cível, inventário, violência doméstica, habitacional)_, compareça presencialmente:${BLOCO_CURTO}`},
+
+  {cat:'naoatende',tag:'tag-nao',tagLabel:'Não atendemos',
+   title:'Não atendemos – fora da competência',
+   preview:'Resposta genérica para casos que não são da área de atuação da subseção.',
+   text:`*OAB – Assistência Judiciária Gratuita*
+Subseção Santana de Parnaíba
+
+Informamos que o caso relatado *não está dentro das áreas de atuação* desta Assistência Judiciária.
+
+As áreas atendidas por esta unidade são:
+✅ Família _(divórcio, pensão, guarda)_
+✅ Cível em geral
+✅ Inventário e Herança
+✅ Violência Doméstica
+✅ Habitacional
+
+Para outras demandas, sugerimos buscar orientação junto à *Defensoria Pública do Estado de São Paulo*.`},
+
+  // ── DOCUMENTOS ───────────────────────────────────────────
+  {cat:'documentos',tag:'tag-info',tagLabel:'Documentos',
+   title:'Lista completa de documentos',
+   preview:'Envia a lista completa de documentos obrigatórios para o atendimento.',
+   text:`*OAB – Assistência Judiciária Gratuita*
+Subseção Santana de Parnaíba
+
+📋 *DOCUMENTOS OBRIGATÓRIOS:*
+
+✅ RG original + CPF
+✅ Comprovante de residência atualizado _(água, luz, gás, telefone ou aluguel)_
+✅ Comprovante de renda de todos da família:
+   • *Registrado:* 3 últimos holerites
+   • *Não registrado:* carteira de trabalho, extrato bancário (3 meses), declaração do empregador ou carta de próprio punho reconhecida em cartório
+✅ Comprovante de patrimônio _(se houver)_:
+   certidão do valor venal, IPTU, veículos, extrato de poupança${BLOCO_CURTO}
+
+❗ Documentos complementares poderão ser solicitados conforme o caso.
+🚫 Sem os documentos, o atendimento NÃO será realizado.`},
+
+  {cat:'documentos',tag:'tag-info',tagLabel:'Documentos',
+   title:'Documentação incompleta',
+   preview:'Informa que faltam documentos para prosseguir com o atendimento.',
+   text:`*OAB – Assistência Judiciária Gratuita*
+Subseção Santana de Parnaíba
+
+Informamos que *a documentação apresentada está incompleta*, não sendo possível realizar o atendimento neste momento.
+
+É necessário providenciar todos os documentos exigidos e retornar presencialmente.${BLOCO}`},
+
+  {cat:'documentos',tag:'tag-info',tagLabel:'Documentos',
+   title:'Documentos – Alimentos / Pensão',
+   preview:'Documentação específica para casos de pensão alimentícia.',
+   text:`*OAB – Assistência Judiciária Gratuita*
+Subseção Santana de Parnaíba
+
+📋 Para casos de *Alimentos / Pensão*, além dos documentos básicos, traga:
+
+✅ Certidão de nascimento da(s) criança(s)
+✅ Endereço completo da parte contrária${BLOCO}`},
+
+  {cat:'documentos',tag:'tag-info',tagLabel:'Documentos',
+   title:'Documentos – Divórcio',
+   preview:'Documentação específica para processo de divórcio.',
+   text:`*OAB – Assistência Judiciária Gratuita*
+Subseção Santana de Parnaíba
+
+📋 Para casos de *Divórcio*, além dos documentos básicos, traga:
+
+✅ Certidão de casamento atualizada _(emitida há no máximo 90 dias)_
+✅ Se houver filhos menores: certidão de nascimento de cada um
+✅ Se houver bens: documentação do imóvel _(IPTU/escritura)_ ou veículo _(CRLV)_${BLOCO}`},
+
+  // ── URGENTE ──────────────────────────────────────────────
+  {cat:'urgente',tag:'tag-nao',tagLabel:'Urgente',
+   title:'Caso urgente – compareça pessoalmente',
+   preview:'Orienta para comparecimento imediato em casos que exigem atenção urgente.',
+   text:`*OAB – Assistência Judiciária Gratuita*
+Subseção Santana de Parnaíba
+
+Para situações urgentes, é necessário *comparecer pessoalmente* à sede, com toda a documentação exigida.
+
+O atendimento é presencial, por ordem de chegada.${BLOCO}`},
+
+  {cat:'urgente',tag:'tag-nao',tagLabel:'Urgente',
+   title:'Violência doméstica – emergência',
+   preview:'Orienta em situação de violência doméstica com canais de emergência.',
+   text:`*OAB – Assistência Judiciária Gratuita*
+Subseção Santana de Parnaíba
+
+Em caso de *risco imediato*, acione os órgãos de emergência:
+
+📞 *Central da Mulher:* 180 _(24h, gratuito)_
+📞 *Polícia Militar:* 190
+📞 *SAMU:* 192
+
+Para orientação jurídica _(medida protetiva, Lei Maria da Penha)_, compareça presencialmente:${BLOCO_CURTO}`},
+
+  // ── AGENDAMENTO ──────────────────────────────────────────
+  {cat:'agendamento',tag:'tag-neutral',tagLabel:'Agendamento',
+   title:'Não há agendamento prévio',
+   preview:'Informa que o atendimento é por ordem de chegada, sem necessidade de agendar.',
+   text:`*OAB – Assistência Judiciária Gratuita*
+Subseção Santana de Parnaíba
+
+Informamos que *não há agendamento prévio*. O atendimento é realizado por *ordem de chegada*, mediante apresentação dos documentos exigidos.${BLOCO}`},
+
+  {cat:'agendamento',tag:'tag-neutral',tagLabel:'Agendamento',
+   title:'Vagas esgotadas no dia',
+   preview:'Informa que o limite de vagas do dia foi atingido.',
+   text:`*OAB – Assistência Judiciária Gratuita*
+Subseção Santana de Parnaíba
+
+Informamos que o *limite de 30 atendimentos de hoje já foi atingido*.
+
+Solicitamos que retorne no próximo dia útil, chegando com antecedência para garantir atendimento.${BLOCO_CURTO}`},
+
+  {cat:'agendamento',tag:'tag-neutral',tagLabel:'Agendamento',
+   title:'Fora do horário de atendimento',
+   preview:'Resposta para mensagens recebidas fora do expediente.',
+   text:`*OAB – Assistência Judiciária Gratuita*
+Subseção Santana de Parnaíba
+
+Este canal está fora do horário de atendimento no momento.
+
+As mensagens serão respondidas no próximo dia útil.${BLOCO_CURTO}`},
+
+  // ── SITUAÇÕES DELICADAS ──────────────────────────────────
+  {cat:'delicado',tag:'tag-neutral',tagLabel:'Situação delicada',
+   title:'Pessoa insatisfeita / reclamação',
+   preview:'Resposta formal e respeitosa para situações de insatisfação.',
+   text:`*OAB – Assistência Judiciária Gratuita*
+Subseção Santana de Parnaíba
+
+Registramos sua manifestação e lamentamos que o atendimento não tenha correspondido às suas expectativas.
+
+Para que possamos verificar sua situação, solicitamos que compareça presencialmente à nossa sede, munido(a) de toda a documentação exigida.${BLOCO_CURTO}`},
+
+  {cat:'delicado',tag:'tag-neutral',tagLabel:'Situação delicada',
+   title:'Pedido de retorno / acompanhamento',
+   preview:'Orienta sobre como obter retorno de um atendimento já realizado.',
+   text:`*OAB – Assistência Judiciária Gratuita*
+Subseção Santana de Parnaíba
+
+Para acompanhamento de atendimento já realizado, solicitamos que compareça presencialmente à nossa sede, portando seus documentos e, se disponível, o protocolo de atendimento.${BLOCO_CURTO}`},
+
+  {cat:'delicado',tag:'tag-neutral',tagLabel:'Situação delicada',
+   title:'Assistido solicita advogado específico',
+   preview:'Explica que a indicação de advogado é feita pela OAB conforme disponibilidade.',
+   text:`*OAB – Assistência Judiciária Gratuita*
+Subseção Santana de Parnaíba
+
+Informamos que a Assistência Judiciária Gratuita não realiza indicação de advogados específicos. O atendimento é realizado pelos advogados voluntários disponíveis, conforme a demanda.
+
+Para ser atendido(a), compareça presencialmente:${BLOCO_CURTO}`},
 ];
 
+// ══════════════════════════════════════════════════════════
+// FAQ
+// ══════════════════════════════════════════════════════════
 const faqs = [
-  {q:'Qual o horário?',a:'Segunda a Sexta, das 09h às 12h. Limite de 30 vagas/dia.',wpp:`🗓️ *Atendimento:* Segunda a Sexta-feira\n🕘 *Horário:* 09h00 às 12h00\n⚠️ *Limite:* 30 pessoas por dia`},
-  {q:'Precisa agendar?',a:'Não! Atendimento por ordem de chegada. Recomendamos chegar cedo.',wpp:`✅ *Não precisa agendar!*\n\nAtendimento por *ordem de chegada*.\n🕘 Segunda a Sexta – 09h00 às 12h00\n⚠️ Apenas 30 vagas/dia!`},
-  {q:'O atendimento é gratuito?',a:'Sim, 100% gratuito para quem não tem condições de pagar advogado.',wpp:`✅ *Atendimento 100% GRATUITO!*\n\nPara cidadãos que não podem pagar advogado particular.\n📍 Av. Tenente Marques, 5297 – _(POUPATEMPO)_\n📞 (11) 4154-5191`},
-  {q:'Onde fica?',a:'Av. Tenente Marques, 5297 – Jardim do Luar, dentro do POUPATEMPO.',wpp:`📍 *Endereço:*\nAv. Tenente Marques, 5297\nJardim do Luar – Santana de Parnaíba/SP\n_(Dentro do POUPATEMPO)_\n📞 (11) 4154-5191`},
-  {q:'Quais documentos levar?',a:'RG, CPF, comprovante de residência, renda e patrimônio (se houver).',wpp:`📋 *Documentos obrigatórios:*\n✅ RG + CPF\n✅ Comprovante de residência\n✅ Comprovante de renda\n✅ Patrimônio (se houver)\n🚫 Sem documentos, atendimento NÃO será realizado.`},
-  {q:'Sem carteira assinada?',a:'Aceita extrato bancário (3 meses), declaração do empregador ou carta reconhecida em cartório.',wpp:`💰 *Comprovante para não registrados:*\n• Extrato bancário (3 meses)\n• Declaração do empregador\n• Carta próprio punho reconhecida em cartório`},
-  {q:'Caso de pensão alimentícia?',a:'Traga certidão da criança e endereço da parte contrária.',wpp:`📋 *Para ALIMENTOS/PENSÃO:*\nAlém dos básicos:\n✅ Certidão de nascimento da criança\n✅ Endereço da parte contrária`},
-  {q:'Caso de divórcio?',a:'Traga certidão de casamento atualizada (máx. 90 dias).',wpp:`📋 *Para DIVÓRCIO:*\nAlém dos básicos:\n✅ Certidão de casamento atualizada _(máx. 90 dias)_`},
-  {q:'Caso criminal?',a:'Venha pessoalmente com RG, CPF, residência e renda. O advogado avaliará o caso.',wpp:`📋 *Para caso CRIMINAL:*\nTraga os documentos básicos (RG, CPF, residência e renda) e compareça pessoalmente.\nO advogado avaliará a situação individualmente.`},
-  {q:'Caso trabalhista?',a:'Traga carteira de trabalho, contracheques e documentação do vínculo.',wpp:`📋 *Para caso TRABALHISTA:*\nAlém dos básicos, traga:\n✅ Carteira de trabalho\n✅ Últimos contracheques\n✅ Documentos do vínculo empregatício`},
+  {q:'Qual o horário?',a:'Segunda a Sexta, das 09h às 12h. Limite de 30 vagas/dia.',
+   wpp:`*OAB – Assistência Judiciária Gratuita* | Subseção Santana de Parnaíba\n\n🕘 Segunda a Sexta-feira | 09h00 às 12h00\n⚠️ Limite: 30 pessoas por dia\n📍 Av. Tenente Marques, 5297 – Jardim do Luar _(POUPATEMPO)_\n📞 (11) 4154-5191`},
+  {q:'Precisa agendar?',a:'Não. Atendimento por ordem de chegada, mediante documentação exigida.',
+   wpp:`*OAB – Assistência Judiciária Gratuita* | Subseção Santana de Parnaíba\n\nNão há agendamento prévio. O atendimento é por *ordem de chegada*.\n\n📍 Av. Tenente Marques, 5297 – _(POUPATEMPO)_\n🕘 Segunda a Sexta | 09h00 às 12h00 | ⚠️ 30 vagas/dia`},
+  {q:'O atendimento é gratuito?',a:'Sim. Gratuito para quem não tem condições de contratar advogado particular.',
+   wpp:`*OAB – Assistência Judiciária Gratuita* | Subseção Santana de Parnaíba\n\nO atendimento é *gratuito* para cidadãos sem condições financeiras de contratar advogado particular.\n📍 Av. Tenente Marques, 5297 – _(POUPATEMPO)_ | 📞 (11) 4154-5191`},
+  {q:'Onde fica?',a:'Av. Tenente Marques, 5297 – Jardim do Luar, dentro do POUPATEMPO.',
+   wpp:`📍 *OAB – Assistência Judiciária Gratuita*\nAv. Tenente Marques, 5297 – Jardim do Luar\nSantana de Parnaíba/SP _(dentro do POUPATEMPO)_\n📞 (11) 4154-5191`},
+  {q:'Quais documentos?',a:'RG, CPF, comprovante de residência, renda e patrimônio (se houver).',
+   wpp:`📋 *Documentos obrigatórios:*\n✅ RG original + CPF\n✅ Comprovante de residência atualizado\n✅ Comprovante de renda de todos da família\n✅ Patrimônio _(se houver)_\n🚫 Sem os documentos, o atendimento NÃO será realizado.`},
+  {q:'Atende trabalhista?',a:'Não. Casos trabalhistas não estão na competência desta unidade.',
+   wpp:`*OAB – Assistência Judiciária Gratuita* | Subseção Santana de Parnaíba\n\nInformamos que *casos trabalhistas não são atendidos* por esta unidade.\n\nÁreas atendidas: família, cível, inventário, violência doméstica e habitacional.`},
+  {q:'Atende previdenciário/INSS?',a:'Não. Casos previdenciários não estão na competência desta unidade.',
+   wpp:`*OAB – Assistência Judiciária Gratuita* | Subseção Santana de Parnaíba\n\nInformamos que *casos previdenciários (INSS) não são atendidos* por esta unidade.\n\nÁreas atendidas: família, cível, inventário, violência doméstica e habitacional.`},
+  {q:'Atende criminal?',a:'Em geral, não. Casos criminais não estão na competência desta unidade.',
+   wpp:`*OAB – Assistência Judiciária Gratuita* | Subseção Santana de Parnaíba\n\nInformamos que *casos criminais não são atendidos* por esta unidade.\n\nÁreas atendidas: família, cível, inventário, violência doméstica e habitacional.`},
+  {q:'Pensão alimentícia?',a:'Sim, atendemos. Traga certidão da criança e endereço da parte contrária.',
+   wpp:`📋 *Para ALIMENTOS/PENSÃO:*\nAlém dos documentos básicos, traga:\n✅ Certidão de nascimento da criança\n✅ Endereço da parte contrária\n\n📍 Av. Tenente Marques, 5297 – _(POUPATEMPO)_ | 🕘 Seg–Sex 09h–12h`},
+  {q:'Divórcio?',a:'Sim, atendemos. Traga certidão de casamento atualizada (máx. 90 dias).',
+   wpp:`📋 *Para DIVÓRCIO:*\nAlém dos documentos básicos, traga:\n✅ Certidão de casamento atualizada _(máx. 90 dias)_\n\n📍 Av. Tenente Marques, 5297 – _(POUPATEMPO)_ | 🕘 Seg–Sex 09h–12h`},
 ];
 
-// ── RENDER ───────────────────────────────────────────────────────
+// ══════════════════════════════════════════════════════════
+// RENDER
+// ══════════════════════════════════════════════════════════
 function renderMsgs(filter='todas'){
   const grid=document.getElementById('qm-grid');
   const list=filter==='todas'?msgs:msgs.filter(m=>m.cat===filter);
-  grid.innerHTML=list.map((m,i)=>{
+  grid.innerHTML=list.map(m=>{
     const idx=msgs.indexOf(m);
     return `<div class="qm-card" onclick="copyMsg(${idx})">
       <span class="qm-tag ${m.tag}">${m.tagLabel}</span>
       <div class="qm-title">${m.title}</div>
       <div class="qm-preview">${m.preview}</div>
-      <div class="qm-footer"><span class="qm-hint">📋 Clique para copiar</span></div>
+      <div class="qm-hint">📋 Clique para copiar</div>
       <span class="qm-copied" id="mc-${idx}">✓ Copiado!</span>
     </div>`;
   }).join('');
 }
 
 function renderFaq(){
-  const grid=document.getElementById('faq-grid');
-  grid.innerHTML=faqs.map((f,i)=>`<div class="qm-card" onclick="copyFaq(${i})">
-    <span class="qm-tag tag-info">FAQ</span>
-    <div class="qm-title">❓ ${f.q}</div>
-    <div class="qm-preview">${f.a}</div>
-    <div class="qm-footer"><span class="qm-hint">📋 Copiar para WhatsApp</span></div>
-    <span class="qm-copied" id="fc-${i}">✓ Copiado!</span>
-  </div>`).join('');
+  document.getElementById('faq-grid').innerHTML=faqs.map((f,i)=>`
+    <div class="qm-card" onclick="copyFaq(${i})">
+      <span class="qm-tag tag-info">FAQ</span>
+      <div class="qm-title">❓ ${f.q}</div>
+      <div class="qm-preview">${f.a}</div>
+      <div class="qm-hint">📋 Copiar para WhatsApp</div>
+      <span class="qm-copied" id="fc-${i}">✓ Copiado!</span>
+    </div>`).join('');
 }
 
 renderMsgs(); renderFaq();
 
-// ── AÇÕES ────────────────────────────────────────────────────────
-function copyMsg(i){navigator.clipboard.writeText(msgs[i].text).then(()=>{showToast('📋 Mensagem copiada!');flash('mc-'+i);})}
-function copyFaq(i){navigator.clipboard.writeText(faqs[i].wpp).then(()=>{showToast('📋 Copiado! Cole no WhatsApp.');flash('fc-'+i);})}
+function copyMsg(i){navigator.clipboard.writeText(msgs[i].text).then(()=>{showToast('📋 Mensagem copiada!');flash('mc-'+i)})}
+function copyFaq(i){navigator.clipboard.writeText(faqs[i].wpp).then(()=>{showToast('📋 Copiado!');flash('fc-'+i)})}
 function flash(id){const el=document.getElementById(id);if(!el)return;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),1800)}
 function filtrar(cat,btn){document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderMsgs(cat)}
 function showTab(id,btn){document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active')}
 
-// ── GERAR WHATSAPP GERAL ─────────────────────────────────────────
 function gerarWppGeral(){
   const nome=document.getElementById('wg-nome').value.trim();
   const caso=document.getElementById('wg-caso').value;
-  const bv=document.getElementById('wg-boasvindas').checked;
   const gr=document.getElementById('wg-gratuito').checked;
   const hr=document.getElementById('wg-horario').checked;
   const av=document.getElementById('wg-aviso').checked;
   const dc=document.getElementById('wg-docs').checked;
   const en=document.getElementById('wg-ende').checked;
-  let m='';
-  if(bv) m+=nome?`Olá, *${nome}*! 👋 Tudo bem?\n\n`:`Olá! Seja bem-vindo(a)! 👋\n\n`;
-  m+=`🏛️ *OAB – ASSISTÊNCIA JUDICIÁRIA GRATUITA*\n📍 Subseção Santana de Parnaíba\n`;
-  if(gr) m+=`\n✅ *Nosso atendimento é 100% GRATUITO.*\n`;
+  let m=`*OAB – Assistência Judiciária Gratuita*\nSubseção Santana de Parnaíba\n`;
+  if(nome) m+=`\nReferência: ${nome}\n`;
+  if(gr) m+=`\nO atendimento é *gratuito* para cidadãos sem condições de contratar advogado particular.\n`;
   if(hr){
-    m+=`\n━━━━━━━━━━━━━━━━━━━━\n🗓️ *Atendimento:* Segunda a Sexta-feira\n🕘 *Horário:* 09h00 às 12h00\n`;
-    if(av) m+=`⚠️ *Limite:* 30 pessoas por dia _(senhas para as primeiras 30)_\n`;
+    m+=`\n━━━━━━━━━━━━━━━━━━━━\n🗓️ Segunda a Sexta-feira\n🕘 09h00 às 12h00\n`;
+    if(av) m+=`⚠️ Limite: 30 pessoas por dia\n`;
     m+=`━━━━━━━━━━━━━━━━━━━━\n`;
   }
   if(dc){
-    m+=`\n📋 *DOCUMENTOS OBRIGATÓRIOS:*\n\n✅ RG original + CPF\n✅ Comprovante de residência atualizado\n   _(água, luz, gás, telefone ou aluguel)_\n✅ Comprovante de renda de todos da família:\n   • *Registrado:* 3 últimos holerites\n   • *Não registrado:* carteira de trabalho, extrato bancário (3 meses), declaração do empregador ou carta de próprio punho reconhecida em cartório\n✅ Comprovante de patrimônio _(se houver)_:\n   certidão do valor venal, IPTU, veículos, extrato de poupança\n`;
-    if(caso==='alimentos') m+=`✅ *Alimentos:* certidão da criança + endereço da parte contrária\n`;
-    if(caso==='divorcio')  m+=`✅ *Divórcio:* certidão de casamento atualizada _(máx. 90 dias)_\n`;
-    m+=`\n━━━━━━━━━━━━━━━━━━━━\n❗ *Documentos extras poderão ser solicitados conforme o caso.*\n🚫 *Sem documentos, o atendimento NÃO será realizado.*\n━━━━━━━━━━━━━━━━━━━━\n`;
+    m+=`\n📋 *DOCUMENTOS OBRIGATÓRIOS:*\n✅ RG original + CPF\n✅ Comprovante de residência atualizado\n✅ Comprovante de renda de todos da família\n   • Registrado: 3 últimos holerites\n   • Não registrado: carteira de trabalho, extrato bancário (3 meses), declaração do empregador ou carta de próprio punho reconhecida em cartório\n✅ Comprovante de patrimônio _(se houver)_\n`;
+    if(caso==='alimentos'||caso==='guarda') m+=`✅ Certidão de nascimento da(s) criança(s) + endereço da parte contrária\n`;
+    if(caso==='divorcio') m+=`✅ Certidão de casamento atualizada _(máx. 90 dias)_\n`;
+    m+=`\n🚫 Sem os documentos, o atendimento NÃO será realizado.\n`;
   }
-  if(en) m+=`\n📍 Av. Tenente Marques, 5297\n   Jardim do Luar (Fazendinha) – Santana de Parnaíba/SP\n   _(Dentro do POUPATEMPO)_\n📞 (11) 4154-5191\n`;
-  m+=`\nQualquer dúvida, estamos à disposição! 🙏`;
+  if(en) m+=`\n📍 Av. Tenente Marques, 5297 – Jardim do Luar\n   Santana de Parnaíba/SP _(dentro do POUPATEMPO)_\n📞 (11) 4154-5191\n`;
   document.getElementById('out-wg').textContent=m;
 }
 
-// ── GERAR CONFIRMAÇÃO ────────────────────────────────────────────
 function gerarConfirmacao(){
-  const nome=document.getElementById('cf-nome').value.trim()||'Prezado(a)';
+  const nome=document.getElementById('cf-nome').value.trim()||'Assistido(a)';
   const dv=document.getElementById('cf-data').value;
   const tipo=document.getElementById('cf-tipo').value;
   const obs=document.getElementById('cf-obs').value.trim();
   let df='';
   if(dv){const d=new Date(dv+'T12:00:00');df=d.toLocaleDateString('pt-BR',{weekday:'long',day:'2-digit',month:'long',year:'numeric'})}
-  let m='';
+  let m=`*OAB – Assistência Judiciária Gratuita*\nSubseção Santana de Parnaíba\n\nReferência: ${nome}\n\n`;
   if(tipo==='confirmar'){
-    m=`Olá, *${nome}*! 👋\n\n✅ *Confirmação de Atendimento – OAB*\n📍 Subseção Santana de Parnaíba\n\n`;
-    if(df) m+=`📅 Atendimento confirmado para *${df}*.\n`;
-    m+=`🕘 *Horário:* 09h00 às 12h00\n📍 Av. Tenente Marques, 5297 – _(POUPATEMPO)_\n\n⚠️ Chegue cedo – 30 vagas/dia!\n📋 Traga *todos os documentos* necessários.\n`;
+    m+=`Confirmamos o atendimento`;
+    if(df) m+=` para *${df}*`;
+    m+=`.\n🕘 09h00 às 12h00\n📍 Av. Tenente Marques, 5297 – _(POUPATEMPO)_\n\nTraga todos os documentos exigidos. Sem documentação completa, o atendimento não será realizado.\n`;
   }else if(tipo==='lembrete'){
-    m=`Olá, *${nome}*! 👋\n\n🔔 *Lembrete – OAB Santana de Parnaíba*\n\n`;
-    if(df) m+=`📅 Atendimento: *${df}*.\n`;
-    m+=`🕘 09h00 às 12h00\n\n📋 Não esqueça os *documentos*!\n📍 Av. Tenente Marques, 5297 – _(POUPATEMPO)_\n`;
+    m+=`Lembramos que há atendimento agendado`;
+    if(df) m+=` para *${df}*`;
+    m+=`.\n🕘 09h00 às 12h00\n📍 Av. Tenente Marques, 5297 – _(POUPATEMPO)_\n\nPorte toda a documentação exigida.\n`;
   }else if(tipo==='reagendar'){
-    m=`Olá, *${nome}*! 👋\n\n📅 *Reagendamento – OAB Santana de Parnaíba*\n\nPrecisamos reagendar seu atendimento.\n`;
-    if(df) m+=`📅 Nova data: *${df}*.\n`;
-    m+=`\nConfirme sua disponibilidade respondendo esta mensagem.\n📞 (11) 4154-5191\n`;
+    m+=`Informamos que o atendimento anterior precisou ser reagendado.\n`;
+    if(df) m+=`Nova data: *${df}*.\n`;
+    m+=`🕘 09h00 às 12h00\n📞 (11) 4154-5191\n`;
   }else{
-    m=`Olá, *${nome}*! 👋\n\n❌ *Cancelamento – OAB Santana de Parnaíba*\n\n`;
-    if(df) m+=`O atendimento de *${df}* foi cancelado.\n\n`;
-    else m+=`Seu atendimento foi cancelado.\n\n`;
-    m+=`Para reagendar: 📞 (11) 4154-5191\n🕘 Segunda a Sexta – 09h às 12h\n`;
+    m+=`Informamos que o atendimento`;
+    if(df) m+=` de *${df}*`;
+    m+=` foi cancelado.\n\nPara novo agendamento, compareça presencialmente.\n📍 Av. Tenente Marques, 5297 – _(POUPATEMPO)_\n🕘 Segunda a Sexta | 09h00 às 12h00\n`;
   }
-  if(obs) m+=`\n📝 *Obs:* ${obs}\n`;
-  m+=`\nQualquer dúvida, estamos à disposição! 🙏`;
+  if(obs) m+=`\nObs: ${obs}\n`;
   document.getElementById('out-cf').textContent=m;
 }
 
-// ── GERAR EMAIL ──────────────────────────────────────────────────
 function gerarEmail(){
-  const dest=document.getElementById('em-dest').value.trim()||'Prezado(a)';
+  const dest=document.getElementById('em-dest').value.trim()||'Senhor(a)';
   const trat=document.getElementById('em-trat').value;
   const tipo=document.getElementById('em-tipo').value;
   const corpo=document.getElementById('em-corpo').value.trim();
   const ass={info:'Informações sobre Atendimento – Assistência Judiciária Gratuita OAB',docs:'Solicitação de Documentos – OAB Subseção Santana de Parnaíba',encaminhamento:'Encaminhamento de Caso – OAB Subseção Santana de Parnaíba',agradecimento:'Resposta ao Contato – OAB Santana de Parnaíba',urgente:'URGENTE – OAB Subseção Santana de Parnaíba',retorno:'Pedido de Retorno – OAB Subseção Santana de Parnaíba'};
-  const intro={info:'Venho, por meio desta, prestar as seguintes informações referentes ao atendimento da Assistência Judiciária Gratuita da OAB, Subseção Santana de Parnaíba:',docs:'Venho, por meio desta, solicitar a apresentação dos documentos necessários para darmos prosseguimento ao atendimento.',encaminhamento:'Venho, por meio desta, realizar o encaminhamento do caso em questão para as devidas providências.',agradecimento:'Agradecemos o seu contato com a OAB – Subseção Santana de Parnaíba. Em atenção à sua mensagem, informamos:',urgente:'Em caráter de urgência, comunicamos o seguinte, solicitando atenção imediata ao assunto:',retorno:'Venho, por meio desta, solicitar retorno sobre o assunto anteriormente tratado:'};
+  const intro={info:'Venho, por meio desta, prestar as seguintes informações referentes ao atendimento da Assistência Judiciária Gratuita da OAB, Subseção Santana de Parnaíba:',docs:'Venho, por meio desta, solicitar a apresentação dos documentos necessários para prosseguimento do atendimento.',encaminhamento:'Venho, por meio desta, realizar o encaminhamento do caso em questão para as devidas providências.',agradecimento:'Em atenção ao seu contato, informamos:',urgente:'Em caráter de urgência, comunicamos:',retorno:'Venho solicitar retorno referente ao assunto anteriormente tratado:'};
   const hoje=new Date().toLocaleDateString('pt-BR',{day:'2-digit',month:'long',year:'numeric'});
   let m=`Assunto: ${ass[tipo]}\n\n─────────────────────────────────────────\n\n${trat} ${dest},\n\n${intro[tipo]}\n\n`;
   if(corpo) m+=`${corpo}\n\n`;
-  m+=`─────────────────────────────────────────\n\nPermanecemos à inteira disposição para quaisquer esclarecimentos adicionais.\n\nAtenciosamente,\n\nCássia Kelly Lins Reis\nAuxiliar Administrativo\nOAB – Subseção Santana de Parnaíba\nAssistência Judiciária Gratuita\n\n📍 Av. Tenente Marques, 5297 – Jardim do Luar\n    Santana de Parnaíba/SP (dentro do POUPATEMPO)\n📞 (11) 4154-5191\n🕘 Segunda a Sexta-feira | 09h00 às 12h00\n\nSantana de Parnaíba, ${hoje}.`;
+  m+=`─────────────────────────────────────────\n\nPermanecemos à disposição para esclarecimentos adicionais.\n\nAtenciosamente,\n\nCássia Kelly Lins Reis\nAuxiliar Administrativo\nOAB – Subseção Santana de Parnaíba | Assistência Judiciária Gratuita\n\nAv. Tenente Marques, 5297 – Jardim do Luar | Santana de Parnaíba/SP\nDentro do POUPATEMPO | (11) 4154-5191\nSegunda a Sexta-feira | 09h00 às 12h00\n\nSantana de Parnaíba, ${hoje}.`;
   document.getElementById('out-em').textContent=m;
 }
 
-// ── UTILITÁRIOS ──────────────────────────────────────────────────
 function copiarTexto(id,sid){
   const el=document.getElementById(id);
   if(el.querySelector('.placeholder')) return showToast('⚠️ Gere a mensagem primeiro!');
@@ -551,17 +769,8 @@ function abrirEmail(){
   window.open(`mailto:?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(body)}`,'_blank');
 }
 let toastT;
-function showToast(msg){
-  const t=document.getElementById('toast');
-  t.textContent=msg;t.classList.add('show');
-  clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),2600);
-}
-function tick(){
-  const el=document.getElementById('live-time');
-  const n=new Date();
-  const dias=['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
-  el.textContent=`${dias[n.getDay()]} · ${String(n.getHours()).padStart(2,'0')}:${String(n.getMinutes()).padStart(2,'0')}`;
-}
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),2500)}
+function tick(){const n=new Date();const dias=['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];document.getElementById('live-time').textContent=`${dias[n.getDay()]} · ${String(n.getHours()).padStart(2,'0')}:${String(n.getMinutes()).padStart(2,'0')}`}
 tick();setInterval(tick,30000);
 </script>
 </body>
