@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OAB Santana de Parnaíba – Painel de Respostas</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --manto: #1a2a6c;
+    --manto-deep: #0d1a4a;
+    --manto-mid: #243580;
+    --manto-light: #2e4099;
+    --gold: #c9a84c;
+    --gold-light: #e8c96d;
+    --gold-pale: #f5e9c4;
+    --white: #ffffff;
+    --off-white: #f8f7f4;
+    --text-light: #e8eaf5;
+    --text-muted: #8a9ac0;
+    --success: #1db954;
+    --card-bg: rgba(255,255,255,0.06);
+    --border: rgba(201,168,76,0.3);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--manto-deep);
+    color: var(--white);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Background texture */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 20%, rgba(44,65,160,0.4) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 80%, rgba(13,26,74,0.8) 0%, transparent 60%),
+      repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 60px,
+        rgba(255,255,255,0.01) 60px,
+        rgba(255,255,255,0.01) 61px
+      );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* HEADER */
+  header {
+    position: relative;
+    z-index: 10;
+    background: linear-gradient(135deg, var(--manto-deep) 0%, var(--manto) 60%, var(--manto-mid) 100%);
+    border-bottom: 2px solid var(--gold);
+    padding: 28px 48px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 32px rgba(0,0,0,0.4);
+  }
+
+  .header-logo {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .oab-seal {
+    width: 64px;
+    height: 64px;
+    border: 2.5px solid var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--gold);
+    background: rgba(201,168,76,0.08);
+    letter-spacing: 1px;
+    flex-shrink: 0;
+  }
+
+  .header-text h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.2;
+  }
+
+  .header-text p {
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 3px;
+  }
+
+  .header-user {
+    text-align: right;
+  }
+
+  .header-user .name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--gold-light);
+  }
+
+  .header-user .role {
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  /* MAIN LAYOUT */
+  main {
+    position: relative;
+    z-index: 10;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 36px 48px 60px;
+  }
+
+  /* TABS */
+  .tabs {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 32px;
+    background: rgba(0,0,0,0.2);
+    padding: 6px;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    width: fit-content;
+  }
+
+  .tab {
+    padding: 10px 24px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    transition: all 0.25s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .tab:hover { color: var(--white); background: rgba(255,255,255,0.05); }
+
+  .tab.active {
+    background: linear-gradient(135deg, var(--manto-light), var(--manto-mid));
+    color: var(--white);
+    box-shadow: 0 4px 16px rgba(26,42,108,0.5);
+    border: 1px solid var(--border);
+  }
+
+  /* TAB CONTENT */
+  .tab-content { display: none; animation: fadeIn 0.3s ease; }
+  .tab-content.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* GRID */
+  .panel-grid {
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+
+  /* CARDS */
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+    backdrop-filter: blur(8px);
+  }
+
+  .card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--gold-light);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  /* FORM */
+  .form-group { margin-bottom: 16px; }
+
+  label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 7px;
+  }
+
+  input, select, textarea {
+    width: 100%;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 10px;
+    padding: 11px 14px;
+    font-family: 'Jost', sans-serif;
+    font-size: 14px;
+    color: var(--white);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  input::placeholder, textarea::placeholder { color: var(--text-muted); }
+
+  input:focus, select:focus, textarea:focus {
+    border-color: var(--gold);
+    background: rgba(201,168,76,0.06);
+  }
+
+  select option { background: var(--manto-deep); color: var(--white); }
+
+  textarea { resize: vertical; min-height: 80px; }
+
+  /* BUTTONS */
+  .btn-group { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
+
+  .btn {
+    padding: 12px 22px;
+    border-radius: 10px;
+    font-family: 'Jost', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+    justify-content: center;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: var(--manto-deep);
+  }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(201,168,76,0.35); }
+
+  .btn-wpp {
+    background: linear-gradient(135deg, #1fbe5e, #25D366);
+    color: white;
+  }
+  .btn-wpp:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(37,211,102,0.35); }
+
+  .btn-email {
+    background: linear-gradient(135deg, #2e6dd4, #4285f4);
+    color: white;
+  }
+  .btn-email:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(66,133,244,0.3); }
+
+  .btn-copy {
+    background: rgba(255,255,255,0.08);
+    color: var(--white);
+    border: 1px solid var(--border);
+    flex: none;
+    padding: 12px 18px;
+  }
+  .btn-copy:hover { background: rgba(255,255,255,0.14); }
+
+  /* OUTPUT */
+  .output-card { position: relative; }
+
+  .output-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+
+  .output-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .copy-status {
+    font-size: 12px;
+    color: var(--success);
+    font-weight: 500;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .copy-status.show { opacity: 1; }
+
+  .output-box {
+    background: rgba(0,0,0,0.25);
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 12px;
+    padding: 20px;
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--text-light);
+    white-space: pre-wrap;
+    min-height: 180px;
+    font-family: 'Jost', sans-serif;
+    user-select: all;
+    max-height: 520px;
+    overflow-y: auto;
+  }
+
+  .output-box::-webkit-scrollbar { width: 5px; }
+  .output-box::-webkit-scrollbar-track { background: transparent; }
+  .output-box::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
+
+  .output-placeholder {
+    color: var(--text-muted);
+    font-style: italic;
+    font-size: 13px;
+  }
+
+  /* FAQ GRID */
+  .faq-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+
+  .faq-item {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .faq-item::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px; height: 100%;
+    background: var(--gold);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .faq-item:hover { border-color: var(--gold); background: rgba(201,168,76,0.06); }
+  .faq-item:hover::before { opacity: 1; }
+
+  .faq-q {
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--gold-light);
+    margin-bottom: 8px;
+  }
+
+  .faq-a {
+    font-size: 12.5px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  .faq-copy-btn {
+    margin-top: 12px;
+    padding: 7px 14px;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--gold-light);
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Jost', sans-serif;
+  }
+  .faq-copy-btn:hover { background: rgba(201,168,76,0.1); }
+
+  /* SECTION TITLE */
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+
+  .section-sub {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 28px;
+  }
+
+  /* DIVIDER */
+  .gold-line {
+    height: 1px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+    margin: 28px 0;
+    opacity: 0.4;
+  }
+
+  /* FOOTER */
+  footer {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 20px;
+    font-size: 11px;
+    color: var(--text-muted);
+    border-top: 1px solid rgba(201,168,76,0.1);
+    letter-spacing: 1px;
+  }
+
+  /* TOAST */
+  .toast {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: var(--manto-mid);
+    border: 1px solid var(--gold);
+    color: var(--white);
+    padding: 14px 22px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 500;
+    z-index: 9999;
+    transform: translateY(80px);
+    opacity: 0;
+    transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .toast.show { transform: translateY(0); opacity: 1; }
+
+  .checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 6px;
+  }
+
+  .checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--text-light);
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 400;
+  }
+
+  .checkbox-label input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    accent-color: var(--gold);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-logo">
+    <div class="oab-seal">OAB</div>
+    <div class="header-text">
+      <h1>Ordem dos Advogados do Brasil</h1>
+      <p>Subseção Santana de Parnaíba &nbsp;•&nbsp; Assistência Judiciária Gratuita</p>
+    </div>
+  </div>
+  <div class="header-user">
+    <div class="name">Cássia Kelly Lins Reis</div>
+    <div class="role">Auxiliar Administrativo</div>
+  </div>
+</header>
+
+<main>
+
+  <!-- TABS -->
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('wpp-geral')">💬 WhatsApp Geral</button>
+    <button class="tab" onclick="showTab('wpp-confirma')">✅ Confirmação</button>
+    <button class="tab" onclick="showTab('email')">📧 E-mail Corporativo</button>
+    <button class="tab" onclick="showTab('faq')">❓ Dúvidas Frequentes</button>
+  </div>
+
+  <!-- ===================== TAB 1: WHATSAPP GERAL ===================== -->
+  <div id="wpp-geral" class="tab-content active">
+    <div class="section-title">💬 WhatsApp – Informações Gerais</div>
+    <div class="section-sub">Gere a mensagem padrão com informações de atendimento, documentos e localização.</div>
+
+    <div class="panel-grid">
+      <div class="card">
+        <div class="card-title">⚙️ Personalizar</div>
+
+        <div class="form-group">
+          <label>Nome do destinatário (opcional)</label>
+          <input type="text" id="wg-nome" placeholder="Ex: Maria, Senhor João...">
+        </div>
+
+        <div class="form-group">
+          <label>Tipo de caso</label>
+          <select id="wg-caso">
+            <option value="geral">Geral (todos os casos)</option>
+            <option value="alimentos">Alimentos / Pensão</option>
+            <option value="divorcio">Divórcio</option>
+            <option value="criminal">Criminal</option>
+            <option value="trabalhista">Trabalhista</option>
+            <option value="civel">Cível</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Incluir na mensagem</label>
+          <div class="checkbox-group">
+            <label class="checkbox-label"><input type="checkbox" id="wg-horario" checked> Horário de atendimento</label>
+            <label class="checkbox-label"><input type="checkbox" id="wg-docs" checked> Lista de documentos</label>
+            <label class="checkbox-label"><input type="checkbox" id="wg-ende" checked> Endereço e telefone</label>
+            <label class="checkbox-label"><input type="checkbox" id="wg-aviso" checked> Aviso de limite de vagas</label>
+          </div>
+        </div>
+
+        <div class="btn-group">
+          <button class="btn btn-primary" onclick="gerarWppGeral()">⚡ Gerar Mensagem</button>
+          <button class="btn btn-copy" onclick="copiarTexto('out-wg')" title="Copiar">📋</button>
+        </div>
+      </div>
+
+      <div class="card output-card">
+        <div class="output-header">
+          <span class="output-label">Mensagem Gerada</span>
+          <span class="copy-status" id="status-wg">✓ Copiado!</span>
+        </div>
+        <div class="output-box" id="out-wg">
+          <span class="output-placeholder">Preencha os campos ao lado e clique em "Gerar Mensagem" para ver o resultado aqui.</span>
+        </div>
+        <div class="btn-group" style="margin-top:14px;">
+          <button class="btn btn-wpp" onclick="abrirWhatsApp('out-wg')">📱 Abrir no WhatsApp</button>
+          <button class="btn btn-copy" onclick="copiarTexto('out-wg')">📋 Copiar tudo</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== TAB 2: CONFIRMAÇÃO ===================== -->
+  <div id="wpp-confirma" class="tab-content">
+    <div class="section-title">✅ WhatsApp – Confirmação de Atendimento</div>
+    <div class="section-sub">Mensagem personalizada para confirmar ou reagendar um atendimento.</div>
+
+    <div class="panel-grid">
+      <div class="card">
+        <div class="card-title">⚙️ Dados do Atendimento</div>
+
+        <div class="form-group">
+          <label>Nome da pessoa</label>
+          <input type="text" id="cf-nome" placeholder="Ex: Maria Silva">
+        </div>
+
+        <div class="form-group">
+          <label>Data</label>
+          <input type="date" id="cf-data">
+        </div>
+
+        <div class="form-group">
+          <label>Tipo de confirmação</label>
+          <select id="cf-tipo">
+            <option value="confirmar">✅ Confirmar atendimento</option>
+            <option value="lembrete">🔔 Lembrete de agendamento</option>
+            <option value="reagendar">📅 Solicitar reagendamento</option>
+            <option value="cancelar">❌ Informar cancelamento</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Observação adicional (opcional)</label>
+          <textarea id="cf-obs" placeholder="Ex: Lembre-se de trazer todos os documentos originais..."></textarea>
+        </div>
+
+        <div class="btn-group">
+          <button class="btn btn-primary" onclick="gerarConfirmacao()">⚡ Gerar Mensagem</button>
+          <button class="btn btn-copy" onclick="copiarTexto('out-cf')" title="Copiar">📋</button>
+        </div>
+      </div>
+
+      <div class="card output-card">
+        <div class="output-header">
+          <span class="output-label">Mensagem Gerada</span>
+          <span class="copy-status" id="status-cf">✓ Copiado!</span>
+        </div>
+        <div class="output-box" id="out-cf">
+          <span class="output-placeholder">Preencha os dados ao lado e clique em "Gerar Mensagem".</span>
+        </div>
+        <div class="btn-group" style="margin-top:14px;">
+          <button class="btn btn-wpp" onclick="abrirWhatsApp('out-cf')">📱 Abrir no WhatsApp</button>
+          <button class="btn btn-copy" onclick="copiarTexto('out-cf')">📋 Copiar tudo</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== TAB 3: E-MAIL ===================== -->
+  <div id="email" class="tab-content">
+    <div class="section-title">📧 E-mail Corporativo</div>
+    <div class="section-sub">Gere e-mails formais com assinatura profissional da OAB Santana de Parnaíba.</div>
+
+    <div class="panel-grid">
+      <div class="card">
+        <div class="card-title">⚙️ Dados do E-mail</div>
+
+        <div class="form-group">
+          <label>Nome do destinatário</label>
+          <input type="text" id="em-dest" placeholder="Ex: Dra. Ana Lima">
+        </div>
+
+        <div class="form-group">
+          <label>Assunto / Tipo de e-mail</label>
+          <select id="em-tipo">
+            <option value="info">Informações sobre atendimento</option>
+            <option value="docs">Solicitação de documentos</option>
+            <option value="encaminhamento">Encaminhamento de caso</option>
+            <option value="agradecimento">Agradecimento / Resposta</option>
+            <option value="urgente">Situação urgente</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Conteúdo principal</label>
+          <textarea id="em-corpo" rows="5" placeholder="Descreva aqui o conteúdo principal do e-mail..."></textarea>
+        </div>
+
+        <div class="btn-group">
+          <button class="btn btn-primary" onclick="gerarEmail()">⚡ Gerar E-mail</button>
+        </div>
+      </div>
+
+      <div class="card output-card">
+        <div class="output-header">
+          <span class="output-label">E-mail Gerado</span>
+          <span class="copy-status" id="status-em">✓ Copiado!</span>
+        </div>
+        <div class="output-box" id="out-em">
+          <span class="output-placeholder">Preencha os dados e clique em "Gerar E-mail".</span>
+        </div>
+        <div class="btn-group" style="margin-top:14px;">
+          <button class="btn btn-email" onclick="abrirEmail()">📧 Abrir no E-mail</button>
+          <button class="btn btn-copy" onclick="copiarTexto('out-em')">📋 Copiar tudo</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== TAB 4: FAQ ===================== -->
+  <div id="faq" class="tab-content">
+    <div class="section-title">❓ Respostas para Dúvidas Frequentes</div>
+    <div class="section-sub">Clique em qualquer resposta para copiar automaticamente.</div>
+
+    <div class="faq-grid" id="faq-grid"></div>
+  </div>
+
+</main>
+
+<footer>
+  OAB – Subseção Santana de Parnaíba &nbsp;|&nbsp; Assistência Judiciária Gratuita &nbsp;|&nbsp; Cássia Kelly Lins Reis – Auxiliar Administrativo
+</footer>
+
+<div class="toast" id="toast">📋 Mensagem copiada com sucesso!</div>
+
+<script>
+// ─── DADOS FAQ ───────────────────────────────────────────────────
+const faqs = [
+  {
+    q: "Qual o horário de atendimento?",
+    a: "Atendemos de segunda a sexta-feira, das 09h às 12h. Distribuímos senhas apenas para as primeiras 30 pessoas por dia.",
+    wpp: `*OAB – Assistência Judiciária Gratuita*\n📍 Subseção Santana de Parnaíba\n\n🗓️ *Atendimento:* Segunda a Sexta-feira\n🕘 *Horário:* 09h00 às 12h00\n⚠️ *Limite:* 30 pessoas por dia\n_(Senhas apenas para as primeiras 30)_`
+  },
+  {
+    q: "Quais documentos devo levar?",
+    a: "RG + CPF, comprovante de residência, comprovante de renda de todos da família e comprovante de patrimônio (se houver). Documentos extras podem ser pedidos conforme o caso.",
+    wpp: `📋 *DOCUMENTOS OBRIGATÓRIOS:*\n\n✅ RG original + CPF\n✅ Comprovante de residência atualizado\n✅ Comprovante de renda de todos da família\n✅ Comprovante de patrimônio (se houver)\n\n❗ Documentos complementares poderão ser solicitados conforme o caso.\n🚫 Sem algum documento, o atendimento *NÃO* será realizado.`
+  },
+  {
+    q: "O atendimento é gratuito?",
+    a: "Sim! A Assistência Judiciária da OAB é totalmente gratuita para quem não possui condições financeiras de arcar com um advogado particular.",
+    wpp: `✅ *O atendimento é 100% GRATUITO!*\n\nA Assistência Judiciária da OAB Subseção Santana de Parnaíba oferece atendimento jurídico gratuito para quem não tem condições de pagar um advogado particular.\n\nCompareça na Av. Tenente Marques, 5297 – Jardim do Luar _(dentro do POUPATEMPO)_.`
+  },
+  {
+    q: "Onde fica o escritório?",
+    a: "Estamos na Av. Tenente Marques, 5297 – Jardim do Luar (Fazendinha), dentro do POUPATEMPO de Santana de Parnaíba/SP.",
+    wpp: `📍 *Endereço OAB – Assistência Judiciária:*\n\nAv. Tenente Marques, 5297\nJardim do Luar (Fazendinha) – Santana de Parnaíba/SP\n_(Dentro do POUPATEMPO)_\n\n📞 (11) 4154-5191`
+  },
+  {
+    q: "Caso de alimentos: o que preciso?",
+    a: "Além dos documentos básicos, traga o documento da criança e o endereço da parte contrária (da pessoa que deve pagar).",
+    wpp: `✅ *Para casos de Alimentos/Pensão:*\n\nAlém dos documentos básicos (RG, CPF, comprovante de residência e renda), traga:\n\n📄 Documento da criança (certidão de nascimento)\n📍 Endereço completo da parte contrária`
+  },
+  {
+    q: "Caso de divórcio: o que preciso?",
+    a: "Para divórcio, além dos documentos básicos, é obrigatória a certidão de casamento atualizada.",
+    wpp: `✅ *Para casos de Divórcio:*\n\nAlém dos documentos básicos (RG, CPF, comprovante de residência e renda), traga:\n\n📄 Certidão de casamento *atualizada*`
+  },
+  {
+    q: "Como comprovar renda sem carteira assinada?",
+    a: "Aceita-se: carteira de trabalho, extrato bancário dos últimos 3 meses, declaração do empregador ou carta de próprio punho reconhecida em cartório.",
+    wpp: `💰 *Comprovante de renda para não registrados:*\n\n• Carteira de trabalho\n• Extrato bancário (últimos 3 meses)\n• Declaração do empregador\n• Carta de próprio punho reconhecida em cartório`
+  },
+  {
+    q: "Tem limite de vagas por dia?",
+    a: "Sim, são 30 vagas por dia. As senhas são distribuídas apenas para as primeiras 30 pessoas. Recomendamos chegar cedo!",
+    wpp: `⚠️ *Atenção ao limite de vagas!*\n\nSão apenas *30 vagas por dia*.\nAs senhas são distribuídas somente para as primeiras 30 pessoas que chegarem.\n\n🕘 Horário: 09h00 às 12h00 – Segunda a Sexta-feira\n\n*Recomendamos chegar com antecedência!*`
+  }
+];
+
+// ─── RENDERIZA FAQ ────────────────────────────────────────────────
+function renderFaq() {
+  const grid = document.getElementById('faq-grid');
+  grid.innerHTML = faqs.map((f, i) => `
+    <div class="faq-item">
+      <div class="faq-q">❓ ${f.q}</div>
+      <div class="faq-a">${f.a}</div>
+      <button class="faq-copy-btn" onclick="copiarFaq(${i})">📋 Copiar para WhatsApp</button>
+    </div>
+  `).join('');
+}
+renderFaq();
+
+function copiarFaq(i) {
+  navigator.clipboard.writeText(faqs[i].wpp).then(() => showToast('✅ Copiado! Cole no WhatsApp.'));
+}
+
+// ─── TABS ─────────────────────────────────────────────────────────
+function showTab(id) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// ─── GERAR WHATSAPP GERAL ─────────────────────────────────────────
+function gerarWppGeral() {
+  const nome = document.getElementById('wg-nome').value.trim();
+  const caso = document.getElementById('wg-caso').value;
+  const horario = document.getElementById('wg-horario').checked;
+  const docs = document.getElementById('wg-docs').checked;
+  const ende = document.getElementById('wg-ende').checked;
+  const aviso = document.getElementById('wg-aviso').checked;
+
+  let msg = '';
+
+  if (nome) msg += `Olá, *${nome}*! 👋\n\n`;
+  else msg += `Olá! 👋\n\n`;
+
+  msg += `🏛️ *OAB – ASSISTÊNCIA JUDICIÁRIA GRATUITA*\n📍 Subseção Santana de Parnaíba\n`;
+
+  if (horario) {
+    msg += `\n━━━━━━━━━━━━━━━━━━━━\n`;
+    msg += `🗓️ *Atendimento:* Segunda a Sexta-feira\n`;
+    msg += `🕘 *Horário:* 09h00 às 12h00\n`;
+    if (aviso) {
+      msg += `⚠️ *Limite:* 30 pessoas por dia\n`;
+      msg += `_(Senhas apenas para as primeiras 30)_\n`;
+    }
+    msg += `━━━━━━━━━━━━━━━━━━━━\n`;
+  }
+
+  if (docs) {
+    msg += `\n📋 *DOCUMENTOS OBRIGATÓRIOS:*\n\n`;
+    msg += `✅ RG original + CPF\n`;
+    msg += `✅ Comprovante de residência atualizado\n`;
+    msg += `   _(água, luz, gás, telefone ou aluguel)_\n`;
+    msg += `✅ Comprovante de renda de todos da família:\n`;
+    msg += `   • *Registrado:* 3 últimos holerites\n`;
+    msg += `   • *Não registrado:* carteira de trabalho, extrato bancário (3 meses), declaração do empregador ou carta de próprio punho reconhecida em cartório\n`;
+    msg += `✅ Comprovante de patrimônio:\n`;
+    msg += `   _(certidão do valor venal, IPTU, veículos, extrato de poupança – se houver)_\n`;
+
+    if (caso === 'alimentos') {
+      msg += `✅ *Alimentos:* documento da criança + endereço da parte contrária\n`;
+    }
+    if (caso === 'divorcio') {
+      msg += `✅ *Divórcio:* certidão de casamento atualizada\n`;
+    }
+
+    msg += `\n━━━━━━━━━━━━━━━━━━━━\n`;
+    msg += `❗ *Documentos complementares poderão ser solicitados conforme o caso.*\n`;
+    msg += `🚫 *Sem algum documento acima, o atendimento NÃO será realizado.*\n`;
+    msg += `━━━━━━━━━━━━━━━━━━━━\n`;
+  }
+
+  if (ende) {
+    msg += `\n📍 Av. Tenente Marques, 5297\n`;
+    msg += `   Jardim do Luar (Fazendinha) – Santana de Parnaíba/SP\n`;
+    msg += `   _(Dentro do POUPATEMPO)_\n`;
+    msg += `📞 (11) 4154-5191\n`;
+  }
+
+  document.getElementById('out-wg').textContent = msg;
+}
+
+// ─── GERAR CONFIRMAÇÃO ────────────────────────────────────────────
+function gerarConfirmacao() {
+  const nome = document.getElementById('cf-nome').value.trim() || 'Prezado(a)';
+  const dataInput = document.getElementById('cf-data').value;
+  const tipo = document.getElementById('cf-tipo').value;
+  const obs = document.getElementById('cf-obs').value.trim();
+
+  let dataFmt = '';
+  if (dataInput) {
+    const d = new Date(dataInput + 'T12:00:00');
+    dataFmt = d.toLocaleDateString('pt-BR', { weekday:'long', day:'2-digit', month:'long', year:'numeric' });
+  }
+
+  let msg = '';
+
+  if (tipo === 'confirmar') {
+    msg += `Olá, *${nome}*! 👋\n\n`;
+    msg += `✅ *Confirmação de Atendimento – OAB*\n📍 Subseção Santana de Parnaíba\n\n`;
+    if (dataFmt) msg += `📅 Seu atendimento está confirmado para *${dataFmt}*.\n`;
+    msg += `🕘 *Horário:* 09h00 às 12h00\n`;
+    msg += `📍 Av. Tenente Marques, 5297 – Jardim do Luar _(dentro do POUPATEMPO)_\n\n`;
+    msg += `⚠️ *Lembrete:* Chegue cedo, pois são apenas 30 vagas por dia.\n`;
+    msg += `📋 Traga *todos os documentos* solicitados. Sem eles, o atendimento não será realizado.\n`;
+  } else if (tipo === 'lembrete') {
+    msg += `Olá, *${nome}*! 👋\n\n`;
+    msg += `🔔 *Lembrete de Atendimento – OAB*\n📍 Subseção Santana de Parnaíba\n\n`;
+    if (dataFmt) msg += `📅 Você tem atendimento agendado para *${dataFmt}*.\n`;
+    msg += `🕘 *Horário:* 09h00 às 12h00\n\n`;
+    msg += `📋 Não esqueça de tragar *todos os documentos* necessários!\n`;
+    msg += `📍 Av. Tenente Marques, 5297 – Jardim do Luar _(dentro do POUPATEMPO)_\n`;
+  } else if (tipo === 'reagendar') {
+    msg += `Olá, *${nome}*! 👋\n\n`;
+    msg += `📅 *Reagendamento – OAB Santana de Parnaíba*\n\n`;
+    msg += `Infelizmente precisamos reagendar seu atendimento.\n`;
+    if (dataFmt) msg += `📅 A nova data proposta é *${dataFmt}*.\n`;
+    msg += `🕘 *Horário:* 09h00 às 12h00\n\n`;
+    msg += `Por favor, confirme sua disponibilidade respondendo esta mensagem.\n`;
+    msg += `📞 Dúvidas: (11) 4154-5191\n`;
+  } else if (tipo === 'cancelar') {
+    msg += `Olá, *${nome}*! 👋\n\n`;
+    msg += `❌ *Cancelamento de Atendimento – OAB*\n📍 Subseção Santana de Parnaíba\n\n`;
+    if (dataFmt) msg += `Informamos que o atendimento do dia *${dataFmt}* foi cancelado.\n\n`;
+    else msg += `Informamos que seu atendimento foi cancelado.\n\n`;
+    msg += `Para reagendar, entre em contato:\n📞 (11) 4154-5191\n`;
+    msg += `🕘 Segunda a Sexta, das 09h às 12h\n`;
+  }
+
+  if (obs) msg += `\n📝 *Observação:* ${obs}\n`;
+
+  document.getElementById('out-cf').textContent = msg;
+}
+
+// ─── GERAR EMAIL ─────────────────────────────────────────────────
+function gerarEmail() {
+  const dest = document.getElementById('em-dest').value.trim() || 'Prezado(a)';
+  const tipo = document.getElementById('em-tipo').value;
+  const corpo = document.getElementById('em-corpo').value.trim();
+
+  const assuntos = {
+    info: 'Informações sobre Atendimento – Assistência Judiciária Gratuita OAB',
+    docs: 'Solicitação de Documentos – Atendimento OAB Santana de Parnaíba',
+    encaminhamento: 'Encaminhamento de Caso – OAB Subseção Santana de Parnaíba',
+    agradecimento: 'Resposta ao Contato – OAB Santana de Parnaíba',
+    urgente: 'URGENTE – OAB Subseção Santana de Parnaíba'
+  };
+
+  const saudacoes = {
+    info: `Espero que esta mensagem o(a) encontre bem.\n\nEntramos em contato para prestar as seguintes informações sobre o atendimento da Assistência Judiciária Gratuita da OAB, Subseção Santana de Parnaíba:`,
+    docs: `Venho, por meio desta, solicitar os documentos necessários para darmos andamento ao seu atendimento junto à Assistência Judiciária Gratuita da OAB, Subseção Santana de Parnaíba.`,
+    encaminhamento: `Venho, por meio desta, realizar o encaminhamento do caso em questão à sua atenção, para os devidos fins.`,
+    agradecimento: `Agradecemos o seu contato com a OAB – Subseção Santana de Parnaíba. Em resposta à sua mensagem, informamos:`,
+    urgente: `Em caráter urgente, comunicamos o seguinte:`
+  };
+
+  const hoje = new Date().toLocaleDateString('pt-BR', { day:'2-digit', month:'long', year:'numeric' });
+
+  let msg = `Assunto: ${assuntos[tipo]}\n\n`;
+  msg += `─────────────────────────────────\n\n`;
+  msg += `${dest},\n\n`;
+  msg += `${saudacoes[tipo]}\n\n`;
+  if (corpo) msg += `${corpo}\n\n`;
+  msg += `─────────────────────────────────\n\n`;
+  msg += `Permanecemos à disposição para quaisquer esclarecimentos adicionais.\n\n`;
+  msg += `Atenciosamente,\n\n`;
+  msg += `*Cássia Kelly Lins Reis*\n`;
+  msg += `Auxiliar Administrativo\n`;
+  msg += `OAB – Subseção Santana de Parnaíba\n`;
+  msg += `Assistência Judiciária Gratuita\n\n`;
+  msg += `📍 Av. Tenente Marques, 5297 – Jardim do Luar\n`;
+  msg += `    Santana de Parnaíba/SP (dentro do POUPATEMPO)\n`;
+  msg += `📞 (11) 4154-5191\n`;
+  msg += `🕘 Segunda a Sexta-feira | 09h00 às 12h00\n\n`;
+  msg += `Santana de Parnaíba, ${hoje}.`;
+
+  document.getElementById('out-em').textContent = msg;
+}
+
+// ─── UTILITÁRIOS ─────────────────────────────────────────────────
+function copiarTexto(id) {
+  const el = document.getElementById(id);
+  const txt = el.textContent;
+  if (!txt || el.querySelector('.output-placeholder')) return;
+  navigator.clipboard.writeText(txt).then(() => {
+    showToast('📋 Mensagem copiada!');
+    const s = document.getElementById('status-' + id.replace('out-',''));
+    if (s) { s.classList.add('show'); setTimeout(() => s.classList.remove('show'), 2000); }
+  });
+}
+
+function abrirWhatsApp(id) {
+  const txt = document.getElementById(id).textContent;
+  if (!txt || document.getElementById(id).querySelector('.output-placeholder')) {
+    showToast('⚠️ Gere a mensagem primeiro!'); return;
+  }
+  window.open('https://wa.me/?text=' + encodeURIComponent(txt), '_blank');
+}
+
+function abrirEmail() {
+  const txt = document.getElementById('out-em').textContent;
+  if (!txt || document.getElementById('out-em').querySelector('.output-placeholder')) {
+    showToast('⚠️ Gere o e-mail primeiro!'); return;
+  }
+  const lines = txt.split('\n');
+  const assunto = lines[0].replace('Assunto: ', '');
+  const corpo = lines.slice(3).join('\n');
+  window.open(`mailto:?subject=${encodeURIComponent(assunto)}&body=${encodeURIComponent(corpo)}`, '_blank');
+}
+
+let toastTimer;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2500);
+}
+</script>
+</body>
+</html>
