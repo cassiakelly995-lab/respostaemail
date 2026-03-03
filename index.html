@@ -4,278 +4,434 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CAD · Central de Atendimento</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%;overflow:hidden}
 :root{
-  --bg:#08101f;--surf:#0d1526;--border:rgba(255,255,255,.06);--border2:rgba(255,255,255,.11);
-  --gold:#c9923a;--gold-lt:#e8b060;--gold-pale:#f5d08a;
-  --glow:rgba(201,146,58,.1);--gb:rgba(201,146,58,.22);
-  --text:#e4edf8;--sub:#7890b4;--dim:#364d6a;--white:#f4f7ff;
-  --green:#1fd278;--red:#e8435a;--teal:#18b8cc;--amber:#f59e0b;
-  --tr:all .18s cubic-bezier(.4,0,.2,1);--r:12px;--rs:8px
+  --bg:#050c1a;
+  --surf:#080f20;
+  --surf2:#0b1427;
+  --border:rgba(255,255,255,.055);
+  --border2:rgba(255,255,255,.1);
+  --gold:#c8903a;
+  --gold-lt:#dba85a;
+  --gold-pale:#f0cc88;
+  --glow:rgba(200,144,58,.09);
+  --gb:rgba(200,144,58,.2);
+  --text:#dce8f5;
+  --sub:#6882a8;
+  --dim:#334866;
+  --white:#f0f5ff;
+  --green:#1ecb72;
+  --red:#e84060;
+  --teal:#15b5c8;
+  --amber:#f09020;
+  --tr:all .18s cubic-bezier(.4,0,.2,1);
+  --r:10px;--rs:7px;
+  --ff:'DM Sans',sans-serif;
+  --fs:'Cormorant Garamond',serif;
 }
-body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);display:flex;flex-direction:column}
-body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
-  background:radial-gradient(ellipse 900px 600px at -80px -80px,rgba(10,28,68,.9) 0%,transparent 60%),
-    radial-gradient(ellipse 500px 400px at 100% 100%,rgba(6,10,32,.95) 0%,transparent 55%)}
-.topbar{position:relative;z-index:50;height:60px;background:rgba(8,13,26,.98);
-  backdrop-filter:blur(24px);border-bottom:1px solid var(--gb);
-  display:flex;align-items:center;padding:0 20px;flex-shrink:0;box-shadow:0 8px 32px rgba(0,0,0,.5)}
-.topbar::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;
-  background:linear-gradient(90deg,transparent,var(--gold) 25%,var(--gold-lt) 50%,var(--gold) 75%,transparent);opacity:.75}
-.brand{display:flex;align-items:center;gap:11px;flex-shrink:0}
-.seal{width:38px;height:38px;border-radius:50%;border:1.5px solid var(--gb);
-  background:linear-gradient(135deg,rgba(201,146,58,.14),rgba(201,146,58,.04));
-  display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 0 0 3px rgba(201,146,58,.05)}
-.seal .s1{font-family:'Playfair Display',serif;font-size:12px;color:var(--gold-lt);line-height:1;font-weight:600}
-.seal .s2{font-size:5.5px;color:var(--gold);letter-spacing:2px;line-height:1.4;text-transform:uppercase}
-.brand-txt h1{font-family:'Playfair Display',serif;font-size:17px;color:var(--white);line-height:1;font-weight:500}
-.brand-txt p{font-size:10px;color:var(--sub);letter-spacing:1.5px;text-transform:uppercase;margin-top:3px;opacity:.7}
-.vdiv{width:1px;height:28px;background:var(--border);margin:0 18px;flex-shrink:0}
-.tmeta{display:flex;gap:20px}
+
+body{font-family:var(--ff);background:var(--bg);color:var(--text);display:flex;flex-direction:column}
+
+/* Atmospheric background */
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 700px 500px at -100px -100px, rgba(15,30,75,.7) 0%, transparent 65%),
+    radial-gradient(ellipse 400px 350px at 100% 85%, rgba(6,9,28,.9) 0%, transparent 55%),
+    radial-gradient(ellipse 600px 300px at 50% 100%, rgba(200,144,58,.03) 0%, transparent 60%);
+}
+
+/* Subtle grid overlay */
+body::after{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.018;
+  background-image:linear-gradient(rgba(255,255,255,.5) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.5) 1px,transparent 1px);
+  background-size:40px 40px;
+}
+
+/* ─── TOPBAR ─── */
+.topbar{
+  position:relative;z-index:50;height:56px;
+  background:rgba(5,10,22,.97);backdrop-filter:blur(30px);
+  border-bottom:1px solid var(--gb);
+  display:flex;align-items:center;padding:0 18px;flex-shrink:0;
+  box-shadow:0 1px 0 rgba(200,144,58,.08),0 8px 32px rgba(0,0,0,.6);
+}
+.topbar::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent 0%,var(--gold) 20%,var(--gold-lt) 50%,var(--gold) 80%,transparent 100%);
+  opacity:.6;
+}
+
+.brand{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.seal{
+  width:36px;height:36px;border-radius:50%;
+  border:1px solid rgba(200,144,58,.3);
+  background:linear-gradient(135deg,rgba(200,144,58,.12),rgba(200,144,58,.03));
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  box-shadow:0 0 0 3px rgba(200,144,58,.04), inset 0 1px 0 rgba(255,255,255,.05);
+}
+.seal .s1{font-family:var(--fs);font-size:11px;color:var(--gold-lt);line-height:1;font-weight:700}
+.seal .s2{font-size:5px;color:var(--gold);letter-spacing:2.5px;line-height:1.5;text-transform:uppercase}
+.brand-txt h1{font-family:var(--fs);font-size:16px;color:var(--white);line-height:1;font-weight:600;letter-spacing:.3px}
+.brand-txt p{font-size:9.5px;color:var(--sub);letter-spacing:1.8px;text-transform:uppercase;margin-top:3px;opacity:.6}
+
+.vdiv{width:1px;height:24px;background:var(--border);margin:0 16px;flex-shrink:0}
+
+.tmeta{display:flex;gap:18px}
 .tm{text-align:center}
-.tm-v{font-family:'Playfair Display',serif;font-size:14px;color:var(--gold-lt);line-height:1;font-weight:500}
-.tm-l{font-size:9px;color:var(--dim);letter-spacing:1.5px;text-transform:uppercase;margin-top:2px}
-.tright{margin-left:auto;display:flex;align-items:center;gap:14px}
-.live-pill{display:flex;align-items:center;gap:5px;padding:4px 10px;border-radius:20px;
-  background:rgba(31,210,120,.07);border:1px solid rgba(31,210,120,.2)}
+.tm-v{font-family:var(--fs);font-size:13px;color:var(--gold-lt);line-height:1;font-weight:600}
+.tm-l{font-size:8.5px;color:var(--dim);letter-spacing:1.8px;text-transform:uppercase;margin-top:2px}
+
+.tright{margin-left:auto;display:flex;align-items:center;gap:12px}
+.live-pill{
+  display:flex;align-items:center;gap:5px;padding:4px 9px;border-radius:20px;
+  background:rgba(30,203,114,.06);border:1px solid rgba(30,203,114,.18);
+}
 .live-dot{width:5px;height:5px;border-radius:50%;background:var(--green);animation:pulse 2s ease-in-out infinite}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.8)}}
-.live-pill span{font-size:8.5px;font-weight:600;color:var(--green);letter-spacing:1.2px;text-transform:uppercase}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.75)}}
+.live-pill span{font-size:8px;font-weight:700;color:var(--green);letter-spacing:1.5px;text-transform:uppercase}
+
 .ublock{text-align:right}
-.uname{font-family:'Playfair Display',serif;font-size:15px;color:var(--gold-pale);line-height:1;font-weight:500}
-.urole{font-size:9.5px;color:var(--dim);letter-spacing:1px;text-transform:uppercase;margin-top:2px}
-.uclock{font-size:10.5px;color:var(--sub);margin-top:2px;font-variant-numeric:tabular-nums}
-.shell{display:grid;grid-template-columns:288px 1fr;flex:1;overflow:hidden;position:relative;z-index:1}
-.sidebar{background:rgba(9,14,28,.82);border-right:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden;backdrop-filter:blur(12px)}
-.sb-head{padding:16px 14px 12px;border-bottom:1px solid var(--border);flex-shrink:0}
-.sb-lbl{font-size:9.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:9px}
+.uname{font-family:var(--fs);font-size:14px;color:var(--gold-pale);line-height:1;font-weight:600}
+.urole{font-size:9px;color:var(--dim);letter-spacing:1.2px;text-transform:uppercase;margin-top:2px}
+.uclock{font-size:10px;color:var(--sub);margin-top:2px;font-variant-numeric:tabular-nums}
+
+/* ─── SHELL ─── */
+.shell{display:grid;grid-template-columns:272px 1fr;flex:1;overflow:hidden;position:relative;z-index:1}
+
+/* ─── SIDEBAR ─── */
+.sidebar{
+  background:rgba(6,11,24,.88);border-right:1px solid var(--border);
+  display:flex;flex-direction:column;overflow:hidden;backdrop-filter:blur(16px);
+}
+.sb-head{padding:14px 12px 10px;border-bottom:1px solid var(--border);flex-shrink:0}
+.sb-lbl{font-size:9px;font-weight:700;letter-spacing:2.2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px}
 .sw{position:relative}
-.sw svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:12px;height:12px;color:var(--dim);pointer-events:none}
-.si{width:100%;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:var(--rs);
-  padding:8px 10px 8px 32px;font-family:'Outfit',sans-serif;font-size:13px;color:var(--text);outline:none;transition:var(--tr)}
+.sw svg{position:absolute;left:9px;top:50%;transform:translateY(-50%);width:11px;height:11px;color:var(--dim);pointer-events:none}
+.si{
+  width:100%;background:rgba(255,255,255,.025);border:1px solid var(--border);border-radius:var(--rs);
+  padding:7px 9px 7px 29px;font-family:var(--ff);font-size:12.5px;color:var(--text);outline:none;transition:var(--tr);
+}
 .si::placeholder{color:var(--dim)}
-.si:focus{border-color:var(--gb);background:var(--glow)}
-.chips{display:flex;flex-wrap:wrap;gap:4px;padding:8px 10px;border-bottom:1px solid var(--border)}
-.chip{padding:3px 9px;border-radius:20px;border:1px solid var(--border);background:transparent;
-  font-size:10px;color:var(--sub);cursor:pointer;transition:var(--tr);font-family:'Outfit',sans-serif;white-space:nowrap}
+.si:focus{border-color:var(--gb);background:rgba(200,144,58,.05)}
+
+.chips{display:flex;flex-wrap:wrap;gap:3px;padding:8px 10px;border-bottom:1px solid var(--border)}
+.chip{
+  padding:3px 8px;border-radius:20px;border:1px solid var(--border);background:transparent;
+  font-size:9.5px;color:var(--sub);cursor:pointer;transition:var(--tr);font-family:var(--ff);white-space:nowrap;
+}
 .chip:hover,.chip.on{background:var(--glow);border-color:var(--gb);color:var(--gold-lt)}
-.sb-list{flex:1;overflow-y:auto;padding:4px 6px 14px}
+
+.sb-list{flex:1;overflow-y:auto;padding:4px 5px 12px}
 .sb-list::-webkit-scrollbar{width:2px}
 .sb-list::-webkit-scrollbar-thumb{background:var(--gb);border-radius:2px}
-.grp-lbl{font-size:9.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);
-  padding:12px 6px 5px;display:flex;align-items:center;gap:6px}
+
+.grp-lbl{
+  font-size:9px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:var(--dim);
+  padding:11px 6px 5px;display:flex;align-items:center;gap:6px;
+}
 .grp-lbl::after{content:'';flex:1;height:1px;background:var(--border)}
-.sc-row{width:100%;text-align:left;background:transparent;border:1px solid transparent;border-radius:var(--rs);
-  padding:9px 10px;margin-bottom:3px;cursor:pointer;display:flex;align-items:center;gap:9px;transition:var(--tr);font-family:'Outfit',sans-serif}
-.sc-row:hover{background:rgba(255,255,255,.025);border-color:var(--border)}
+
+.sc-row{
+  width:100%;text-align:left;background:transparent;border:1px solid transparent;border-radius:var(--rs);
+  padding:8px 9px;margin-bottom:2px;cursor:pointer;display:flex;align-items:center;gap:8px;
+  transition:var(--tr);font-family:var(--ff);
+}
+.sc-row:hover{background:rgba(255,255,255,.022);border-color:var(--border)}
 .sc-row.active{background:var(--glow);border-color:var(--gb)}
-.sc-ico{width:32px;height:32px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
-.i-blue{background:rgba(20,40,100,.7)}.i-green{background:rgba(31,210,120,.08)}.i-red{background:rgba(232,67,90,.08)}
-.i-gold{background:rgba(201,146,58,.1)}.i-slate{background:rgba(90,120,180,.08)}
-.i-teal{background:rgba(24,184,204,.08)}.i-amber{background:rgba(245,158,11,.08)}.i-purple{background:rgba(167,139,250,.08)}
-.i-orange{background:rgba(249,115,22,.1)}
+.sc-ico{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.i-blue{background:rgba(20,40,100,.6)}.i-green{background:rgba(30,203,114,.07)}.i-red{background:rgba(232,64,96,.07)}
+.i-gold{background:rgba(200,144,58,.1)}.i-slate{background:rgba(80,110,170,.07)}
+.i-teal{background:rgba(21,181,200,.07)}.i-amber{background:rgba(240,144,32,.08)}.i-purple{background:rgba(160,130,240,.07)}
+.i-orange{background:rgba(245,110,18,.09)}
 .sc-info{flex:1;min-width:0}
-.sc-title{font-size:13px;font-weight:500;color:var(--text);line-height:1.3}
-.sc-desc{font-size:11px;color:var(--sub);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.sc-pip{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.sc-title{font-size:12.5px;font-weight:500;color:var(--text);line-height:1.3}
+.sc-desc{font-size:10.5px;color:var(--sub);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sc-pip{width:5px;height:5px;border-radius:50%;flex-shrink:0}
 .pip-green{background:var(--green)}.pip-red{background:var(--red)}.pip-teal{background:var(--teal)}
 .pip-amber{background:var(--amber)}.pip-purple{background:#a78bfa}.pip-orange{background:#f97316}
+
+/* ─── MAIN ─── */
 .main{display:flex;flex-direction:column;overflow:hidden}
-.breadbar{height:46px;background:rgba(9,14,26,.8);border-bottom:1px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;padding:0 22px;flex-shrink:0}
-.btitle{font-family:'Playfair Display',serif;font-size:18px;color:var(--white);display:flex;align-items:center;gap:7px;font-weight:500}
-.bsub{font-size:11.5px;color:var(--sub);margin-top:2px}
-.btn{display:flex;align-items:center;gap:5px;padding:6px 13px;border-radius:var(--rs);
-  font-family:'Outfit',sans-serif;font-size:12.5px;font-weight:500;border:none;cursor:pointer;transition:var(--tr);white-space:nowrap}
+
+.breadbar{
+  height:44px;background:rgba(7,12,24,.85);border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;padding:0 20px;flex-shrink:0;
+}
+.btitle{font-family:var(--fs);font-size:17px;color:var(--white);display:flex;align-items:center;gap:7px;font-weight:600}
+.bsub{font-size:11px;color:var(--sub);margin-top:1px}
+
+.btn{
+  display:flex;align-items:center;gap:5px;padding:5px 12px;border-radius:var(--rs);
+  font-family:var(--ff);font-size:12px;font-weight:500;border:none;cursor:pointer;transition:var(--tr);white-space:nowrap;
+}
 .btn:hover{transform:translateY(-1px)}
 .btn-guide{background:var(--glow);border:1px solid var(--gb);color:var(--gold-lt)}
-.btn-guide:hover{background:rgba(201,146,58,.18)}
-.btn-copy{background:linear-gradient(135deg,var(--gold),var(--gold-lt));color:#06100a;font-weight:700;font-size:12.5px;padding:9px 18px;box-shadow:0 2px 10px rgba(201,146,58,.2)}
-.btn-copy:hover{box-shadow:0 4px 20px rgba(201,146,58,.4)}
-.btn-wapp{background:rgba(31,210,120,.08);border:1px solid rgba(31,210,120,.2);color:var(--green)}
-.btn-wapp:hover{background:rgba(31,210,120,.15)}
-.btn-email{background:rgba(24,184,204,.08);border:1px solid rgba(24,184,204,.22);color:var(--teal)}
-.btn-email:hover{background:rgba(24,184,204,.15)}
-.btn-sec{background:rgba(167,139,250,.1);border:1px solid rgba(167,139,250,.25);color:#c4b5fd}
-.btn-sec:hover{background:rgba(167,139,250,.18)}
+.btn-guide:hover{background:rgba(200,144,58,.15)}
+.btn-copy{
+  background:linear-gradient(135deg,var(--gold),var(--gold-lt));color:#04090f;
+  font-weight:700;font-size:12px;padding:8px 16px;
+  box-shadow:0 2px 12px rgba(200,144,58,.25);
+}
+.btn-copy:hover{box-shadow:0 4px 20px rgba(200,144,58,.45)}
+.btn-wapp{background:rgba(30,203,114,.07);border:1px solid rgba(30,203,114,.2);color:var(--green)}
+.btn-wapp:hover{background:rgba(30,203,114,.14)}
+.btn-email{background:rgba(21,181,200,.07);border:1px solid rgba(21,181,200,.2);color:var(--teal)}
+.btn-email:hover{background:rgba(21,181,200,.14)}
+.btn-sec{background:rgba(160,130,240,.09);border:1px solid rgba(160,130,240,.22);color:#c4b5fd}
+.btn-sec:hover{background:rgba(160,130,240,.16)}
 .btn-ghost{background:rgba(255,255,255,.04);border:1px solid var(--border);color:var(--sub)}
-.btn-ghost:hover{background:rgba(255,255,255,.08);color:var(--text)}
-.channel-tabs-outer{display:flex;border-bottom:1px solid var(--border);background:rgba(8,13,24,.6);flex-shrink:0}
-.channel-tab{padding:0 22px;height:38px;font-family:'Outfit',sans-serif;font-size:12px;font-weight:600;
-  letter-spacing:.8px;text-transform:uppercase;background:transparent;border:none;cursor:pointer;
-  color:var(--dim);transition:var(--tr);display:flex;align-items:center;gap:6px;border-bottom:2px solid transparent}
+.btn-ghost:hover{background:rgba(255,255,255,.07);color:var(--text)}
+
+/* Channel tabs */
+.channel-tabs-outer{display:flex;border-bottom:1px solid var(--border);background:rgba(6,11,22,.7);flex-shrink:0}
+.channel-tab{
+  padding:0 20px;height:36px;font-family:var(--ff);font-size:11px;font-weight:600;
+  letter-spacing:1px;text-transform:uppercase;background:transparent;border:none;cursor:pointer;
+  color:var(--dim);transition:var(--tr);display:flex;align-items:center;gap:5px;
+  border-bottom:2px solid transparent;
+}
 .channel-tab.act{color:var(--gold-lt);border-bottom-color:var(--gold)}
 .channel-tab:hover:not(.act){color:var(--sub)}
+
 .channel-pane{display:none;flex:1;overflow:hidden;flex-direction:column}
 .channel-pane.on{display:flex}
-.welcome{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:40px;text-align:center}
-.wglyph{width:72px;height:72px;border-radius:50%;border:1px solid var(--gb);
-  background:radial-gradient(circle,var(--glow),transparent);
-  display:flex;align-items:center;justify-content:center;font-size:30px;
-  box-shadow:0 0 0 8px rgba(201,146,58,.04),0 0 40px rgba(201,146,58,.08);animation:float 5s ease-in-out infinite}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-.welcome h2{font-family:'Playfair Display',serif;font-size:26px;font-weight:500;color:var(--white);opacity:.85}
-.welcome p{font-size:14px;color:var(--sub);max-width:420px;line-height:1.9}
+
+/* Welcome screen */
+.welcome{
+  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:14px;padding:40px;text-align:center;
+}
+.wglyph{
+  width:70px;height:70px;border-radius:50%;border:1px solid var(--gb);
+  background:radial-gradient(circle at 40% 35%,rgba(200,144,58,.12),transparent 65%);
+  display:flex;align-items:center;justify-content:center;font-size:28px;
+  box-shadow:0 0 0 8px rgba(200,144,58,.03),0 0 40px rgba(200,144,58,.07);
+  animation:float 5s ease-in-out infinite;
+}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+.welcome h2{font-family:var(--fs);font-size:24px;font-weight:600;color:var(--white);opacity:.85}
+.welcome p{font-size:13.5px;color:var(--sub);max-width:400px;line-height:1.95}
 .wtags{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;margin-top:4px}
-.wtag{padding:5px 13px;border-radius:20px;background:rgba(255,255,255,.025);border:1px solid var(--border);
-  font-size:12.5px;color:var(--sub);cursor:pointer;transition:var(--tr);font-family:'Outfit',sans-serif}
+.wtag{
+  padding:5px 12px;border-radius:20px;background:rgba(255,255,255,.022);border:1px solid var(--border);
+  font-size:12px;color:var(--sub);cursor:pointer;transition:var(--tr);font-family:var(--ff);
+}
 .wtag:hover{background:var(--glow);border-color:var(--gb);color:var(--gold-lt)}
+
+/* Scene view */
 .sc-view{flex:1;display:none;flex-direction:column;overflow:hidden}
 .sc-view.on{display:flex}
-.namebar{height:48px;background:rgba(201,146,58,.04);border-bottom:1px solid var(--gb);
-  display:flex;align-items:center;gap:12px;padding:0 22px;flex-shrink:0}
-.namebar label{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold-lt);white-space:nowrap}
-.namebar input{width:210px;background:rgba(255,255,255,.05);border:1px solid var(--gb);border-radius:var(--rs);
-  padding:5px 11px;font-family:'Outfit',sans-serif;font-size:14px;color:var(--white);outline:none;transition:var(--tr)}
+
+.namebar{
+  height:44px;background:rgba(200,144,58,.035);border-bottom:1px solid rgba(200,144,58,.12);
+  display:flex;align-items:center;gap:12px;padding:0 20px;flex-shrink:0;
+}
+.namebar label{font-size:9.5px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:var(--gold-lt);white-space:nowrap}
+.namebar input{
+  width:200px;background:rgba(255,255,255,.045);border:1px solid var(--gb);border-radius:var(--rs);
+  padding:5px 10px;font-family:var(--ff);font-size:13.5px;color:var(--white);outline:none;transition:var(--tr);
+}
 .namebar input::placeholder{color:var(--dim)}
-.namebar input:focus{border-color:var(--gold-lt);background:rgba(201,146,58,.08)}
-.namebar-hint{font-size:11px;color:var(--dim)}
+.namebar input:focus{border-color:var(--gold-lt);background:rgba(200,144,58,.07)}
+.namebar-hint{font-size:10.5px;color:var(--dim)}
+
+/* Two-column layout */
 .cols{flex:1;display:grid;grid-template-columns:1fr 1fr;overflow:hidden}
 .col{display:flex;flex-direction:column;overflow:hidden}
 .col-l{border-right:1px solid var(--border)}
-.col-hd{height:36px;border-bottom:1px solid var(--border);display:flex;align-items:center;
-  padding:0 18px;gap:6px;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);flex-shrink:0}
-.col-body{flex:1;overflow-y:auto;padding:16px 18px}
+.col-hd{
+  height:34px;border-bottom:1px solid var(--border);display:flex;align-items:center;
+  padding:0 16px;gap:6px;font-size:9.5px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;
+  color:var(--dim);flex-shrink:0;background:rgba(255,255,255,.012);
+}
+.col-body{flex:1;overflow-y:auto;padding:14px 16px}
 .col-body::-webkit-scrollbar{width:3px}
 .col-body::-webkit-scrollbar-thumb{background:var(--gb);border-radius:3px}
-.who-row{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--sub);margin-bottom:8px}
+
+.who-row{display:flex;align-items:center;gap:6px;font-size:10.5px;color:var(--sub);margin-bottom:8px}
 .who-pip{width:6px;height:6px;border-radius:50%}
-.bubble{background:rgba(255,255,255,.03);border:1px solid var(--border2);border-radius:14px 14px 14px 4px;
-  padding:12px 16px;font-size:14px;color:var(--sub);line-height:1.8;font-style:italic;margin-bottom:12px}
-.tag-row{display:flex;gap:5px;flex-wrap:wrap}
-.tag{font-size:10px;font-weight:600;padding:3px 11px;border-radius:20px;letter-spacing:.2px;text-transform:uppercase}
-.tg-green{background:rgba(31,210,120,.08);color:#4ade80;border:1px solid rgba(31,210,120,.2)}
-.tg-red{background:rgba(232,67,90,.08);color:#f87171;border:1px solid rgba(232,67,90,.2)}
+.bubble{
+  background:rgba(255,255,255,.025);border:1px solid var(--border2);
+  border-radius:14px 14px 14px 3px;padding:11px 14px;
+  font-size:13.5px;color:var(--sub);line-height:1.85;font-style:italic;margin-bottom:12px;
+}
+.tag-row{display:flex;gap:4px;flex-wrap:wrap}
+.tag{font-size:9.5px;font-weight:600;padding:3px 9px;border-radius:20px;letter-spacing:.3px;text-transform:uppercase}
+.tg-green{background:rgba(30,203,114,.07);color:#4ade80;border:1px solid rgba(30,203,114,.18)}
+.tg-red{background:rgba(232,64,96,.07);color:#f87171;border:1px solid rgba(232,64,96,.18)}
 .tg-gold{background:var(--glow);color:var(--gold-lt);border:1px solid var(--gb)}
-.tg-blue{background:rgba(20,40,100,.4);color:#93b4fb;border:1px solid rgba(90,120,200,.2)}
-.tg-teal{background:rgba(24,184,204,.08);color:#5eead4;border:1px solid rgba(24,184,204,.2)}
-.tg-amber{background:rgba(245,158,11,.08);color:#fbbf24;border:1px solid rgba(245,158,11,.2)}
-.tg-purple{background:rgba(167,139,250,.08);color:#c4b5fd;border:1px solid rgba(167,139,250,.2)}
-.tg-orange{background:rgba(249,115,22,.08);color:#fb923c;border:1px solid rgba(249,115,22,.2)}
-.ctx{margin-top:12px;background:rgba(201,146,58,.04);border:1px solid var(--gb);border-radius:var(--rs);
-  padding:10px 13px;font-size:12.5px;color:var(--sub);line-height:1.65}
+.tg-blue{background:rgba(20,40,100,.35);color:#93b4fb;border:1px solid rgba(90,120,200,.18)}
+.tg-teal{background:rgba(21,181,200,.07);color:#5eead4;border:1px solid rgba(21,181,200,.18)}
+.tg-amber{background:rgba(240,144,32,.07);color:#fbbf24;border:1px solid rgba(240,144,32,.18)}
+.tg-purple{background:rgba(160,130,240,.07);color:#c4b5fd;border:1px solid rgba(160,130,240,.18)}
+.tg-orange{background:rgba(245,110,18,.07);color:#fb923c;border:1px solid rgba(245,110,18,.18)}
+.ctx{
+  margin-top:12px;background:rgba(200,144,58,.035);border:1px solid var(--gb);border-radius:var(--rs);
+  padding:9px 12px;font-size:12px;color:var(--sub);line-height:1.7;
+}
 .ctx strong{color:var(--gold-lt)}
-.resp-stack{display:flex;flex-direction:column;gap:12px}
-.rcard{border-radius:14px;border:1px solid var(--border);
-  background:linear-gradient(160deg,rgba(14,21,42,.85),rgba(11,17,34,.65));overflow:hidden;transition:all .2s}
+
+/* Response cards */
+.resp-stack{display:flex;flex-direction:column;gap:10px}
+.rcard{
+  border-radius:12px;border:1px solid var(--border);
+  background:linear-gradient(160deg,rgba(12,19,40,.9),rgba(9,14,30,.7));overflow:hidden;
+  transition:all .2s;
+}
 .rcard:hover{border-color:var(--border2);box-shadow:0 4px 20px rgba(0,0,0,.3)}
-.rcard.primary{border-color:rgba(201,146,58,.2);background:linear-gradient(160deg,rgba(201,146,58,.05),rgba(14,21,42,.85))}
-.rcard.danger{border-color:rgba(232,67,90,.2);background:linear-gradient(160deg,rgba(232,67,90,.05),rgba(14,21,42,.85))}
-.rcard-hd{padding:11px 15px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:8px}
-.rcard-title{font-size:13px;font-weight:600;color:var(--gold-lt);display:flex;align-items:center;gap:5px}
+.rcard.primary{border-color:rgba(200,144,58,.18);background:linear-gradient(160deg,rgba(200,144,58,.04),rgba(12,19,40,.9))}
+.rcard.danger{border-color:rgba(232,64,96,.18);background:linear-gradient(160deg,rgba(232,64,96,.04),rgba(12,19,40,.9))}
+.rcard-hd{
+  padding:10px 14px;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;gap:8px;
+}
+.rcard-title{font-size:12.5px;font-weight:600;color:var(--gold-lt);display:flex;align-items:center;gap:5px}
 .rcard-title.danger{color:#f87171}
-.badge{font-size:8.5px;font-weight:700;padding:3px 9px;border-radius:6px;letter-spacing:.5px;text-transform:uppercase;flex-shrink:0}
-.b-main{background:rgba(201,146,58,.15);color:var(--gold-lt)}
-.b-alt{background:rgba(90,120,200,.15);color:#93b4fb}
-.b-no{background:rgba(232,67,90,.15);color:#f87171}
-.b-email{background:rgba(24,184,204,.15);color:var(--teal)}
-.b-int{background:rgba(167,139,250,.15);color:#c4b5fd}
-.b-orange{background:rgba(249,115,22,.15);color:#fb923c}
-.reditor{width:100%;background:rgba(0,0,0,.2);border:none;border-bottom:1px solid var(--border);
-  padding:14px 16px;font-family:'Outfit',sans-serif;font-size:14px;line-height:1.9;color:var(--text);
-  resize:none;outline:none;min-height:100px;max-height:240px;overflow-y:auto;transition:background .2s}
-.reditor:focus{background:rgba(255,255,255,.015)}
+.badge{font-size:8px;font-weight:700;padding:2px 8px;border-radius:5px;letter-spacing:.6px;text-transform:uppercase;flex-shrink:0}
+.b-main{background:rgba(200,144,58,.14);color:var(--gold-lt)}
+.b-alt{background:rgba(90,120,200,.12);color:#93b4fb}
+.b-no{background:rgba(232,64,96,.12);color:#f87171}
+.b-email{background:rgba(21,181,200,.12);color:var(--teal)}
+.b-int{background:rgba(160,130,240,.12);color:#c4b5fd}
+.b-orange{background:rgba(245,110,18,.12);color:#fb923c}
+.reditor{
+  width:100%;background:rgba(0,0,0,.18);border:none;border-bottom:1px solid var(--border);
+  padding:12px 14px;font-family:var(--ff);font-size:13.5px;line-height:1.95;color:var(--text);
+  resize:none;outline:none;min-height:90px;max-height:230px;overflow-y:auto;transition:background .2s;
+}
+.reditor:focus{background:rgba(255,255,255,.012)}
 .reditor::-webkit-scrollbar{width:3px}
 .reditor::-webkit-scrollbar-thumb{background:var(--gb);border-radius:3px}
-.email-subj{display:flex;align-items:center;gap:8px;padding:7px 13px;border-bottom:1px solid var(--border);background:rgba(24,184,204,.03)}
-.email-subj-lbl{font-size:9.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--teal);white-space:nowrap}
-.email-subj-input{flex:1;background:transparent;border:none;outline:none;font-family:'Outfit',sans-serif;font-size:13.5px;color:var(--text);padding:2px 0}
+.email-subj{display:flex;align-items:center;gap:8px;padding:7px 12px;border-bottom:1px solid var(--border);background:rgba(21,181,200,.025)}
+.email-subj-lbl{font-size:9px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--teal);white-space:nowrap}
+.email-subj-input{flex:1;background:transparent;border:none;outline:none;font-family:var(--ff);font-size:13px;color:var(--text);padding:2px 0}
 .email-subj-input::placeholder{color:var(--dim)}
-.rcard-ft{padding:10px 15px;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
-.chars{font-size:10px;color:var(--dim);margin-left:auto}
+.rcard-ft{padding:9px 13px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.chars{font-size:9.5px;color:var(--dim);margin-left:auto}
 
-/* ── CPF CHECKER ── */
-.cpf-checker{background:linear-gradient(160deg,rgba(249,115,22,.07),rgba(11,17,34,.9));
-  border:1px solid rgba(249,115,22,.3);border-radius:14px;overflow:hidden;margin-bottom:14px}
-.cpf-checker-hd{padding:12px 16px;border-bottom:1px solid rgba(249,115,22,.15);
-  display:flex;align-items:center;gap:8px;background:rgba(249,115,22,.05)}
-.cpf-checker-hd span:first-child{font-size:16px}
-.cpf-checker-title{font-size:13px;font-weight:700;color:#fb923c;letter-spacing:.3px}
-.cpf-checker-body{padding:14px 16px;display:flex;flex-direction:column;gap:11px}
+/* CPF Checker */
+.cpf-checker{
+  background:linear-gradient(160deg,rgba(245,110,18,.06),rgba(9,14,30,.95));
+  border:1px solid rgba(245,110,18,.25);border-radius:12px;overflow:hidden;margin-bottom:12px;
+}
+.cpf-checker-hd{
+  padding:11px 14px;border-bottom:1px solid rgba(245,110,18,.12);
+  display:flex;align-items:center;gap:8px;background:rgba(245,110,18,.04);
+}
+.cpf-checker-hd span:first-child{font-size:15px}
+.cpf-checker-title{font-size:12.5px;font-weight:700;color:#fb923c;letter-spacing:.2px}
+.cpf-checker-body{padding:12px 14px;display:flex;flex-direction:column;gap:10px}
 .cpf-field-row{display:flex;gap:8px;align-items:center}
-.cpf-field-lbl{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#fb923c;white-space:nowrap;min-width:28px}
-.cpf-field-input{flex:1;background:rgba(0,0,0,.35);border:1px solid rgba(249,115,22,.3);border-radius:var(--rs);
-  padding:9px 13px;font-family:'Outfit',sans-serif;font-size:15px;color:var(--white);outline:none;
-  letter-spacing:2px;font-variant-numeric:tabular-nums;transition:var(--tr)}
-.cpf-field-input::placeholder{color:var(--dim);letter-spacing:0;font-size:13px}
-.cpf-field-input:focus{border-color:rgba(249,115,22,.6);background:rgba(249,115,22,.07)}
-.cpf-hint-txt{font-size:11.5px;color:var(--sub);line-height:1.65;padding:8px 12px;
-  background:rgba(249,115,22,.04);border-radius:8px;border:1px solid rgba(249,115,22,.1)}
-.cpf-status-btns{display:flex;gap:6px;flex-wrap:wrap}
-.cpf-status-btns-lbl{font-size:9.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);margin-bottom:4px}
-.sbtn{padding:7px 14px;border-radius:20px;font-family:'Outfit',sans-serif;font-size:11.5px;font-weight:600;
-  border:none;cursor:pointer;transition:var(--tr);display:flex;align-items:center;gap:5px}
+.cpf-field-lbl{font-size:9.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#fb923c;white-space:nowrap;min-width:28px}
+.cpf-field-input{
+  flex:1;background:rgba(0,0,0,.3);border:1px solid rgba(245,110,18,.25);border-radius:var(--rs);
+  padding:8px 12px;font-family:var(--ff);font-size:14.5px;color:var(--white);outline:none;
+  letter-spacing:2px;font-variant-numeric:tabular-nums;transition:var(--tr);
+}
+.cpf-field-input::placeholder{color:var(--dim);letter-spacing:0;font-size:12.5px}
+.cpf-field-input:focus{border-color:rgba(245,110,18,.55);background:rgba(245,110,18,.06)}
+.cpf-hint-txt{font-size:11px;color:var(--sub);line-height:1.7;padding:8px 11px;background:rgba(245,110,18,.035);border-radius:7px;border:1px solid rgba(245,110,18,.1)}
+.cpf-status-btns{display:flex;gap:5px;flex-wrap:wrap}
+.cpf-status-btns-lbl{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);margin-bottom:4px}
+.sbtn{
+  padding:6px 12px;border-radius:20px;font-family:var(--ff);font-size:11px;font-weight:600;
+  border:none;cursor:pointer;transition:var(--tr);display:flex;align-items:center;gap:5px;
+}
 .sbtn:hover{transform:translateY(-1px)}
-.sbtn-teal{background:rgba(24,184,204,.1);border:1px solid rgba(24,184,204,.3);color:#5eead4}
-.sbtn-teal:hover{background:rgba(24,184,204,.2)}
-.sbtn-amber{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.3);color:#fbbf24}
-.sbtn-amber:hover{background:rgba(245,158,11,.2)}
-.sbtn-red{background:rgba(232,67,90,.1);border:1px solid rgba(232,67,90,.3);color:#f87171}
-.sbtn-red:hover{background:rgba(232,67,90,.2)}
-.status-result{border-radius:10px;padding:14px 15px;animation:fadeSlide .3s ease;display:none}
+.sbtn-teal{background:rgba(21,181,200,.09);border:1px solid rgba(21,181,200,.25);color:#5eead4}
+.sbtn-teal:hover{background:rgba(21,181,200,.18)}
+.sbtn-amber{background:rgba(240,144,32,.09);border:1px solid rgba(240,144,32,.25);color:#fbbf24}
+.sbtn-amber:hover{background:rgba(240,144,32,.18)}
+.sbtn-red{background:rgba(232,64,96,.09);border:1px solid rgba(232,64,96,.25);color:#f87171}
+.sbtn-red:hover{background:rgba(232,64,96,.18)}
+.status-result{border-radius:9px;padding:12px 14px;animation:fadeSlide .3s ease;display:none}
 .status-result.show{display:block}
-@keyframes fadeSlide{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-.sr-noproc{background:rgba(24,184,204,.05);border:1px solid rgba(24,184,204,.2)}
-.sr-recused{background:rgba(245,158,11,.05);border:1px solid rgba(245,158,11,.2)}
-.sr-accepted{background:rgba(232,67,90,.06);border:1px solid rgba(232,67,90,.2)}
-.sr-title{font-size:13px;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:7px}
-.sr-noproc .sr-title{color:#5eead4}
-.sr-recused .sr-title{color:#fbbf24}
-.sr-accepted .sr-title{color:#f87171}
-.sr-body{font-size:12.5px;color:var(--sub);line-height:1.8}
+@keyframes fadeSlide{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+.sr-noproc{background:rgba(21,181,200,.04);border:1px solid rgba(21,181,200,.18)}
+.sr-recused{background:rgba(240,144,32,.04);border:1px solid rgba(240,144,32,.18)}
+.sr-accepted{background:rgba(232,64,96,.04);border:1px solid rgba(232,64,96,.18)}
+.sr-title{font-size:12.5px;font-weight:700;margin-bottom:7px;display:flex;align-items:center;gap:6px}
+.sr-noproc .sr-title{color:#5eead4}.sr-recused .sr-title{color:#fbbf24}.sr-accepted .sr-title{color:#f87171}
+.sr-body{font-size:12px;color:var(--sub);line-height:1.8}
 .sr-body strong{color:var(--text)}
-.sr-steps{margin-top:10px;display:flex;flex-direction:column;gap:7px}
-.sr-step{display:flex;align-items:flex-start;gap:8px;font-size:12px;color:var(--sub);line-height:1.6}
-.sr-num{width:20px;height:20px;border-radius:50%;font-size:9.5px;font-weight:700;
-  display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
-.sr-noproc .sr-num{background:rgba(24,184,204,.15);color:#5eead4}
-.sr-recused .sr-num{background:rgba(245,158,11,.15);color:#fbbf24}
-.sr-accepted .sr-num{background:rgba(232,67,90,.15);color:#f87171}
-.sr-warn-box{margin-top:10px;padding:10px 13px;border-radius:8px;font-size:12px;line-height:1.7}
-.sr-noproc .sr-warn-box{background:rgba(24,184,204,.06);border:1px solid rgba(24,184,204,.15);color:#5eead4}
-.sr-recused .sr-warn-box{background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.15);color:#fbbf24}
-.sr-accepted .sr-warn-box{background:rgba(232,67,90,.06);border:1px solid rgba(232,67,90,.15);color:#f87171}
+.sr-steps{margin-top:9px;display:flex;flex-direction:column;gap:6px}
+.sr-step{display:flex;align-items:flex-start;gap:7px;font-size:11.5px;color:var(--sub);line-height:1.65}
+.sr-num{
+  width:19px;height:19px;border-radius:50%;font-size:9px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;
+}
+.sr-noproc .sr-num{background:rgba(21,181,200,.14);color:#5eead4}
+.sr-recused .sr-num{background:rgba(240,144,32,.14);color:#fbbf24}
+.sr-accepted .sr-num{background:rgba(232,64,96,.14);color:#f87171}
+.sr-warn-box{margin-top:9px;padding:9px 12px;border-radius:7px;font-size:11.5px;line-height:1.7}
+.sr-noproc .sr-warn-box{background:rgba(21,181,200,.05);border:1px solid rgba(21,181,200,.12);color:#5eead4}
+.sr-recused .sr-warn-box{background:rgba(240,144,32,.05);border:1px solid rgba(240,144,32,.12);color:#fbbf24}
+.sr-accepted .sr-warn-box{background:rgba(232,64,96,.05);border:1px solid rgba(232,64,96,.12);color:#f87171}
 
-.histbar{border-top:1px solid var(--border);height:36px;background:rgba(7,11,22,.92);
-  display:flex;align-items:center;gap:12px;padding:0 22px;flex-shrink:0}
-.hist-lbl{font-size:9.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);white-space:nowrap}
-.hist-chips{display:flex;gap:5px;overflow-x:auto;flex:1}
+/* History bar */
+.histbar{
+  border-top:1px solid var(--border);height:34px;background:rgba(5,9,20,.95);
+  display:flex;align-items:center;gap:10px;padding:0 20px;flex-shrink:0;
+}
+.hist-lbl{font-size:9px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:var(--dim);white-space:nowrap}
+.hist-chips{display:flex;gap:4px;overflow-x:auto;flex:1}
 .hist-chips::-webkit-scrollbar{display:none}
-.hchip{padding:2px 10px;border-radius:20px;background:rgba(255,255,255,.03);border:1px solid var(--border);
-  font-size:11px;color:var(--sub);cursor:pointer;white-space:nowrap;transition:var(--tr);font-family:'Outfit',sans-serif;display:flex;align-items:center;gap:5px}
+.hchip{
+  padding:2px 9px;border-radius:20px;background:rgba(255,255,255,.025);border:1px solid var(--border);
+  font-size:10.5px;color:var(--sub);cursor:pointer;white-space:nowrap;transition:var(--tr);
+  font-family:var(--ff);display:flex;align-items:center;gap:5px;
+}
 .hchip:hover{border-color:var(--gb);color:var(--gold-lt)}
-.hchip-t{font-size:9px;color:var(--dim)}
-.hist-empty{font-size:9.5px;color:var(--dim)}
-.guide{position:absolute;inset:0;z-index:40;background:rgba(6,10,22,.98);backdrop-filter:blur(24px);
-  display:none;flex-direction:column;overflow-y:auto}
+.hchip-t{font-size:8.5px;color:var(--dim)}
+.hist-empty{font-size:9px;color:var(--dim)}
+
+/* Guide panel */
+.guide{
+  position:absolute;inset:0;z-index:40;background:rgba(4,8,19,.98);backdrop-filter:blur(28px);
+  display:none;flex-direction:column;overflow-y:auto;
+}
 .guide.open{display:flex}
-.guide-inner{padding:30px 36px;max-width:860px;margin:0 auto;width:100%}
-.guide-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
-.guide-hd h2{font-family:'Playfair Display',serif;font-size:21px;font-weight:500;color:var(--white)}
-.gg{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.gc{border-radius:var(--r);padding:20px}
-.gc-yes{background:rgba(31,210,120,.05);border:1px solid rgba(31,210,120,.15)}
-.gc-no{background:rgba(232,67,90,.05);border:1px solid rgba(232,67,90,.15)}
-.gc h3{font-family:'Playfair Display',serif;font-size:17px;font-weight:500;margin-bottom:12px;display:flex;align-items:center;gap:7px}
+.guide-inner{padding:28px 34px;max-width:820px;margin:0 auto;width:100%}
+.guide-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.guide-hd h2{font-family:var(--fs);font-size:20px;font-weight:600;color:var(--white)}
+.gg{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.gc{border-radius:var(--r);padding:18px}
+.gc-yes{background:rgba(30,203,114,.04);border:1px solid rgba(30,203,114,.12)}
+.gc-no{background:rgba(232,64,96,.04);border:1px solid rgba(232,64,96,.12)}
+.gc h3{font-family:var(--fs);font-size:16px;font-weight:600;margin-bottom:11px;display:flex;align-items:center;gap:6px}
 .gc-yes h3{color:#4ade80}.gc-no h3{color:#f87171}
-.gi{padding:7px 0;border-bottom:1px solid var(--border);font-size:12px;color:var(--sub);display:flex;gap:9px;line-height:1.6}
+.gi{padding:6px 0;border-bottom:1px solid var(--border);font-size:11.5px;color:var(--sub);display:flex;gap:8px;line-height:1.65}
 .gi:last-child{border-bottom:none}
 .gi strong{color:var(--text);display:block}
-.ginfo{margin-top:14px;background:var(--glow);border:1px solid var(--gb);border-radius:var(--r);
-  padding:14px 18px;font-size:11.5px;color:var(--sub);line-height:1.9}
+.ginfo{
+  margin-top:12px;background:var(--glow);border:1px solid var(--gb);border-radius:var(--r);
+  padding:13px 17px;font-size:11px;color:var(--sub);line-height:2;
+}
 .ginfo strong{color:var(--gold-lt)}
-.toast{position:fixed;bottom:20px;right:20px;z-index:9999;
-  background:rgba(9,14,30,.98);border:1px solid var(--gold);color:var(--white);
-  padding:9px 16px;border-radius:var(--rs);font-size:11.5px;font-weight:500;
-  transform:translateY(60px) scale(.95);opacity:0;transition:all .35s cubic-bezier(.34,1.56,.64,1);
-  display:flex;align-items:center;gap:8px;box-shadow:0 8px 30px rgba(0,0,0,.7);backdrop-filter:blur(20px)}
+
+/* Toast */
+.toast{
+  position:fixed;bottom:18px;right:18px;z-index:9999;
+  background:rgba(7,12,28,.98);border:1px solid var(--gold);color:var(--white);
+  padding:8px 15px;border-radius:var(--rs);font-size:11px;font-weight:500;
+  transform:translateY(50px) scale(.95);opacity:0;transition:all .32s cubic-bezier(.34,1.56,.64,1);
+  display:flex;align-items:center;gap:8px;box-shadow:0 8px 28px rgba(0,0,0,.7);backdrop-filter:blur(20px);
+}
 .toast.show{transform:translateY(0) scale(1);opacity:1}
+
+/* Scrollbar global */
+::-webkit-scrollbar{width:3px;height:3px}
+::-webkit-scrollbar-thumb{background:var(--gb);border-radius:3px}
+::-webkit-scrollbar-track{background:transparent}
 </style>
 </head>
 <body>
+
+<!-- TOPBAR -->
 <div class="topbar">
   <div class="brand">
     <div class="seal"><span class="s1">OAB</span><span class="s2">SP</span></div>
@@ -300,7 +456,11 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
     </div>
   </div>
 </div>
+
+<!-- SHELL -->
 <div class="shell">
+
+  <!-- SIDEBAR -->
   <div class="sidebar">
     <div class="sb-head">
       <div class="sb-lbl">Que situação você recebeu?</div>
@@ -328,6 +488,8 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
     </div>
     <div class="sb-list" id="sb-list"></div>
   </div>
+
+  <!-- MAIN -->
   <div class="main">
     <div class="breadbar">
       <div>
@@ -336,17 +498,22 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
       </div>
       <button class="btn btn-guide" onclick="toggleGuide()">📌 O que atendemos?</button>
     </div>
+
     <div style="flex:1;display:flex;flex-direction:column;overflow:hidden;position:relative">
+
+      <!-- WELCOME -->
       <div class="welcome" id="welcome">
         <div class="wglyph">⚖️</div>
         <h2>Olá, Cássia! 👋</h2>
         <p>Selecione ao lado o tipo de mensagem que você recebeu. A resposta já aparece pronta, com o nome da pessoa — edite se precisar e copie com um clique.</p>
         <div class="wtags" id="wtags"></div>
-        <div style="margin-top:8px;font-size:12px;color:var(--dim);display:flex;align-items:center;gap:6px">
-          <span style="width:6px;height:6px;border-radius:50%;background:var(--green);display:inline-block"></span>
+        <div style="margin-top:8px;font-size:11.5px;color:var(--dim);display:flex;align-items:center;gap:6px">
+          <span style="width:5px;height:5px;border-radius:50%;background:var(--green);display:inline-block;flex-shrink:0"></span>
           CAD · Subseção Santana de Parnaíba · 30 senhas/dia · 9h–12h
         </div>
       </div>
+
+      <!-- SCENE VIEW -->
       <div class="sc-view" id="sc-view">
         <div class="namebar">
           <label>✏️ Nome da pessoa</label>
@@ -357,6 +524,8 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
           <button class="channel-tab act" id="ctab-wapp" onclick="switchChannel('wapp')">📱 WhatsApp</button>
           <button class="channel-tab" id="ctab-email" onclick="switchChannel('email')">📧 E-mail</button>
         </div>
+
+        <!-- WHATSAPP PANE -->
         <div class="channel-pane on" id="pane-wapp">
           <div class="cols">
             <div class="col col-l">
@@ -402,6 +571,8 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
             </div>
           </div>
         </div>
+
+        <!-- EMAIL PANE -->
         <div class="channel-pane" id="pane-email">
           <div class="cols">
             <div class="col col-l">
@@ -420,6 +591,8 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
           </div>
         </div>
       </div>
+
+      <!-- GUIDE OVERLAY -->
       <div class="guide" id="guide">
         <div class="guide-inner">
           <div class="guide-hd">
@@ -449,20 +622,29 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
           <div class="ginfo">
             <strong>📋 Documentos básicos:</strong> RG original + CPF · Comprovante de residência · Comprovante de renda de todos da família · Patrimônio se houver<br><br>
             <strong>📍</strong> Av. Tenente Marques, 5297 – Jd. do Luar, Santana de Parnaíba/SP (POUPATEMPO)<br>
-            <strong>📞</strong> (11) 4154-5191 &nbsp;·&nbsp; <strong>📧</strong> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a9c8c387dac8c7ddc8c7c887d9c8dbc7c8c0e9c6c8cbdad987c6dbce87cbdb">[email&#160;protected]</a> &nbsp;·&nbsp; <strong>🕘</strong> Seg–Sex, 9h–12h &nbsp;·&nbsp; <strong>⚠️</strong> 30 senhas/dia
+            <strong>📞</strong> (11) 4154-5191 &nbsp;·&nbsp;
+            <strong>📧</strong> aj.santana.parnai@oabsp.org.br &nbsp;·&nbsp;
+            <strong>🕘</strong> Seg–Sex, 9h–12h &nbsp;·&nbsp;
+            <strong>⚠️</strong> 30 senhas/dia
           </div>
           <div style="margin-top:14px"><button class="btn btn-ghost" onclick="window.print()">🖨️ Imprimir</button></div>
         </div>
       </div>
-    </div>
+
+    </div><!-- end flex col -->
+
+    <!-- HISTORY BAR -->
     <div class="histbar">
       <span class="hist-lbl">Recentes</span>
       <div class="hist-chips" id="hist-chips"><span class="hist-empty">Nenhuma cópia ainda — as últimas aparecerão aqui</span></div>
     </div>
-  </div>
-</div>
+  </div><!-- end .main -->
+
+</div><!-- end .shell -->
+
 <div class="toast" id="toast"></div>
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+
+<script>
 const DOCS='\n\nDocumentos necessários:\n- RG original e CPF (originais)\n- Comprovante de residência atualizado (água, luz, gás ou contrato de aluguel)\n- Comprovante de renda de todos que moram com você:\n  • Com carteira assinada: 3 últimos holerites\n  • Sem carteira assinada: extrato bancário dos últimos 3 meses ou declaração de renda\n- Se tiver bens (imóvel, carro, poupança): documentação desses bens\n\n⚠️ Sem documentação completa, o atendimento não poderá ser realizado.';
 const END='\n\n📍 Av. Tenente Marques, 5297 – Jd. do Luar, Santana de Parnaíba/SP (POUPATEMPO)\n📞 (11) 4154-5191\n🕘 Seg–Sex, 9h–12h  ⚠️ 30 senhas/dia';
 const END_REC='\n\n📍 R. Alberto Frediani, 770 – Jd. Frediani, Santana de Parnaíba/SP\n    CEP 06502-155\n🕘 Seg–Sex, 9h–17h';
@@ -472,7 +654,6 @@ const AREAS='\n\nA CAD atende: família (divórcio, pensão, guarda), cível, in
 
 const S=[
 
-// ── INFORMATIVO GERAL ──
 {grp:'📣 Informativo Geral',id:'info1',icon:'📣',ic:'i-blue',pip:null,
  label:'Informativo completo do atendimento',sub:'Texto pronto para WhatsApp ou e-mail',
  who:'Assistido',wc:'#3b82f6',sim:'Pode me mandar as informações sobre o atendimento?',
@@ -491,7 +672,6 @@ const S=[
    tpl:n=>'CAD – Comissão de Advocacia Dativa\nOAB Subseção Santana de Parnaíba\n\nPrezado(a)'+(n?' '+n:'')+'!\n\nO atendimento de Assistência Judiciária Gratuita funciona da seguinte forma:\n\nDias e horário: Segunda a sexta-feira, das 9h às 12h\nLimite: 30 pessoas por dia, por ordem de chegada — sem agendamento prévio.\n\nDocumentos obrigatórios:\n- RG original e CPF\n- Comprovante de residência atualizado (água, luz, gás, telefone ou aluguel)\n- Comprovante de renda de todos da família (holerites, extrato bancário ou declaração)\n- Documentação de patrimônio, se houver\n- Documentos específicos conforme o tipo de caso\n\nSem a documentação completa, o atendimento não poderá ser realizado.\n\nLocalização: Av. Tenente Marques, 5297 – Jd. do Luar (Fazendinha), Santana de Parnaíba/SP (POUPATEMPO)\nTelefone: (11) 4154-5191\n\nAtenciosamente,\nCássia Kelly\nCentral de Atendimento – CAD\nOAB Subseção Santana de Parnaíba'}
  ]},
 
-// ── PRIMEIRO CONTATO ──
 {grp:'👤 Primeiro contato',id:'bv0',icon:'💬',ic:'i-blue',pip:null,
  label:'Assistido entra em contato',sub:'Perguntar no que podemos ajudar',
  who:'Assistido',wc:'#3b82f6',sim:'Oi, boa tarde!',
@@ -560,7 +740,6 @@ const S=[
   {title:'⏸️ Em atendimento presencial',badge:'Alternativa',primary:false,nao:false,tpl:n=>'Oi'+(n?', '+n:'')+'! 😊 No momento estou em atendimento presencial, mas respondo assim que finalizar. Obrigada pela paciência! 🙂'}
  ],emailResps:[]},
 
-// ── CASOS QUE ATENDEMOS ──
 {grp:'✅ Casos que atendemos',id:'at1',icon:'👨‍👩‍👧',ic:'i-green',pip:'pip-green',
  label:'Família — Divórcio',sub:'Confirmar + docs específicos',
  who:'Assistido',wc:'#22c97a',sim:'Preciso me separar do meu marido. Vocês podem me ajudar?',
@@ -594,7 +773,6 @@ const S=[
  emailResps:[{title:'📧 Confirmar inventário',subj:'CAD – Atendemos inventário e herança',badge:'Padrão',primary:true,nao:false,
   tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nSim, a CAD atende casos de inventário e herança.\n\nDocumentos necessários:\n- RG original e CPF\n- Comprovante de residência\n- Certidão de óbito do falecido\n- RG e CPF do falecido\n- Documentação dos bens a inventariar'+ENDE}]},
 
-// ── NÃO ATENDEMOS ──
 {grp:'🚫 Casos que não atendemos',id:'na1',icon:'🏭',ic:'i-red',pip:'pip-red',
  label:'Trabalhista',sub:'Rescisão, FGTS, Justiça do Trabalho',
  who:'Assistido',wc:'#e8495a',sim:'Fui demitido sem justa causa e não recebi meu FGTS. Podem me ajudar?',
@@ -620,7 +798,6 @@ const S=[
  emailResps:[{title:'📧 Não atendemos — Criminal',subj:'CAD – Sobre seu contato',badge:'Padrão',primary:false,nao:true,
   tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nA CAD não atende defesa criminal em geral. Exceção: advocacia dativa nomeada pelo juiz. Indicamos a Defensoria Pública do Estado de São Paulo.'+AREAS+ENDE}]},
 
-// ── CONVÊNIO ──
 {grp:'🤝 Convênio OAB/DPE',id:'cv1',icon:'🤝',ic:'i-teal',pip:'pip-teal',
  label:'O que é o convênio?',sub:'Explica como funciona',
  who:'Assistido',wc:'#22b8c9',sim:'O que é esse convênio OAB com a Defensoria?',
@@ -646,7 +823,6 @@ const S=[
  emailResps:[{title:'📧 Encaminhamento DPE',subj:'CAD – Encaminhamento da Defensoria',badge:'Recomendada',primary:true,nao:false,
   tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nSe a Defensoria te encaminhou, compareça com:\n- O documento de encaminhamento\n- RG original e CPF\n- Comprovante de residência\n- Comprovante de renda\n- Documentos do seu caso'+ENDE}]},
 
-// ── DATIVO ──
 {grp:'⚖️ Advocacia Dativa',id:'dv1',icon:'⚖️',ic:'i-amber',pip:'pip-amber',
  label:'O que é advocacia dativa?',sub:'Explica ao assistido',
  who:'Assistido',wc:'#f59e0b',sim:'Me falaram que preciso de um advogado dativo. O que é isso?',
@@ -672,7 +848,6 @@ const S=[
  emailResps:[{title:'📧 Honorários dativos',subj:'CAD – Honorários dativos',badge:'Padrão',primary:true,nao:false,
   tpl:n=>HDRE+'\nPrezado(a) Dr(a).'+(n?' '+n:'')+'!\n\nOs honorários dativos são fixados pelo juiz e pagos pelo Estado de São Paulo. Para informações sobre valores e prazos, entre em contato pelo (11) 4154-5191.'+ENDE}]},
 
-// ── DOCUMENTOS ──
 {grp:'📋 Documentos',id:'doc1',icon:'📋',ic:'i-gold',pip:null,
  label:'Quais documentos trazer?',sub:'Lista completa',
  who:'Assistido',wc:'#c9973a',sim:'Quais documentos preciso levar?',
@@ -703,7 +878,6 @@ const S=[
   tpl:n=>'Documentos não podem ser avaliados por WhatsApp.\n\nÉ necessário comparecer pessoalmente com os documentos originais.\n\nAtendemos de segunda a sexta, das 9h às 12h, sem necessidade de agendamento prévio.'+DOCS+END}],
  emailResps:[]},
 
-// ── AGENDAMENTO ──
 {grp:'📅 Agendamento e horários',id:'age1',icon:'🚷',ic:'i-slate',pip:null,
  label:'Vagas esgotadas no dia',sub:'Limite de 30 senhas atingido',
  who:'Assistido',wc:'#6e89b8',sim:'Fui lá hoje mas as vagas já tinham acabado.',
@@ -737,7 +911,6 @@ const S=[
  emailResps:[{title:'📧 Não atendemos sábado',subj:'CAD – Dias de atendimento',badge:'Padrão',primary:true,nao:false,
   tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nAtendemos apenas em dias úteis, de segunda a sexta, das 9h às 12h. Não atendemos sábados, domingos ou feriados.'+ENDE}]},
 
-// ── LOCALIZAÇÃO ──
 {grp:'📍 Como chegar',id:'loc1',icon:'📍',ic:'i-gold',pip:null,
  label:'Como chegar',sub:'Endereço e referência',
  who:'Assistido',wc:'#c9973a',sim:'Como faço para chegar aí?',
@@ -751,7 +924,6 @@ const S=[
  emailResps:[{title:'📧 Como chegar por e-mail',subj:'CAD – Endereço e informações de acesso',badge:'Padrão',primary:true,nao:false,
   tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nEstamos localizados no Poupatempo de Santana de Parnaíba:\n\n📍 Av. Tenente Marques, 5297 – Jd. do Luar (Fazendinha), Santana de Parnaíba/SP\n\nAtendemos de segunda a sexta, das 9h às 12h, por ordem de chegada — limite de 30 senhas por dia.'+ENDE}]},
 
-// ── SITUAÇÕES DELICADAS ──
 {grp:'😓 Situações delicadas',id:'del1',icon:'😤',ic:'i-slate',pip:null,
  label:'Pessoa nervosa / reclamação',sub:'Resposta calma e respeitosa',
  who:'Assistido',wc:'#8b5cf6',sim:'Vocês são um absurdo! Fui lá três vezes e nunca consigo ser atendida!',
@@ -817,7 +989,6 @@ const S=[
    tpl:n=>'Olá'+(n?', '+n:'')+'! Tudo bem?\n\nPassei para verificar se posso ser útil em algo. Caso as dúvidas já tenham sido sanadas, fico feliz em ter ajudado.'}
  ],emailResps:[]},
 
-// ── ADVOGADOS ──
 {grp:'⚖️ Mensagem de Advogado(a)',id:'adv1',icon:'⚖️',ic:'i-teal',pip:'pip-teal',
  label:'Encaminhamento de caso',sub:'Orientar que assistido venha pessoalmente',
  who:'Advogado(a)',wc:'#22b8c9',sim:'Gostaria de encaminhar um caso para a CAD.',
@@ -855,7 +1026,6 @@ const S=[
  emailResps:[{title:'📧 Redirecionar à secretaria',subj:'CAD – Contato com a secretaria',badge:'Recomendada',primary:true,nao:false,
   tpl:n=>HDRE+'\nPrezado(a) Dr(a).'+(n?' '+n:'')+'!\n\nPara tratar sobre esse assunto, solicitamos que entre em contato com a secretaria da Subseção pelo WhatsApp:\n\n📲 (11) 93724-8448'+ENDE}]},
 
-// ── COMUNICADOS ──
 {grp:'📢 Comunicados',id:'com1',icon:'📢',ic:'i-purple',pip:null,
  label:'Lembrete de triagem — advogado(a)',sub:'Segunda-feira e amanhã',
  who:'Advogado(a)',wc:'#a78bfa',sim:'[Envio de lembrete de triagem]',
@@ -868,12 +1038,11 @@ const S=[
  ],
  emailResps:[
   {title:'📧 Lembrete — segunda-feira',subj:'CAD – Lembrete: Triagem na segunda-feira',badge:'Recomendada',primary:true,nao:false,
-   tpl:n=>HDRE+'\nPrezado(a) Advogado(a),\n\nGostaríamos de lembrá-lo(a) que a triagem para os atendimentos da Assistência Judiciária ocorrerá segunda-feira, no Poupatempo, localizado no endereço:\n\n📍 Avenida Tenente Marques, 5297, Jardim do Luar (Fazendinha), Santana de Parnaíba.\n\nAgradecemos a sua colaboração.'+ENDE},
+   tpl:n=>HDRE+'\nPrezado(a) Advogado(a),\n\nGostaríamos de lembrá-lo(a) que a triagem para os atendimentos da Assistência Judiciária ocorrerá segunda-feira, no Poupatempo:\n\n📍 Avenida Tenente Marques, 5297, Jardim do Luar (Fazendinha), Santana de Parnaíba.\n\nAgradecemos a sua colaboração.'+ENDE},
   {title:'📧 Lembrete — amanhã',subj:'CAD – Lembrete: Triagem amanhã',badge:'Recomendada',primary:false,nao:false,
-   tpl:n=>HDRE+'\nPrezado(a) Advogado(a),\n\nGostaríamos de lembrá-lo(a) que a triagem para os atendimentos da Assistência Judiciária ocorrerá amanhã, no Poupatempo, localizado no endereço:\n\n📍 Avenida Tenente Marques, 5297, Jardim do Luar (Fazendinha), Santana de Parnaíba.\n\nAgradecemos a sua colaboração.'+ENDE}
+   tpl:n=>HDRE+'\nPrezado(a) Advogado(a),\n\nGostaríamos de lembrá-lo(a) que a triagem para os atendimentos da Assistência Judiciária ocorrerá amanhã, no Poupatempo:\n\n📍 Avenida Tenente Marques, 5297, Jardim do Luar (Fazendinha), Santana de Parnaíba.\n\nAgradecemos a sua colaboração.'+ENDE}
  ]},
 
-// ── OFÍCIOS DO FÓRUM ──
 {grp:'⚖️ Ofícios do Fórum',id:'ofic1',icon:'📄',ic:'i-amber',pip:'pip-amber',
  label:'Indicação de Curador Especial',sub:'Encaminhar à secretaria e ao fórum',
  who:'Advogado(a)',wc:'#f59e0b',sim:'[Ofício do fórum solicitando Curador Especial]',
@@ -888,7 +1057,6 @@ const S=[
  emailResps:[{title:'📧 Resposta ao fórum',subj:'CAD – Ofício de Indicação de Curador Especial',badge:'Recomendada',primary:true,nao:false,
   tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nEm atendimento à demanda enviada por V.Sa. à nossa Subseção, a fim de que seja indicado Curador Especial, segue em anexo Ofício de Indicação para as devidas providências.\n\nColoco-me à disposição para quaisquer esclarecimentos adicionais.'+ENDE}]},
 
-// ── RECLAMAÇÃO DE ADVOGADO ── (NEW)
 {grp:'⚠️ Reclamação de Advogado',id:'rec1',icon:'⚠️',ic:'i-orange',pip:'pip-orange',
  label:'Assistido quer reclamar do advogado',sub:'Verificar CPF → orientar conforme situação',
  who:'Assistido',wc:'#f97316',sim:'Quero reclamar do meu advogado. Ele não me atende e não faz nada no meu processo.',
@@ -916,7 +1084,7 @@ const S=[
    tpl:n=>'Oi'+(n?', '+n:'')+'! 😊\n\nNão localizei processo para o seu CPF no sistema. Você precisa comparecer pessoalmente para pegar uma senha de atendimento.\n\n🕘 Seg–Sex, 9h–17h — sem agendamento, por ordem de chegada.'+DOCS+END_REC}
  ],
  emailResps:[{title:'📧 Sem processo — Orientar',subj:'CAD – Reclamação – Processo não localizado',badge:'Padrão',primary:true,nao:false,
-  tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nNão localizamos processo cadastrado para o CPF informado.\n\nPara prosseguir, é necessário comparecer pessoalmente à nossa sede para retirar uma senha de atendimento.\n\nComparecer em:\n📍 R. Alberto Frediani, 770 – Jd. Frediani, Santana de Parnaíba/SP (CEP 06502-155)\n🕘 Seg–Sex, 9h–17h\n\nDocumentos necessários:\n- RG original e CPF (originais)\n- Comprovante de residência atualizado\n- Comprovante de renda de todos que moram com você\n- Se tiver bens: documentação correspondente\n- Documentos relacionados ao seu caso'+ENDE}]},
+  tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nNão localizamos processo cadastrado para o CPF informado.\n\nPara prosseguir, é necessário comparecer pessoalmente à nossa sede para retirar uma senha de atendimento.\n\nComparecer em:\n📍 R. Alberto Frediani, 770 – Jd. Frediani, Santana de Parnaíba/SP (CEP 06502-155)\n🕘 Seg–Sex, 9h–17h'+ENDE}]},
 
 {grp:'⚠️ Reclamação de Advogado',id:'rec3',icon:'🔄',ic:'i-amber',pip:'pip-amber',
  label:'CPF verificado — Nomeação recusada',sub:'Advogado recusou a nomeação',
@@ -944,57 +1112,59 @@ const S=[
    tpl:n=>'Oi'+(n?', '+n:'')+'! 😊\n\nA nomeação do advogado está aceita no sistema. Não podemos trocar de advogado sem seguir os procedimentos — dependemos do sistema para isso.\n\nVocê precisa:\n1️⃣ Escrever uma reclamação a próprio punho descrevendo os problemas com o advogado\n2️⃣ Vir pessoalmente aqui com essa reclamação + seus documentos + número do processo (se tiver)\n\n🕘 Seg–Sex, 9h–17h — sem agendamento.'+END_REC}
  ],
  emailResps:[{title:'📧 Nomeação aceita — Orientar reclamação',subj:'CAD – Reclamação – Orientações importantes',badge:'Recomendada',primary:true,nao:false,
-  tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nApós verificação, constatamos que a nomeação do advogado indicado para o seu caso está aceita em nosso sistema.\n\nComo a nomeação foi formalmente aceita, não é possível realizar a substituição sem seguir os procedimentos adequados — nosso sistema exige um trâmite específico para isso.\n\nOrientações:\n1. Redigir uma reclamação escrita a próprio punho, detalhando todos os problemas: falta de atendimento, ausência de retorno, inércia processual, etc.\n2. Comparecer pessoalmente à nossa sede com:\n   - A reclamação escrita\n   - RG original e CPF\n   - Documentos do processo (número do processo, intimações, etc.)\n\nAtendemos de segunda a sexta, das 9h às 12h, por ordem de chegada — limite de 30 senhas por dia.\n\nEstamos à disposição para auxiliá-lo(a) nesse processo.'+ENDE}]},
+  tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nApós verificação, constatamos que a nomeação do advogado indicado para o seu caso está aceita em nosso sistema.\n\nComo a nomeação foi formalmente aceita, não é possível realizar a substituição sem seguir os procedimentos adequados.\n\nOrientações:\n1. Redigir uma reclamação escrita a próprio punho, detalhando todos os problemas\n2. Comparecer presencialmente com:\n   - A reclamação escrita\n   - RG original e CPF\n   - Documentos do processo (número, intimações, etc.)\n\nAtendemos de segunda a sexta, das 9h às 12h, por ordem de chegada — limite de 30 senhas por dia.'+ENDE}]},
 ];
 
-// ── ESTADO ──
+// ─── STATE ───
 let activeId=null,term='',hist=[],activeChannel='wapp';
 
 function fmtCPF(el){
   let v=el.value.replace(/\D/g,'');
   if(v.length>11)v=v.slice(0,11);
-  v=v.replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})\.(\d{3})(\d)/,'$1.$2.$3').replace(/(\d{3})\.(\d{3})\.(\d{3})(\d)/,'$1.$2.$3-$4');
+  v=v.replace(/(\d{3})(\d)/,'$1.$2')
+     .replace(/(\d{3})\.(\d{3})(\d)/,'$1.$2.$3')
+     .replace(/(\d{3})\.(\d{3})\.(\d{3})(\d)/,'$1.$2.$3-$4');
   el.value=v;
 }
 
 function showCPFStatus(type){
   const cpf=(document.getElementById('cpf-input')||{value:''}).value;
-  const cpfTxt=cpf?cpf:'(CPF não informado)';
+  const cpfTxt=cpf||'(CPF não informado)';
   const name=(document.getElementById('person-name').value||'').trim();
-  const nm=name?name:'o(a) assistido(a)';
+  const nm=name||'o(a) assistido(a)';
   let html='';
   if(type==='noproc'){
     html=`<div class="status-result sr-noproc show">
-      <div class="sr-title">📂 Sem processo cadastrado — CPF: ${cpfTxt}</div>
-      <div class="sr-body">Nenhum processo localizado para este CPF no sistema. O assistido precisa vir pessoalmente retirar uma senha.</div>
+      <div class="sr-title">📂 Sem processo — CPF: ${cpfTxt}</div>
+      <div class="sr-body">Nenhum processo localizado. O assistido precisa vir pessoalmente retirar uma senha.</div>
       <div class="sr-steps">
         <div class="sr-step"><div class="sr-num">1</div><span>Orientar <strong>${nm}</strong> a comparecer presencialmente</span></div>
-        <div class="sr-step"><div class="sr-num">2</div><span>Retirar senha na ordem de chegada — Seg–Sex, 9h–12h</span></div>
+        <div class="sr-step"><div class="sr-num">2</div><span>Retirar senha na ordem de chegada — Seg–Sex, 9h–17h</span></div>
         <div class="sr-step"><div class="sr-num">3</div><span>Trazer documentos básicos + documentos do caso</span></div>
       </div>
       <div class="sr-warn-box">💡 Use as mensagens abaixo para orientar o assistido.</div>
     </div>`;
-  } else if(type==='recused'){
+  }else if(type==='recused'){
     html=`<div class="status-result sr-recused show">
       <div class="sr-title">⚠️ Nomeação recusada — CPF: ${cpfTxt}</div>
-      <div class="sr-body">O advogado recusou a nomeação. O assistido deve retornar ao atendimento para uma nova indicação.</div>
+      <div class="sr-body">O advogado recusou a nomeação. Assistido deve retornar para nova indicação.</div>
       <div class="sr-steps">
         <div class="sr-step"><div class="sr-num">1</div><span>Informar <strong>${nm}</strong> que a nomeação foi recusada</span></div>
         <div class="sr-step"><div class="sr-num">2</div><span>Orientar a voltar presencialmente para nova indicação</span></div>
         <div class="sr-step"><div class="sr-num">3</div><span>Trazer documentos + comprovantes do processo (se tiver)</span></div>
       </div>
-      <div class="sr-warn-box">⚠️ Nova indicação só é feita presencialmente. Use as mensagens abaixo.</div>
+      <div class="sr-warn-box">⚠️ Nova indicação só é feita presencialmente.</div>
     </div>`;
-  } else if(type==='accepted'){
+  }else if(type==='accepted'){
     html=`<div class="status-result sr-accepted show">
       <div class="sr-title">✅ Nomeação aceita — CPF: ${cpfTxt}</div>
-      <div class="sr-body">O advogado aceitou a nomeação. <strong>Não é possível trocar sem procedimento formal</strong> — o sistema exige trâmite específico.</div>
+      <div class="sr-body"><strong>Não é possível trocar sem procedimento formal</strong> — o sistema exige trâmite específico.</div>
       <div class="sr-steps">
-        <div class="sr-step"><div class="sr-num">1</div><span>Explicar que a troca direta não é possível — dependemos do sistema</span></div>
+        <div class="sr-step"><div class="sr-num">1</div><span>Explicar que a troca direta não é possível</span></div>
         <div class="sr-step"><div class="sr-num">2</div><span>Orientar <strong>${nm}</strong> a escrever reclamação <strong>a próprio punho</strong></span></div>
         <div class="sr-step"><div class="sr-num">3</div><span>Vir pessoalmente com a reclamação + documentos + nº do processo</span></div>
       </div>
-      <div class="sr-warn-box">✍️ A reclamação deve ser manuscrita (a próprio punho), detalhando: falta de atendimento, ausência de retorno, inércia. Use as mensagens abaixo.</div>
+      <div class="sr-warn-box">✍️ Reclamação manuscrita detalhando: falta de atendimento, ausência de retorno, inércia.</div>
     </div>`;
   }
   document.getElementById('cpf-status-result').innerHTML=html;
@@ -1016,7 +1186,7 @@ function renderSb(f){
   const groups={};
   S.forEach(s=>{
     const ok=!f||s.label.toLowerCase().includes(f)||s.sub.toLowerCase().includes(f)
-      ||s.grp.toLowerCase().includes(f)||s.tags.some(t=>t.t.toLowerCase().includes(f));
+      ||(s.grp||'').toLowerCase().includes(f)||s.tags.some(t=>t.t.toLowerCase().includes(f));
     if(!ok)return;
     (groups[s.grp]=groups[s.grp]||[]).push(s);
   });
@@ -1039,47 +1209,54 @@ renderSb('');
 function filtro(el,val){
   document.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));
   el.classList.add('on');term=val;
-  document.getElementById('search').value=val;renderSb(val);
+  document.getElementById('search').value='';
+  renderSb(val);
 }
 function buscar(v){
-  term=v;document.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));
-  document.querySelector('.chip').classList.add('on');renderSb(v);
+  term=v;
+  document.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));
+  document.querySelector('.chip').classList.add('on');
+  renderSb(v);
 }
 
+// Build quick tags
 (function(){
   const tags=['Informativo geral','Divórcio','Pensão','Trabalhista','INSS','Criminal','Documentos','Áudio','Vagas esgotadas','Violência doméstica','Convênio','Dativo','Urgente','Como chegar','Encerramento','Secretaria','Reclamação'];
   document.getElementById('wtags').innerHTML=tags.map(t=>`<button class="wtag" onclick="buscar('${t}')">${t}</button>`).join('');
 })();
 
 function pick(id){
-  activeId=id;renderSb(term);
-  const s=S.find(x=>x.id===id);if(!s)return;
+  activeId=id;
+  renderSb(term);
+  const s=S.find(x=>x.id===id);
+  if(!s)return;
   document.getElementById('btitle').textContent=s.icon+' '+s.label;
   document.getElementById('bsub').textContent=s.sub;
   document.getElementById('welcome').style.display='none';
   document.getElementById('sc-view').classList.add('on');
+
   ['','-e'].forEach(sfx=>{
     document.getElementById('who-pip'+sfx).style.background=s.wc;
     document.getElementById('who-lbl'+sfx).textContent=s.who;
-    document.getElementById('bubble'+sfx).textContent=s.sim;
+    document.getElementById('bubble'+sfx).textContent=s.sim||'—';
     document.getElementById('tag-row'+sfx).innerHTML=s.tags.map(t=>`<span class="tag ${t.c}">${t.t}</span>`).join('');
     const ctx=document.getElementById('ctx'+sfx);
     if(s.ctx){ctx.style.display='block';ctx.innerHTML='<strong>💡 Contexto:</strong> '+s.ctx;}
     else ctx.style.display='none';
   });
-  // show/hide CPF checker
+
   const box=document.getElementById('cpf-checker-box');
   if(box){
     box.style.display=s.cpfChecker?'block':'none';
     if(s.cpfChecker){
-      // clear previous state
       const inp=document.getElementById('cpf-input');
       if(inp)inp.value='';
       const res=document.getElementById('cpf-status-result');
       if(res)res.innerHTML='';
     }
   }
-  renderResps(s);renderEmailResps(s);
+  renderResps(s);
+  renderEmailResps(s);
 }
 
 function renderResps(s){
@@ -1098,7 +1275,7 @@ function renderResps(s){
         <button class="btn btn-copy" onclick="copiar('ta${i}','${r.title.replace(/'/g,"\\'")}')">📋 Copiar</button>
         <button class="btn btn-wapp" onclick="wapp('ta${i}')">📱 WhatsApp</button>
         ${secBtn}
-        <button class="btn btn-ghost" onclick="resetMsg('ta${i}',${i},'wapp')" title="Redefinir">↩</button>
+        <button class="btn btn-ghost" onclick="resetMsg('ta${i}',${i},'wapp')" title="Redefinir">↩ Redefinir</button>
         <span class="chars" id="cc${i}">${txt.length} chars</span>
       </div>
     </div>`;
@@ -1129,7 +1306,7 @@ function renderEmailResps(s){
       <div class="rcard-ft">
         <button class="btn btn-copy" onclick="copiarEmail('eta${i}','${r.title.replace(/'/g,"\\'")}')">📋 Copiar texto</button>
         <button class="btn btn-email" onclick="abrirEmail('esub${i}','eta${i}')">📧 Abrir no e-mail</button>
-        <button class="btn btn-ghost" onclick="resetMsg('eta${i}',${i},'email')" title="Redefinir">↩</button>
+        <button class="btn btn-ghost" onclick="resetMsg('eta${i}',${i},'email')" title="Redefinir">↩ Redefinir</button>
         <span class="chars" id="ecc${i}">${txt.length} chars</span>
       </div>
     </div>`;
@@ -1137,11 +1314,12 @@ function renderEmailResps(s){
   setTimeout(()=>document.querySelectorAll('#resp-stack-email .reditor').forEach(autoH),30);
 }
 
-function autoH(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,240)+'px';}
+function autoH(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,230)+'px';}
 function onIn(el,id){autoH(el);const c=document.getElementById(id);if(c)c.textContent=el.value.length+' chars';}
 
 function atualizaNome(){
-  const s=S.find(x=>x.id===activeId);if(!s)return;
+  const s=S.find(x=>x.id===activeId);
+  if(!s)return;
   const name=(document.getElementById('person-name').value||'').trim();
   s.resps.forEach((r,i)=>{
     const el=document.getElementById('ta'+i);if(!el)return;
@@ -1189,11 +1367,16 @@ function wappSec(id){
 function addHist(title,text){
   const now=new Date();
   const t=String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');
-  hist.unshift({title,text,t});if(hist.length>10)hist.pop();renderHist();
+  hist.unshift({title,text,t});
+  if(hist.length>10)hist.pop();
+  renderHist();
 }
 function renderHist(){
   const el=document.getElementById('hist-chips');
-  if(!hist.length){el.innerHTML='<span class="hist-empty">Nenhuma cópia ainda — as últimas aparecerão aqui</span>';return;}
+  if(!hist.length){
+    el.innerHTML='<span class="hist-empty">Nenhuma cópia ainda — as últimas aparecerão aqui</span>';
+    return;
+  }
   el.innerHTML=hist.map((h,i)=>`<div class="hchip" onclick="recop(${i})" title="${h.title}">📋 ${h.title.replace(/[^\w\sÀ-ú]/gu,'').trim().substring(0,26)}<span class="hchip-t">${h.t}</span></div>`).join('');
 }
 function recop(i){navigator.clipboard.writeText(hist[i].text).then(()=>toast('📋 Recopiado!'));}
@@ -1205,6 +1388,19 @@ function toast(msg){
   el.textContent=msg;el.classList.add('show');
   clearTimeout(_tt);_tt=setTimeout(()=>el.classList.remove('show'),2400);
 }
+
+// Clock
 function clock(){
-  const n=new Date(),d=['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
-  const h=String(n.getHours())
+  const n=new Date();
+  const d=['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
+  const h=String(n.getHours()).padStart(2,'0');
+  const m=String(n.getMinutes()).padStart(2,'0');
+  const s=String(n.getSeconds()).padStart(2,'0');
+  const el=document.getElementById('clock');
+  if(el) el.textContent=d[n.getDay()]+' '+h+':'+m+':'+s;
+}
+clock();
+setInterval(clock,1000);
+</script>
+</body>
+</html>
