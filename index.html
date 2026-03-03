@@ -4,263 +4,163 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CAD · Central de Atendimento</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%;overflow:hidden}
 :root{
-  --bg:#050c1a;
-  --surf:#080f20;
-  --surf2:#0b1427;
-  --border:rgba(255,255,255,.055);
-  --border2:rgba(255,255,255,.1);
-  --gold:#c8903a;
-  --gold-lt:#dba85a;
-  --gold-pale:#f0cc88;
-  --glow:rgba(200,144,58,.09);
-  --gb:rgba(200,144,58,.2);
-  --text:#dce8f5;
-  --sub:#6882a8;
-  --dim:#334866;
-  --white:#f0f5ff;
-  --green:#1ecb72;
-  --red:#e84060;
-  --teal:#15b5c8;
-  --amber:#f09020;
-  --tr:all .18s cubic-bezier(.4,0,.2,1);
-  --r:10px;--rs:7px;
-  --ff:'DM Sans',sans-serif;
-  --fs:'Cormorant Garamond',serif;
+  --bg:#050c1a;--surf:#080f20;--border:rgba(255,255,255,.055);--border2:rgba(255,255,255,.1);
+  --gold:#c8903a;--gold-lt:#dba85a;--gold-pale:#f0cc88;--glow:rgba(200,144,58,.09);--gb:rgba(200,144,58,.2);
+  --text:#dce8f5;--sub:#6882a8;--dim:#334866;--white:#f0f5ff;
+  --green:#1ecb72;--red:#e84060;--teal:#15b5c8;--amber:#f09020;
+  --tr:all .18s cubic-bezier(.4,0,.2,1);--r:10px;--rs:7px;
+  --ff:'DM Sans',sans-serif;--fs:'Cormorant Garamond',serif;
 }
-
 body{font-family:var(--ff);background:var(--bg);color:var(--text);display:flex;flex-direction:column}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(ellipse 700px 500px at -100px -100px,rgba(15,30,75,.7) 0%,transparent 65%),
+    radial-gradient(ellipse 600px 300px at 50% 100%,rgba(200,144,58,.03) 0%,transparent 60%);}
 
-/* Atmospheric background */
-body::before{
-  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
-  background:
-    radial-gradient(ellipse 700px 500px at -100px -100px, rgba(15,30,75,.7) 0%, transparent 65%),
-    radial-gradient(ellipse 400px 350px at 100% 85%, rgba(6,9,28,.9) 0%, transparent 55%),
-    radial-gradient(ellipse 600px 300px at 50% 100%, rgba(200,144,58,.03) 0%, transparent 60%);
-}
-
-/* Subtle grid overlay */
-body::after{
-  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.018;
-  background-image:linear-gradient(rgba(255,255,255,.5) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.5) 1px,transparent 1px);
-  background-size:40px 40px;
-}
-
-/* ─── TOPBAR ─── */
-.topbar{
-  position:relative;z-index:50;height:56px;
-  background:rgba(5,10,22,.97);backdrop-filter:blur(30px);
-  border-bottom:1px solid var(--gb);
-  display:flex;align-items:center;padding:0 18px;flex-shrink:0;
-  box-shadow:0 1px 0 rgba(200,144,58,.08),0 8px 32px rgba(0,0,0,.6);
-}
-.topbar::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:1px;
-  background:linear-gradient(90deg,transparent 0%,var(--gold) 20%,var(--gold-lt) 50%,var(--gold) 80%,transparent 100%);
-  opacity:.6;
-}
-
-.brand{display:flex;align-items:center;gap:10px;flex-shrink:0}
-.seal{
-  width:36px;height:36px;border-radius:50%;
-  border:1px solid rgba(200,144,58,.3);
+/* TOPBAR */
+.topbar{position:relative;z-index:50;height:52px;background:rgba(5,10,22,.97);backdrop-filter:blur(30px);
+  border-bottom:1px solid var(--gb);display:flex;align-items:center;padding:0 16px;flex-shrink:0;
+  box-shadow:0 8px 32px rgba(0,0,0,.6);}
+.topbar::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold) 30%,var(--gold-lt) 50%,var(--gold) 70%,transparent);opacity:.6;}
+.brand{display:flex;align-items:center;gap:10px}
+.seal{width:34px;height:34px;border-radius:50%;border:1px solid rgba(200,144,58,.3);
   background:linear-gradient(135deg,rgba(200,144,58,.12),rgba(200,144,58,.03));
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  box-shadow:0 0 0 3px rgba(200,144,58,.04), inset 0 1px 0 rgba(255,255,255,.05);
-}
-.seal .s1{font-family:var(--fs);font-size:11px;color:var(--gold-lt);line-height:1;font-weight:700}
-.seal .s2{font-size:5px;color:var(--gold);letter-spacing:2.5px;line-height:1.5;text-transform:uppercase}
-.brand-txt h1{font-family:var(--fs);font-size:16px;color:var(--white);line-height:1;font-weight:600;letter-spacing:.3px}
-.brand-txt p{font-size:9.5px;color:var(--sub);letter-spacing:1.8px;text-transform:uppercase;margin-top:3px;opacity:.6}
-
-.vdiv{width:1px;height:24px;background:var(--border);margin:0 16px;flex-shrink:0}
-
-.tmeta{display:flex;gap:18px}
-.tm{text-align:center}
-.tm-v{font-family:var(--fs);font-size:13px;color:var(--gold-lt);line-height:1;font-weight:600}
-.tm-l{font-size:8.5px;color:var(--dim);letter-spacing:1.8px;text-transform:uppercase;margin-top:2px}
-
-.tright{margin-left:auto;display:flex;align-items:center;gap:12px}
-.live-pill{
-  display:flex;align-items:center;gap:5px;padding:4px 9px;border-radius:20px;
-  background:rgba(30,203,114,.06);border:1px solid rgba(30,203,114,.18);
-}
+  display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.seal .s1{font-family:var(--fs);font-size:11px;color:var(--gold-lt);font-weight:700}
+.seal .s2{font-size:5px;color:var(--gold);letter-spacing:2px;text-transform:uppercase}
+.brand-txt h1{font-family:var(--fs);font-size:15px;color:var(--white);font-weight:600}
+.brand-txt p{font-size:9px;color:var(--sub);letter-spacing:1.6px;text-transform:uppercase;margin-top:2px;opacity:.6}
+.vdiv{width:1px;height:22px;background:var(--border);margin:0 14px;flex-shrink:0}
+.tmeta{display:flex;gap:16px}
+.tm-v{font-family:var(--fs);font-size:12px;color:var(--gold-lt);font-weight:600}
+.tm-l{font-size:8px;color:var(--dim);letter-spacing:1.6px;text-transform:uppercase;margin-top:1px}
+.tright{margin-left:auto;display:flex;align-items:center;gap:10px}
+.live-pill{display:flex;align-items:center;gap:5px;padding:3px 8px;border-radius:20px;
+  background:rgba(30,203,114,.06);border:1px solid rgba(30,203,114,.18);}
 .live-dot{width:5px;height:5px;border-radius:50%;background:var(--green);animation:pulse 2s ease-in-out infinite}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.75)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 .live-pill span{font-size:8px;font-weight:700;color:var(--green);letter-spacing:1.5px;text-transform:uppercase}
+.uname{font-family:var(--fs);font-size:13px;color:var(--gold-pale);font-weight:600;text-align:right}
+.urole{font-size:8.5px;color:var(--dim);letter-spacing:1px;text-transform:uppercase;margin-top:1px}
+.uclock{font-size:9.5px;color:var(--sub);margin-top:1px;font-variant-numeric:tabular-nums}
 
-.ublock{text-align:right}
-.uname{font-family:var(--fs);font-size:14px;color:var(--gold-pale);line-height:1;font-weight:600}
-.urole{font-size:9px;color:var(--dim);letter-spacing:1.2px;text-transform:uppercase;margin-top:2px}
-.uclock{font-size:10px;color:var(--sub);margin-top:2px;font-variant-numeric:tabular-nums}
+/* SHELL */
+.shell{display:grid;grid-template-columns:258px 1fr;flex:1;overflow:hidden;position:relative;z-index:1}
 
-/* ─── SHELL ─── */
-.shell{display:grid;grid-template-columns:272px 1fr;flex:1;overflow:hidden;position:relative;z-index:1}
-
-/* ─── SIDEBAR ─── */
-.sidebar{
-  background:rgba(6,11,24,.88);border-right:1px solid var(--border);
-  display:flex;flex-direction:column;overflow:hidden;backdrop-filter:blur(16px);
-}
-.sb-head{padding:14px 12px 10px;border-bottom:1px solid var(--border);flex-shrink:0}
-.sb-lbl{font-size:9px;font-weight:700;letter-spacing:2.2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px}
+/* SIDEBAR */
+.sidebar{background:rgba(6,11,24,.88);border-right:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden;}
+.sb-head{padding:12px 10px 8px;border-bottom:1px solid var(--border)}
+.sb-lbl{font-size:8.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:7px}
 .sw{position:relative}
-.sw svg{position:absolute;left:9px;top:50%;transform:translateY(-50%);width:11px;height:11px;color:var(--dim);pointer-events:none}
-.si{
-  width:100%;background:rgba(255,255,255,.025);border:1px solid var(--border);border-radius:var(--rs);
-  padding:7px 9px 7px 29px;font-family:var(--ff);font-size:12.5px;color:var(--text);outline:none;transition:var(--tr);
-}
+.sw svg{position:absolute;left:8px;top:50%;transform:translateY(-50%);width:11px;height:11px;color:var(--dim);pointer-events:none}
+.si{width:100%;background:rgba(255,255,255,.025);border:1px solid var(--border);border-radius:var(--rs);
+  padding:6px 8px 6px 27px;font-family:var(--ff);font-size:12px;color:var(--text);outline:none;transition:var(--tr);}
 .si::placeholder{color:var(--dim)}
 .si:focus{border-color:var(--gb);background:rgba(200,144,58,.05)}
 
-.chips{display:flex;flex-wrap:wrap;gap:3px;padding:8px 10px;border-bottom:1px solid var(--border)}
-.chip{
-  padding:3px 8px;border-radius:20px;border:1px solid var(--border);background:transparent;
-  font-size:9.5px;color:var(--sub);cursor:pointer;transition:var(--tr);font-family:var(--ff);white-space:nowrap;
-}
+/* Chips — compactos, apenas categorias principais */
+.chips{display:flex;flex-wrap:wrap;gap:3px;padding:7px 8px;border-bottom:1px solid var(--border)}
+.chip{padding:3px 7px;border-radius:20px;border:1px solid var(--border);background:transparent;
+  font-size:9px;color:var(--sub);cursor:pointer;transition:var(--tr);font-family:var(--ff);}
 .chip:hover,.chip.on{background:var(--glow);border-color:var(--gb);color:var(--gold-lt)}
 
-.sb-list{flex:1;overflow-y:auto;padding:4px 5px 12px}
+.sb-list{flex:1;overflow-y:auto;padding:3px 4px 10px}
 .sb-list::-webkit-scrollbar{width:2px}
-.sb-list::-webkit-scrollbar-thumb{background:var(--gb);border-radius:2px}
-
-.grp-lbl{
-  font-size:9px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:var(--dim);
-  padding:11px 6px 5px;display:flex;align-items:center;gap:6px;
-}
+.sb-list::-webkit-scrollbar-thumb{background:var(--gb)}
+.grp-lbl{font-size:8.5px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--dim);
+  padding:10px 5px 4px;display:flex;align-items:center;gap:5px;}
 .grp-lbl::after{content:'';flex:1;height:1px;background:var(--border)}
-
-.sc-row{
-  width:100%;text-align:left;background:transparent;border:1px solid transparent;border-radius:var(--rs);
-  padding:8px 9px;margin-bottom:2px;cursor:pointer;display:flex;align-items:center;gap:8px;
-  transition:var(--tr);font-family:var(--ff);
-}
-.sc-row:hover{background:rgba(255,255,255,.022);border-color:var(--border)}
+.sc-row{width:100%;text-align:left;background:transparent;border:1px solid transparent;border-radius:var(--rs);
+  padding:7px 8px;margin-bottom:1px;cursor:pointer;display:flex;align-items:center;gap:7px;
+  transition:var(--tr);font-family:var(--ff);}
+.sc-row:hover{background:rgba(255,255,255,.02);border-color:var(--border)}
 .sc-row.active{background:var(--glow);border-color:var(--gb)}
-.sc-ico{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.sc-ico{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
 .i-blue{background:rgba(20,40,100,.6)}.i-green{background:rgba(30,203,114,.07)}.i-red{background:rgba(232,64,96,.07)}
-.i-gold{background:rgba(200,144,58,.1)}.i-slate{background:rgba(80,110,170,.07)}
-.i-teal{background:rgba(21,181,200,.07)}.i-amber{background:rgba(240,144,32,.08)}.i-purple{background:rgba(160,130,240,.07)}
-.i-orange{background:rgba(245,110,18,.09)}
+.i-gold{background:rgba(200,144,58,.1)}.i-slate{background:rgba(80,110,170,.07)}.i-teal{background:rgba(21,181,200,.07)}
+.i-amber{background:rgba(240,144,32,.08)}.i-purple{background:rgba(160,130,240,.07)}.i-orange{background:rgba(245,110,18,.09)}
 .sc-info{flex:1;min-width:0}
-.sc-title{font-size:12.5px;font-weight:500;color:var(--text);line-height:1.3}
-.sc-desc{font-size:10.5px;color:var(--sub);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sc-title{font-size:12px;font-weight:500;color:var(--text)}
+.sc-desc{font-size:10px;color:var(--sub);margin-top:1px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .sc-pip{width:5px;height:5px;border-radius:50%;flex-shrink:0}
 .pip-green{background:var(--green)}.pip-red{background:var(--red)}.pip-teal{background:var(--teal)}
 .pip-amber{background:var(--amber)}.pip-purple{background:#a78bfa}.pip-orange{background:#f97316}
 
-/* ─── MAIN ─── */
+/* MAIN */
 .main{display:flex;flex-direction:column;overflow:hidden}
-
-.breadbar{
-  height:44px;background:rgba(7,12,24,.85);border-bottom:1px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;padding:0 20px;flex-shrink:0;
-}
-.btitle{font-family:var(--fs);font-size:17px;color:var(--white);display:flex;align-items:center;gap:7px;font-weight:600}
-.bsub{font-size:11px;color:var(--sub);margin-top:1px}
-
-.btn{
-  display:flex;align-items:center;gap:5px;padding:5px 12px;border-radius:var(--rs);
-  font-family:var(--ff);font-size:12px;font-weight:500;border:none;cursor:pointer;transition:var(--tr);white-space:nowrap;
-}
+.breadbar{height:42px;background:rgba(7,12,24,.85);border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;padding:0 18px;flex-shrink:0;}
+.btitle{font-family:var(--fs);font-size:16px;color:var(--white);display:flex;align-items:center;gap:6px;font-weight:600}
+.bsub{font-size:10.5px;color:var(--sub);margin-top:1px}
+.btn{display:flex;align-items:center;gap:5px;padding:5px 11px;border-radius:var(--rs);
+  font-family:var(--ff);font-size:11.5px;font-weight:500;border:none;cursor:pointer;transition:var(--tr);}
 .btn:hover{transform:translateY(-1px)}
 .btn-guide{background:var(--glow);border:1px solid var(--gb);color:var(--gold-lt)}
-.btn-guide:hover{background:rgba(200,144,58,.15)}
-.btn-copy{
-  background:linear-gradient(135deg,var(--gold),var(--gold-lt));color:#04090f;
-  font-weight:700;font-size:12px;padding:8px 16px;
-  box-shadow:0 2px 12px rgba(200,144,58,.25);
-}
+.btn-copy{background:linear-gradient(135deg,var(--gold),var(--gold-lt));color:#04090f;font-weight:700;padding:7px 14px;box-shadow:0 2px 12px rgba(200,144,58,.25);}
 .btn-copy:hover{box-shadow:0 4px 20px rgba(200,144,58,.45)}
 .btn-wapp{background:rgba(30,203,114,.07);border:1px solid rgba(30,203,114,.2);color:var(--green)}
-.btn-wapp:hover{background:rgba(30,203,114,.14)}
 .btn-email{background:rgba(21,181,200,.07);border:1px solid rgba(21,181,200,.2);color:var(--teal)}
-.btn-email:hover{background:rgba(21,181,200,.14)}
 .btn-sec{background:rgba(160,130,240,.09);border:1px solid rgba(160,130,240,.22);color:#c4b5fd}
-.btn-sec:hover{background:rgba(160,130,240,.16)}
 .btn-ghost{background:rgba(255,255,255,.04);border:1px solid var(--border);color:var(--sub)}
 .btn-ghost:hover{background:rgba(255,255,255,.07);color:var(--text)}
 
 /* Channel tabs */
 .channel-tabs-outer{display:flex;border-bottom:1px solid var(--border);background:rgba(6,11,22,.7);flex-shrink:0}
-.channel-tab{
-  padding:0 20px;height:36px;font-family:var(--ff);font-size:11px;font-weight:600;
-  letter-spacing:1px;text-transform:uppercase;background:transparent;border:none;cursor:pointer;
-  color:var(--dim);transition:var(--tr);display:flex;align-items:center;gap:5px;
-  border-bottom:2px solid transparent;
-}
+.channel-tab{padding:0 18px;height:34px;font-family:var(--ff);font-size:10.5px;font-weight:600;
+  letter-spacing:.8px;text-transform:uppercase;background:transparent;border:none;cursor:pointer;
+  color:var(--dim);transition:var(--tr);display:flex;align-items:center;gap:5px;border-bottom:2px solid transparent;}
 .channel-tab.act{color:var(--gold-lt);border-bottom-color:var(--gold)}
-.channel-tab:hover:not(.act){color:var(--sub)}
-
 .channel-pane{display:none;flex:1;overflow:hidden;flex-direction:column}
 .channel-pane.on{display:flex}
 
-/* Welcome screen */
-.welcome{
-  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:14px;padding:40px;text-align:center;
-}
-.wglyph{
-  width:70px;height:70px;border-radius:50%;border:1px solid var(--gb);
+/* Welcome */
+.welcome{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:12px;padding:40px;text-align:center;}
+.wglyph{width:64px;height:64px;border-radius:50%;border:1px solid var(--gb);
   background:radial-gradient(circle at 40% 35%,rgba(200,144,58,.12),transparent 65%);
-  display:flex;align-items:center;justify-content:center;font-size:28px;
-  box-shadow:0 0 0 8px rgba(200,144,58,.03),0 0 40px rgba(200,144,58,.07);
-  animation:float 5s ease-in-out infinite;
-}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
-.welcome h2{font-family:var(--fs);font-size:24px;font-weight:600;color:var(--white);opacity:.85}
-.welcome p{font-size:13.5px;color:var(--sub);max-width:400px;line-height:1.95}
-.wtags{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;margin-top:4px}
-.wtag{
-  padding:5px 12px;border-radius:20px;background:rgba(255,255,255,.022);border:1px solid var(--border);
-  font-size:12px;color:var(--sub);cursor:pointer;transition:var(--tr);font-family:var(--ff);
-}
+  display:flex;align-items:center;justify-content:center;font-size:26px;
+  animation:float 5s ease-in-out infinite;}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.welcome h2{font-family:var(--fs);font-size:22px;font-weight:600;color:var(--white);opacity:.85}
+.welcome p{font-size:13px;color:var(--sub);max-width:380px;line-height:1.9}
+.wtags{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;margin-top:4px}
+.wtag{padding:4px 11px;border-radius:20px;background:rgba(255,255,255,.02);border:1px solid var(--border);
+  font-size:11.5px;color:var(--sub);cursor:pointer;transition:var(--tr);}
 .wtag:hover{background:var(--glow);border-color:var(--gb);color:var(--gold-lt)}
 
 /* Scene view */
 .sc-view{flex:1;display:none;flex-direction:column;overflow:hidden}
 .sc-view.on{display:flex}
-
-.namebar{
-  height:44px;background:rgba(200,144,58,.035);border-bottom:1px solid rgba(200,144,58,.12);
-  display:flex;align-items:center;gap:12px;padding:0 20px;flex-shrink:0;
-}
-.namebar label{font-size:9.5px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:var(--gold-lt);white-space:nowrap}
-.namebar input{
-  width:200px;background:rgba(255,255,255,.045);border:1px solid var(--gb);border-radius:var(--rs);
-  padding:5px 10px;font-family:var(--ff);font-size:13.5px;color:var(--white);outline:none;transition:var(--tr);
-}
+.namebar{height:40px;background:rgba(200,144,58,.035);border-bottom:1px solid rgba(200,144,58,.12);
+  display:flex;align-items:center;gap:10px;padding:0 16px;flex-shrink:0;}
+.namebar label{font-size:9px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--gold-lt);white-space:nowrap}
+.namebar input{width:180px;background:rgba(255,255,255,.045);border:1px solid var(--gb);border-radius:var(--rs);
+  padding:4px 9px;font-family:var(--ff);font-size:13px;color:var(--white);outline:none;transition:var(--tr);}
 .namebar input::placeholder{color:var(--dim)}
 .namebar input:focus{border-color:var(--gold-lt);background:rgba(200,144,58,.07)}
-.namebar-hint{font-size:10.5px;color:var(--dim)}
+.namebar-hint{font-size:10px;color:var(--dim)}
 
-/* Two-column layout */
+/* Two-column */
 .cols{flex:1;display:grid;grid-template-columns:1fr 1fr;overflow:hidden}
 .col{display:flex;flex-direction:column;overflow:hidden}
 .col-l{border-right:1px solid var(--border)}
-.col-hd{
-  height:34px;border-bottom:1px solid var(--border);display:flex;align-items:center;
-  padding:0 16px;gap:6px;font-size:9.5px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;
-  color:var(--dim);flex-shrink:0;background:rgba(255,255,255,.012);
-}
-.col-body{flex:1;overflow-y:auto;padding:14px 16px}
+.col-hd{height:32px;border-bottom:1px solid var(--border);display:flex;align-items:center;
+  padding:0 14px;font-size:9px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;
+  color:var(--dim);flex-shrink:0;background:rgba(255,255,255,.01);}
+.col-body{flex:1;overflow-y:auto;padding:12px 14px}
 .col-body::-webkit-scrollbar{width:3px}
-.col-body::-webkit-scrollbar-thumb{background:var(--gb);border-radius:3px}
-
-.who-row{display:flex;align-items:center;gap:6px;font-size:10.5px;color:var(--sub);margin-bottom:8px}
+.col-body::-webkit-scrollbar-thumb{background:var(--gb)}
+.who-row{display:flex;align-items:center;gap:6px;font-size:10px;color:var(--sub);margin-bottom:7px}
 .who-pip{width:6px;height:6px;border-radius:50%}
-.bubble{
-  background:rgba(255,255,255,.025);border:1px solid var(--border2);
-  border-radius:14px 14px 14px 3px;padding:11px 14px;
-  font-size:13.5px;color:var(--sub);line-height:1.85;font-style:italic;margin-bottom:12px;
-}
+.bubble{background:rgba(255,255,255,.025);border:1px solid var(--border2);border-radius:12px 12px 12px 3px;
+  padding:10px 13px;font-size:13px;color:var(--sub);line-height:1.8;font-style:italic;margin-bottom:10px;}
 .tag-row{display:flex;gap:4px;flex-wrap:wrap}
-.tag{font-size:9.5px;font-weight:600;padding:3px 9px;border-radius:20px;letter-spacing:.3px;text-transform:uppercase}
+.tag{font-size:9px;font-weight:600;padding:2px 8px;border-radius:20px;letter-spacing:.3px;text-transform:uppercase}
 .tg-green{background:rgba(30,203,114,.07);color:#4ade80;border:1px solid rgba(30,203,114,.18)}
 .tg-red{background:rgba(232,64,96,.07);color:#f87171;border:1px solid rgba(232,64,96,.18)}
 .tg-gold{background:var(--glow);color:var(--gold-lt);border:1px solid var(--gb)}
@@ -269,161 +169,123 @@ body::after{
 .tg-amber{background:rgba(240,144,32,.07);color:#fbbf24;border:1px solid rgba(240,144,32,.18)}
 .tg-purple{background:rgba(160,130,240,.07);color:#c4b5fd;border:1px solid rgba(160,130,240,.18)}
 .tg-orange{background:rgba(245,110,18,.07);color:#fb923c;border:1px solid rgba(245,110,18,.18)}
-.ctx{
-  margin-top:12px;background:rgba(200,144,58,.035);border:1px solid var(--gb);border-radius:var(--rs);
-  padding:9px 12px;font-size:12px;color:var(--sub);line-height:1.7;
-}
+.ctx{margin-top:10px;background:rgba(200,144,58,.035);border:1px solid var(--gb);border-radius:var(--rs);
+  padding:8px 11px;font-size:11.5px;color:var(--sub);line-height:1.65;}
 .ctx strong{color:var(--gold-lt)}
 
 /* Response cards */
-.resp-stack{display:flex;flex-direction:column;gap:10px}
-.rcard{
-  border-radius:12px;border:1px solid var(--border);
-  background:linear-gradient(160deg,rgba(12,19,40,.9),rgba(9,14,30,.7));overflow:hidden;
-  transition:all .2s;
-}
-.rcard:hover{border-color:var(--border2);box-shadow:0 4px 20px rgba(0,0,0,.3)}
+.resp-stack{display:flex;flex-direction:column;gap:9px}
+.rcard{border-radius:11px;border:1px solid var(--border);
+  background:linear-gradient(160deg,rgba(12,19,40,.9),rgba(9,14,30,.7));overflow:hidden;transition:all .2s;}
+.rcard:hover{border-color:var(--border2)}
 .rcard.primary{border-color:rgba(200,144,58,.18);background:linear-gradient(160deg,rgba(200,144,58,.04),rgba(12,19,40,.9))}
-.rcard.danger{border-color:rgba(232,64,96,.18);background:linear-gradient(160deg,rgba(232,64,96,.04),rgba(12,19,40,.9))}
-.rcard-hd{
-  padding:10px 14px;border-bottom:1px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;gap:8px;
-}
-.rcard-title{font-size:12.5px;font-weight:600;color:var(--gold-lt);display:flex;align-items:center;gap:5px}
+.rcard.danger{border-color:rgba(232,64,96,.18)}
+.rcard-hd{padding:9px 13px;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;gap:8px;}
+.rcard-title{font-size:12px;font-weight:600;color:var(--gold-lt)}
 .rcard-title.danger{color:#f87171}
-.badge{font-size:8px;font-weight:700;padding:2px 8px;border-radius:5px;letter-spacing:.6px;text-transform:uppercase;flex-shrink:0}
+.badge{font-size:7.5px;font-weight:700;padding:2px 7px;border-radius:5px;letter-spacing:.5px;text-transform:uppercase;flex-shrink:0}
 .b-main{background:rgba(200,144,58,.14);color:var(--gold-lt)}
 .b-alt{background:rgba(90,120,200,.12);color:#93b4fb}
 .b-no{background:rgba(232,64,96,.12);color:#f87171}
 .b-email{background:rgba(21,181,200,.12);color:var(--teal)}
 .b-int{background:rgba(160,130,240,.12);color:#c4b5fd}
 .b-orange{background:rgba(245,110,18,.12);color:#fb923c}
-.reditor{
-  width:100%;background:rgba(0,0,0,.18);border:none;border-bottom:1px solid var(--border);
-  padding:12px 14px;font-family:var(--ff);font-size:13.5px;line-height:1.95;color:var(--text);
-  resize:none;outline:none;min-height:90px;max-height:230px;overflow-y:auto;transition:background .2s;
-}
+.reditor{width:100%;background:rgba(0,0,0,.18);border:none;border-bottom:1px solid var(--border);
+  padding:11px 13px;font-family:var(--ff);font-size:13px;line-height:1.9;color:var(--text);
+  resize:none;outline:none;min-height:80px;max-height:220px;overflow-y:auto;}
 .reditor:focus{background:rgba(255,255,255,.012)}
-.reditor::-webkit-scrollbar{width:3px}
-.reditor::-webkit-scrollbar-thumb{background:var(--gb);border-radius:3px}
-.email-subj{display:flex;align-items:center;gap:8px;padding:7px 12px;border-bottom:1px solid var(--border);background:rgba(21,181,200,.025)}
-.email-subj-lbl{font-size:9px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--teal);white-space:nowrap}
-.email-subj-input{flex:1;background:transparent;border:none;outline:none;font-family:var(--ff);font-size:13px;color:var(--text);padding:2px 0}
+.email-subj{display:flex;align-items:center;gap:8px;padding:6px 11px;border-bottom:1px solid var(--border);background:rgba(21,181,200,.025)}
+.email-subj-lbl{font-size:8.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--teal);white-space:nowrap}
+.email-subj-input{flex:1;background:transparent;border:none;outline:none;font-family:var(--ff);font-size:12.5px;color:var(--text)}
 .email-subj-input::placeholder{color:var(--dim)}
-.rcard-ft{padding:9px 13px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-.chars{font-size:9.5px;color:var(--dim);margin-left:auto}
+.rcard-ft{padding:8px 12px;display:flex;align-items:center;gap:5px;flex-wrap:wrap}
+.chars{font-size:9px;color:var(--dim);margin-left:auto}
 
 /* CPF Checker */
-.cpf-checker{
-  background:linear-gradient(160deg,rgba(245,110,18,.06),rgba(9,14,30,.95));
-  border:1px solid rgba(245,110,18,.25);border-radius:12px;overflow:hidden;margin-bottom:12px;
-}
-.cpf-checker-hd{
-  padding:11px 14px;border-bottom:1px solid rgba(245,110,18,.12);
-  display:flex;align-items:center;gap:8px;background:rgba(245,110,18,.04);
-}
-.cpf-checker-hd span:first-child{font-size:15px}
-.cpf-checker-title{font-size:12.5px;font-weight:700;color:#fb923c;letter-spacing:.2px}
-.cpf-checker-body{padding:12px 14px;display:flex;flex-direction:column;gap:10px}
-.cpf-field-row{display:flex;gap:8px;align-items:center}
-.cpf-field-lbl{font-size:9.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#fb923c;white-space:nowrap;min-width:28px}
-.cpf-field-input{
-  flex:1;background:rgba(0,0,0,.3);border:1px solid rgba(245,110,18,.25);border-radius:var(--rs);
-  padding:8px 12px;font-family:var(--ff);font-size:14.5px;color:var(--white);outline:none;
-  letter-spacing:2px;font-variant-numeric:tabular-nums;transition:var(--tr);
-}
-.cpf-field-input::placeholder{color:var(--dim);letter-spacing:0;font-size:12.5px}
+.cpf-checker{background:linear-gradient(160deg,rgba(245,110,18,.06),rgba(9,14,30,.95));
+  border:1px solid rgba(245,110,18,.25);border-radius:11px;overflow:hidden;margin-bottom:10px;}
+.cpf-checker-hd{padding:10px 13px;border-bottom:1px solid rgba(245,110,18,.12);
+  display:flex;align-items:center;gap:7px;background:rgba(245,110,18,.04);}
+.cpf-checker-title{font-size:12px;font-weight:700;color:#fb923c}
+.cpf-checker-body{padding:11px 13px;display:flex;flex-direction:column;gap:9px}
+.cpf-field-row{display:flex;gap:7px;align-items:center}
+.cpf-field-lbl{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#fb923c;white-space:nowrap}
+.cpf-field-input{flex:1;background:rgba(0,0,0,.3);border:1px solid rgba(245,110,18,.25);border-radius:var(--rs);
+  padding:7px 11px;font-family:var(--ff);font-size:14px;color:var(--white);outline:none;
+  letter-spacing:2px;font-variant-numeric:tabular-nums;transition:var(--tr);}
 .cpf-field-input:focus{border-color:rgba(245,110,18,.55);background:rgba(245,110,18,.06)}
-.cpf-hint-txt{font-size:11px;color:var(--sub);line-height:1.7;padding:8px 11px;background:rgba(245,110,18,.035);border-radius:7px;border:1px solid rgba(245,110,18,.1)}
-.cpf-status-btns{display:flex;gap:5px;flex-wrap:wrap}
-.cpf-status-btns-lbl{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);margin-bottom:4px}
-.sbtn{
-  padding:6px 12px;border-radius:20px;font-family:var(--ff);font-size:11px;font-weight:600;
-  border:none;cursor:pointer;transition:var(--tr);display:flex;align-items:center;gap:5px;
-}
+.cpf-hint-txt{font-size:11px;color:var(--sub);line-height:1.65;padding:7px 10px;background:rgba(245,110,18,.035);border-radius:7px;border:1px solid rgba(245,110,18,.1)}
+.cpf-status-btns-lbl{font-size:8.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);margin-bottom:3px}
+.cpf-status-btns{display:flex;gap:4px;flex-wrap:wrap}
+.sbtn{padding:5px 11px;border-radius:20px;font-family:var(--ff);font-size:10.5px;font-weight:600;
+  border:none;cursor:pointer;transition:var(--tr);display:flex;align-items:center;gap:4px;}
 .sbtn:hover{transform:translateY(-1px)}
 .sbtn-teal{background:rgba(21,181,200,.09);border:1px solid rgba(21,181,200,.25);color:#5eead4}
-.sbtn-teal:hover{background:rgba(21,181,200,.18)}
 .sbtn-amber{background:rgba(240,144,32,.09);border:1px solid rgba(240,144,32,.25);color:#fbbf24}
-.sbtn-amber:hover{background:rgba(240,144,32,.18)}
 .sbtn-red{background:rgba(232,64,96,.09);border:1px solid rgba(232,64,96,.25);color:#f87171}
-.sbtn-red:hover{background:rgba(232,64,96,.18)}
-.status-result{border-radius:9px;padding:12px 14px;animation:fadeSlide .3s ease;display:none}
+.status-result{border-radius:8px;padding:11px 13px;animation:fadeSlide .3s ease;display:none}
 .status-result.show{display:block}
-@keyframes fadeSlide{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeSlide{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 .sr-noproc{background:rgba(21,181,200,.04);border:1px solid rgba(21,181,200,.18)}
 .sr-recused{background:rgba(240,144,32,.04);border:1px solid rgba(240,144,32,.18)}
 .sr-accepted{background:rgba(232,64,96,.04);border:1px solid rgba(232,64,96,.18)}
-.sr-title{font-size:12.5px;font-weight:700;margin-bottom:7px;display:flex;align-items:center;gap:6px}
+.sr-title{font-size:12px;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:5px}
 .sr-noproc .sr-title{color:#5eead4}.sr-recused .sr-title{color:#fbbf24}.sr-accepted .sr-title{color:#f87171}
-.sr-body{font-size:12px;color:var(--sub);line-height:1.8}
-.sr-body strong{color:var(--text)}
-.sr-steps{margin-top:9px;display:flex;flex-direction:column;gap:6px}
-.sr-step{display:flex;align-items:flex-start;gap:7px;font-size:11.5px;color:var(--sub);line-height:1.65}
-.sr-num{
-  width:19px;height:19px;border-radius:50%;font-size:9px;font-weight:700;
-  display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;
-}
+.sr-body{font-size:11.5px;color:var(--sub);line-height:1.75}
+.sr-steps{margin-top:8px;display:flex;flex-direction:column;gap:5px}
+.sr-step{display:flex;align-items:flex-start;gap:6px;font-size:11px;color:var(--sub);line-height:1.6}
+.sr-num{width:18px;height:18px;border-radius:50%;font-size:8.5px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
 .sr-noproc .sr-num{background:rgba(21,181,200,.14);color:#5eead4}
 .sr-recused .sr-num{background:rgba(240,144,32,.14);color:#fbbf24}
 .sr-accepted .sr-num{background:rgba(232,64,96,.14);color:#f87171}
-.sr-warn-box{margin-top:9px;padding:9px 12px;border-radius:7px;font-size:11.5px;line-height:1.7}
+.sr-warn-box{margin-top:8px;padding:8px 11px;border-radius:6px;font-size:11px;line-height:1.65}
 .sr-noproc .sr-warn-box{background:rgba(21,181,200,.05);border:1px solid rgba(21,181,200,.12);color:#5eead4}
 .sr-recused .sr-warn-box{background:rgba(240,144,32,.05);border:1px solid rgba(240,144,32,.12);color:#fbbf24}
 .sr-accepted .sr-warn-box{background:rgba(232,64,96,.05);border:1px solid rgba(232,64,96,.12);color:#f87171}
 
 /* History bar */
-.histbar{
-  border-top:1px solid var(--border);height:34px;background:rgba(5,9,20,.95);
-  display:flex;align-items:center;gap:10px;padding:0 20px;flex-shrink:0;
-}
-.hist-lbl{font-size:9px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:var(--dim);white-space:nowrap}
+.histbar{border-top:1px solid var(--border);height:32px;background:rgba(5,9,20,.95);
+  display:flex;align-items:center;gap:8px;padding:0 16px;flex-shrink:0;}
+.hist-lbl{font-size:8.5px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--dim);white-space:nowrap}
 .hist-chips{display:flex;gap:4px;overflow-x:auto;flex:1}
 .hist-chips::-webkit-scrollbar{display:none}
-.hchip{
-  padding:2px 9px;border-radius:20px;background:rgba(255,255,255,.025);border:1px solid var(--border);
-  font-size:10.5px;color:var(--sub);cursor:pointer;white-space:nowrap;transition:var(--tr);
-  font-family:var(--ff);display:flex;align-items:center;gap:5px;
-}
+.hchip{padding:2px 8px;border-radius:20px;background:rgba(255,255,255,.025);border:1px solid var(--border);
+  font-size:10px;color:var(--sub);cursor:pointer;white-space:nowrap;transition:var(--tr);
+  font-family:var(--ff);display:flex;align-items:center;gap:4px;}
 .hchip:hover{border-color:var(--gb);color:var(--gold-lt)}
-.hchip-t{font-size:8.5px;color:var(--dim)}
+.hchip-t{font-size:8px;color:var(--dim)}
 .hist-empty{font-size:9px;color:var(--dim)}
 
-/* Guide panel */
-.guide{
-  position:absolute;inset:0;z-index:40;background:rgba(4,8,19,.98);backdrop-filter:blur(28px);
-  display:none;flex-direction:column;overflow-y:auto;
-}
+/* Guide */
+.guide{position:absolute;inset:0;z-index:40;background:rgba(4,8,19,.98);backdrop-filter:blur(28px);
+  display:none;flex-direction:column;overflow-y:auto;}
 .guide.open{display:flex}
-.guide-inner{padding:28px 34px;max-width:820px;margin:0 auto;width:100%}
-.guide-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
-.guide-hd h2{font-family:var(--fs);font-size:20px;font-weight:600;color:var(--white)}
-.gg{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.gc{border-radius:var(--r);padding:18px}
+.guide-inner{padding:26px 30px;max-width:780px;margin:0 auto;width:100%}
+.guide-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.guide-hd h2{font-family:var(--fs);font-size:19px;font-weight:600;color:var(--white)}
+.gg{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.gc{border-radius:var(--r);padding:16px}
 .gc-yes{background:rgba(30,203,114,.04);border:1px solid rgba(30,203,114,.12)}
 .gc-no{background:rgba(232,64,96,.04);border:1px solid rgba(232,64,96,.12)}
-.gc h3{font-family:var(--fs);font-size:16px;font-weight:600;margin-bottom:11px;display:flex;align-items:center;gap:6px}
+.gc h3{font-family:var(--fs);font-size:15px;font-weight:600;margin-bottom:10px;display:flex;align-items:center;gap:5px}
 .gc-yes h3{color:#4ade80}.gc-no h3{color:#f87171}
-.gi{padding:6px 0;border-bottom:1px solid var(--border);font-size:11.5px;color:var(--sub);display:flex;gap:8px;line-height:1.65}
+.gi{padding:5px 0;border-bottom:1px solid var(--border);font-size:11px;color:var(--sub);display:flex;gap:7px;line-height:1.6}
 .gi:last-child{border-bottom:none}
 .gi strong{color:var(--text);display:block}
-.ginfo{
-  margin-top:12px;background:var(--glow);border:1px solid var(--gb);border-radius:var(--r);
-  padding:13px 17px;font-size:11px;color:var(--sub);line-height:2;
-}
+.ginfo{margin-top:11px;background:var(--glow);border:1px solid var(--gb);border-radius:var(--r);
+  padding:12px 16px;font-size:11px;color:var(--sub);line-height:1.9;}
 .ginfo strong{color:var(--gold-lt)}
 
 /* Toast */
-.toast{
-  position:fixed;bottom:18px;right:18px;z-index:9999;
-  background:rgba(7,12,28,.98);border:1px solid var(--gold);color:var(--white);
-  padding:8px 15px;border-radius:var(--rs);font-size:11px;font-weight:500;
-  transform:translateY(50px) scale(.95);opacity:0;transition:all .32s cubic-bezier(.34,1.56,.64,1);
-  display:flex;align-items:center;gap:8px;box-shadow:0 8px 28px rgba(0,0,0,.7);backdrop-filter:blur(20px);
-}
+.toast{position:fixed;bottom:16px;right:16px;z-index:9999;background:rgba(7,12,28,.98);
+  border:1px solid var(--gold);color:var(--white);padding:7px 14px;border-radius:var(--rs);
+  font-size:11px;font-weight:500;transform:translateY(40px) scale(.95);opacity:0;
+  transition:all .3s cubic-bezier(.34,1.56,.64,1);display:flex;align-items:center;gap:7px;
+  box-shadow:0 8px 28px rgba(0,0,0,.7);}
 .toast.show{transform:translateY(0) scale(1);opacity:1}
 
-/* Scrollbar global */
 ::-webkit-scrollbar{width:3px;height:3px}
 ::-webkit-scrollbar-thumb{background:var(--gb);border-radius:3px}
 ::-webkit-scrollbar-track{background:transparent}
@@ -431,7 +293,6 @@ body::after{
 </head>
 <body>
 
-<!-- TOPBAR -->
 <div class="topbar">
   <div class="brand">
     <div class="seal"><span class="s1">OAB</span><span class="s2">SP</span></div>
@@ -442,25 +303,22 @@ body::after{
   </div>
   <div class="vdiv"></div>
   <div class="tmeta">
-    <div class="tm"><div class="tm-v">09h – 12h</div><div class="tm-l">Horário</div></div>
+    <div class="tm"><div class="tm-v">09h–12h</div><div class="tm-l">Horário</div></div>
     <div class="tm"><div class="tm-v">30 senhas/dia</div><div class="tm-l">Limite</div></div>
     <div class="tm"><div class="tm-v">(11) 4154-5191</div><div class="tm-l">Telefone</div></div>
   </div>
   <div class="tright">
     <div class="live-pill"><div class="live-dot"></div><span>Online</span></div>
     <div class="vdiv"></div>
-    <div class="ublock">
-      <div class="uname">Cássia Kelly Lins Reis</div>
+    <div>
+      <div class="uname">Cássia Kelly</div>
       <div class="urole">Auxiliar Administrativo</div>
       <div class="uclock" id="clock"></div>
     </div>
   </div>
 </div>
 
-<!-- SHELL -->
 <div class="shell">
-
-  <!-- SIDEBAR -->
   <div class="sidebar">
     <div class="sb-head">
       <div class="sb-lbl">Que situação você recebeu?</div>
@@ -471,61 +329,53 @@ body::after{
     </div>
     <div class="chips">
       <button class="chip on" onclick="filtro(this,'')">Todos</button>
-      <button class="chip" onclick="filtro(this,'Primeiro contato')">1º Contato</button>
+      <button class="chip" onclick="filtro(this,'Primeiro contato')">Contato</button>
       <button class="chip" onclick="filtro(this,'Atendemos')">✅ Atend.</button>
       <button class="chip" onclick="filtro(this,'Não atendemos')">🚫 Não atend.</button>
-      <button class="chip" onclick="filtro(this,'Convênio')">🤝 Convênio</button>
       <button class="chip" onclick="filtro(this,'Dativo')">⚖️ Dativo</button>
       <button class="chip" onclick="filtro(this,'Documentos')">📋 Docs</button>
-      <button class="chip" onclick="filtro(this,'Agendamento')">📅 Agenda</button>
       <button class="chip" onclick="filtro(this,'delicada')">😓 Delicado</button>
       <button class="chip" onclick="filtro(this,'Urgente')">🚨 Urgente</button>
-      <button class="chip" onclick="filtro(this,'Comunicado')">📢 Comunicados</button>
+      <button class="chip" onclick="filtro(this,'Reclamação')">⚠️ Reclam.</button>
+      <button class="chip" onclick="filtro(this,'Comunicado')">📢 Comunic.</button>
       <button class="chip" onclick="filtro(this,'Ofício')">📄 Ofícios</button>
-      <button class="chip" onclick="filtro(this,'Secretaria')">📲 Secretaria</button>
-      <button class="chip" onclick="filtro(this,'Informativo')">📣 Informativo</button>
-      <button class="chip" onclick="filtro(this,'Reclamação')">⚠️ Reclamação</button>
     </div>
     <div class="sb-list" id="sb-list"></div>
   </div>
 
-  <!-- MAIN -->
   <div class="main">
     <div class="breadbar">
       <div>
         <div class="btitle" id="btitle">Selecione uma situação</div>
-        <div class="bsub" id="bsub">A resposta aparece pronta para copiar ou enviar direto pelo WhatsApp</div>
+        <div class="bsub" id="bsub">A resposta aparece pronta para copiar ou enviar pelo WhatsApp</div>
       </div>
       <button class="btn btn-guide" onclick="toggleGuide()">📌 O que atendemos?</button>
     </div>
 
     <div style="flex:1;display:flex;flex-direction:column;overflow:hidden;position:relative">
 
-      <!-- WELCOME -->
       <div class="welcome" id="welcome">
         <div class="wglyph">⚖️</div>
         <h2>Olá, Cássia! 👋</h2>
-        <p>Selecione ao lado o tipo de mensagem que você recebeu. A resposta já aparece pronta, com o nome da pessoa — edite se precisar e copie com um clique.</p>
+        <p>Selecione ao lado o tipo de mensagem recebida. A resposta já aparece pronta — edite e copie com um clique.</p>
         <div class="wtags" id="wtags"></div>
-        <div style="margin-top:8px;font-size:11.5px;color:var(--dim);display:flex;align-items:center;gap:6px">
-          <span style="width:5px;height:5px;border-radius:50%;background:var(--green);display:inline-block;flex-shrink:0"></span>
-          CAD · Subseção Santana de Parnaíba · 30 senhas/dia · 9h–12h
+        <div style="margin-top:6px;font-size:11px;color:var(--dim);display:flex;align-items:center;gap:5px">
+          <span style="width:5px;height:5px;border-radius:50%;background:var(--green);display:inline-block"></span>
+          CAD · Santana de Parnaíba · 30 senhas/dia · 9h–12h
         </div>
       </div>
 
-      <!-- SCENE VIEW -->
       <div class="sc-view" id="sc-view">
         <div class="namebar">
-          <label>✏️ Nome da pessoa</label>
+          <label>✏️ Nome</label>
           <input id="person-name" type="text" placeholder="Ex: Maria Silva" oninput="atualizaNome()">
-          <span class="namebar-hint">✨ Já entra automático nas mensagens</span>
+          <span class="namebar-hint">✨ Entra automático nas mensagens</span>
         </div>
         <div class="channel-tabs-outer">
           <button class="channel-tab act" id="ctab-wapp" onclick="switchChannel('wapp')">📱 WhatsApp</button>
           <button class="channel-tab" id="ctab-email" onclick="switchChannel('email')">📧 E-mail</button>
         </div>
 
-        <!-- WHATSAPP PANE -->
         <div class="channel-pane on" id="pane-wapp">
           <div class="cols">
             <div class="col col-l">
@@ -538,26 +388,21 @@ body::after{
               </div>
             </div>
             <div class="col">
-              <div class="col-hd">✏️ Respostas prontas — edite e copie</div>
+              <div class="col-hd">✏️ Respostas prontas</div>
               <div class="col-body" id="right-col-wapp">
                 <div id="cpf-checker-box" style="display:none">
                   <div class="cpf-checker">
-                    <div class="cpf-checker-hd">
-                      <span>🔍</span>
-                      <span class="cpf-checker-title">Verificar situação no sistema — Reclamação de Advogado</span>
-                    </div>
+                    <div class="cpf-checker-hd"><span>🔍</span><span class="cpf-checker-title">Verificar CPF no sistema</span></div>
                     <div class="cpf-checker-body">
                       <div class="cpf-field-row">
                         <span class="cpf-field-lbl">CPF</span>
                         <input class="cpf-field-input" id="cpf-input" type="text" placeholder="000.000.000-00" maxlength="14" oninput="fmtCPF(this)">
                       </div>
-                      <div class="cpf-hint-txt">
-                        💡 <strong style="color:var(--text)">Peça o CPF do assistido</strong>, consulte no sistema e selecione abaixo a situação encontrada para gerar a orientação correta.
-                      </div>
+                      <div class="cpf-hint-txt">💡 Peça o CPF, consulte no sistema e selecione a situação encontrada.</div>
                       <div>
-                        <div class="cpf-status-btns-lbl">Situação encontrada no sistema:</div>
+                        <div class="cpf-status-btns-lbl">Situação no sistema:</div>
                         <div class="cpf-status-btns">
-                          <button class="sbtn sbtn-teal" onclick="showCPFStatus('noproc')">📂 Sem processo cadastrado</button>
+                          <button class="sbtn sbtn-teal" onclick="showCPFStatus('noproc')">📂 Sem processo</button>
                           <button class="sbtn sbtn-amber" onclick="showCPFStatus('recused')">⚠️ Nomeação recusada</button>
                           <button class="sbtn sbtn-red" onclick="showCPFStatus('accepted')">✅ Nomeação aceita</button>
                         </div>
@@ -572,11 +417,10 @@ body::after{
           </div>
         </div>
 
-        <!-- EMAIL PANE -->
         <div class="channel-pane" id="pane-email">
           <div class="cols">
             <div class="col col-l">
-              <div class="col-hd">📩 Contexto da situação</div>
+              <div class="col-hd">📩 Contexto</div>
               <div class="col-body">
                 <div class="who-row"><div class="who-pip" id="who-pip-e"></div><span id="who-lbl-e">—</span></div>
                 <div class="bubble" id="bubble-e">—</div>
@@ -585,14 +429,14 @@ body::after{
               </div>
             </div>
             <div class="col">
-              <div class="col-hd">📧 Respostas por e-mail — edite e copie</div>
+              <div class="col-hd">📧 Respostas por e-mail</div>
               <div class="col-body"><div class="resp-stack" id="resp-stack-email"></div></div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- GUIDE OVERLAY -->
+      <!-- Guide overlay -->
       <div class="guide" id="guide">
         <div class="guide-inner">
           <div class="guide-hd">
@@ -602,50 +446,44 @@ body::after{
           <div class="gg">
             <div class="gc gc-yes">
               <h3>✅ Atendemos</h3>
-              <div class="gi"><span>👨‍👩‍👧</span><div><strong>Família</strong>Divórcio, pensão alimentícia, guarda de filhos, reconhecimento de paternidade</div></div>
-              <div class="gi"><span>⚖️</span><div><strong>Cível em geral</strong>Cobranças, contratos, indenizações, danos morais</div></div>
-              <div class="gi"><span>🏠</span><div><strong>Habitacional</strong>Posse, regularização de imóvel, usucapião</div></div>
-              <div class="gi"><span>📜</span><div><strong>Inventário e Herança</strong>Abertura de inventário, partilha de bens</div></div>
+              <div class="gi"><span>👨‍👩‍👧</span><div><strong>Família</strong>Divórcio, pensão, guarda, paternidade</div></div>
+              <div class="gi"><span>⚖️</span><div><strong>Cível</strong>Cobranças, contratos, indenizações</div></div>
+              <div class="gi"><span>🏠</span><div><strong>Habitacional</strong>Posse, usucapião, regularização</div></div>
+              <div class="gi"><span>📜</span><div><strong>Inventário</strong>Abertura, partilha de bens</div></div>
               <div class="gi"><span>🛡️</span><div><strong>Violência Doméstica</strong>Medida protetiva, Lei Maria da Penha</div></div>
-              <div class="gi"><span>🤝</span><div><strong>Convênio OAB/DPE</strong>Assistência via convênio com a Defensoria Pública</div></div>
-              <div class="gi"><span>📋</span><div><strong>Advocacia Dativa</strong>Nomeação judicial — réus sem advogado</div></div>
+              <div class="gi"><span>🤝</span><div><strong>Convênio OAB/DPE</strong>Via Defensoria Pública</div></div>
+              <div class="gi"><span>📋</span><div><strong>Dativo</strong>Réus sem advogado — nomeação judicial</div></div>
             </div>
             <div class="gc gc-no">
-              <h3>🚫 Não Atendemos</h3>
-              <div class="gi"><span>🏭</span><div><strong>Trabalhista</strong>Rescisão, FGTS, hora extra, vínculo empregatício</div></div>
-              <div class="gi"><span>📋</span><div><strong>Previdenciário / INSS</strong>Aposentadoria, BPC, auxílio-doença, pensão por morte</div></div>
+              <h3>🚫 Não atendemos</h3>
+              <div class="gi"><span>🏭</span><div><strong>Trabalhista</strong>Rescisão, FGTS, vínculo</div></div>
+              <div class="gi"><span>📋</span><div><strong>INSS / Previdenciário</strong>Aposentadoria, BPC, auxílio</div></div>
               <div class="gi"><span>🔒</span><div><strong>Criminal geral</strong>Exceto dativo nomeado pelo juiz</div></div>
-              <div class="gi"><span>🏢</span><div><strong>Empresarial / Comercial</strong>Contratos empresariais, CNPJ, sociedades</div></div>
-              <div class="gi"><span>💰</span><div><strong>Tributário / Fiscal</strong>Dívidas com Receita Federal, parcelamentos</div></div>
+              <div class="gi"><span>🏢</span><div><strong>Empresarial</strong>CNPJ, sociedades, contratos</div></div>
+              <div class="gi"><span>💰</span><div><strong>Tributário</strong>Receita Federal, parcelamentos</div></div>
             </div>
           </div>
           <div class="ginfo">
-            <strong>📋 Documentos básicos:</strong> RG original + CPF · Comprovante de residência · Comprovante de renda de todos da família · Patrimônio se houver<br><br>
+            <strong>📋 Documentos básicos:</strong> RG + CPF · Comprovante de residência · Comprovante de renda de todos da família · Patrimônio se houver<br><br>
             <strong>📍</strong> Av. Tenente Marques, 5297 – Jd. do Luar, Santana de Parnaíba/SP (POUPATEMPO)<br>
-            <strong>📞</strong> (11) 4154-5191 &nbsp;·&nbsp;
-            <strong>📧</strong> aj.santana.parnai@oabsp.org.br &nbsp;·&nbsp;
-            <strong>🕘</strong> Seg–Sex, 9h–12h &nbsp;·&nbsp;
-            <strong>⚠️</strong> 30 senhas/dia
+            <strong>📞</strong> (11) 4154-5191 &nbsp;·&nbsp; <strong>📧</strong> aj.santana.parnai@oabsp.org.br &nbsp;·&nbsp; <strong>🕘</strong> Seg–Sex, 9h–12h &nbsp;·&nbsp; <strong>⚠️</strong> 30 senhas/dia
           </div>
-          <div style="margin-top:14px"><button class="btn btn-ghost" onclick="window.print()">🖨️ Imprimir</button></div>
+          <div style="margin-top:12px"><button class="btn btn-ghost" onclick="window.print()">🖨️ Imprimir</button></div>
         </div>
       </div>
+    </div>
 
-    </div><!-- end flex col -->
-
-    <!-- HISTORY BAR -->
     <div class="histbar">
       <span class="hist-lbl">Recentes</span>
-      <div class="hist-chips" id="hist-chips"><span class="hist-empty">Nenhuma cópia ainda — as últimas aparecerão aqui</span></div>
+      <div class="hist-chips" id="hist-chips"><span class="hist-empty">Nenhuma cópia ainda</span></div>
     </div>
-  </div><!-- end .main -->
-
-</div><!-- end .shell -->
+  </div>
+</div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-const DOCS='\n\nDocumentos necessários:\n- RG original e CPF (originais)\n- Comprovante de residência atualizado (água, luz, gás ou contrato de aluguel)\n- Comprovante de renda de todos que moram com você:\n  • Com carteira assinada: 3 últimos holerites\n  • Sem carteira assinada: extrato bancário dos últimos 3 meses ou declaração de renda\n- Se tiver bens (imóvel, carro, poupança): documentação desses bens\n\n⚠️ Sem documentação completa, o atendimento não poderá ser realizado.';
+const DOCS='\n\nDocumentos necessários:\n- RG original e CPF\n- Comprovante de residência atualizado\n- Comprovante de renda de todos que moram com você\n- Se tiver bens: documentação correspondente\n\n⚠️ Sem documentação completa, o atendimento não será realizado.';
 const END='\n\n📍 Av. Tenente Marques, 5297 – Jd. do Luar, Santana de Parnaíba/SP (POUPATEMPO)\n📞 (11) 4154-5191\n🕘 Seg–Sex, 9h–12h  ⚠️ 30 senhas/dia';
 const END_REC='\n\n📍 R. Alberto Frediani, 770 – Jd. Frediani, Santana de Parnaíba/SP\n    CEP 06502-155\n🕘 Seg–Sex, 9h–17h';
 const ENDE='\n\nAtenciosamente,\nCássia Kelly\nCentral de Atendimento – CAD\nOAB Subseção Santana de Parnaíba\n📍 Av. Tenente Marques, 5297 – Jd. do Luar, Santana de Parnaíba/SP\n📞 (11) 4154-5191\n🕘 Seg–Sex, 9h–12h  ⚠️ 30 senhas/dia';
@@ -654,641 +492,441 @@ const AREAS='\n\nA CAD atende: família (divórcio, pensão, guarda), cível, in
 
 const S=[
 
-{grp:'📣 Informativo Geral',id:'info1',icon:'📣',ic:'i-blue',pip:null,
- label:'Informativo completo do atendimento',sub:'Texto pronto para WhatsApp ou e-mail',
+// ── INFORMATIVO ──
+{grp:'📣 Informativo',id:'info1',icon:'📣',ic:'i-blue',pip:null,
+ label:'Informativo completo',sub:'Horário, documentos, endereço',
  who:'Assistido',wc:'#3b82f6',sim:'Pode me mandar as informações sobre o atendimento?',
- tags:[{t:'Informativo',c:'tg-blue'},{t:'Documentos',c:'tg-gold'},{t:'Primeiro contato',c:'tg-teal'}],
- ctx:'Texto completo com horário, documentos e endereço — ideal para mandar a qualquer pessoa que perguntar sobre o atendimento.',
+ tags:[{t:'Informativo',c:'tg-blue'},{t:'Documentos',c:'tg-gold'}],
+ ctx:'Texto completo — ideal para qualquer pessoa que pergunte sobre o atendimento.',
  resps:[
-  {title:'📣 Informativo completo — WhatsApp',badge:'Recomendada',primary:true,nao:false,
-   tpl:n=>'*OAB – ASSISTÊNCIA JUDICIÁRIA GRATUITA*\n📍 Subseção Santana de Parnaíba\n \n━━━━━━━━━━━━━━━━━━━━\n🗓️ *Atendimento:* Segunda a Sexta-feira\n🕘 *Horário:* 09h00 às 12h00\n⚠️ *Limite:* 30 pessoas por dia\n_(Senhas apenas para as primeiras 30)_\n━━━━━━━━━━━━━━━━━━━━\n \n📋 *DOCUMENTOS OBRIGATÓRIOS:*\n \n✅ RG original + CPF\n✅ Comprovante de residência atualizado\n   _(água, luz, gás, telefone ou aluguel)_\n✅ Comprovante de renda de todos da família:\n   • *Registrado:* 3 últimos holerites\n   • *Não registrado:* carteira de trabalho, extrato bancário (3 meses), declaração do empregador ou carta de próprio punho reconhecida em cartório\n✅ Comprovante de patrimônio:\n   _(certidão do valor venal, IPTU, veículos, extrato de poupança – se houver)_\n✅ *Alimentos:* documento da criança + endereço da parte contrária\n✅ *Divórcio:* certidão de casamento atualizada\n \n━━━━━━━━━━━━━━━━━━━━\n❗ *Documentos complementares poderão ser solicitados conforme o caso.*\n🚫 *Sem algum documento acima, o atendimento NÃO será realizado.*\n━━━━━━━━━━━━━━━━━━━━\n \n📍 Av. Tenente Marques, 5297\n   Jardim do Luar (Fazendinha) – Santana de Parnaíba/SP\n   _(Dentro do POUPATEMPO)_\n📞 (11) 4154-5191'},
-  {title:'📣 Variação com saudação',badge:'Alternativa',primary:false,nao:false,
-   tpl:n=>'Olá'+(n?', '+n:'')+'! 😊\n\nSegue abaixo as informações sobre o nosso atendimento:\n\n*OAB – ASSISTÊNCIA JUDICIÁRIA GRATUITA*\n📍 Subseção Santana de Parnaíba\n \n━━━━━━━━━━━━━━━━━━━━\n🗓️ *Atendimento:* Segunda a Sexta-feira\n🕘 *Horário:* 09h00 às 12h00\n⚠️ *Limite:* 30 pessoas por dia\n_(Senhas apenas para as primeiras 30)_\n━━━━━━━━━━━━━━━━━━━━\n \n📋 *DOCUMENTOS OBRIGATÓRIOS:*\n \n✅ RG original + CPF\n✅ Comprovante de residência atualizado\n   _(água, luz, gás, telefone ou aluguel)_\n✅ Comprovante de renda de todos da família:\n   • *Registrado:* 3 últimos holerites\n   • *Não registrado:* carteira de trabalho, extrato bancário (3 meses), declaração do empregador ou carta de próprio punho reconhecida em cartório\n✅ Comprovante de patrimônio:\n   _(certidão do valor venal, IPTU, veículos, extrato de poupança – se houver)_\n✅ *Alimentos:* documento da criança + endereço da parte contrária\n✅ *Divórcio:* certidão de casamento atualizada\n \n━━━━━━━━━━━━━━━━━━━━\n❗ *Documentos complementares poderão ser solicitados conforme o caso.*\n🚫 *Sem algum documento acima, o atendimento NÃO será realizado.*\n━━━━━━━━━━━━━━━━━━━━\n \n📍 Av. Tenente Marques, 5297\n   Jardim do Luar (Fazendinha) – Santana de Parnaíba/SP\n   _(Dentro do POUPATEMPO)_\n📞 (11) 4154-5191\n\nQualquer dúvida, estou à disposição! 😊'}
+  {title:'📣 Informativo completo',badge:'Recomendada',primary:true,nao:false,
+   tpl:n=>'*OAB – ASSISTÊNCIA JUDICIÁRIA GRATUITA*\n📍 Subseção Santana de Parnaíba\n \n━━━━━━━━━━━━━━━━━━━━\n🗓️ *Atendimento:* Segunda a Sexta-feira\n🕘 *Horário:* 09h00 às 12h00\n⚠️ *Limite:* 30 pessoas por dia\n_(Senhas apenas para as primeiras 30)_\n━━━━━━━━━━━━━━━━━━━━\n \n📋 *DOCUMENTOS OBRIGATÓRIOS:*\n \n✅ RG original + CPF\n✅ Comprovante de residência atualizado\n   _(água, luz, gás, telefone ou aluguel)_\n✅ Comprovante de renda de todos da família:\n   • *Registrado:* 3 últimos holerites\n   • *Não registrado:* carteira de trabalho, extrato bancário (3 meses), declaração do empregador ou carta de próprio punho\n✅ Comprovante de patrimônio _(se houver)_\n✅ *Alimentos:* documento da criança + endereço da parte contrária\n✅ *Divórcio:* certidão de casamento atualizada\n \n━━━━━━━━━━━━━━━━━━━━\n❗ *Documentos complementares podem ser solicitados conforme o caso.*\n🚫 *Sem os documentos acima, o atendimento NÃO será realizado.*\n━━━━━━━━━━━━━━━━━━━━\n \n📍 Av. Tenente Marques, 5297 – Jd. do Luar (Fazendinha)\n   _(Dentro do POUPATEMPO)_ · Santana de Parnaíba/SP\n📞 (11) 4154-5191'},
+  {title:'📣 Com saudação',badge:'Alternativa',primary:false,nao:false,
+   tpl:n=>'Olá'+(n?', '+n:'')+'! 😊\n\nSegue as informações sobre o atendimento:\n\n*OAB – ASSISTÊNCIA JUDICIÁRIA GRATUITA*\n📍 Subseção Santana de Parnaíba\n \n🗓️ *Atendimento:* Seg–Sex · 🕘 *Horário:* 09h–12h · ⚠️ *Limite:* 30 senhas/dia\n \n📋 *DOCUMENTOS:*\n✅ RG original + CPF\n✅ Comprovante de residência\n✅ Comprovante de renda (holerites, extrato ou declaração)\n✅ Patrimônio se houver · Certidão de casamento (divórcio) · Doc. do filho + endereço da parte (pensão)\n \n🚫 Sem documentação completa, o atendimento não é realizado.\n \n📍 Av. Tenente Marques, 5297 – Fazendinha (POUPATEMPO)\n📞 (11) 4154-5191\n\nQualquer dúvida, é só chamar! 😊'}
  ],
  emailResps:[
-  {title:'📧 Informativo completo — E-mail',subj:'OAB Santana de Parnaíba – Informações sobre Assistência Judiciária Gratuita',badge:'Recomendada',primary:true,nao:false,
-   tpl:n=>'CAD – Comissão de Advocacia Dativa\nOAB Subseção Santana de Parnaíba\n\nPrezado(a)'+(n?' '+n:'')+'!\n\nSegue abaixo todas as informações sobre o nosso atendimento de Assistência Judiciária Gratuita:\n\n──────────────────────────────\nATENDIMENTO\n──────────────────────────────\nDias: Segunda a Sexta-feira\nHorário: 09h00 às 12h00\nLimite: 30 pessoas por dia (senhas distribuídas por ordem de chegada)\n\n──────────────────────────────\nDOCUMENTOS OBRIGATÓRIOS\n──────────────────────────────\n1. RG original + CPF\n2. Comprovante de residência atualizado\n   (água, luz, gás, telefone ou aluguel)\n3. Comprovante de renda de todos os membros da família:\n   - Registrado em carteira: 3 últimos holerites\n   - Não registrado: carteira de trabalho, extrato bancário dos últimos 3 meses, declaração do empregador ou carta de próprio punho reconhecida em cartório\n4. Comprovante de patrimônio (se houver):\n   certidão do valor venal, IPTU, documentação de veículos, extrato de poupança\n5. Para casos de Alimentos: documento da criança + endereço completo da parte contrária\n6. Para casos de Divórcio: certidão de casamento atualizada\n\n──────────────────────────────\nOBSERVAÇÕES IMPORTANTES\n──────────────────────────────\n• Documentos complementares poderão ser solicitados conforme a especificidade do caso.\n• Sem a documentação completa acima, o atendimento NÃO poderá ser realizado.\n• O atendimento é presencial, sem agendamento prévio — por ordem de chegada.\n\n──────────────────────────────\nLOCALIZAÇÃO\n──────────────────────────────\nAv. Tenente Marques, 5297\nJardim do Luar (Fazendinha) – Santana de Parnaíba/SP\n(Dentro do POUPATEMPO)\nTelefone: (11) 4154-5191\n\nAtenciosamente,\nCássia Kelly\nCentral de Atendimento – CAD\nOAB Subseção Santana de Parnaíba'},
-  {title:'📧 Versão curta — E-mail',subj:'OAB Santana de Parnaíba – Assistência Judiciária Gratuita',badge:'Alternativa',primary:false,nao:false,
-   tpl:n=>'CAD – Comissão de Advocacia Dativa\nOAB Subseção Santana de Parnaíba\n\nPrezado(a)'+(n?' '+n:'')+'!\n\nO atendimento de Assistência Judiciária Gratuita funciona da seguinte forma:\n\nDias e horário: Segunda a sexta-feira, das 9h às 12h\nLimite: 30 pessoas por dia, por ordem de chegada — sem agendamento prévio.\n\nDocumentos obrigatórios:\n- RG original e CPF\n- Comprovante de residência atualizado (água, luz, gás, telefone ou aluguel)\n- Comprovante de renda de todos da família (holerites, extrato bancário ou declaração)\n- Documentação de patrimônio, se houver\n- Documentos específicos conforme o tipo de caso\n\nSem a documentação completa, o atendimento não poderá ser realizado.\n\nLocalização: Av. Tenente Marques, 5297 – Jd. do Luar (Fazendinha), Santana de Parnaíba/SP (POUPATEMPO)\nTelefone: (11) 4154-5191\n\nAtenciosamente,\nCássia Kelly\nCentral de Atendimento – CAD\nOAB Subseção Santana de Parnaíba'}
+  {title:'📧 Informativo por e-mail',subj:'OAB Santana de Parnaíba – Assistência Judiciária Gratuita',badge:'Recomendada',primary:true,nao:false,
+   tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nSegue as informações sobre o atendimento:\n\nDias: Segunda a Sexta · Horário: 09h–12h · Limite: 30 senhas por dia (ordem de chegada)\n\nDocumentos obrigatórios:\n1. RG original + CPF\n2. Comprovante de residência atualizado\n3. Comprovante de renda de todos da família\n4. Patrimônio se houver\n5. Para pensão: documento da criança + endereço da parte contrária\n6. Para divórcio: certidão de casamento atualizada\n\nSem documentação completa, o atendimento não poderá ser realizado.\n\nLocalização: Av. Tenente Marques, 5297 – Jd. do Luar (POUPATEMPO), Santana de Parnaíba/SP\nTelefone: (11) 4154-5191'+ENDE}
  ]},
 
+// ── PRIMEIRO CONTATO (mesclado) ──
 {grp:'👤 Primeiro contato',id:'bv0',icon:'💬',ic:'i-blue',pip:null,
- label:'Assistido entra em contato',sub:'Perguntar no que podemos ajudar',
+ label:'Boas-vindas / Primeiro contato',sub:'Cumprimentar e perguntar o que precisa',
  who:'Assistido',wc:'#3b82f6',sim:'Oi, boa tarde!',
  tags:[{t:'Boas-vindas',c:'tg-blue'},{t:'Primeiro contato',c:'tg-teal'}],
- ctx:'Assistido mandou mensagem sem dizer o motivo.',
+ ctx:'Use para qualquer mensagem inicial — simples "oi", "boa tarde", ou sem contexto.',
  resps:[
-  {title:'✉️ Boas-vindas',badge:'Recomendada',primary:true,nao:false,tpl:n=>'Olá'+(n?', '+n:'')+'! 😊 Aqui é a Cássia, em que posso te ajudar?'},
-  {title:'✉️ Variação animada',badge:'Alternativa',primary:false,nao:false,tpl:n=>'Oi'+(n?', '+n:'')+'! Tudo bem? 😊 Sou a Cássia, em que posso te ajudar?'},
-  {title:'✉️ Variação formal',badge:'Alternativa',primary:false,nao:false,tpl:n=>'Olá'+(n?', '+n:'')+'! Aqui é a Cássia. Como posso te ajudar hoje?'}
+  {title:'👋 Boas-vindas padrão',badge:'Recomendada',primary:true,nao:false,tpl:n=>'Olá'+(n?', '+n:'')+'! 😊 Aqui é a Cássia — em que posso te ajudar?'},
+  {title:'👋 Tom mais informal',badge:'Alternativa',primary:false,nao:false,tpl:n=>'Oi'+(n?', '+n:'')+'! Tudo bem? 😊 Sou a Cássia, me conta — no que posso ajudar?'}
  ],emailResps:[]},
-{grp:'👤 Primeiro contato',id:'bv5',icon:'👋',ic:'i-blue',pip:null,
- label:"Mandou só 'oi' sem contexto",sub:'Cumprimentar e perguntar o que precisa',
- who:'Assistido',wc:'#3b82f6',sim:'Oi',
- tags:[{t:'Boas-vindas',c:'tg-blue'},{t:'Primeiro contato',c:'tg-teal'}],
- ctx:'Pessoa mandou só um oi. Responder de forma leve.',
- resps:[
-  {title:'👋 Responder o oi',badge:'Recomendada',primary:true,nao:false,tpl:n=>'Oi'+(n?', '+n:'')+'! 😊 Aqui é a Cássia, tudo bem?\n\nEm que posso te ajudar?'},
-  {title:'👋 Variação',badge:'Alternativa',primary:false,nao:false,tpl:n=>'Oi'+(n?', '+n:'')+'! 😊 Tudo bem? Aqui é a Cássia!\n\nMe conta, no que posso ajudar?'}
- ],emailResps:[]},
+
 {grp:'👤 Primeiro contato',id:'bv1',icon:'❓',ic:'i-blue',pip:null,
- label:'Não sabe o que é a CAD',sub:'Explica o serviço do zero',
- who:'Assistido',wc:'#3b82f6',sim:'Oi, vi o número aqui. Vocês fazem o quê exatamente?',
- tags:[{t:'Boas-vindas',c:'tg-blue'}],ctx:'Pessoa sem contexto. Explicar de forma simples.',
- resps:[{title:'✉️ Apresentar o serviço',badge:'Recomendada',primary:true,nao:false,
-  tpl:n=>'Olá'+(n?', '+n:'')+'! 😊\n\nAqui é a Cássia.\n\nSomos a CAD – Comissão de Advocacia Dativa da OAB Santana de Parnaíba. Oferecemos atendimento jurídico gratuito para quem não tem condições de pagar advogado particular.\n\nO atendimento é presencial, com advogados da OAB. Basta comparecer com os documentos e orientamos sobre o seu caso. 😊'+DOCS+END}],
- emailResps:[{title:'📧 Apresentação por e-mail',subj:'CAD – O que somos e como podemos ajudar',badge:'Recomendada',primary:true,nao:false,
-  tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nA CAD oferece atendimento jurídico gratuito para quem não tem condições de contratar advogado particular. O atendimento é presencial, de segunda a sexta, das 9h às 12h.\n\nDocumentos necessários:\n- RG original e CPF\n- Comprovante de residência atualizado\n- Comprovante de renda de todos que moram com você\n- Se tiver bens: documentação correspondente'+ENDE}]},
+ label:'Não sabe o que é a CAD',sub:'Apresentar o serviço',
+ who:'Assistido',wc:'#3b82f6',sim:'Vocês fazem o quê exatamente?',
+ tags:[{t:'Boas-vindas',c:'tg-blue'}],ctx:'Explicar de forma simples.',
+ resps:[{title:'✉️ Apresentar o serviço',badge:'Padrão',primary:true,nao:false,
+  tpl:n=>'Olá'+(n?', '+n:'')+'! 😊\n\nSomos a CAD – Comissão de Advocacia Dativa da OAB Santana de Parnaíba. Oferecemos atendimento jurídico gratuito para quem não tem condições de pagar advogado particular.\n\nO atendimento é presencial, de segunda a sexta, das 9h às 12h.'+DOCS+END}],
+ emailResps:[{title:'📧 Apresentação',subj:'CAD – O que somos e como podemos ajudar',badge:'Padrão',primary:true,nao:false,
+  tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nA CAD oferece atendimento jurídico gratuito a quem não pode contratar advogado. Atendemos presencialmente, de segunda a sexta, das 9h às 12h.'+DOCS+ENDE}]},
+
 {grp:'👤 Primeiro contato',id:'bv2',icon:'🙋',ic:'i-blue',pip:null,
- label:'Sabe que é a OAB e quer ajuda',sub:'Confirmar e orientar',
- who:'Assistido',wc:'#3b82f6',sim:'Preciso de ajuda e não tenho dinheiro para pagar. Vocês podem me ajudar?',
- tags:[{t:'Boas-vindas',c:'tg-blue'},{t:'Primeiro contato',c:'tg-teal'}],ctx:'Confirmar e orientar.',
- resps:[{title:'✉️ Confirmar e orientar',badge:'Recomendada',primary:true,nao:false,
-  tpl:n=>'Olá'+(n?', '+n:'')+'! 😊\n\nSim! Aqui é a Cássia e podemos ajudar.\n\nO atendimento é gratuito, presencial, de segunda a sexta, das 9h às 12h. Não é necessário agendar — o atendimento é por ordem de chegada, com limite de 30 senhas por dia.'+DOCS+END}],
- emailResps:[{title:'📧 Confirmar por e-mail',subj:'CAD – Podemos te ajudar!',badge:'Recomendada',primary:true,nao:false,
-  tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nSim, podemos ajudar! A CAD oferece atendimento jurídico gratuito. O atendimento é presencial, de segunda a sexta, das 9h às 12h, por ordem de chegada — limite de 30 senhas por dia.\n\nDocumentos necessários:\n- RG original e CPF\n- Comprovante de residência atualizado\n- Comprovante de renda de todos que moram com você\n- Se tiver bens: documentação correspondente'+ENDE}]},
-{grp:'👤 Primeiro contato',id:'bv3',icon:'📅',ic:'i-blue',pip:null,
- label:'Pergunta se precisa agendar',sub:'Sem agendamento — ordem de chegada',
- who:'Assistido',wc:'#3b82f6',sim:'Preciso de ajuda. Tenho que marcar hora ou posso ir direto?',
- tags:[{t:'Agendamento',c:'tg-blue'}],ctx:'Não há agendamento. Limite de 30 senhas/dia.',
- resps:[{title:'✉️ Sem agendamento',badge:'Padrão',primary:true,nao:false,
-  tpl:n=>'Oi'+(n?', '+n:'')+'! 😊\n\nNão precisa agendar não — pode vir direto! É por ordem de chegada, de segunda a sexta, das 9h às 12h.\n\nSó um aviso: o limite é 30 senhas por dia e costumam acabar cedo. Quanto antes chegar, melhor!'+DOCS+END}],
- emailResps:[{title:'📧 Sem agendamento',subj:'CAD – Como nos visitar',badge:'Padrão',primary:true,nao:false,
-  tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nNão há necessidade de agendamento. O atendimento é por ordem de chegada, de segunda a sexta, das 9h às 12h — limite de 30 senhas por dia.'+ENDE}]},
-{grp:'👤 Primeiro contato',id:'bv4',icon:'🔊',ic:'i-blue',pip:null,
- label:'Enviou áudio',sub:'Pede para mandar em texto',
- who:'Assistido',wc:'#3b82f6',sim:'[🎙️ Áudio de 1:12]',
- tags:[{t:'Áudio',c:'tg-gold'}],ctx:'Não conseguimos ouvir áudios. Pedir em texto.',
+ label:'Quer ajuda / pode ir?',sub:'Confirmar e orientar acesso',
+ who:'Assistido',wc:'#3b82f6',sim:'Preciso de ajuda. Tenho que agendar ou posso ir direto?',
+ tags:[{t:'Agendamento',c:'tg-blue'},{t:'Primeiro contato',c:'tg-teal'}],
+ ctx:'Unifica: "pode ajudar?", "precisa agendar?" e "como chegar?" — todas levam à mesma orientação.',
+ resps:[
+  {title:'✉️ Confirmar e orientar',badge:'Recomendada',primary:true,nao:false,
+   tpl:n=>'Olá'+(n?', '+n:'')+'! 😊\n\nSim, podemos ajudar! Não precisa agendar — o atendimento é presencial, por ordem de chegada, de segunda a sexta, das 9h às 12h.\n\n⚠️ Limite de 30 senhas por dia — recomendamos chegar cedo!'+DOCS+END},
+  {title:'📍 Com endereço destacado',badge:'Alternativa',primary:false,nao:false,
+   tpl:n=>'Oi'+(n?', '+n:'')+'! 😊\n\nPode vir direto, sem agendar! A gente fica no Poupatempo de Santana de Parnaíba:\n\n📍 Av. Tenente Marques, 5297 – Jd. do Luar (Fazendinha)\n🕘 Seg–Sex, das 9h às 12h · ⚠️ 30 senhas/dia — chegue cedo!'+DOCS}
+ ],
+ emailResps:[{title:'📧 Confirmar e orientar',subj:'CAD – Como nos visitar',badge:'Padrão',primary:true,nao:false,
+  tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nPodemos ajudar! Não há agendamento — atendemos de segunda a sexta, das 9h às 12h, por ordem de chegada (limite: 30 senhas/dia).\n\nLocalização: Av. Tenente Marques, 5297 – Jd. do Luar (POUPATEMPO), Santana de Parnaíba/SP'+ENDE}]},
+
+{grp:'👤 Primeiro contato',id:'bv4',icon:'🎙️',ic:'i-blue',pip:null,
+ label:'Enviou áudio',sub:'Pedir em texto',
+ who:'Assistido',wc:'#3b82f6',sim:'[🎙️ Áudio]',
+ tags:[{t:'Áudio',c:'tg-gold'}],ctx:'Não conseguimos ouvir áudios.',
  resps:[{title:'✉️ Pedir em texto',badge:'Padrão',primary:true,nao:false,
-  tpl:n=>'Oi'+(n?', '+n:'')+'! 😊 Aqui é a Cássia — infelizmente não consigo ouvir áudios por aqui.\n\nPode me mandar em texto? Assim consigo te ajudar direitinho! 😊'}],
+  tpl:n=>'Oi'+(n?', '+n:'')+'! 😊 Infelizmente não consigo ouvir áudios por aqui. Pode me mandar em texto? Assim te ajudo direitinho!'}],
  emailResps:[]},
+
 {grp:'👤 Primeiro contato',id:'bv6',icon:'✅',ic:'i-green',pip:null,
- label:'Encerramento de conversa',sub:'Fechar o atendimento com acolhimento',
+ label:'Encerrar conversa',sub:'Fechar com acolhimento',
  who:'Assistido',wc:'#22c97a',sim:'Ok, muito obrigada!',
- tags:[{t:'Encerramento',c:'tg-green'}],ctx:'Pessoa agradeceu ou encerrou a conversa.',
+ tags:[{t:'Encerramento',c:'tg-green'}],ctx:'Pessoa agradeceu ou encerrou.',
  resps:[
   {title:'✅ Encerrar com carinho',badge:'Recomendada',primary:true,nao:false,tpl:n=>'Disponha'+(n?', '+n:'')+'! 😊 Se surgir qualquer dúvida, é só me chamar. Boa sorte! 🍀'},
-  {title:'✅ Variação',badge:'Alternativa',primary:false,nao:false,tpl:n=>'Por nada'+(n?', '+n:'')+'! 😊 Qualquer coisa que precisar, pode me chamar aqui. Boa sorte e até logo! 🍀'},
   {title:'✅ Simples',badge:'Alternativa',primary:false,nao:false,tpl:n=>'De nada'+(n?', '+n:'')+'! 😊 Estou por aqui se precisar. Até logo!'}
  ],emailResps:[]},
+
 {grp:'👤 Primeiro contato',id:'bv7',icon:'⏸️',ic:'i-slate',pip:null,
  label:'Ausência temporária',sub:'Avisar que volta em breve',
- who:'Assistido',wc:'#6e89b8',sim:'',tags:[{t:'Ausência',c:'tg-gold'}],ctx:'Usar quando precisar se ausentar brevemente.',
+ who:'Assistido',wc:'#6e89b8',sim:'',tags:[{t:'Ausência',c:'tg-gold'}],ctx:'Usar quando precisar se ausentar.',
  resps:[
-  {title:'⏸️ Ausência curta',badge:'Recomendada',primary:true,nao:false,tpl:n=>'Oi'+(n?', '+n:'')+'! 😊 Preciso me ausentar por alguns minutos, mas já volto e respondo você! 🙂'},
-  {title:'⏸️ Com previsão',badge:'Alternativa',primary:false,nao:false,tpl:n=>'Oi'+(n?', '+n:'')+'! 😊 Preciso me ausentar por uns 15 minutinhos — assim que voltar te respondo! 🙂'},
-  {title:'⏸️ Em atendimento presencial',badge:'Alternativa',primary:false,nao:false,tpl:n=>'Oi'+(n?', '+n:'')+'! 😊 No momento estou em atendimento presencial, mas respondo assim que finalizar. Obrigada pela paciência! 🙂'}
+  {title:'⏸️ Ausência curta',badge:'Recomendada',primary:true,nao:false,tpl:n=>'Oi'+(n?', '+n:'')+'! 😊 Preciso me ausentar por alguns minutos — já volto! 🙂'},
+  {title:'⏸️ Em atendimento presencial',badge:'Alternativa',primary:false,nao:false,tpl:n=>'Oi'+(n?', '+n:'')+'! 😊 Estou em atendimento presencial agora — respondo assim que finalizar. Obrigada pela paciência! 🙂'}
  ],emailResps:[]},
 
+// ── CASOS QUE ATENDEMOS ──
 {grp:'✅ Casos que atendemos',id:'at1',icon:'👨‍👩‍👧',ic:'i-green',pip:'pip-green',
- label:'Família — Divórcio',sub:'Confirmar + docs específicos',
- who:'Assistido',wc:'#22c97a',sim:'Preciso me separar do meu marido. Vocês podem me ajudar?',
- tags:[{t:'Atendemos',c:'tg-green'},{t:'Família',c:'tg-blue'}],ctx:'Divórcio está dentro da atuação da CAD.',
- resps:[{title:'✉️ Confirmar divórcio',badge:'Recomendada',primary:true,nao:false,
-  tpl:n=>'Olá'+(n?', '+n:'')+'!\n\nSim, atendemos casos de divórcio! Pode vir até nós.\n\nAlém dos documentos básicos, traga também:\n- Certidão de casamento atualizada (emitida há no máximo 90 dias)\n- Se tiver filhos menores: certidão de nascimento de cada um\n- Se tiver bens: documentação do imóvel ou veículo'+DOCS+END}],
- emailResps:[{title:'📧 Confirmar divórcio',subj:'CAD – Atendemos seu caso de divórcio',badge:'Recomendada',primary:true,nao:false,
-  tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nSim, a CAD atende casos de divórcio.\n\nDocumentos necessários:\n- RG original e CPF\n- Comprovante de residência atualizado\n- Comprovante de renda\n- Certidão de casamento atualizada (máximo 90 dias)\n- Se tiver filhos menores: certidão de nascimento de cada um\n- Se tiver bens: documentação correspondente'+ENDE}]},
-{grp:'✅ Casos que atendemos',id:'at2',icon:'🍼',ic:'i-green',pip:'pip-green',
- label:'Família — Pensão / Alimentos',sub:'Confirmar + docs específicos',
- who:'Assistido',wc:'#22c97a',sim:'O pai da minha filha não paga a pensão. Posso entrar com processo aqui?',
- tags:[{t:'Atendemos',c:'tg-green'},{t:'Alimentos',c:'tg-blue'}],ctx:'Pensão alimentícia está na atuação da CAD.',
- resps:[{title:'✉️ Confirmar pensão',badge:'Recomendada',primary:true,nao:false,
-  tpl:n=>'Olá'+(n?', '+n:'')+'!\n\nSim, atendemos casos de pensão alimentícia! Pode vir até nós.\n\nAlém dos documentos básicos, traga:\n- Certidão de nascimento do(s) filho(s)\n- Endereço completo da parte contrária'+DOCS+END}],
- emailResps:[{title:'📧 Confirmar pensão',subj:'CAD – Atendemos pensão alimentícia',badge:'Recomendada',primary:true,nao:false,
-  tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nSim, a CAD atende casos de pensão alimentícia.\n\nDocumentos necessários:\n- RG original e CPF\n- Comprovante de residência atualizado\n- Comprovante de renda\n- Certidão de nascimento do(s) filho(s)\n- Endereço completo da parte contrária'+ENDE}]},
+ label:'Família (divórcio, pensão, guarda)',sub:'Confirmar + docs específicos',
+ who:'Assistido',wc:'#22c97a',sim:'Preciso me separar / pedir pensão / guarda dos meus filhos.',
+ tags:[{t:'Atendemos',c:'tg-green'},{t:'Família',c:'tg-blue'}],
+ ctx:'Divórcio, pensão e guarda estão dentro da atuação da CAD. Selecione a variação mais adequada.',
+ resps:[
+  {title:'✉️ Divórcio',badge:'Recomendada',primary:true,nao:false,
+   tpl:n=>'Olá'+(n?', '+n:'')+'!\n\nSim, atendemos divórcio! Além dos documentos básicos, traga:\n- Certidão de casamento atualizada (máximo 90 dias)\n- Se tiver filhos menores: certidão de nascimento de cada um\n- Se tiver bens: documentação do imóvel ou veículo'+DOCS+END},
+  {title:'✉️ Pensão alimentícia',badge:'Alternativa',primary:false,nao:false,
+   tpl:n=>'Olá'+(n?', '+n:'')+'!\n\nSim, atendemos pensão alimentícia! Além dos documentos básicos, traga:\n- Certidão de nascimento do(s) filho(s)\n- Endereço completo da parte contrária'+DOCS+END},
+  {title:'✉️ Resposta geral — Família',badge:'Alternativa',primary:false,nao:false,
+   tpl:n=>'Olá'+(n?', '+n:'')+'!\n\nSim, atendemos casos de família! Pode vir até nós.'+DOCS+END}
+ ],
+ emailResps:[{title:'📧 Casos de família',subj:'CAD – Atendemos seu caso',badge:'Padrão',primary:true,nao:false,
+  tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nA CAD atende casos de família (divórcio, pensão, guarda). Compareça com a documentação necessária.'+DOCS+ENDE}]},
+
 {grp:'✅ Casos que atendemos',id:'at3',icon:'🛡️',ic:'i-green',pip:'pip-green',
  label:'Violência Doméstica',sub:'Medida protetiva, Lei Maria da Penha',
- who:'Assistido',wc:'#22c97a',sim:'Estou sofrendo violência do meu companheiro. Podem me ajudar?',
- tags:[{t:'Atendemos',c:'tg-green'},{t:'Urgente',c:'tg-red'}],ctx:'Se houver risco imediato, orientar ligar 180 ou 190 primeiro.',
+ who:'Assistido',wc:'#22c97a',sim:'Estou sofrendo violência do meu companheiro.',
+ tags:[{t:'Atendemos',c:'tg-green'},{t:'Urgente',c:'tg-red'}],ctx:'Se houver risco imediato, orientar 180 ou 190 primeiro.',
  resps:[{title:'✉️ Violência doméstica',badge:'Recomendada',primary:true,nao:false,
-  tpl:n=>'Olá'+(n?', '+n:'')+'!\n\nSim, atendemos casos de violência doméstica e pedido de medida protetiva.\n\nSe você estiver em risco agora, ligue primeiro:\n- Central da Mulher: 180 (24h, gratuito)\n- Polícia Militar: 190\n\nDepois venha até nós com os documentos.'+DOCS+END}],
- emailResps:[{title:'📧 Violência doméstica',subj:'CAD – Atendemos violência doméstica',badge:'Recomendada',primary:true,nao:false,
-  tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nA CAD atende casos de violência doméstica e medida protetiva (Lei Maria da Penha).\n\n⚠️ Se estiver em risco imediato: ligue 180 (Central da Mulher, 24h) ou 190 (Polícia).\n\nDocumentos necessários:\n- RG original e CPF\n- Comprovante de residência\n- Boletim de ocorrência (se já tiver)\n- Qualquer documento relacionado ao caso'+ENDE}]},
+  tpl:n=>'Olá'+(n?', '+n:'')+'!\n\nSim, atendemos violência doméstica e medida protetiva.\n\nSe você estiver em risco agora, ligue primeiro:\n🔴 Central da Mulher: 180 (24h, gratuito)\n🔴 Polícia: 190\n\nDepois venha até nós com os documentos.'+DOCS+END}],
+ emailResps:[{title:'📧 Violência doméstica',subj:'CAD – Atendemos violência doméstica',badge:'Padrão',primary:true,nao:false,
+  tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nA CAD atende casos de violência doméstica e medida protetiva.\n\n⚠️ Em risco imediato: 180 (Central da Mulher, 24h) ou 190 (Polícia).'+DOCS+ENDE}]},
+
 {grp:'✅ Casos que atendemos',id:'at4',icon:'📜',ic:'i-green',pip:'pip-green',
  label:'Inventário / Herança',sub:'Confirmar atendimento',
- who:'Assistido',wc:'#22c97a',sim:'Meu pai faleceu e precisamos fazer o inventário. Vocês atendem isso?',
+ who:'Assistido',wc:'#22c97a',sim:'Precisamos fazer o inventário. Vocês atendem?',
  tags:[{t:'Atendemos',c:'tg-green'}],ctx:'Inventário e herança estão na atuação da CAD.',
  resps:[{title:'✉️ Confirmar inventário',badge:'Padrão',primary:true,nao:false,
-  tpl:n=>'Olá'+(n?', '+n:'')+'!\n\nSim, atendemos casos de inventário e herança! Venha até nós com os documentos.'+DOCS+END}],
- emailResps:[{title:'📧 Confirmar inventário',subj:'CAD – Atendemos inventário e herança',badge:'Padrão',primary:true,nao:false,
-  tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nSim, a CAD atende casos de inventário e herança.\n\nDocumentos necessários:\n- RG original e CPF\n- Comprovante de residência\n- Certidão de óbito do falecido\n- RG e CPF do falecido\n- Documentação dos bens a inventariar'+ENDE}]},
+  tpl:n=>'Olá'+(n?', '+n:'')+'!\n\nSim, atendemos inventário e herança! Venha com os documentos.'+DOCS+END}],
+ emailResps:[{title:'📧 Inventário',subj:'CAD – Atendemos inventário e herança',badge:'Padrão',primary:true,nao:false,
+  tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nSim, atendemos inventário e herança. Compareça com a documentação.'+DOCS+ENDE}]},
 
-{grp:'🚫 Casos que não atendemos',id:'na1',icon:'🏭',ic:'i-red',pip:'pip-red',
- label:'Trabalhista',sub:'Rescisão, FGTS, Justiça do Trabalho',
- who:'Assistido',wc:'#e8495a',sim:'Fui demitido sem justa causa e não recebi meu FGTS. Podem me ajudar?',
- tags:[{t:'Não atendemos',c:'tg-red'}],ctx:'Casos trabalhistas não são da competência da CAD.',
- resps:[{title:'🚫 Não atendemos — Trabalhista',badge:'Padrão',primary:false,nao:true,
-  tpl:n=>'Olá'+(n?', '+n:'')+'!\n\nInfelizmente não atendemos casos trabalhistas por aqui. Essa área não faz parte da nossa atuação.'+AREAS+END}],
- emailResps:[{title:'📧 Não atendemos — Trabalhista',subj:'CAD – Sobre seu contato',badge:'Padrão',primary:false,nao:true,
-  tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nA CAD não atende casos trabalhistas. Para esses casos, indicamos: sindicato da sua categoria, Defensoria Pública do Estado ou advogado especializado.'+AREAS+ENDE}]},
-{grp:'🚫 Casos que não atendemos',id:'na2',icon:'📋',ic:'i-red',pip:'pip-red',
- label:'Previdenciário / INSS',sub:'Aposentadoria, benefícios, BPC',
- who:'Assistido',wc:'#e8495a',sim:'Tive meu auxílio-doença negado pelo INSS. Podem me ajudar?',
- tags:[{t:'Não atendemos',c:'tg-red'}],ctx:'Casos previdenciários não são da competência da CAD.',
- resps:[{title:'🚫 Não atendemos — INSS',badge:'Padrão',primary:false,nao:true,
-  tpl:n=>'Olá'+(n?', '+n:'')+'!\n\nInfelizmente não atendemos casos do INSS ou previdenciário por aqui. Essa área não faz parte da nossa atuação.'+AREAS+END}],
- emailResps:[{title:'📧 Não atendemos — INSS',subj:'CAD – Sobre seu contato',badge:'Padrão',primary:false,nao:true,
-  tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nA CAD não atende casos previdenciários (INSS). Indicamos: CRAS, Defensoria Pública ou advogado especializado.'+AREAS+ENDE}]},
-{grp:'🚫 Casos que não atendemos',id:'na3',icon:'🔒',ic:'i-red',pip:'pip-red',
- label:'Criminal (sem nomeação judicial)',sub:'Indicar Defensoria Pública',
- who:'Assistido',wc:'#e8495a',sim:'Meu filho foi preso. Preciso de um advogado criminal urgente.',
- tags:[{t:'Não atendemos',c:'tg-red'}],ctx:'Criminal geral não atendemos. Exceção: dativo nomeado pelo juiz.',
- resps:[{title:'🚫 Não atendemos — Criminal',badge:'Padrão',primary:false,nao:true,
-  tpl:n=>'Olá'+(n?', '+n:'')+'!\n\nInfelizmente não fazemos defesa criminal por aqui. O mais indicado é procurar a Defensoria Pública do Estado de São Paulo.'+AREAS+END}],
- emailResps:[{title:'📧 Não atendemos — Criminal',subj:'CAD – Sobre seu contato',badge:'Padrão',primary:false,nao:true,
-  tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nA CAD não atende defesa criminal em geral. Exceção: advocacia dativa nomeada pelo juiz. Indicamos a Defensoria Pública do Estado de São Paulo.'+AREAS+ENDE}]},
+// ── NÃO ATENDEMOS (mesclado) ──
+{grp:'🚫 Não atendemos',id:'na1',icon:'🏭',ic:'i-red',pip:'pip-red',
+ label:'Trabalhista / INSS / Criminal',sub:'Fora da nossa atuação',
+ who:'Assistido',wc:'#e8495a',sim:'Fui demitido / tive benefício negado / meu filho foi preso...',
+ tags:[{t:'Não atendemos',c:'tg-red'}],
+ ctx:'Trabalhista, previdenciário e criminal geral não são da competência da CAD. Selecione a variação adequada.',
+ resps:[
+  {title:'🚫 Trabalhista',badge:'Padrão',primary:false,nao:true,
+   tpl:n=>'Olá'+(n?', '+n:'')+'!\n\nInfelizmente não atendemos casos trabalhistas. Para esses casos: sindicato da sua categoria, Defensoria Pública ou advogado especializado.'+AREAS+END},
+  {title:'🚫 INSS / Previdenciário',badge:'Padrão',primary:false,nao:true,
+   tpl:n=>'Olá'+(n?', '+n:'')+'!\n\nInfelizmente não atendemos casos do INSS ou previdenciário. Indicamos: CRAS, Defensoria Pública ou advogado especializado.'+AREAS+END},
+  {title:'🚫 Criminal geral',badge:'Padrão',primary:false,nao:true,
+   tpl:n=>'Olá'+(n?', '+n:'')+'!\n\nInfelizmente não fazemos defesa criminal. O indicado é procurar a Defensoria Pública do Estado de São Paulo.'+AREAS+END}
+ ],
+ emailResps:[{title:'📧 Não atendemos',subj:'CAD – Sobre seu contato',badge:'Padrão',primary:false,nao:true,
+  tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nInfelizmente este tipo de caso está fora da atuação da CAD. Indicamos a Defensoria Pública ou advogado especializado.'+AREAS+ENDE}]},
 
+// ── CONVÊNIO ──
 {grp:'🤝 Convênio OAB/DPE',id:'cv1',icon:'🤝',ic:'i-teal',pip:'pip-teal',
- label:'O que é o convênio?',sub:'Explica como funciona',
- who:'Assistido',wc:'#22b8c9',sim:'O que é esse convênio OAB com a Defensoria?',
- tags:[{t:'Convênio',c:'tg-teal'}],ctx:'Explicar de forma simples o convênio OAB/DPE.',
- resps:[{title:'✉️ Explicar o convênio',badge:'Recomendada',primary:true,nao:false,
-  tpl:n=>'Olá'+(n?', '+n:'')+'!\n\nO convênio OAB/DPE é uma parceria entre a OAB e a Defensoria Pública. Advogados conveniados atendem pessoas que não têm condições de pagar advogado particular.\n\nVocê vem até nós, passamos pela triagem para verificar se tem direito, e se tiver, um advogado conveniado cuida do seu caso — tudo gratuito.'+DOCS+END}],
- emailResps:[{title:'📧 Explicar convênio',subj:'CAD – Como funciona o Convênio OAB/DPE',badge:'Recomendada',primary:true,nao:false,
-  tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nO Convênio OAB/DPE permite que advogados conveniados atendam pessoas sem condições de pagar advogado. O serviço é gratuito e a triagem é feita presencialmente.'+ENDE}]},
-{grp:'🤝 Convênio OAB/DPE',id:'cv2',icon:'💰',ic:'i-teal',pip:'pip-teal',
- label:'Quem tem direito ao convênio?',sub:'Critérios de renda e elegibilidade',
- who:'Assistido',wc:'#22b8c9',sim:'Como sei se tenho direito ao atendimento gratuito?',
- tags:[{t:'Convênio',c:'tg-teal'},{t:'Elegibilidade',c:'tg-blue'}],ctx:'Explicar os critérios de elegibilidade.',
- resps:[{title:'✉️ Critérios',badge:'Recomendada',primary:true,nao:false,
-  tpl:n=>'Olá'+(n?', '+n:'')+'!\n\nO atendimento gratuito é para pessoas sem condições de pagar advogado particular. Verificamos a renda de toda a família presencialmente, com os documentos.'+DOCS+END}],
- emailResps:[{title:'📧 Elegibilidade',subj:'CAD – Quem tem direito ao atendimento gratuito',badge:'Recomendada',primary:true,nao:false,
-  tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nO atendimento é gratuito para quem não tem condições de pagar advogado. A análise é feita presencialmente com base nos documentos de renda.'+ENDE}]},
-{grp:'🤝 Convênio OAB/DPE',id:'cv3',icon:'🔄',ic:'i-teal',pip:'pip-teal',
- label:'Já atendido pela Defensoria',sub:'Encaminhado pela DPE',
- who:'Assistido',wc:'#22b8c9',sim:'Fui na Defensoria e me mandaram vir aqui.',
- tags:[{t:'Convênio',c:'tg-teal'},{t:'DPE',c:'tg-blue'}],ctx:'Pessoa encaminhada pela Defensoria.',
- resps:[{title:'✉️ Encaminhamento DPE',badge:'Recomendada',primary:true,nao:false,
-  tpl:n=>'Olá'+(n?', '+n:'')+'!\n\nEntendido! Você pode vir diretamente à nossa sede. Traga o documento que a Defensoria te deu junto com a documentação básica.'+DOCS+END}],
- emailResps:[{title:'📧 Encaminhamento DPE',subj:'CAD – Encaminhamento da Defensoria',badge:'Recomendada',primary:true,nao:false,
-  tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nSe a Defensoria te encaminhou, compareça com:\n- O documento de encaminhamento\n- RG original e CPF\n- Comprovante de residência\n- Comprovante de renda\n- Documentos do seu caso'+ENDE}]},
+ label:'O que é o convênio / quem tem direito?',sub:'Explicar funcionamento e elegibilidade',
+ who:'Assistido',wc:'#22b8c9',sim:'O que é o convênio OAB/DPE? Tenho direito?',
+ tags:[{t:'Convênio',c:'tg-teal'}],
+ ctx:'Unifica explicação do convênio + critérios de elegibilidade.',
+ resps:[{title:'✉️ Explicar convênio',badge:'Recomendada',primary:true,nao:false,
+  tpl:n=>'Olá'+(n?', '+n:'')+'!\n\nO convênio OAB/DPE é uma parceria entre a OAB e a Defensoria Pública. Advogados conveniados atendem gratuitamente quem não tem condições de pagar advogado particular.\n\nA verificação de elegibilidade é feita presencialmente, com base nos documentos de renda de toda a família.'+DOCS+END}],
+ emailResps:[{title:'📧 Convênio',subj:'CAD – Como funciona o Convênio OAB/DPE',badge:'Padrão',primary:true,nao:false,
+  tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nO Convênio OAB/DPE permite atendimento jurídico gratuito a quem não tem condições de contratar advogado. A análise de elegibilidade é presencial, com base na renda familiar.'+ENDE}]},
 
+{grp:'🤝 Convênio OAB/DPE',id:'cv3',icon:'🔄',ic:'i-teal',pip:'pip-teal',
+ label:'Encaminhado pela Defensoria',sub:'Orientar comparecimento',
+ who:'Assistido',wc:'#22b8c9',sim:'Fui na Defensoria e me mandaram vir aqui.',
+ tags:[{t:'Convênio',c:'tg-teal'},{t:'DPE',c:'tg-blue'}],ctx:'Pessoa encaminhada pela DPE.',
+ resps:[{title:'✉️ Encaminhamento DPE',badge:'Padrão',primary:true,nao:false,
+  tpl:n=>'Olá'+(n?', '+n:'')+'!\n\nEntendido! Você pode vir diretamente à nossa sede. Traga o documento da Defensoria junto com a documentação básica.'+DOCS+END}],
+ emailResps:[{title:'📧 Encaminhamento DPE',subj:'CAD – Encaminhamento da Defensoria',badge:'Padrão',primary:true,nao:false,
+  tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nSe a Defensoria te encaminhou, compareça com o documento de encaminhamento e a documentação básica.'+DOCS+ENDE}]},
+
+// ── DATIVO ──
 {grp:'⚖️ Advocacia Dativa',id:'dv1',icon:'⚖️',ic:'i-amber',pip:'pip-amber',
  label:'O que é advocacia dativa?',sub:'Explica ao assistido',
- who:'Assistido',wc:'#f59e0b',sim:'Me falaram que preciso de um advogado dativo. O que é isso?',
+ who:'Assistido',wc:'#f59e0b',sim:'O que é um advogado dativo?',
  tags:[{t:'Dativo',c:'tg-amber'}],ctx:'Explicar o que é advocacia dativa.',
- resps:[{title:'✉️ Explicar dativo',badge:'Recomendada',primary:true,nao:false,
-  tpl:n=>'Olá'+(n?', '+n:'')+'!\n\nO advogado dativo é nomeado pelo juiz para defender uma pessoa em processo judicial que não tem advogado e não tem condições de contratar um.\n\nTem mais alguma dúvida sobre o seu caso?'+END}],
- emailResps:[{title:'📧 Explicar dativo',subj:'CAD – O que é a Advocacia Dativa',badge:'Recomendada',primary:true,nao:false,
-  tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nA advocacia dativa é um serviço jurídico prestado por advogado nomeado pelo juiz, para defender pessoas em processos judiciais sem advogado nem condições financeiras para contratar um.'+ENDE}]},
-{grp:'⚖️ Advocacia Dativa',id:'dv2',icon:'📄',ic:'i-amber',pip:'pip-amber',
- label:'Recebeu nomeação como dativo',sub:'Advogado recebeu ofício de nomeação',
- who:'Advogado(a)',wc:'#f59e0b',sim:'Recebi uma nomeação como advogado dativo. Quais os próximos passos?',
- tags:[{t:'Dativo',c:'tg-amber'},{t:'Advogado',c:'tg-teal'}],ctx:'Advogado nomeado como dativo. Orientar.',
- resps:[{title:'✉️ Orientar advogado dativo',badge:'Padrão',primary:true,nao:false,
-  tpl:n=>'Bom dia'+(n?', '+n:'')+'!\n\nPara dar andamento, aceite formalmente nos autos e apresente os documentos necessários.\n\nPara mais detalhes sobre honorários e procedimentos, entre em contato:\n📞 (11) 4154-5191\n📧 aj.santana.parnai@oabsp.org.br\n🕘 Seg–Sex, 9h–12h'}],
- emailResps:[{title:'📧 Orientar advogado dativo',subj:'CAD – Nomeação como Advogado Dativo',badge:'Padrão',primary:true,nao:false,
-  tpl:n=>HDRE+'\nPrezado(a) Dr(a).'+(n?' '+n:'')+'!\n\nPróximos passos:\n1. Aceitar formalmente nos autos\n2. Apresentar documentos ao juízo\n3. Entrar em contato com a CAD para regularização dos honorários\n\nQualquer dúvida, ligue (11) 4154-5191.'+ENDE}]},
-{grp:'⚖️ Advocacia Dativa',id:'dv3',icon:'💵',ic:'i-amber',pip:'pip-amber',
- label:'Dúvida sobre honorários dativos',sub:'Como funciona o pagamento',
- who:'Advogado(a)',wc:'#f59e0b',sim:'Como funciona o recebimento dos honorários dativos?',
- tags:[{t:'Dativo',c:'tg-amber'},{t:'Honorários',c:'tg-gold'}],ctx:'Orientar sobre honorários dativos.',
- resps:[{title:'✉️ Orientar honorários',badge:'Padrão',primary:true,nao:false,
-  tpl:n=>'Bom dia'+(n?', '+n:'')+'!\n\nOs honorários dativos são fixados pelo juiz na sentença e pagos pelo Estado. Para informações específicas, entre em contato:\n📞 (11) 4154-5191\n📧 aj.santana.parnai@oabsp.org.br\n🕘 Seg–Sex, 9h–12h'}],
- emailResps:[{title:'📧 Honorários dativos',subj:'CAD – Honorários dativos',badge:'Padrão',primary:true,nao:false,
-  tpl:n=>HDRE+'\nPrezado(a) Dr(a).'+(n?' '+n:'')+'!\n\nOs honorários dativos são fixados pelo juiz e pagos pelo Estado de São Paulo. Para informações sobre valores e prazos, entre em contato pelo (11) 4154-5191.'+ENDE}]},
+ resps:[{title:'✉️ Explicar dativo',badge:'Padrão',primary:true,nao:false,
+  tpl:n=>'Olá'+(n?', '+n:'')+'!\n\nO advogado dativo é nomeado pelo juiz para defender uma pessoa em processo judicial que não tem advogado e não tem condições de contratar um.'+END}],
+ emailResps:[{title:'📧 Advocacia dativa',subj:'CAD – O que é a Advocacia Dativa',badge:'Padrão',primary:true,nao:false,
+  tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nA advocacia dativa é prestada por advogado nomeado pelo juiz para defender pessoas em processos sem advogado e sem condições financeiras.'+ENDE}]},
 
+{grp:'⚖️ Advocacia Dativa',id:'dv2',icon:'📄',ic:'i-amber',pip:'pip-amber',
+ label:'Advogado nomeado como dativo',sub:'Orientar sobre nomeação e honorários',
+ who:'Advogado(a)',wc:'#f59e0b',sim:'Recebi uma nomeação como advogado dativo. O que faço?',
+ tags:[{t:'Dativo',c:'tg-amber'},{t:'Honorários',c:'tg-gold'}],
+ ctx:'Unifica: orientação ao advogado nomeado + dúvidas sobre honorários.',
+ resps:[{title:'✉️ Orientar advogado dativo',badge:'Padrão',primary:true,nao:false,
+  tpl:n=>'Bom dia'+(n?', '+n:'')+'!\n\nPara dar andamento, aceite formalmente nos autos. Os honorários são fixados pelo juiz na sentença e pagos pelo Estado.\n\nPara mais detalhes:\n📞 (11) 4154-5191\n📧 aj.santana.parnai@oabsp.org.br\n🕘 Seg–Sex, 9h–12h'}],
+ emailResps:[{title:'📧 Orientar advogado dativo',subj:'CAD – Nomeação e Honorários Dativos',badge:'Padrão',primary:true,nao:false,
+  tpl:n=>HDRE+'\nPrezado(a) Dr(a).'+(n?' '+n:'')+'!\n\nPróximos passos:\n1. Aceitar formalmente nos autos\n2. Apresentar documentos ao juízo\n\nOs honorários são fixados pelo juiz e pagos pelo Estado. Dúvidas: (11) 4154-5191.'+ENDE}]},
+
+// ── DOCUMENTOS ──
 {grp:'📋 Documentos',id:'doc1',icon:'📋',ic:'i-gold',pip:null,
- label:'Quais documentos trazer?',sub:'Lista completa',
+ label:'Quais documentos trazer?',sub:'Lista completa com variações por caso',
  who:'Assistido',wc:'#c9973a',sim:'Quais documentos preciso levar?',
- tags:[{t:'Documentos',c:'tg-gold'}],ctx:'Lista completa de documentos obrigatórios.',
+ tags:[{t:'Documentos',c:'tg-gold'}],ctx:'Lista completa. Use as variações para casos específicos.',
  resps:[
   {title:'📋 Lista completa',badge:'Recomendada',primary:true,nao:false,
-   tpl:n=>'Olá'+(n?', '+n:'')+'!\n\nPara ser atendido(a), é preciso trazer:\n\n- RG original e CPF\n- Comprovante de residência atualizado (água, luz, gás ou contrato de aluguel)\n- Comprovante de renda de todos que moram com você:\n  Com carteira assinada: os 3 últimos holerites\n  Sem carteira assinada: extrato bancário dos últimos 3 meses ou declaração\n- Se tiver bens (imóvel, carro, poupança): documentação desses bens\n\n⚠️ Sem tudo completo, o atendimento não pode ser feito.'+END},
-  {title:'📋 Docs extras — Pensão',badge:'Alternativa',primary:false,nao:false,
-   tpl:n=>'Olá'+(n?', '+n:'')+'!\n\nPara pensão alimentícia, além dos documentos básicos, traga:\n- Certidão de nascimento do(s) filho(s)\n- Endereço completo da parte contrária'+DOCS+END},
-  {title:'📋 Docs extras — Divórcio',badge:'Alternativa',primary:false,nao:false,
-   tpl:n=>'Olá'+(n?', '+n:'')+'!\n\nPara divórcio, além dos documentos básicos, traga:\n- Certidão de casamento atualizada (máximo 90 dias)\n- Se tiver filhos menores: certidão de nascimento\n- Se tiver bens: documentação do imóvel ou veículo'+DOCS+END}
+   tpl:n=>'Olá'+(n?', '+n:'')+'!\n\nPara ser atendido(a):\n- RG original e CPF\n- Comprovante de residência atualizado\n- Comprovante de renda de todos que moram com você\n- Se tiver bens: documentação correspondente\n\n⚠️ Sem tudo completo, o atendimento não é realizado.'+END},
+  {title:'📋 Pensão — docs extras',badge:'Alternativa',primary:false,nao:false,
+   tpl:n=>'Olá'+(n?', '+n:'')+'!\n\nPara pensão, além dos documentos básicos:\n- Certidão de nascimento do(s) filho(s)\n- Endereço completo da parte contrária'+DOCS+END},
+  {title:'📋 Divórcio — docs extras',badge:'Alternativa',primary:false,nao:false,
+   tpl:n=>'Olá'+(n?', '+n:'')+'!\n\nPara divórcio, além dos documentos básicos:\n- Certidão de casamento atualizada (máximo 90 dias)\n- Filhos menores: certidão de nascimento\n- Se tiver bens: documentação do imóvel ou veículo'+DOCS+END}
  ],
- emailResps:[{title:'📧 Lista de documentos',subj:'CAD – Documentos necessários',badge:'Recomendada',primary:true,nao:false,
-  tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nDocumentos obrigatórios:\n- RG original e CPF\n- Comprovante de residência atualizado\n- Comprovante de renda de todos que moram com você\n- Se tiver bens: documentação correspondente\n\n⚠️ Sem documentação completa, o atendimento não poderá ser realizado.'+ENDE}]},
+ emailResps:[{title:'📧 Documentos',subj:'CAD – Documentos necessários',badge:'Padrão',primary:true,nao:false,
+  tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nDocumentos obrigatórios:\n- RG original e CPF\n- Comprovante de residência atualizado\n- Comprovante de renda de todos que moram com você\n- Se tiver bens: documentação correspondente\n\nSem documentação completa, o atendimento não é realizado.'+ENDE}]},
+
 {grp:'📋 Documentos',id:'doc2',icon:'❌',ic:'i-gold',pip:null,
- label:'Documentação incompleta',sub:'Orientar retorno com tudo',
- who:'Assistido',wc:'#c9973a',sim:'Fui lá mas disseram que minha documentação estava incompleta.',
- tags:[{t:'Documentos',c:'tg-gold'},{t:'Incompleta',c:'tg-red'}],ctx:'Sem documentação completa não há atendimento.',
- resps:[{title:'❌ Docs incompletos',badge:'Padrão',primary:true,nao:false,
-  tpl:n=>'Olá'+(n?', '+n:'')+'!\n\nSem a documentação completa não conseguimos fazer o atendimento. É necessário providenciar tudo e voltar pessoalmente.'+DOCS+END}],
+ label:'Documentação incompleta / foto de doc',sub:'Orientar retorno presencial com originais',
+ who:'Assistido',wc:'#c9973a',sim:'Minha documentação estava incompleta / [📎 Imagem]',
+ tags:[{t:'Documentos',c:'tg-gold'},{t:'Incompleta',c:'tg-red'}],
+ ctx:'Unifica: docs incompletos + foto enviada por WhatsApp. Ambos levam à mesma orientação: vir presencialmente.',
+ resps:[{title:'❌ Orientar comparecer',badge:'Padrão',primary:true,nao:false,
+  tpl:n=>'Olá'+(n?', '+n:'')+'!\n\nDocumentos não podem ser avaliados por aqui — e sem a documentação completa o atendimento não é realizado.\n\nÉ necessário comparecer pessoalmente com os documentos originais.'+DOCS+END}],
  emailResps:[{title:'📧 Docs incompletos',subj:'CAD – Documentação pendente',badge:'Padrão',primary:true,nao:false,
-  tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nSeu atendimento não pôde ser concluído por documentação incompleta. Providencie e retorne presencialmente.\n\nDocumentos necessários:\n- RG original e CPF\n- Comprovante de residência atualizado\n- Comprovante de renda de todos que moram com você\n- Se tiver bens: documentação correspondente'+ENDE}]},
-{grp:'📋 Documentos',id:'doc3',icon:'📸',ic:'i-gold',pip:null,
- label:'Mandou foto de documento',sub:'Não avaliamos por WhatsApp',
- who:'Assistido',wc:'#c9973a',sim:'[📎 Imagem]',
- tags:[{t:'Documentos',c:'tg-gold'}],ctx:'Não fazemos avaliação de documentos por WhatsApp.',
- resps:[{title:'📸 Não avaliamos por aqui',badge:'Recomendada',primary:true,nao:false,
-  tpl:n=>'Documentos não podem ser avaliados por WhatsApp.\n\nÉ necessário comparecer pessoalmente com os documentos originais.\n\nAtendemos de segunda a sexta, das 9h às 12h, sem necessidade de agendamento prévio.'+DOCS+END}],
- emailResps:[]},
+  tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nO atendimento não pôde ser concluído por documentação incompleta. Compareça presencialmente com todos os originais.'+DOCS+ENDE}]},
 
+// ── AGENDAMENTO ──
 {grp:'📅 Agendamento e horários',id:'age1',icon:'🚷',ic:'i-slate',pip:null,
- label:'Vagas esgotadas no dia',sub:'Limite de 30 senhas atingido',
- who:'Assistido',wc:'#6e89b8',sim:'Fui lá hoje mas as vagas já tinham acabado.',
- tags:[{t:'Vagas esgotadas',c:'tg-red'},{t:'Agendamento',c:'tg-blue'}],ctx:'Limite de 30 senhas atingido.',
+ label:'Vagas esgotadas',sub:'Limite de 30 senhas atingido',
+ who:'Assistido',wc:'#6e89b8',sim:'As vagas já tinham acabado.',
+ tags:[{t:'Vagas esgotadas',c:'tg-red'},{t:'Agendamento',c:'tg-blue'}],ctx:'30 senhas atingidas.',
  resps:[{title:'📅 Vagas esgotadas',badge:'Padrão',primary:true,nao:false,
-  tpl:n=>'As 30 senhas de atendimento de hoje já foram distribuídas.\n\nRetorne amanhã com antecedência — recomendamos chegar antes das 9h para garantir o atendimento.'+DOCS+END}],
+  tpl:n=>'As 30 senhas de hoje já foram distribuídas.\n\nRetorne amanhã antes das 9h para garantir seu atendimento.'+DOCS+END}],
  emailResps:[{title:'📧 Vagas esgotadas',subj:'CAD – Atendimento indisponível hoje',badge:'Padrão',primary:true,nao:false,
-  tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nO limite diário de 30 senhas já foi atingido. Retorne no próximo dia útil, de preferência antes das 9h, para garantir sua vaga.'+ENDE}]},
-{grp:'📅 Agendamento e horários',id:'age2',icon:'🌙',ic:'i-slate',pip:null,
- label:'Mensagem fora do horário',sub:'Fora do expediente',
- who:'Assistido',wc:'#6e89b8',sim:'Oi, boa noite! Queria saber como faço para ser atendida.',
- tags:[{t:'Fora do horário',c:'tg-gold'},{t:'Agendamento',c:'tg-blue'}],ctx:'Mensagem fora do horário.',
- resps:[{title:'🌙 Fora do horário',badge:'Padrão',primary:true,nao:false,
-  tpl:n=>'Obrigada pelo contato. Sua mensagem foi recebida fora do horário de atendimento e será respondida no próximo dia útil.\n\nAtendemos de segunda a sexta, das 9h às 12h.'+DOCS+END}],
- emailResps:[{title:'📧 Fora do horário',subj:'CAD – Mensagem fora do horário',badge:'Padrão',primary:true,nao:false,
-  tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nSua mensagem foi recebida fora do horário de atendimento. Retornaremos no próximo dia útil, de segunda a sexta, das 9h às 12h.'+ENDE}]},
-{grp:'📅 Agendamento e horários',id:'age3',icon:'🕘',ic:'i-slate',pip:null,
- label:'Pergunta sobre horário',sub:'Informar horário e limite',
- who:'Assistido',wc:'#6e89b8',sim:'Qual é o horário de atendimento de vocês?',
- tags:[{t:'Agendamento',c:'tg-blue'},{t:'Horário',c:'tg-gold'}],ctx:'Informar horário e limite de 30 senhas.',
- resps:[{title:'🕘 Informar horário',badge:'Recomendada',primary:true,nao:false,
-  tpl:n=>'O atendimento é presencial, de segunda a sexta, das 9h às 12h, por ordem de chegada.\n\nInformamos que o limite é de 30 senhas por dia — recomendamos chegar antes das 9h para garantir o atendimento.'+DOCS+END}],
- emailResps:[{title:'📧 Horário por e-mail',subj:'CAD – Horário de atendimento',badge:'Recomendada',primary:true,nao:false,
-  tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nAtendemos de segunda a sexta, das 9h às 12h, presencialmente, por ordem de chegada — limite de 30 senhas por dia.'+ENDE}]},
-{grp:'📅 Agendamento e horários',id:'age4',icon:'📆',ic:'i-slate',pip:null,
- label:'Atende sábado ou feriado?',sub:'Não, apenas dias úteis',
- who:'Assistido',wc:'#6e89b8',sim:'Vocês atendem no sábado?',
- tags:[{t:'Agendamento',c:'tg-blue'},{t:'Horário',c:'tg-gold'}],ctx:'Não atendemos sábado nem feriado.',
- resps:[{title:'📆 Não atendemos sábado',badge:'Padrão',primary:true,nao:false,
-  tpl:n=>'O atendimento é realizado exclusivamente de segunda a sexta, das 9h às 12h. Não atendemos aos sábados, domingos ou feriados.'+DOCS+END}],
- emailResps:[{title:'📧 Não atendemos sábado',subj:'CAD – Dias de atendimento',badge:'Padrão',primary:true,nao:false,
-  tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nAtendemos apenas em dias úteis, de segunda a sexta, das 9h às 12h. Não atendemos sábados, domingos ou feriados.'+ENDE}]},
+  tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nO limite de 30 senhas diárias foi atingido. Retorne no próximo dia útil antes das 9h.'+ENDE}]},
 
-{grp:'📍 Como chegar',id:'loc1',icon:'📍',ic:'i-gold',pip:null,
- label:'Como chegar',sub:'Endereço e referência',
- who:'Assistido',wc:'#c9973a',sim:'Como faço para chegar aí?',
- tags:[{t:'Localização',c:'tg-gold'}],ctx:'Informar endereço e referência (Poupatempo).',
+{grp:'📅 Agendamento e horários',id:'age2',icon:'🕘',ic:'i-slate',pip:null,
+ label:'Horário / Sábado / Fora do expediente',sub:'Informar dias e horários',
+ who:'Assistido',wc:'#6e89b8',sim:'Qual o horário? / Atendem sábado?',
+ tags:[{t:'Agendamento',c:'tg-blue'},{t:'Horário',c:'tg-gold'}],
+ ctx:'Unifica: horário de funcionamento + mensagem fora do expediente + "atendem sábado?".',
  resps:[
-  {title:'📍 Como chegar',badge:'Recomendada',primary:true,nao:false,
-   tpl:n=>'Oi'+(n?', '+n:'')+'! 😊\n\nA gente fica no Poupatempo de Santana de Parnaíba:\n\n📍 Av. Tenente Marques, 5297 – Jd. do Luar, Santana de Parnaíba/SP\n\nAtendemos de segunda a sexta, das 9h às 12h, por ordem de chegada. ⚠️ Limite de 30 senhas por dia — chegar cedo garante a vaga!\n\nNão esqueça os documentos 😊'+DOCS},
-  {title:'📍 Só o endereço',badge:'Alternativa',primary:false,nao:false,
-   tpl:n=>'Oi'+(n?', '+n:'')+'! 😊\n\n📍 Av. Tenente Marques, 5297 – Jd. do Luar, Santana de Parnaíba/SP\n(dentro do Poupatempo)\n\n🕘 Seg–Sex, das 9h às 12h — sem agendamento, por ordem de chegada!'+DOCS+END}
+  {title:'🕘 Informar horário',badge:'Recomendada',primary:true,nao:false,
+   tpl:n=>'Atendemos de segunda a sexta, das 9h às 12h, por ordem de chegada — sem agendamento prévio.\n\n⚠️ Limite de 30 senhas/dia. Não atendemos sábados, domingos ou feriados.'+DOCS+END},
+  {title:'🌙 Fora do horário',badge:'Alternativa',primary:false,nao:false,
+   tpl:n=>'Obrigada pelo contato! Sua mensagem foi recebida fora do nosso horário de atendimento e será respondida no próximo dia útil.\n\n🕘 Seg–Sex, 9h–12h.'}
  ],
- emailResps:[{title:'📧 Como chegar por e-mail',subj:'CAD – Endereço e informações de acesso',badge:'Padrão',primary:true,nao:false,
-  tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nEstamos localizados no Poupatempo de Santana de Parnaíba:\n\n📍 Av. Tenente Marques, 5297 – Jd. do Luar (Fazendinha), Santana de Parnaíba/SP\n\nAtendemos de segunda a sexta, das 9h às 12h, por ordem de chegada — limite de 30 senhas por dia.'+ENDE}]},
+ emailResps:[{title:'📧 Horário',subj:'CAD – Horário de atendimento',badge:'Padrão',primary:true,nao:false,
+  tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nAtendemos de segunda a sexta, das 9h às 12h, presencialmente, por ordem de chegada — limite de 30 senhas por dia. Não atendemos sábados, domingos ou feriados.'+ENDE}]},
 
-
-// ── NERVOSA / FRUSTRADA ──
+// ── SITUAÇÕES DELICADAS ──
 {grp:'😓 Situações delicadas',id:'del1',icon:'😤',ic:'i-slate',pip:null,
- label:'Pessoa nervosa — Acalmar e entender',sub:'Acolher, pedir calma e pedir que explique a situação',
+ label:'Pessoa nervosa ou frustrada',sub:'Acolher, acalmar e ouvir',
  who:'Assistido',wc:'#8b5cf6',sim:'Vocês são um absurdo! Fui lá três vezes e nunca consigo ser atendida!',
  tags:[{t:'Situação delicada',c:'tg-gold'},{t:'Reclamação',c:'tg-orange'}],
- ctx:'Passo 1: acalmar com empatia. Passo 2: pedir que explique o que aconteceu para poder orientar corretamente. NÃO dar explicações antes de ouvir.',
+ ctx:'Passo 1: acolher com empatia. Passo 2: pedir que explique. Passo 3: orientar. NÃO dar explicações antes de ouvir.',
  resps:[
-  {title:'😤 Acalmar + pedir que explique',badge:'Recomendada',primary:true,nao:false,
-   tpl:n=>'Oi'+(n?', '+n:'')+'! 😔\n\nEntendo que você está frustrada e me desculpe pelo transtorno.\n\nPreciso que você respire fundo por um momento — estou aqui para te ajudar de verdade! 🙏\n\nMe conta com calma o que aconteceu? Assim consigo entender a sua situação direitinho e te orientar da melhor forma possível.'},
-  {title:'😤 Versão mais direta',badge:'Alternativa',primary:false,nao:false,
-   tpl:n=>'Olá'+(n?', '+n:'')+'!\n\nEntendo a sua frustração e peço desculpas pela dificuldade. 😔\n\nPara que eu possa te ajudar da melhor forma, me conta o que aconteceu? Preciso entender a sua situação para te dar a orientação certa.'},
-  {title:'😤 Tom mais acolhedor',badge:'Alternativa',primary:false,nao:false,
-   tpl:n=>'Oi'+(n?', '+n:'')+'! 💙\n\nSinto muito pela situação — isso deve estar sendo bem difícil para você.\n\nVamos resolver juntas, tá? Me conta com calma o que está acontecendo, o que você precisa, e eu te oriento no que for possível! 😊'},
-  {title:'😤 Quando a pessoa continua irritada',badge:'Acalmar',primary:false,nao:false,
-   tpl:n=>'Oi'+(n?', '+n:'')+'! 😊\n\nEntendo que a situação é difícil e sua frustração é completamente válida.\n\nMas para que eu consiga te ajudar de verdade, preciso que a gente converse com calma. Me conta o que está acontecendo com mais detalhes? Só assim consigo te dar a orientação certa! 🙏'},
+  {title:'😤 Acolher e pedir que explique',badge:'Recomendada',primary:true,nao:false,
+   tpl:n=>'Oi'+(n?', '+n:'')+'! 😔\n\nEntendo a frustração e me desculpe pelo transtorno. Estou aqui para te ajudar de verdade! 🙏\n\nMe conta com calma o que aconteceu? Assim consigo entender e te orientar corretamente.'},
   {title:'😤 Após ouvir — vagas esgotadas',badge:'Complementar',primary:false,nao:false,
-   tpl:n=>'Obrigada por me explicar'+(n?', '+n:'')+'! 😊\n\nInfelizmente, o nosso limite é de 30 senhas por dia e elas costumam acabar cedo. Não é falta de vontade de atender — é um limite que não depende de nós. 😔\n\nA dica que dou: venha bem cedo, antes das 9h, para garantir sua vez. Com certeza vai conseguir desta vez!'+DOCS+END},
+   tpl:n=>'Obrigada por me explicar'+(n?', '+n:'')+'! 😊\n\nInfelizmente o limite é de 30 senhas/dia e costumam acabar cedo. A dica: venha bem antes das 9h para garantir sua vez!'+DOCS+END},
   {title:'😤 Após ouvir — orientar o caso',badge:'Complementar',primary:false,nao:false,
-   tpl:n=>'Obrigada por me contar'+(n?', '+n:'')+'! 😊\n\nAgora que entendi melhor a sua situação, vou te orientar:\n\nO atendimento para o seu caso é presencial. Venha de segunda a sexta, das 9h às 12h, com os documentos abaixo — e assim que chegar, a gente consegue te ajudar de verdade!'+DOCS+END}
+   tpl:n=>'Obrigada por me contar'+(n?', '+n:'')+'! 😊\n\nAgora que entendi melhor, venha de segunda a sexta, das 9h às 12h, com os documentos abaixo.'+DOCS+END}
  ],
- emailResps:[
-  {title:'📧 Resposta acolhedora',subj:'CAD – Recebemos seu contato',badge:'Recomendada',primary:true,nao:false,
-   tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nRecebemos seu contato e lamentamos muito pela situação.\n\nPara que possamos orientá-lo(a) da melhor forma, pedimos que nos descreva com mais detalhes o que ocorreu e o que você precisa. Assim conseguimos verificar as opções disponíveis e dar a orientação adequada.\n\nEstamos à sua disposição.'+ENDE},
-  {title:'📧 Resposta sobre vagas esgotadas',subj:'CAD – Sobre dificuldade de atendimento',badge:'Alternativa',primary:false,nao:false,
-   tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nLamentamos a dificuldade. O limite diário é de 30 senhas, por ordem de chegada.\n\nRecomendamos comparecer antes das 9h para garantir seu atendimento.'+ENDE}
- ]},
-
-{grp:'😓 Situações delicadas',id:'del1b',icon:'😠',ic:'i-red',pip:'pip-red',
- label:'Insatisfeita com atendimento anterior',sub:'Reclamação do atendimento recebido',
- who:'Assistido',wc:'#e84060',sim:'Fui atendida aí e saí sem nenhuma resposta. Não resolveram nada!',
- tags:[{t:'Situação delicada',c:'tg-gold'},{t:'Reclamação',c:'tg-orange'}],
- ctx:'Ouvir com atenção antes de qualquer coisa. Não se defender. Entender o que ela esperava e o que recebeu.',
- resps:[
-  {title:'😠 Ouvir e entender o que aconteceu',badge:'Recomendada',primary:true,nao:false,
-   tpl:n=>'Oi'+(n?', '+n:'')+'! 😔\n\nSinto muito que o atendimento não tenha correspondido ao que você esperava.\n\nMe conta o que aconteceu com mais detalhes? O que você foi buscar e o que recebeu? Assim consigo entender melhor e te orientar sobre os próximos passos.'},
-  {title:'😠 Quando quer falar com responsável',badge:'Alternativa',primary:false,nao:false,
-   tpl:n=>'Entendo'+(n?', '+n:'')+'! 😔\n\nAnoto o seu contato e encaminho para quem pode te dar um retorno mais completo. Se preferir, pode também entrar em contato pelo:\n\n📞 (11) 4154-5191\n📧 aj.santana.parnai@oabsp.org.br\n🕘 Seg–Sex, 9h–12h'},
-  {title:'😠 Explicar limitações do serviço',badge:'Alternativa',primary:false,nao:false,
-   tpl:n=>'Oi'+(n?', '+n:'')+'!\n\nEntendo a sua decepção e me desculpe. 😔\n\nA nossa função é fazer a triagem e orientar sobre documentos e encaminhamento. A consulta jurídica detalhada é feita pelo advogado no dia do atendimento presencial.\n\nSe quiser tentar novamente, estamos à disposição! Venha de segunda a sexta, das 9h às 12h.'+DOCS+END}
- ],
- emailResps:[
-  {title:'📧 Reclamação de atendimento',subj:'CAD – Retorno sobre seu atendimento',badge:'Recomendada',primary:true,nao:false,
-   tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nRecebemos sua mensagem e lamentamos que o atendimento não tenha sido satisfatório.\n\nPara que possamos verificar o que ocorreu, pedimos que nos descreva com detalhes o que aconteceu e o que esperava receber.\n\nEstamos à disposição.'+ENDE}
- ]},
+ emailResps:[{title:'📧 Acolher frustração',subj:'CAD – Recebemos seu contato',badge:'Padrão',primary:true,nao:false,
+  tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nLamentamos a situação. Para orientá-lo(a) adequadamente, pedimos que descreva com mais detalhes o que ocorreu.'+ENDE}]},
 
 {grp:'😓 Situações delicadas',id:'del1c',icon:'🛑',ic:'i-red',pip:'pip-red',
- label:'Pessoa usando linguagem agressiva',sub:'Redirecionar com firmeza e respeito',
+ label:'Linguagem agressiva',sub:'Redirecionar com firmeza e respeito',
  who:'Assistido',wc:'#e84060',sim:'Isso é uma palhaçada! Vocês não servem pra nada!',
- tags:[{t:'Situação delicada',c:'tg-gold'},{t:'Urgente',c:'tg-red'}],
- ctx:'Manter firmeza e respeito. Não rebater. Deixar claro que pode ajudar, mas precisa de cordialidade.',
+ tags:[{t:'Situação delicada',c:'tg-gold'},{t:'Urgente',c:'tg-red'}],ctx:'Manter firmeza. Não rebater.',
  resps:[
   {title:'🛑 Redirecionar com firmeza',badge:'Recomendada',primary:true,nao:false,
-   tpl:n=>'Oi'+(n?', '+n:'')+'!\n\nEntendo que você está muito frustrada e quero te ajudar. 😊\n\nPorém, para que eu consiga fazer isso, precisamos conversar com respeito de ambos os lados.\n\nMe conta o que está acontecendo com calma, e farei o possível para te orientar! 🙏'},
-  {title:'🛑 Tom mais firme',badge:'Alternativa',primary:false,nao:false,
-   tpl:n=>'Olá'+(n?', '+n:'')+'!\n\nEstou aqui para ajudar, e vou fazer isso com muito prazer. Mas para que isso seja possível, preciso que a gente mantenha uma conversa respeitosa.\n\nQuando estiver pronta para me contar o que aconteceu com calma, estou à disposição. 😊'},
-  {title:'🛑 Última tentativa de abertura',badge:'Alternativa',primary:false,nao:false,
-   tpl:n=>'Oi'+(n?', '+n:'')+'!\n\nPercebo que você está passando por um momento muito difícil, e lamento por isso. 💙\n\nSei que em situações assim a gente fica sem paciência. Mas me ajuda a te ajudar — me conta com calma o que você precisa, e eu te oriento da melhor forma possível.'}
- ],
- emailResps:[]},
+   tpl:n=>'Oi'+(n?', '+n:'')+'!\n\nQuero te ajudar! 😊 Mas para isso precisamos conversar com respeito de ambos os lados.\n\nMe conta o que está acontecendo com calma e farei o possível para te orientar. 🙏'},
+  {title:'🛑 Tom mais acolhedor',badge:'Alternativa',primary:false,nao:false,
+   tpl:n=>'Oi'+(n?', '+n:'')+'! 💙\n\nPercebo que você está passando por um momento difícil. Me ajuda a te ajudar — conta o que você precisa com calma, e eu te oriento da melhor forma possível. 🙏'}
+ ],emailResps:[]},
+
+{grp:'😓 Situações delicadas',id:'del6',icon:'🚨',ic:'i-red',pip:'pip-red',
+ label:'Situação urgente / vulnerável / choro',sub:'Acolher com empatia antes de orientar',
+ who:'Assistido',wc:'#e8495a',sim:'Estou desesperada, chorando, não sei mais o que fazer...',
+ tags:[{t:'Urgente',c:'tg-red'},{t:'Situação delicada',c:'tg-gold'}],
+ ctx:'NÃO dar informações jurídicas imediatamente. Primeiro acolher. Se risco físico: 180 / 190.',
+ resps:[
+  {title:'🚨 Acolher e pedir que conte',badge:'Recomendada',primary:true,nao:false,
+   tpl:n=>'Fico feliz que você entrou em contato. 💙 Você não está sozinha nisso.\n\nRespira fundo e me conta o que está acontecendo — estou aqui para te ouvir. 🙏'},
+  {title:'🚨 Se houver risco físico',badge:'Urgente',primary:false,nao:false,
+   tpl:n=>'Você está em segurança agora?\n\nSe estiver em risco, ligue imediatamente:\n🔴 190 – Polícia Militar\n🔴 180 – Central da Mulher (24h, gratuito)\n\nEstou aqui assim que puder me contar o que está acontecendo. 💙'},
+  {title:'🚨 Após ouvir — orientar',badge:'Complementar',primary:false,nao:false,
+   tpl:n=>'Obrigada por confiar em mim'+(n?', '+n:'')+'! 💙\n\nSeu caso tem solução — vamos conseguir te ajudar. Venha até nós com os documentos abaixo!'+DOCS+END}
+ ],emailResps:[]},
 
 {grp:'😓 Situações delicadas',id:'del2',icon:'🔄',ic:'i-slate',pip:null,
- label:'Quer saber do processo',sub:'Acompanhamento é presencial',
- who:'Assistido',wc:'#8b5cf6',sim:'Como está o meu processo?',
- tags:[{t:'Acompanhamento',c:'tg-blue'},{t:'Situação delicada',c:'tg-gold'}],ctx:'Acompanhamento é presencial.',
+ label:'Quer saber do processo / retornar',sub:'Acompanhamento é presencial',
+ who:'Assistido',wc:'#8b5cf6',sim:'Como está meu processo? / Posso voltar para continuar meu caso?',
+ tags:[{t:'Acompanhamento',c:'tg-blue'},{t:'Retorno',c:'tg-purple'}],
+ ctx:'Unifica: acompanhamento de processo + retorno para continuidade.',
  resps:[
   {title:'🔄 Orientar comparecimento',badge:'Recomendada',primary:true,nao:false,
-   tpl:n=>'Oi'+(n?', '+n:'')+'! 😊\n\nPara acompanhar o seu caso, é necessário comparecer pessoalmente à nossa sede.\n\nTraga seus documentos e, se disponível, o protocolo do atendimento anterior — isso facilita bastante!'+DOCS+END},
-  {title:'🔄 Não consigo verificar remotamente',badge:'Alternativa',primary:false,nao:false,
-   tpl:n=>'Oi'+(n?', '+n:'')+'!\n\nInfelizmente não consigo verificar o andamento do seu processo por aqui. Essa consulta precisa ser feita presencialmente.\n\nVenha de segunda a sexta, das 9h às 12h, com seus documentos e o número do processo se tiver.'+END},
-  {title:'🔄 Sem número do processo',badge:'Alternativa',primary:false,nao:false,
-   tpl:n=>'Oi'+(n?', '+n:'')+'!\n\nSem o número do processo fica difícil localizar qualquer informação por aqui. 😊\n\nA melhor forma é vir pessoalmente com os documentos que tiver do caso — conseguimos te orientar muito melhor assim!'+DOCS+END}
- ],
- emailResps:[{title:'📧 Acompanhamento',subj:'CAD – Acompanhamento do seu caso',badge:'Padrão',primary:true,nao:false,
-  tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nO acompanhamento de processos é realizado exclusivamente de forma presencial. Compareça com seus documentos e protocolo de atendimento (se tiver).'+ENDE}]},
+   tpl:n=>'Oi'+(n?', '+n:'')+'! 😊\n\nPara acompanhar ou dar continuidade ao seu caso, é necessário comparecer pessoalmente.\n\nVenha de segunda a sexta, das 9h às 12h. Se tiver o protocolo do atendimento anterior, traga — facilita bastante!'+DOCS+END},
+  {title:'🔄 Sem protocolo / número',badge:'Alternativa',primary:false,nao:false,
+   tpl:n=>'Oi'+(n?', '+n:'')+'!\n\nMesmo sem o número do processo ou protocolo, pode vir pessoalmente. Traga os documentos do caso e contamos o que aconteceu.'+DOCS+END}
+ ],emailResps:[{title:'📧 Acompanhamento',subj:'CAD – Acompanhamento do seu caso',badge:'Padrão',primary:true,nao:false,
+  tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nO acompanhamento é exclusivamente presencial. Compareça com seus documentos e protocolo de atendimento (se tiver).'+ENDE}]},
 
 {grp:'😓 Situações delicadas',id:'del3',icon:'📧',ic:'i-slate',pip:null,
- label:'Quer orientação à distância',sub:'Indicar e-mail para contato',
- who:'Assistido',wc:'#8b5cf6',sim:'Não consigo ir até vocês. Podem me ajudar pelo WhatsApp?',
+ label:'Não pode vir presencialmente',sub:'Indicar e-mail; explicar limitações',
+ who:'Assistido',wc:'#8b5cf6',sim:'Não consigo ir até vocês. Podem me ajudar à distância?',
  tags:[{t:'Situação delicada',c:'tg-gold'}],ctx:'Não fazemos orientação jurídica por WhatsApp.',
  resps:[
   {title:'📧 Indicar canal correto',badge:'Recomendada',primary:true,nao:false,
-   tpl:n=>'Oi'+(n?', '+n:'')+'! 😊\n\nPor aqui consigo te passar informações gerais, mas orientação jurídica precisa ser presencial, tá?\n\nPara dúvidas gerais, pode escrever para o e-mail:\n📧 aj.santana.parnai@oabsp.org.br\n\nQuando puder vir, estaremos à disposição!'+DOCS+END},
-  {title:'📧 Explicar o motivo',badge:'Alternativa',primary:false,nao:false,
-   tpl:n=>'Oi'+(n?', '+n:'')+'!\n\nEntendo que às vezes é difícil vir pessoalmente. 😔\n\nMas aqui pelo WhatsApp não consigo dar orientação jurídica — isso só é possível com um advogado, presencialmente. Cada caso tem particularidades que precisam ser analisadas com cuidado.\n\nQuando puder, venha de segunda a sexta, das 9h às 12h. Ou envie um e-mail: aj.santana.parnai@oabsp.org.br'+END},
+   tpl:n=>'Oi'+(n?', '+n:'')+'! 😊\n\nPor aqui passo informações gerais, mas orientação jurídica precisa ser presencial com um advogado.\n\nPara dúvidas gerais: 📧 aj.santana.parnai@oabsp.org.br\n\nQuando puder vir, estaremos à disposição!'+DOCS+END},
   {title:'📧 Dificuldade de locomoção',badge:'Alternativa',primary:false,nao:false,
-   tpl:n=>'Oi'+(n?', '+n:'')+'! 😊\n\nSe tiver alguma dificuldade de locomoção, você pode vir acompanhada ou nos contatar pelo e-mail para explicar a situação:\n\n📧 aj.santana.parnai@oabsp.org.br\n\nVamos ver o que é possível fazer! O atendimento completo ainda precisa ser presencial, mas podemos esclarecer dúvidas gerais por e-mail.'}
- ],
- emailResps:[{title:'📧 Orientação à distância',subj:'CAD – Informações sobre atendimento',badge:'Padrão',primary:true,nao:false,
-  tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nPodemos esclarecer dúvidas gerais por e-mail, mas o atendimento jurídico completo é presencial.'+ENDE}]},
+   tpl:n=>'Oi'+(n?', '+n:'')+'! 😊\n\nSe tiver dificuldade de locomoção, pode vir acompanhada ou nos contatar por e-mail explicando a situação:\n📧 aj.santana.parnai@oabsp.org.br\n\nO atendimento completo ainda é presencial, mas podemos esclarecer dúvidas gerais.'}
+ ],emailResps:[{title:'📧 Orientação remota',subj:'CAD – Atendimento',badge:'Padrão',primary:true,nao:false,
+  tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nEsclarecemos dúvidas gerais por e-mail, mas o atendimento jurídico completo é presencial.'+ENDE}]},
 
-{grp:'😓 Situações delicadas',id:'del4',icon:'👥',ic:'i-slate',pip:null,
- label:'Quer vir com acompanhante',sub:'Acompanhante aguarda fora',
- who:'Assistido',wc:'#8b5cf6',sim:'Posso levar minha filha para me ajudar?',
- tags:[{t:'Situação delicada',c:'tg-gold'}],ctx:'Consulta é só com a parte.',
+{grp:'😓 Situações delicadas',id:'del4',icon:'😕',ic:'i-slate',pip:null,
+ label:'Confusa / acompanhante / sumiu',sub:'Explicar, orientar acompanhante ou retomar contato',
+ who:'Assistido',wc:'#8b5cf6',sim:'Não entendi nada. / Posso levar minha filha? / [sem resposta há dias]',
+ tags:[{t:'Situação delicada',c:'tg-gold'}],
+ ctx:'Unifica: pessoa confusa + dúvida sobre acompanhante + retomar contato após silêncio.',
  resps:[
-  {title:'👥 Orientar acompanhante',badge:'Recomendada',primary:true,nao:false,
-   tpl:n=>'Sim'+(n?', '+n:'')+'! Pode vir acompanhada sem problema. 😊\n\nA consulta com o advogado é feita só com você — o acompanhante aguarda na área externa.\n\nExceção para dificuldade de locomoção ou comunicação, aí pode entrar junto.'+DOCS+END},
-  {title:'👥 Com menor de idade',badge:'Alternativa',primary:false,nao:false,
-   tpl:n=>'Oi'+(n?', '+n:'')+'! 😊\n\nSe precisar trazer seu filho(a) menor, pode vir normalmente. A consulta jurídica é feita só com você — a criança pode ficar na área de espera ou entrar caso precise.'+DOCS+END}
- ],
- emailResps:[{title:'📧 Orientar acompanhante',subj:'CAD – Sobre acompanhante no atendimento',badge:'Padrão',primary:true,nao:false,
-  tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nPode vir acompanhado(a). O atendimento com o advogado é apenas com a parte envolvida — o acompanhante aguarda na área externa. Exceção para dificuldade de locomoção ou comunicação.'+ENDE}]},
+  {title:'😕 Explicar o fluxo simples',badge:'Recomendada',primary:true,nao:false,
+   tpl:n=>'Oi'+(n?', '+n:'')+'! 😊 Vamos com calma!\n\n1️⃣ Venha pessoalmente com os documentos\n2️⃣ Fazemos a triagem para ver se atendemos seu caso\n3️⃣ Um advogado te orienta na hora\n\nSeg–Sex, 9h–12h, sem agendamento. 😊'+DOCS+END},
+  {title:'👥 Sobre acompanhante',badge:'Alternativa',primary:false,nao:false,
+   tpl:n=>'Sim'+(n?', '+n:'')+'! Pode vir acompanhada. 😊 A consulta com o advogado é só com você — o acompanhante aguarda na área externa. Exceção para dificuldade de locomoção.'+DOCS+END},
+  {title:'🔔 Retomar contato',badge:'Alternativa',primary:false,nao:false,
+   tpl:n=>'Olá'+(n?', '+n:'')+'! Tudo bem? 😊 Passando para verificar se ainda precisa de assistência. Estou à disposição! 🙂'}
+ ],emailResps:[]},,
 
-{grp:'😓 Situações delicadas',id:'del5',icon:'🔁',ic:'i-slate',pip:null,
- label:'Já foi atendida e quer retornar',sub:'Orientar retorno',
- who:'Assistido',wc:'#8b5cf6',sim:'Já fui atendida aí antes. Posso voltar para continuar meu caso?',
- tags:[{t:'Retorno',c:'tg-purple'},{t:'Situação delicada',c:'tg-gold'}],ctx:'Pessoa já atendida quer dar continuidade.',
- resps:[
-  {title:'🔁 Orientar retorno',badge:'Recomendada',primary:true,nao:false,
-   tpl:n=>'Claro'+(n?', '+n:'')+'! Pode retornar sem problemas. 😊\n\nCompareça de segunda a sexta, das 9h às 12h. Se disponível, traga o protocolo do atendimento anterior — isso facilita bastante o processo!'+DOCS+END},
-  {title:'🔁 Caso encerrado / situação nova',badge:'Alternativa',primary:false,nao:false,
-   tpl:n=>'Oi'+(n?', '+n:'')+'! 😊\n\nPode sim retornar! Se o caso anterior já foi encerrado e você tem uma situação nova, basta vir com a documentação atualizada.'+DOCS+END},
-  {title:'🔁 Sem protocolo anterior',badge:'Alternativa',primary:false,nao:false,
-   tpl:n=>'Oi'+(n?', '+n:'')+'! 😊\n\nMesmo sem o protocolo anterior, pode voltar. Venha com seus documentos e nos conta o que aconteceu no atendimento anterior — faremos o possível para dar continuidade!'+DOCS+END}
- ],
- emailResps:[{title:'📧 Retorno por e-mail',subj:'CAD – Retorno para continuidade',badge:'Recomendada',primary:true,nao:false,
-  tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nPode retornar! Compareça com seus documentos e protocolo do atendimento anterior (se tiver).\n\nAtendemos de segunda a sexta, das 9h às 12h, limite de 30 senhas por dia.'+ENDE}]},
-
-{grp:'😓 Situações delicadas',id:'del6',icon:'🚨',ic:'i-red',pip:'pip-red',
- label:'Situação urgente / vulnerável',sub:'Acolher com empatia e orientar',
- who:'Assistido',wc:'#e8495a',sim:'Estou desesperada, preciso muito de ajuda',
- tags:[{t:'Urgente',c:'tg-red'},{t:'Situação delicada',c:'tg-gold'}],ctx:'Acolher antes de orientar. Se houver risco físico: 190 ou 180.',
- resps:[
-  {title:'🚨 Acolher e pedir que conte',badge:'Recomendada',primary:true,nao:false,
-   tpl:n=>'Fico feliz que você entrou em contato — você não está sozinha nisso. 💙\n\nRespira fundo e me conta o que está acontecendo. Estou aqui para te ouvir e orientar da melhor forma possível. 🙏'},
-  {title:'🚨 Se houver risco físico imediato',badge:'Urgente',primary:false,nao:false,
-   tpl:n=>'Antes de qualquer coisa — você está em segurança agora?\n\nSe estiver em risco, ligue imediatamente:\n🔴 190 – Polícia Militar\n🔴 180 – Central da Mulher (24h, gratuito)\n\nEstou aqui assim que puder me contar o que está acontecendo. 💙'},
-  {title:'🚨 Após ouvir — orientar atendimento',badge:'Complementar',primary:false,nao:false,
-   tpl:n=>'Obrigada por confiar em mim'+(n?', '+n:'')+'! 💙\n\nSeu caso tem solução e vamos conseguir te ajudar. Venha até nós o quanto antes com os documentos abaixo!'+DOCS+END},
-  {title:'🚨 Sofrimento emocional',badge:'Alternativa',primary:false,nao:false,
-   tpl:n=>'Oi'+(n?', '+n:'')+'! 💙\n\nPercebo que você está passando por um momento muito difícil. Antes de tudo, quero que saiba que sua situação importa e que você não está sozinha.\n\nMe conta o que está acontecendo com calma — vou te ouvir e fazer o possível para te ajudar, tá? 🙏'}
- ],emailResps:[]},
-
-{grp:'😓 Situações delicadas',id:'del7',icon:'🔔',ic:'i-slate',pip:null,
- label:'Pessoa que sumiu sem responder',sub:'Retomar contato educadamente',
- who:'Assistido',wc:'#8b5cf6',sim:'[sem resposta há dias]',
- tags:[{t:'Retorno',c:'tg-purple'},{t:'Situação delicada',c:'tg-gold'}],ctx:'Retomar contato de forma leve, sem pressionar.',
- resps:[
-  {title:'🔔 Retomar contato',badge:'Recomendada',primary:true,nao:false,
-   tpl:n=>'Olá'+(n?', '+n:'')+'! Tudo bem? 😊\n\nEstou verificando se ainda precisa de assistência ou se a situação já foi resolvida. Estou à disposição! 🙂'},
-  {title:'🔔 Segundo contato',badge:'Alternativa',primary:false,nao:false,
-   tpl:n=>'Olá'+(n?', '+n:'')+'! 😊\n\nPassei para verificar se posso ser útil em algo. Caso as dúvidas já tenham sido sanadas, fico feliz em ter ajudado!'},
-  {title:'🔔 Último contato',badge:'Alternativa',primary:false,nao:false,
-   tpl:n=>'Olá'+(n?', '+n:'')+'! 😊\n\nEntrarei em contato mais uma vez para verificar se ainda posso ajudar. Caso não obtenha resposta, encerrarei esta conversa — mas estarei sempre disponível se precisar!'}
- ],emailResps:[]},
-
-{grp:'😓 Situações delicadas',id:'del8',icon:'😢',ic:'i-purple',pip:'pip-purple',
- label:'Pessoa chorando / muito emocionada',sub:'Acolher antes de qualquer orientação',
- who:'Assistido',wc:'#8b5cf6',sim:'Estou chorando aqui, não sei mais o que fazer...',
- tags:[{t:'Situação delicada',c:'tg-gold'},{t:'Urgente',c:'tg-red'}],
- ctx:'NÃO dar informações jurídicas imediatamente. Primeiro acolher. Só depois de acalmar, perguntar o que precisa.',
- resps:[
-  {title:'😢 Acolher com cuidado',badge:'Recomendada',primary:true,nao:false,
-   tpl:n=>'Oi'+(n?', '+n:'')+'! 💙\n\nRespira. Você não está sozinha nisso.\n\nMe conta o que está acontecendo — pode ser devagar, sem pressa. Estou aqui para te ouvir. 🙏'},
-  {title:'😢 Após ela contar — validar e orientar',badge:'Complementar',primary:false,nao:false,
-   tpl:n=>'Muito obrigada por me contar'+(n?', '+n:'')+'! 💙\n\nEntendo o quanto isso está pesado. Mas saiba que você fez certo em buscar ajuda.\n\nVenha até nós com os documentos abaixo — nossos advogados vão te ouvir e te orientar pessoalmente. Você vai conseguir superar isso! 💪'+DOCS+END},
-  {title:'😢 Situação envolvendo família',badge:'Alternativa',primary:false,nao:false,
-   tpl:n=>'Oi'+(n?', '+n:'')+'! 💙\n\nSei que situações envolvendo família doem muito. Fica tranquila — existe caminho para resolver isso.\n\nMe conta o que está acontecendo para eu entender melhor e te orientar. Estou aqui! 😊'}
- ],emailResps:[]},
-
-{grp:'😓 Situações delicadas',id:'del9',icon:'😕',ic:'i-slate',pip:null,
- label:'Pessoa confusa / sem entender o processo',sub:'Explicar de forma simples e paciente',
- who:'Assistido',wc:'#8b5cf6',sim:'Não entendi nada do que me explicaram lá. Podem me explicar de novo?',
- tags:[{t:'Situação delicada',c:'tg-gold'},{t:'Primeiro contato',c:'tg-teal'}],
- ctx:'Simplificar ao máximo. Evitar termos jurídicos. Ser paciente.',
- resps:[
-  {title:'😕 Perguntar o que ficou confuso',badge:'Recomendada',primary:true,nao:false,
-   tpl:n=>'Oi'+(n?', '+n:'')+'! 😊 Claro, sem problema nenhum — vamos com calma!\n\nMe conta o que você entendeu e o que ficou confuso? Assim consigo explicar melhor a parte que pegou. 😊'},
-  {title:'😕 Explicar o fluxo geral',badge:'Alternativa',primary:false,nao:false,
-   tpl:n=>'Oi'+(n?', '+n:'')+'! 😊\n\nVeja bem — o processo é bem simples:\n\n1️⃣ Você vem pessoalmente aqui com os documentos\n2️⃣ Fazemos a triagem para ver se atendemos o seu caso\n3️⃣ Se atender, um advogado te orienta na hora\n\nNão precisa agendar — é por ordem de chegada, de segunda a sexta, das 9h às 12h. 😊'+DOCS+END},
-  {title:'😕 Versão super simples (idosos)',badge:'Alternativa',primary:false,nao:false,
-   tpl:n=>'Oi'+(n?', '+n:'')+'! 😊\n\nNão tem problema, vamos com calma!\n\nO que você precisa saber é simples:\n✅ Venha aqui pessoalmente\n✅ Traga seus documentos\n✅ De segunda a sexta, das 9h às 12h\n✅ Chegue cedo — são 30 pessoas por dia\n\nQualquer dúvida, pode me perguntar! 😊'+END}
- ],emailResps:[]},
-
-
+// ── ADVOGADO ──
 {grp:'⚖️ Mensagem de Advogado(a)',id:'adv1',icon:'⚖️',ic:'i-teal',pip:'pip-teal',
- label:'Encaminhamento de caso',sub:'Orientar que assistido venha pessoalmente',
- who:'Advogado(a)',wc:'#22b8c9',sim:'Gostaria de encaminhar um caso para a CAD.',
- tags:[{t:'Advogado',c:'tg-teal'},{t:'Convênio',c:'tg-blue'}],ctx:'Assistido deve comparecer pessoalmente.',
- resps:[{title:'⚖️ Orientar encaminhamento',badge:'Padrão',primary:true,nao:false,
-  tpl:n=>'Bom dia'+(n?', '+n:'')+'!\n\nPara encaminhar um caso, o(a) assistido(a) precisa vir pessoalmente à nossa sede com a documentação necessária. Verificamos os critérios de elegibilidade presencialmente.'+DOCS+END}],
- emailResps:[{title:'📧 Encaminhamento de caso',subj:'CAD – Encaminhamento de caso',badge:'Padrão',primary:true,nao:false,
-  tpl:n=>HDRE+'\nPrezado(a) Dr(a).'+(n?' '+n:'')+'!\n\nO(a) assistido(a) deverá comparecer pessoalmente com a documentação necessária. A verificação de elegibilidade é presencial.'+ENDE}]},
-{grp:'⚖️ Mensagem de Advogado(a)',id:'adv2',icon:'📞',ic:'i-teal',pip:'pip-teal',
- label:'Pede informações de processo',sub:'Orientar contato por telefone',
- who:'Advogado(a)',wc:'#22b8c9',sim:'Preciso de informações sobre o andamento de um caso.',
- tags:[{t:'Advogado',c:'tg-teal'}],ctx:'Informações de processo são por telefone ou presencial.',
- resps:[{title:'📞 Orientar contato',badge:'Padrão',primary:true,nao:false,
-  tpl:n=>'Bom dia'+(n?', '+n:'')+'!\n\nPara informações sobre processos, entre em contato pelo telefone ou venha pessoalmente.\n\n📞 (11) 4154-5191\n📧 aj.santana.parnai@oabsp.org.br\n🕘 Seg–Sex, 9h–12h'}],
- emailResps:[{title:'📧 Informações de processo',subj:'CAD – Informações sobre processo',badge:'Padrão',primary:true,nao:false,
-  tpl:n=>HDRE+'\nPrezado(a) Dr(a).'+(n?' '+n:'')+'!\n\nPara informações sobre processos, entre em contato pelo (11) 4154-5191 ou compareça presencialmente. Atendemos de segunda a sexta, das 9h às 12h.'+ENDE}]},
-{grp:'⚖️ Mensagem de Advogado(a)',id:'adv3',icon:'📅',ic:'i-teal',pip:'pip-teal',
- label:'Confirmação de escala',sub:'Confirmar presença na escala',
- who:'Advogado(a)',wc:'#22b8c9',sim:'Gostaria de confirmar minha escala desta semana.',
- tags:[{t:'Advogado',c:'tg-teal'},{t:'Escala',c:'tg-blue'}],ctx:'Confirmação de presença na escala.',
- resps:[{title:'📅 Confirmar escala',badge:'Padrão',primary:true,nao:false,
-  tpl:n=>'Bom dia'+(n?', '+n:'')+'!\n\nConfirmamos sua presença na escala. Se precisar de alguma alteração, nos avise com antecedência.\n\n📞 (11) 4154-5191\n📧 aj.santana.parnai@oabsp.org.br\n🕘 Seg–Sex, 9h–12h'}],
- emailResps:[{title:'📧 Confirmar escala',subj:'CAD – Confirmação de escala',badge:'Padrão',primary:true,nao:false,
-  tpl:n=>HDRE+'\nPrezado(a) Dr(a).'+(n?' '+n:'')+'!\n\nConfirmamos sua presença na escala. Caso precise de alteração, comunique com antecedência pelo (11) 4154-5191.'+ENDE}]},
+ label:'Encaminhamento / processo / escala',sub:'Orientar contato ou comparecer',
+ who:'Advogado(a)',wc:'#22b8c9',sim:'Quero encaminhar um caso / saber do processo / confirmar escala.',
+ tags:[{t:'Advogado',c:'tg-teal'}],
+ ctx:'Unifica: encaminhar caso + info de processo + confirmar escala — todos encaminham para telefone ou presencial.',
+ resps:[
+  {title:'⚖️ Encaminhar caso',badge:'Recomendada',primary:true,nao:false,
+   tpl:n=>'Bom dia'+(n?', '+n:'')+'!\n\nO(a) assistido(a) precisa vir pessoalmente com a documentação. A triagem é feita presencialmente.'+DOCS+END},
+  {title:'📞 Info de processo / escala',badge:'Alternativa',primary:false,nao:false,
+   tpl:n=>'Bom dia'+(n?', '+n:'')+'!\n\nPara esse assunto, entre em contato:\n📞 (11) 4154-5191\n📧 aj.santana.parnai@oabsp.org.br\n🕘 Seg–Sex, 9h–12h'}
+ ],
+ emailResps:[{title:'📧 Advogado',subj:'CAD – Retorno ao seu contato',badge:'Padrão',primary:true,nao:false,
+  tpl:n=>HDRE+'\nPrezado(a) Dr(a).'+(n?' '+n:'')+'!\n\nPara encaminhamentos e informações, entre em contato pelo (11) 4154-5191 ou compareça presencialmente.'+ENDE}]},
+
 {grp:'⚖️ Mensagem de Advogado(a)',id:'adv4',icon:'📲',ic:'i-teal',pip:'pip-teal',
- label:'Redirecionar para a secretaria',sub:'Passar número da secretaria',
+ label:'Redirecionar para a secretaria',sub:'WhatsApp (11) 93724-8448',
  who:'Advogado(a)',wc:'#22b8c9',sim:'Bom dia, queria tratar sobre...',
  tags:[{t:'Advogado',c:'tg-teal'},{t:'Secretaria',c:'tg-blue'}],ctx:'Redirecionar ao WhatsApp (11) 93724-8448.',
  resps:[
   {title:'📲 Redirecionar à secretaria',badge:'Recomendada',primary:true,nao:false,
-   tpl:n=>'Olá'+(n?', '+n:'')+'! 😊\n\nPara tratar sobre esse assunto, você precisa entrar em contato diretamente com a secretaria pelo WhatsApp:\n\n📲 (11) 93724-8448\n\nEles vão conseguir te ajudar melhor! 🙂'},
-  {title:'📲 Versão formal',badge:'Alternativa',primary:false,nao:false,
-   tpl:n=>'Bom dia'+(n?', '+n:'')+'!\n\nPara esse assunto, pedimos que entre em contato com a secretaria da Subseção diretamente pelo WhatsApp:\n\n📲 (11) 93724-8448\n\nEstamos à disposição para demais esclarecimentos.'}
+   tpl:n=>'Olá'+(n?', '+n:'')+'! 😊\n\nPara esse assunto, entre em contato diretamente com a secretaria:\n📲 (11) 93724-8448\n\nEles te ajudarão melhor! 🙂'},
  ],
- emailResps:[{title:'📧 Redirecionar à secretaria',subj:'CAD – Contato com a secretaria',badge:'Recomendada',primary:true,nao:false,
-  tpl:n=>HDRE+'\nPrezado(a) Dr(a).'+(n?' '+n:'')+'!\n\nPara tratar sobre esse assunto, solicitamos que entre em contato com a secretaria da Subseção pelo WhatsApp:\n\n📲 (11) 93724-8448'+ENDE}]},
+ emailResps:[{title:'📧 Secretaria',subj:'CAD – Contato com a secretaria',badge:'Padrão',primary:true,nao:false,
+  tpl:n=>HDRE+'\nPrezado(a) Dr(a).'+(n?' '+n:'')+'!\n\nSolicito que entre em contato com a secretaria da Subseção pelo WhatsApp: 📲 (11) 93724-8448'+ENDE}]},
 
+// ── COMUNICADOS ──
 {grp:'📢 Comunicados',id:'com1',icon:'📢',ic:'i-purple',pip:null,
- label:'Lembrete de triagem — advogado(a)',sub:'Segunda-feira e amanhã',
- who:'Advogado(a)',wc:'#a78bfa',sim:'[Envio de lembrete de triagem]',
+ label:'Lembrete de triagem',sub:'Segunda-feira ou amanhã',
+ who:'Advogado(a)',wc:'#a78bfa',sim:'[Lembrete de triagem]',
  tags:[{t:'Comunicado',c:'tg-purple'},{t:'Advogado',c:'tg-teal'}],ctx:'Use "segunda-feira" no fim de semana e "amanhã" no dia anterior.',
  resps:[
   {title:'📢 Lembrete — segunda-feira',badge:'Recomendada',primary:true,nao:false,
-   tpl:n=>'Prezado(a) Advogado(a),\n\nGostaríamos de lembrá-lo(a) que a triagem para os atendimentos da Assistência Judiciária ocorrerá segunda-feira, no Poupatempo, localizado no endereço:\n\n📍 Avenida Tenente Marques, 5297, Jardim do Luar (Fazendinha), Santana de Parnaíba.\n\nAgradecemos a sua colaboração e pedimos que esteja presente no horário agendado para garantir um atendimento eficiente. Caso haja qualquer dúvida ou necessidade de esclarecimento, estamos à disposição.'},
+   tpl:n=>'Prezado(a) Advogado(a),\n\nGostaríamos de lembrá-lo(a) que a triagem ocorrerá segunda-feira no Poupatempo:\n\n📍 Av. Tenente Marques, 5297 – Jd. do Luar (Fazendinha), Santana de Parnaíba.\n\nAgradecemos a colaboração e pedimos que esteja presente no horário agendado.'},
   {title:'📢 Lembrete — amanhã',badge:'Recomendada',primary:false,nao:false,
-   tpl:n=>'Prezado(a) Advogado(a),\n\nGostaríamos de lembrá-lo(a) que a triagem para os atendimentos da Assistência Judiciária ocorrerá amanhã, no Poupatempo, localizado no endereço:\n\n📍 Avenida Tenente Marques, 5297, Jardim do Luar (Fazendinha), Santana de Parnaíba.\n\nAgradecemos a sua colaboração e pedimos que esteja presente no horário agendado para garantir um atendimento eficiente. Caso haja qualquer dúvida ou necessidade de esclarecimento, estamos à disposição.'}
+   tpl:n=>'Prezado(a) Advogado(a),\n\nGostaríamos de lembrá-lo(a) que a triagem ocorrerá amanhã no Poupatempo:\n\n📍 Av. Tenente Marques, 5297 – Jd. do Luar (Fazendinha), Santana de Parnaíba.\n\nAgradecemos a colaboração e pedimos que esteja presente no horário agendado.'}
  ],
  emailResps:[
-  {title:'📧 Lembrete — segunda-feira',subj:'CAD – Lembrete: Triagem na segunda-feira',badge:'Recomendada',primary:true,nao:false,
-   tpl:n=>HDRE+'\nPrezado(a) Advogado(a),\n\nGostaríamos de lembrá-lo(a) que a triagem para os atendimentos da Assistência Judiciária ocorrerá segunda-feira, no Poupatempo:\n\n📍 Avenida Tenente Marques, 5297, Jardim do Luar (Fazendinha), Santana de Parnaíba.\n\nAgradecemos a sua colaboração.'+ENDE},
-  {title:'📧 Lembrete — amanhã',subj:'CAD – Lembrete: Triagem amanhã',badge:'Recomendada',primary:false,nao:false,
-   tpl:n=>HDRE+'\nPrezado(a) Advogado(a),\n\nGostaríamos de lembrá-lo(a) que a triagem para os atendimentos da Assistência Judiciária ocorrerá amanhã, no Poupatempo:\n\n📍 Avenida Tenente Marques, 5297, Jardim do Luar (Fazendinha), Santana de Parnaíba.\n\nAgradecemos a sua colaboração.'+ENDE}
+  {title:'📧 Lembrete — segunda-feira',subj:'CAD – Lembrete: Triagem na segunda-feira',badge:'Padrão',primary:true,nao:false,
+   tpl:n=>HDRE+'\nPrezado(a) Advogado(a),\n\nLembramos que a triagem ocorrerá segunda-feira no Poupatempo:\n📍 Av. Tenente Marques, 5297 – Jd. do Luar (Fazendinha), Santana de Parnaíba.\n\nAgradecemos a colaboração.'+ENDE},
+  {title:'📧 Lembrete — amanhã',subj:'CAD – Lembrete: Triagem amanhã',badge:'Padrão',primary:false,nao:false,
+   tpl:n=>HDRE+'\nPrezado(a) Advogado(a),\n\nLembramos que a triagem ocorrerá amanhã no Poupatempo:\n📍 Av. Tenente Marques, 5297 – Jd. do Luar (Fazendinha), Santana de Parnaíba.\n\nAgradecemos a colaboração.'+ENDE}
  ]},
 
+// ── OFÍCIOS ──
 {grp:'⚖️ Ofícios do Fórum',id:'ofic1',icon:'📄',ic:'i-amber',pip:'pip-amber',
- label:'Indicação de Curador Especial',sub:'Encaminhar à secretaria e ao fórum',
- who:'Advogado(a)',wc:'#f59e0b',sim:'[Ofício do fórum solicitando Curador Especial]',
- tags:[{t:'Ofício',c:'tg-amber'},{t:'Curador',c:'tg-blue'},{t:'Secretaria',c:'tg-gold'}],
- ctx:'Fórum solicitou indicação de Curador Especial. Use o botão 📲 Secretaria para enviar direto ao WhatsApp (11) 93724-8448.',
+ label:'Indicação de Curador Especial',sub:'Texto oficial + pedir à secretaria',
+ who:'Advogado(a)',wc:'#f59e0b',sim:'[Ofício solicitando Curador Especial]',
+ tags:[{t:'Ofício',c:'tg-amber'},{t:'Secretaria',c:'tg-gold'}],
+ ctx:'Fórum pediu Curador Especial. Use o botão 📲 Secretaria para enviar ao WhatsApp (11) 93724-8448.',
  resps:[
   {title:'📄 Texto oficial ao fórum',badge:'Recomendada',primary:true,nao:false,
    tpl:n=>'Em atendimento à demanda enviada por V.Sa. à nossa Subseção, a fim de que seja indicado Curador Especial, segue em anexo Ofício de Indicação para as devidas providências.'},
   {title:'📲 Pedir indicação à secretaria',badge:'Interno',primary:false,nao:false,
-   tpl:n=>'Bom dia! 😊\n\nChegou aqui um ofício do fórum solicitando indicação de Curador Especial'+(n?' para o processo de '+n:'')+'.\n\nPoderia verificar e providenciar a indicação? Obrigada! 🙂'}
+   tpl:n=>'Bom dia! 😊\n\nChegou um ofício solicitando indicação de Curador Especial'+(n?' – processo: '+n:'')+'.\n\nPoderia verificar e providenciar? Obrigada! 🙂'}
  ],
- emailResps:[{title:'📧 Resposta ao fórum',subj:'CAD – Ofício de Indicação de Curador Especial',badge:'Recomendada',primary:true,nao:false,
-  tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nEm atendimento à demanda enviada por V.Sa. à nossa Subseção, a fim de que seja indicado Curador Especial, segue em anexo Ofício de Indicação para as devidas providências.\n\nColoco-me à disposição para quaisquer esclarecimentos adicionais.'+ENDE}]},
+ emailResps:[{title:'📧 Resposta ao fórum',subj:'CAD – Ofício de Indicação de Curador Especial',badge:'Padrão',primary:true,nao:false,
+  tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nEm atendimento à demanda de V.Sa., segue em anexo o Ofício de Indicação de Curador Especial para as devidas providências.'+ENDE}]},
 
+// ── RECLAMAÇÃO DE ADVOGADO ──
 {grp:'⚠️ Reclamação de Advogado',id:'rec1',icon:'⚠️',ic:'i-orange',pip:'pip-orange',
  label:'Assistido quer reclamar do advogado',sub:'Verificar CPF → orientar conforme situação',
- who:'Assistido',wc:'#f97316',sim:'Quero reclamar do meu advogado. Ele não me atende e não faz nada no meu processo.',
+ who:'Assistido',wc:'#f97316',sim:'Quero reclamar do meu advogado. Ele não me atende.',
  tags:[{t:'Reclamação',c:'tg-orange'},{t:'Dativo',c:'tg-amber'}],
- ctx:'Pedir o CPF, verificar no sistema e selecionar a situação encontrada para gerar a orientação correta.',
+ ctx:'Pedir CPF → verificar no sistema → selecionar situação abaixo para gerar orientação.',
  cpfChecker:true,
  resps:[
-  {title:'⚠️ Solicitar CPF ao assistido',badge:'1º Passo',primary:true,nao:false,
-   tpl:n=>'Compreendemos a sua situação.\n\nPara verificar o seu caso no sistema, precisamos que informe o seu CPF, por gentileza.'},
+  {title:'⚠️ Solicitar CPF',badge:'1º Passo',primary:true,nao:false,
+   tpl:n=>'Compreendemos a situação.\n\nPara verificar seu caso no sistema, precisamos do seu CPF, por favor.'},
   {title:'⚠️ Confirmação de recebimento',badge:'Alternativa',primary:false,nao:false,
-   tpl:n=>'Oi'+(n?', '+n:'')+'! 😊\n\nAnotei o seu CPF. Vou verificar a situação do seu caso no sistema e já te retorno com as orientações necessárias. Um momento! 🙂'}
+   tpl:n=>'Oi'+(n?', '+n:'')+'! 😊\n\nAnotei o CPF. Vou verificar no sistema e já te retorno com as orientações. Um momento! 🙂'}
  ],
- emailResps:[{title:'📧 Solicitar CPF por e-mail',subj:'CAD – Reclamação de advogado – Dados necessários',badge:'1º Passo',primary:true,nao:false,
-  tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nRecebemos seu contato sobre reclamação de advogado.\n\nPara verificarmos seu caso no sistema, precisamos do seu CPF. Favor retornar com essa informação para darmos prosseguimento.'+ENDE}]},
+ emailResps:[{title:'📧 Solicitar CPF',subj:'CAD – Reclamação de advogado – Dados necessários',badge:'1º Passo',primary:true,nao:false,
+  tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nRecebemos seu contato. Para verificar seu caso, precisamos do CPF do assistido.'+ENDE}]},
 
 {grp:'⚠️ Reclamação de Advogado',id:'rec2',icon:'📂',ic:'i-teal',pip:'pip-teal',
- label:'CPF verificado — Sem processo',sub:'Não há processo cadastrado para este CPF',
- who:'Assistido',wc:'#22b8c9',sim:'[CPF verificado — nenhum processo encontrado]',
- tags:[{t:'Reclamação',c:'tg-orange'},{t:'Sem processo',c:'tg-teal'}],
- ctx:'CPF consultado mas não há processo cadastrado. Orientar a vir pessoalmente com senha.',
- resps:[
-  {title:'📂 Sem processo — Orientar senha',badge:'Padrão',primary:true,nao:false,
-   tpl:n=>'Verificamos o seu CPF no sistema e não foi localizado nenhum processo cadastrado.\n\nPara darmos andamento, é necessário comparecer pessoalmente à nossa sede e retirar uma senha de atendimento.\n\nAtendemos de segunda a sexta, das 9h às 17h, por ordem de chegada.'+DOCS+END_REC},
-  {title:'📂 Sem processo — Versão curta',badge:'Alternativa',primary:false,nao:false,
-   tpl:n=>'Oi'+(n?', '+n:'')+'! 😊\n\nNão localizei processo para o seu CPF no sistema. Você precisa comparecer pessoalmente para pegar uma senha de atendimento.\n\n🕘 Seg–Sex, 9h–17h — sem agendamento, por ordem de chegada.'+DOCS+END_REC}
- ],
- emailResps:[{title:'📧 Sem processo — Orientar',subj:'CAD – Reclamação – Processo não localizado',badge:'Padrão',primary:true,nao:false,
-  tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nNão localizamos processo cadastrado para o CPF informado.\n\nPara prosseguir, é necessário comparecer pessoalmente à nossa sede para retirar uma senha de atendimento.\n\nComparecer em:\n📍 R. Alberto Frediani, 770 – Jd. Frediani, Santana de Parnaíba/SP (CEP 06502-155)\n🕘 Seg–Sex, 9h–17h'+ENDE}]},
+ label:'CPF → Sem processo',sub:'Orientar a vir com senha',
+ who:'Assistido',wc:'#22b8c9',sim:'[CPF sem processo]',
+ tags:[{t:'Reclamação',c:'tg-orange'},{t:'Sem processo',c:'tg-teal'}],ctx:'Nenhum processo encontrado.',
+ resps:[{title:'📂 Sem processo — orientar',badge:'Padrão',primary:true,nao:false,
+  tpl:n=>'Verificamos o CPF e não encontramos processo cadastrado.\n\nÉ necessário comparecer pessoalmente para retirar uma senha de atendimento.\n\n🕘 Seg–Sex, 9h–17h'+DOCS+END_REC}],
+ emailResps:[{title:'📧 Sem processo',subj:'CAD – Processo não localizado',badge:'Padrão',primary:true,nao:false,
+  tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nNão localizamos processo para o CPF informado. Compareça presencialmente para retirar uma senha.\n\n📍 R. Alberto Frediani, 770 – Santana de Parnaíba · 🕘 Seg–Sex, 9h–17h'+ENDE}]},
 
 {grp:'⚠️ Reclamação de Advogado',id:'rec3',icon:'🔄',ic:'i-amber',pip:'pip-amber',
- label:'CPF verificado — Nomeação recusada',sub:'Advogado recusou a nomeação',
- who:'Assistido',wc:'#f59e0b',sim:'[CPF verificado — nomeação recusada pelo advogado]',
- tags:[{t:'Reclamação',c:'tg-orange'},{t:'Nomeação recusada',c:'tg-amber'}],
- ctx:'A nomeação foi recusada pelo advogado. Orientar o assistido a voltar ao atendimento presencialmente para nova indicação.',
- resps:[
-  {title:'🔄 Nomeação recusada — Orientar retorno',badge:'Recomendada',primary:true,nao:false,
-   tpl:n=>'Verificamos o seu caso no sistema e a nomeação do advogado consta como recusada.\n\nNesse caso, é necessário retornar presencialmente à nossa sede para nova indicação de advogado.\n\nAtendemos de segunda a sexta, das 9h às 17h, por ordem de chegada. Traga seus documentos e, se disponível, comprovantes relacionados ao processo.'+DOCS+END_REC},
-  {title:'🔄 Nomeação recusada — Com mais detalhes',badge:'Alternativa',primary:false,nao:false,
-   tpl:n=>'Oi'+(n?', '+n:'')+'! 😊\n\nVerifiquei o seu caso aqui. A nomeação do advogado que foi indicado para você consta como recusada — isso significa que ele não aceitou o caso.\n\nVocê precisará vir pessoalmente para que possamos fazer uma nova indicação de advogado. Não se preocupe, isso faz parte do processo!\n\n🕘 Seg–Sex, 9h–12h — sem agendamento, por ordem de chegada.'+DOCS+END}
- ],
- emailResps:[{title:'📧 Nomeação recusada — Orientar',subj:'CAD – Reclamação – Nomeação recusada',badge:'Recomendada',primary:true,nao:false,
-  tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nA nomeação do advogado indicado para o seu caso consta como recusada em nosso sistema.\n\nComparecer pessoalmente para nova indicação:\n📍 R. Alberto Frediani, 770 – Jd. Frediani, Santana de Parnaíba/SP (CEP 06502-155)\n🕘 Seg–Sex, 9h–17h'+ENDE}]},
+ label:'CPF → Nomeação recusada',sub:'Orientar retorno para nova indicação',
+ who:'Assistido',wc:'#f59e0b',sim:'[Nomeação recusada]',
+ tags:[{t:'Reclamação',c:'tg-orange'},{t:'Nomeação recusada',c:'tg-amber'}],ctx:'Advogado recusou nomeação.',
+ resps:[{title:'🔄 Nomeação recusada',badge:'Recomendada',primary:true,nao:false,
+  tpl:n=>'Verificamos o caso — a nomeação consta como recusada.\n\nÉ necessário retornar presencialmente para nova indicação de advogado.\n\n🕘 Seg–Sex, 9h–17h'+DOCS+END_REC}],
+ emailResps:[{title:'📧 Nomeação recusada',subj:'CAD – Nomeação recusada',badge:'Padrão',primary:true,nao:false,
+  tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nA nomeação do advogado foi recusada. Compareça para nova indicação:\n📍 R. Alberto Frediani, 770 · 🕘 Seg–Sex, 9h–17h'+ENDE}]},
 
 {grp:'⚠️ Reclamação de Advogado',id:'rec4',icon:'✍️',ic:'i-red',pip:'pip-red',
- label:'CPF verificado — Nomeação aceita',sub:'Advogado aceitou — fazer reclamação a próprio punho',
- who:'Assistido',wc:'#e8495a',sim:'[CPF verificado — nomeação aceita pelo advogado]',
+ label:'CPF → Nomeação aceita',sub:'Orientar reclamação por escrito',
+ who:'Assistido',wc:'#e8495a',sim:'[Nomeação aceita]',
  tags:[{t:'Reclamação',c:'tg-orange'},{t:'Nomeação aceita',c:'tg-red'}],
- ctx:'Nomeação foi aceita. Não é possível trocar sem procedimento. Orientar reclamação escrita (a próprio punho) e trazer senha.',
- resps:[
-  {title:'✍️ Nomeação aceita — Orientar reclamação',badge:'Recomendada',primary:true,nao:false,
-   tpl:n=>'Verificamos o seu caso no sistema e a nomeação do advogado indicado está aceita.\n\nComo a nomeação foi formalmente aceita, não é possível realizar a substituição direta — o sistema exige o cumprimento de um procedimento específico.\n\nO que deve ser feito:\n\n✍️ Redigir uma reclamação a próprio punho relatando todos os problemas ocorridos: falta de atendimento, ausência de retorno, inércia no processo — com o máximo de detalhes possível.\n\nComparecer pessoalmente à nossa sede com:\n- A reclamação redigida\n- Seus documentos de identificação\n- Número ou documentos do processo (se disponível)\n\nCom esses documentos em mãos, daremos andamento à sua reclamação.'+END_REC},
-  {title:'✍️ Nomeação aceita — Versão objetiva',badge:'Alternativa',primary:false,nao:false,
-   tpl:n=>'Oi'+(n?', '+n:'')+'! 😊\n\nA nomeação do advogado está aceita no sistema. Não podemos trocar de advogado sem seguir os procedimentos — dependemos do sistema para isso.\n\nVocê precisa:\n1️⃣ Escrever uma reclamação a próprio punho descrevendo os problemas com o advogado\n2️⃣ Vir pessoalmente aqui com essa reclamação + seus documentos + número do processo (se tiver)\n\n🕘 Seg–Sex, 9h–17h — sem agendamento.'+END_REC}
- ],
- emailResps:[{title:'📧 Nomeação aceita — Orientar reclamação',subj:'CAD – Reclamação – Orientações importantes',badge:'Recomendada',primary:true,nao:false,
-  tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nApós verificação, constatamos que a nomeação do advogado indicado para o seu caso está aceita em nosso sistema.\n\nComo a nomeação foi formalmente aceita, não é possível realizar a substituição sem seguir os procedimentos adequados.\n\nOrientações:\n1. Redigir uma reclamação escrita a próprio punho, detalhando todos os problemas\n2. Comparecer presencialmente com:\n   - A reclamação escrita\n   - RG original e CPF\n   - Documentos do processo (número, intimações, etc.)\n\nAtendemos de segunda a sexta, das 9h às 12h, por ordem de chegada — limite de 30 senhas por dia.'+ENDE}]},
-];
+ ctx:'Nomeação aceita — troca exige procedimento formal. Orientar reclamação escrita.',
+ resps:[{title:'✍️ Orientar reclamação',badge:'Recomendada',primary:true,nao:false,
+  tpl:n=>'Verificamos — a nomeação está aceita. Como foi formalmente aceita, a troca direta não é possível.\n\nO que fazer:\n✍️ Escrever uma reclamação a próprio punho relatando os problemas (falta de atendimento, sem retorno, inércia)\n\nVir pessoalmente com:\n- A reclamação redigida\n- Seus documentos\n- Número do processo (se tiver)'+END_REC}],
+ emailResps:[{title:'📧 Nomeação aceita',subj:'CAD – Reclamação – Orientações',badge:'Padrão',primary:true,nao:false,
+  tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nA nomeação está aceita — a substituição exige procedimento formal.\n\n1. Redigir reclamação escrita (a próprio punho) com todos os problemas\n2. Comparecer com: reclamação + RG + CPF + documentos do processo\n\n📍 R. Alberto Frediani, 770 · 🕘 Seg–Sex, 9h–17h'+ENDE}]},
+
+].filter(Boolean);
 
 // ─── STATE ───
 let activeId=null,term='',hist=[],activeChannel='wapp';
 
 function fmtCPF(el){
-  let v=el.value.replace(/\D/g,'');
-  if(v.length>11)v=v.slice(0,11);
-  v=v.replace(/(\d{3})(\d)/,'$1.$2')
-     .replace(/(\d{3})\.(\d{3})(\d)/,'$1.$2.$3')
-     .replace(/(\d{3})\.(\d{3})\.(\d{3})(\d)/,'$1.$2.$3-$4');
+  let v=el.value.replace(/\D/g,'').slice(0,11);
+  v=v.replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})\.(\d{3})(\d)/,'$1.$2.$3').replace(/(\d{3})\.(\d{3})\.(\d{3})(\d)/,'$1.$2.$3-$4');
   el.value=v;
 }
 
 function showCPFStatus(type){
-  const cpf=(document.getElementById('cpf-input')||{value:''}).value;
-  const cpfTxt=cpf||'(CPF não informado)';
-  const name=(document.getElementById('person-name').value||'').trim();
-  const nm=name||'o(a) assistido(a)';
+  const cpf=(document.getElementById('cpf-input')||{value:''}).value||'(CPF não informado)';
+  const name=(document.getElementById('person-name').value||'').trim()||'o(a) assistido(a)';
   let html='';
   if(type==='noproc'){
-    html=`<div class="status-result sr-noproc show">
-      <div class="sr-title">📂 Sem processo — CPF: ${cpfTxt}</div>
-      <div class="sr-body">Nenhum processo localizado. O assistido precisa vir pessoalmente retirar uma senha.</div>
-      <div class="sr-steps">
-        <div class="sr-step"><div class="sr-num">1</div><span>Orientar <strong>${nm}</strong> a comparecer presencialmente</span></div>
-        <div class="sr-step"><div class="sr-num">2</div><span>Retirar senha na ordem de chegada — Seg–Sex, 9h–17h</span></div>
-        <div class="sr-step"><div class="sr-num">3</div><span>Trazer documentos básicos + documentos do caso</span></div>
-      </div>
-      <div class="sr-warn-box">💡 Use as mensagens abaixo para orientar o assistido.</div>
-    </div>`;
+    html=`<div class="status-result sr-noproc show"><div class="sr-title">📂 Sem processo — ${cpf}</div><div class="sr-body">Nenhum processo localizado. Assistido precisa vir pessoalmente retirar uma senha.</div><div class="sr-steps"><div class="sr-step"><div class="sr-num">1</div><span>Orientar <strong>${name}</strong> a comparecer presencialmente</span></div><div class="sr-step"><div class="sr-num">2</div><span>Retirar senha — Seg–Sex, 9h–17h</span></div><div class="sr-step"><div class="sr-num">3</div><span>Trazer documentos + documentos do caso</span></div></div><div class="sr-warn-box">💡 Use as mensagens abaixo.</div></div>`;
   }else if(type==='recused'){
-    html=`<div class="status-result sr-recused show">
-      <div class="sr-title">⚠️ Nomeação recusada — CPF: ${cpfTxt}</div>
-      <div class="sr-body">O advogado recusou a nomeação. Assistido deve retornar para nova indicação.</div>
-      <div class="sr-steps">
-        <div class="sr-step"><div class="sr-num">1</div><span>Informar <strong>${nm}</strong> que a nomeação foi recusada</span></div>
-        <div class="sr-step"><div class="sr-num">2</div><span>Orientar a voltar presencialmente para nova indicação</span></div>
-        <div class="sr-step"><div class="sr-num">3</div><span>Trazer documentos + comprovantes do processo (se tiver)</span></div>
-      </div>
-      <div class="sr-warn-box">⚠️ Nova indicação só é feita presencialmente.</div>
-    </div>`;
+    html=`<div class="status-result sr-recused show"><div class="sr-title">⚠️ Nomeação recusada — ${cpf}</div><div class="sr-body">Advogado recusou. Retornar para nova indicação.</div><div class="sr-steps"><div class="sr-step"><div class="sr-num">1</div><span>Informar <strong>${name}</strong> que a nomeação foi recusada</span></div><div class="sr-step"><div class="sr-num">2</div><span>Orientar retorno presencial para nova indicação</span></div><div class="sr-step"><div class="sr-num">3</div><span>Trazer documentos + comprovantes</span></div></div><div class="sr-warn-box">⚠️ Nova indicação só presencialmente.</div></div>`;
   }else if(type==='accepted'){
-    html=`<div class="status-result sr-accepted show">
-      <div class="sr-title">✅ Nomeação aceita — CPF: ${cpfTxt}</div>
-      <div class="sr-body"><strong>Não é possível trocar sem procedimento formal</strong> — o sistema exige trâmite específico.</div>
-      <div class="sr-steps">
-        <div class="sr-step"><div class="sr-num">1</div><span>Explicar que a troca direta não é possível</span></div>
-        <div class="sr-step"><div class="sr-num">2</div><span>Orientar <strong>${nm}</strong> a escrever reclamação <strong>a próprio punho</strong></span></div>
-        <div class="sr-step"><div class="sr-num">3</div><span>Vir pessoalmente com a reclamação + documentos + nº do processo</span></div>
-      </div>
-      <div class="sr-warn-box">✍️ Reclamação manuscrita detalhando: falta de atendimento, ausência de retorno, inércia.</div>
-    </div>`;
+    html=`<div class="status-result sr-accepted show"><div class="sr-title">✅ Nomeação aceita — ${cpf}</div><div class="sr-body"><strong>Troca direta não é possível</strong> — exige procedimento formal.</div><div class="sr-steps"><div class="sr-step"><div class="sr-num">1</div><span>Explicar que troca direta não é possível</span></div><div class="sr-step"><div class="sr-num">2</div><span>Orientar <strong>${name}</strong> a escrever reclamação <strong>a próprio punho</strong></span></div><div class="sr-step"><div class="sr-num">3</div><span>Vir com reclamação + documentos + nº do processo</span></div></div><div class="sr-warn-box">✍️ Detalhar: falta de atendimento, sem retorno, inércia.</div></div>`;
   }
   document.getElementById('cpf-status-result').innerHTML=html;
 }
 
 function switchChannel(ch){
   activeChannel=ch;
-  document.getElementById('ctab-wapp').classList.toggle('act',ch==='wapp');
-  document.getElementById('ctab-email').classList.toggle('act',ch==='email');
-  document.getElementById('pane-wapp').classList.toggle('on',ch==='wapp');
-  document.getElementById('pane-email').classList.toggle('on',ch==='email');
+  ['wapp','email'].forEach(c=>{
+    document.getElementById('ctab-'+c).classList.toggle('act',c===ch);
+    document.getElementById('pane-'+c).classList.toggle('on',c===ch);
+  });
   const s=S.find(x=>x.id===activeId);
-  if(s){if(ch==='email')renderEmailResps(s);else renderResps(s);}
+  if(s){ch==='email'?renderEmailResps(s):renderResps(s);}
 }
 
 function renderSb(f){
@@ -1312,7 +950,7 @@ function renderSb(f){
       </button>`;
     });
   });
-  if(!h)h=`<div style="padding:20px;text-align:center;font-size:12px;color:var(--sub)">Nenhum resultado para "<b>${f}</b>"</div>`;
+  if(!h)h=`<div style="padding:18px;text-align:center;font-size:12px;color:var(--sub)">Nenhum resultado para "<b>${f}</b>"</div>`;
   el.innerHTML=h;
 }
 renderSb('');
@@ -1330,9 +968,8 @@ function buscar(v){
   renderSb(v);
 }
 
-// Build quick tags
 (function(){
-  const tags=['Informativo geral','Divórcio','Pensão','Trabalhista','INSS','Criminal','Documentos','Áudio','Vagas esgotadas','Violência doméstica','Convênio','Dativo','Urgente','Como chegar','Encerramento','Secretaria','Reclamação'];
+  const tags=['Informativo','Divórcio','Pensão','Trabalhista','INSS','Criminal','Documentos','Áudio','Vagas esgotadas','Violência doméstica','Convênio','Dativo','Urgente','Como chegar','Secretaria','Reclamação'];
   document.getElementById('wtags').innerHTML=tags.map(t=>`<button class="wtag" onclick="buscar('${t}')">${t}</button>`).join('');
 })();
 
@@ -1360,14 +997,11 @@ function pick(id){
   if(box){
     box.style.display=s.cpfChecker?'block':'none';
     if(s.cpfChecker){
-      const inp=document.getElementById('cpf-input');
-      if(inp)inp.value='';
-      const res=document.getElementById('cpf-status-result');
-      if(res)res.innerHTML='';
+      const inp=document.getElementById('cpf-input');if(inp)inp.value='';
+      const res=document.getElementById('cpf-status-result');if(res)res.innerHTML='';
     }
   }
-  renderResps(s);
-  renderEmailResps(s);
+  renderResps(s);renderEmailResps(s);
 }
 
 function renderResps(s){
@@ -1377,141 +1011,91 @@ function renderResps(s){
     const txt=r.tpl(name);
     const secBtn=isOfic?`<button class="btn btn-sec" onclick="wappSec('ta${i}')">📲 Secretaria</button>`:'';
     return `<div class="rcard${r.primary?' primary':''}${r.nao?' danger':''}" id="c${i}">
-      <div class="rcard-hd">
-        <div class="rcard-title${r.nao?' danger':''}">${r.title}</div>
-        <span class="badge ${r.primary?'b-main':r.nao?'b-no':r.badge==='Interno'?'b-int':r.badge==='1º Passo'?'b-orange':'b-alt'}">${r.badge}</span>
-      </div>
+      <div class="rcard-hd"><div class="rcard-title${r.nao?' danger':''}">${r.title}</div>
+        <span class="badge ${r.primary?'b-main':r.nao?'b-no':r.badge==='Interno'?'b-int':r.badge==='1º Passo'?'b-orange':'b-alt'}">${r.badge}</span></div>
       <textarea class="reditor" id="ta${i}" oninput="onIn(this,'cc${i}')">${txt}</textarea>
       <div class="rcard-ft">
         <button class="btn btn-copy" onclick="copiar('ta${i}','${r.title.replace(/'/g,"\\'")}')">📋 Copiar</button>
         <button class="btn btn-wapp" onclick="wapp('ta${i}')">📱 WhatsApp</button>
         ${secBtn}
-        <button class="btn btn-ghost" onclick="resetMsg('ta${i}',${i},'wapp')" title="Redefinir">↩ Redefinir</button>
+        <button class="btn btn-ghost" onclick="resetMsg('ta${i}',${i},'wapp')">↩</button>
         <span class="chars" id="cc${i}">${txt.length} chars</span>
-      </div>
-    </div>`;
+      </div></div>`;
   }).join('');
   setTimeout(()=>document.querySelectorAll('#resp-stack .reditor').forEach(autoH),30);
 }
 
 function renderEmailResps(s){
   const name=(document.getElementById('person-name').value||'').trim();
-  const emailResps=s.emailResps||[];
-  if(!emailResps.length){
-    document.getElementById('resp-stack-email').innerHTML=
-      '<div style="padding:24px;text-align:center;font-size:13px;color:var(--dim);line-height:2">📧 Sem resposta de e-mail para este cenário.<br><span style="font-size:11px">Use a aba WhatsApp e adapte o texto.</span></div>';
+  const er=s.emailResps||[];
+  if(!er.length){
+    document.getElementById('resp-stack-email').innerHTML='<div style="padding:22px;text-align:center;font-size:12.5px;color:var(--dim);line-height:2">📧 Sem resposta de e-mail para este cenário.<br><span style="font-size:11px">Use a aba WhatsApp e adapte.</span></div>';
     return;
   }
-  document.getElementById('resp-stack-email').innerHTML=emailResps.map((r,i)=>{
+  document.getElementById('resp-stack-email').innerHTML=er.map((r,i)=>{
     const txt=r.tpl(name);
     return `<div class="rcard${r.primary?' primary':''}${r.nao?' danger':''}" id="ec${i}">
-      <div class="rcard-hd">
-        <div class="rcard-title${r.nao?' danger':''}">${r.title}</div>
-        <span class="badge ${r.primary?'b-email':r.nao?'b-no':'b-alt'}">${r.badge}</span>
-      </div>
-      <div class="email-subj">
-        <span class="email-subj-lbl">Assunto</span>
-        <input class="email-subj-input" id="esub${i}" type="text" value="${(r.subj||'').replace(/"/g,'&quot;')}" placeholder="Assunto...">
-      </div>
+      <div class="rcard-hd"><div class="rcard-title${r.nao?' danger':''}">${r.title}</div>
+        <span class="badge ${r.primary?'b-email':r.nao?'b-no':'b-alt'}">${r.badge}</span></div>
+      <div class="email-subj"><span class="email-subj-lbl">Assunto</span>
+        <input class="email-subj-input" id="esub${i}" type="text" value="${(r.subj||'').replace(/"/g,'&quot;')}" placeholder="Assunto..."></div>
       <textarea class="reditor" id="eta${i}" oninput="onIn(this,'ecc${i}')">${txt}</textarea>
       <div class="rcard-ft">
-        <button class="btn btn-copy" onclick="copiarEmail('eta${i}','${r.title.replace(/'/g,"\\'")}')">📋 Copiar texto</button>
+        <button class="btn btn-copy" onclick="copiarEmail('eta${i}','${r.title.replace(/'/g,"\\'")}')">📋 Copiar</button>
         <button class="btn btn-email" onclick="abrirEmail('esub${i}','eta${i}')">📧 Abrir no e-mail</button>
-        <button class="btn btn-ghost" onclick="resetMsg('eta${i}',${i},'email')" title="Redefinir">↩ Redefinir</button>
+        <button class="btn btn-ghost" onclick="resetMsg('eta${i}',${i},'email')">↩</button>
         <span class="chars" id="ecc${i}">${txt.length} chars</span>
-      </div>
-    </div>`;
+      </div></div>`;
   }).join('');
   setTimeout(()=>document.querySelectorAll('#resp-stack-email .reditor').forEach(autoH),30);
 }
 
-function autoH(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,230)+'px';}
+function autoH(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,220)+'px';}
 function onIn(el,id){autoH(el);const c=document.getElementById(id);if(c)c.textContent=el.value.length+' chars';}
 
 function atualizaNome(){
-  const s=S.find(x=>x.id===activeId);
-  if(!s)return;
+  const s=S.find(x=>x.id===activeId);if(!s)return;
   const name=(document.getElementById('person-name').value||'').trim();
-  s.resps.forEach((r,i)=>{
-    const el=document.getElementById('ta'+i);if(!el)return;
-    el.value=r.tpl(name);autoH(el);
-    const cc=document.getElementById('cc'+i);if(cc)cc.textContent=el.value.length+' chars';
-  });
-  (s.emailResps||[]).forEach((r,i)=>{
-    const el=document.getElementById('eta'+i);if(!el)return;
-    el.value=r.tpl(name);autoH(el);
-    const cc=document.getElementById('ecc'+i);if(cc)cc.textContent=el.value.length+' chars';
-  });
+  s.resps.forEach((r,i)=>{const el=document.getElementById('ta'+i);if(!el)return;el.value=r.tpl(name);autoH(el);const cc=document.getElementById('cc'+i);if(cc)cc.textContent=el.value.length+' chars';});
+  (s.emailResps||[]).forEach((r,i)=>{const el=document.getElementById('eta'+i);if(!el)return;el.value=r.tpl(name);autoH(el);const cc=document.getElementById('ecc'+i);if(cc)cc.textContent=el.value.length+' chars';});
 }
 
-function resetMsg(taId,idx,channel){
+function resetMsg(taId,idx,ch){
   const s=S.find(x=>x.id===activeId);if(!s)return;
   const name=(document.getElementById('person-name').value||'').trim();
   const el=document.getElementById(taId);if(!el)return;
-  el.value=channel==='email'?s.emailResps[idx].tpl(name):s.resps[idx].tpl(name);
-  autoH(el);toast('↩ Mensagem redefinida');
+  el.value=ch==='email'?s.emailResps[idx].tpl(name):s.resps[idx].tpl(name);
+  autoH(el);toast('↩ Redefinido');
 }
 
-function copiar(id,title){
-  const el=document.getElementById(id);if(!el)return;
-  navigator.clipboard.writeText(el.value).then(()=>{toast('📋 Copiado!');addHist(title,el.value);});
-}
-function copiarEmail(bodyId,title){
-  const body=document.getElementById(bodyId);if(!body)return;
-  navigator.clipboard.writeText(body.value).then(()=>{toast('📋 Texto copiado!');addHist(title,body.value);});
-}
-function abrirEmail(subjId,bodyId){
-  const subj=document.getElementById(subjId);
-  const body=document.getElementById(bodyId);if(!body)return;
-  window.open('mailto:aj.santana.parnai@oabsp.org.br?subject='+encodeURIComponent(subj?subj.value:'')+'&body='+encodeURIComponent(body.value),'_blank');
-}
-function wapp(id){
-  const el=document.getElementById(id);if(!el)return;
-  window.open('https://wa.me/?text='+encodeURIComponent(el.value),'_blank');
-}
-function wappSec(id){
-  const el=document.getElementById(id);if(!el)return;
-  window.open('https://wa.me/5511937248448?text='+encodeURIComponent(el.value),'_blank');
-  toast('📲 Abrindo WhatsApp da secretaria...');
-}
+function copiar(id,title){const el=document.getElementById(id);if(!el)return;navigator.clipboard.writeText(el.value).then(()=>{toast('📋 Copiado!');addHist(title,el.value);});}
+function copiarEmail(bodyId,title){const body=document.getElementById(bodyId);if(!body)return;navigator.clipboard.writeText(body.value).then(()=>{toast('📋 Copiado!');addHist(title,body.value);});}
+function abrirEmail(subjId,bodyId){const s=document.getElementById(subjId),b=document.getElementById(bodyId);if(!b)return;window.open('mailto:aj.santana.parnai@oabsp.org.br?subject='+encodeURIComponent(s?s.value:'')+'&body='+encodeURIComponent(b.value),'_blank');}
+function wapp(id){const el=document.getElementById(id);if(!el)return;window.open('https://wa.me/?text='+encodeURIComponent(el.value),'_blank');}
+function wappSec(id){const el=document.getElementById(id);if(!el)return;window.open('https://wa.me/5511937248448?text='+encodeURIComponent(el.value),'_blank');toast('📲 Abrindo secretaria...');}
 
 function addHist(title,text){
   const now=new Date();
   const t=String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');
-  hist.unshift({title,text,t});
-  if(hist.length>10)hist.pop();
-  renderHist();
+  hist.unshift({title,text,t});if(hist.length>10)hist.pop();renderHist();
 }
 function renderHist(){
   const el=document.getElementById('hist-chips');
-  if(!hist.length){
-    el.innerHTML='<span class="hist-empty">Nenhuma cópia ainda — as últimas aparecerão aqui</span>';
-    return;
-  }
-  el.innerHTML=hist.map((h,i)=>`<div class="hchip" onclick="recop(${i})" title="${h.title}">📋 ${h.title.replace(/[^\w\sÀ-ú]/gu,'').trim().substring(0,26)}<span class="hchip-t">${h.t}</span></div>`).join('');
+  if(!hist.length){el.innerHTML='<span class="hist-empty">Nenhuma cópia ainda</span>';return;}
+  el.innerHTML=hist.map((h,i)=>`<div class="hchip" onclick="recop(${i})" title="${h.title}">📋 ${h.title.replace(/[^\w\sÀ-ú]/gu,'').trim().substring(0,24)}<span class="hchip-t">${h.t}</span></div>`).join('');
 }
 function recop(i){navigator.clipboard.writeText(hist[i].text).then(()=>toast('📋 Recopiado!'));}
 function toggleGuide(){document.getElementById('guide').classList.toggle('open');}
 
 let _tt;
-function toast(msg){
-  const el=document.getElementById('toast');
-  el.textContent=msg;el.classList.add('show');
-  clearTimeout(_tt);_tt=setTimeout(()=>el.classList.remove('show'),2400);
-}
+function toast(msg){const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');clearTimeout(_tt);_tt=setTimeout(()=>el.classList.remove('show'),2400);}
 
-// Clock
 function clock(){
-  const n=new Date();
-  const d=['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
-  const h=String(n.getHours()).padStart(2,'0');
-  const m=String(n.getMinutes()).padStart(2,'0');
-  const s=String(n.getSeconds()).padStart(2,'0');
+  const n=new Date(),d=['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
   const el=document.getElementById('clock');
-  if(el) el.textContent=d[n.getDay()]+' '+h+':'+m+':'+s;
+  if(el)el.textContent=d[n.getDay()]+' '+String(n.getHours()).padStart(2,'0')+':'+String(n.getMinutes()).padStart(2,'0')+':'+String(n.getSeconds()).padStart(2,'0');
 }
-clock();
-setInterval(clock,1000);
+clock();setInterval(clock,1000);
 </script>
 </body>
 </html>
