@@ -449,7 +449,7 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
           <div class="ginfo">
             <strong>📋 Documentos básicos:</strong> RG original + CPF · Comprovante de residência · Comprovante de renda de todos da família · Patrimônio se houver<br><br>
             <strong>📍</strong> Av. Tenente Marques, 5297 – Jd. do Luar, Santana de Parnaíba/SP (POUPATEMPO)<br>
-            <strong>📞</strong> (11) 4154-5191 &nbsp;·&nbsp; <strong>📧</strong> aj.santana.parnai@oabsp.org.br &nbsp;·&nbsp; <strong>🕘</strong> Seg–Sex, 9h–12h &nbsp;·&nbsp; <strong>⚠️</strong> 30 senhas/dia
+            <strong>📞</strong> (11) 4154-5191 &nbsp;·&nbsp; <strong>📧</strong> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a9c8c387dac8c7ddc8c7c887d9c8dbc7c8c0e9c6c8cbdad987c6dbce87cbdb">[email&#160;protected]</a> &nbsp;·&nbsp; <strong>🕘</strong> Seg–Sex, 9h–12h &nbsp;·&nbsp; <strong>⚠️</strong> 30 senhas/dia
           </div>
           <div style="margin-top:14px"><button class="btn btn-ghost" onclick="window.print()">🖨️ Imprimir</button></div>
         </div>
@@ -462,7 +462,7 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
   </div>
 </div>
 <div class="toast" id="toast"></div>
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const DOCS='\n\nDocumentos necessários:\n- RG original e CPF (originais)\n- Comprovante de residência atualizado (água, luz, gás ou contrato de aluguel)\n- Comprovante de renda de todos que moram com você:\n  • Com carteira assinada: 3 últimos holerites\n  • Sem carteira assinada: extrato bancário dos últimos 3 meses ou declaração de renda\n- Se tiver bens (imóvel, carro, poupança): documentação desses bens\n\n⚠️ Sem documentação completa, o atendimento não poderá ser realizado.';
 const END='\n\n📍 Av. Tenente Marques, 5297 – Jd. do Luar, Santana de Parnaíba/SP (POUPATEMPO)\n📞 (11) 4154-5191\n🕘 Seg–Sex, 9h–12h  ⚠️ 30 senhas/dia';
 const END_REC='\n\n📍 R. Alberto Frediani, 770 – Jd. Frediani, Santana de Parnaíba/SP\n    CEP 06502-155\n🕘 Seg–Sex, 9h–17h';
@@ -516,7 +516,7 @@ const S=[
  who:'Assistido',wc:'#3b82f6',sim:'Oi, vi o número aqui. Vocês fazem o quê exatamente?',
  tags:[{t:'Boas-vindas',c:'tg-blue'}],ctx:'Pessoa sem contexto. Explicar de forma simples.',
  resps:[{title:'✉️ Apresentar o serviço',badge:'Recomendada',primary:true,nao:false,
-  tpl:n=>'Olá'+(n?', '+n:'')+'! 😊\n\nAqui é a Cássia.\n\nA gente é a CAD – Comissão de Advocacia Dativa da OAB Santana de Parnaíba. Oferecemos atendimento jurídico gratuito para quem não tem condições de pagar advogado particular.\n\nÉ tudo presencial aqui na nossa sede, com advogados da OAB. É só vir com os documentos e a gente te orienta! 😊'+DOCS+END}],
+  tpl:n=>'Olá'+(n?', '+n:'')+'! 😊\n\nAqui é a Cássia.\n\nSomos a CAD – Comissão de Advocacia Dativa da OAB Santana de Parnaíba. Oferecemos atendimento jurídico gratuito para quem não tem condições de pagar advogado particular.\n\nO atendimento é presencial, com advogados da OAB. Basta comparecer com os documentos e orientamos sobre o seu caso. 😊'+DOCS+END}],
  emailResps:[{title:'📧 Apresentação por e-mail',subj:'CAD – O que somos e como podemos ajudar',badge:'Recomendada',primary:true,nao:false,
   tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nA CAD oferece atendimento jurídico gratuito para quem não tem condições de contratar advogado particular. O atendimento é presencial, de segunda a sexta, das 9h às 12h.\n\nDocumentos necessários:\n- RG original e CPF\n- Comprovante de residência atualizado\n- Comprovante de renda de todos que moram com você\n- Se tiver bens: documentação correspondente'+ENDE}]},
 {grp:'👤 Primeiro contato',id:'bv2',icon:'🙋',ic:'i-blue',pip:null,
@@ -524,7 +524,7 @@ const S=[
  who:'Assistido',wc:'#3b82f6',sim:'Preciso de ajuda e não tenho dinheiro para pagar. Vocês podem me ajudar?',
  tags:[{t:'Boas-vindas',c:'tg-blue'},{t:'Primeiro contato',c:'tg-teal'}],ctx:'Confirmar e orientar.',
  resps:[{title:'✉️ Confirmar e orientar',badge:'Recomendada',primary:true,nao:false,
-  tpl:n=>'Olá'+(n?', '+n:'')+'! 😊\n\nSim! Aqui é a Cássia e a gente pode te ajudar sim.\n\nO atendimento é gratuito, presencial, de segunda a sexta das 9h às 12h. Não precisa agendar — é por ordem de chegada, só chegar cedo porque as vagas são limitadas a 30 por dia.'+DOCS+END}],
+  tpl:n=>'Olá'+(n?', '+n:'')+'! 😊\n\nSim! Aqui é a Cássia e podemos ajudar.\n\nO atendimento é gratuito, presencial, de segunda a sexta, das 9h às 12h. Não é necessário agendar — o atendimento é por ordem de chegada, com limite de 30 senhas por dia.'+DOCS+END}],
  emailResps:[{title:'📧 Confirmar por e-mail',subj:'CAD – Podemos te ajudar!',badge:'Recomendada',primary:true,nao:false,
   tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nSim, podemos ajudar! A CAD oferece atendimento jurídico gratuito. O atendimento é presencial, de segunda a sexta, das 9h às 12h, por ordem de chegada — limite de 30 senhas por dia.\n\nDocumentos necessários:\n- RG original e CPF\n- Comprovante de residência atualizado\n- Comprovante de renda de todos que moram com você\n- Se tiver bens: documentação correspondente'+ENDE}]},
 {grp:'👤 Primeiro contato',id:'bv3',icon:'📅',ic:'i-blue',pip:null,
@@ -700,7 +700,7 @@ const S=[
  who:'Assistido',wc:'#c9973a',sim:'[📎 Imagem]',
  tags:[{t:'Documentos',c:'tg-gold'}],ctx:'Não fazemos avaliação de documentos por WhatsApp.',
  resps:[{title:'📸 Não avaliamos por aqui',badge:'Recomendada',primary:true,nao:false,
-  tpl:n=>'Oi'+(n?', '+n:'')+'! 😊 Aqui é a Cássia.\n\nInfelizmente não consigo avaliar documentos pelo WhatsApp. Precisa vir pessoalmente com os originais.\n\nO atendimento é de segunda a sexta, das 9h às 12h — sem agendamento! 😊'+DOCS+END}],
+  tpl:n=>'Documentos não podem ser avaliados por WhatsApp.\n\nÉ necessário comparecer pessoalmente com os documentos originais.\n\nAtendemos de segunda a sexta, das 9h às 12h, sem necessidade de agendamento prévio.'+DOCS+END}],
  emailResps:[]},
 
 // ── AGENDAMENTO ──
@@ -709,7 +709,7 @@ const S=[
  who:'Assistido',wc:'#6e89b8',sim:'Fui lá hoje mas as vagas já tinham acabado.',
  tags:[{t:'Vagas esgotadas',c:'tg-red'},{t:'Agendamento',c:'tg-blue'}],ctx:'Limite de 30 senhas atingido.',
  resps:[{title:'📅 Vagas esgotadas',badge:'Padrão',primary:true,nao:false,
-  tpl:n=>'Oi'+(n?', '+n:'')+'! 😔\n\nAqui é a Cássia. Infelizmente hoje as 30 senhas do dia já se esgotaram.\n\nMas não desanima — volte amanhã bem cedinho (antes das 9h se puder) que você garante a vaga!'+DOCS+END}],
+  tpl:n=>'As 30 senhas de atendimento de hoje já foram distribuídas.\n\nRetorne amanhã com antecedência — recomendamos chegar antes das 9h para garantir o atendimento.'+DOCS+END}],
  emailResps:[{title:'📧 Vagas esgotadas',subj:'CAD – Atendimento indisponível hoje',badge:'Padrão',primary:true,nao:false,
   tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nO limite diário de 30 senhas já foi atingido. Retorne no próximo dia útil, de preferência antes das 9h, para garantir sua vaga.'+ENDE}]},
 {grp:'📅 Agendamento e horários',id:'age2',icon:'🌙',ic:'i-slate',pip:null,
@@ -717,7 +717,7 @@ const S=[
  who:'Assistido',wc:'#6e89b8',sim:'Oi, boa noite! Queria saber como faço para ser atendida.',
  tags:[{t:'Fora do horário',c:'tg-gold'},{t:'Agendamento',c:'tg-blue'}],ctx:'Mensagem fora do horário.',
  resps:[{title:'🌙 Fora do horário',badge:'Padrão',primary:true,nao:false,
-  tpl:n=>'Oi'+(n?', '+n:'')+'! 😊\n\nAqui é a Cássia. Obrigada pelo contato! No momento estou fora do horário, mas respondo assim que possível no próximo dia útil.\n\nAtendo de segunda a sexta, das 9h às 12h. Até lá! 🙂'+DOCS+END}],
+  tpl:n=>'Obrigada pelo contato. Sua mensagem foi recebida fora do horário de atendimento e será respondida no próximo dia útil.\n\nAtendemos de segunda a sexta, das 9h às 12h.'+DOCS+END}],
  emailResps:[{title:'📧 Fora do horário',subj:'CAD – Mensagem fora do horário',badge:'Padrão',primary:true,nao:false,
   tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nSua mensagem foi recebida fora do horário de atendimento. Retornaremos no próximo dia útil, de segunda a sexta, das 9h às 12h.'+ENDE}]},
 {grp:'📅 Agendamento e horários',id:'age3',icon:'🕘',ic:'i-slate',pip:null,
@@ -725,7 +725,7 @@ const S=[
  who:'Assistido',wc:'#6e89b8',sim:'Qual é o horário de atendimento de vocês?',
  tags:[{t:'Agendamento',c:'tg-blue'},{t:'Horário',c:'tg-gold'}],ctx:'Informar horário e limite de 30 senhas.',
  resps:[{title:'🕘 Informar horário',badge:'Recomendada',primary:true,nao:false,
-  tpl:n=>'Oi'+(n?', '+n:'')+'! 😊 Aqui é a Cássia!\n\nA gente atende de segunda a sexta, das 9h às 12h, de forma presencial, por ordem de chegada.\n\nSó um aviso: o limite é de 30 senhas por dia, então vale chegar antes das 9h para garantir a vaga! 😊'+DOCS+END}],
+  tpl:n=>'O atendimento é presencial, de segunda a sexta, das 9h às 12h, por ordem de chegada.\n\nInformamos que o limite é de 30 senhas por dia — recomendamos chegar antes das 9h para garantir o atendimento.'+DOCS+END}],
  emailResps:[{title:'📧 Horário por e-mail',subj:'CAD – Horário de atendimento',badge:'Recomendada',primary:true,nao:false,
   tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nAtendemos de segunda a sexta, das 9h às 12h, presencialmente, por ordem de chegada — limite de 30 senhas por dia.'+ENDE}]},
 {grp:'📅 Agendamento e horários',id:'age4',icon:'📆',ic:'i-slate',pip:null,
@@ -733,7 +733,7 @@ const S=[
  who:'Assistido',wc:'#6e89b8',sim:'Vocês atendem no sábado?',
  tags:[{t:'Agendamento',c:'tg-blue'},{t:'Horário',c:'tg-gold'}],ctx:'Não atendemos sábado nem feriado.',
  resps:[{title:'📆 Não atendemos sábado',badge:'Padrão',primary:true,nao:false,
-  tpl:n=>'Oi'+(n?', '+n:'')+'! 😊 Aqui é a Cássia.\n\nInfelizmente não, só atendemos de segunda a sexta, das 9h às 12h — feriados também não.\n\nSe puder, apareça num dia útil bem cedinho! 😊'+DOCS+END}],
+  tpl:n=>'O atendimento é realizado exclusivamente de segunda a sexta, das 9h às 12h. Não atendemos aos sábados, domingos ou feriados.'+DOCS+END}],
  emailResps:[{title:'📧 Não atendemos sábado',subj:'CAD – Dias de atendimento',badge:'Padrão',primary:true,nao:false,
   tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nAtendemos apenas em dias úteis, de segunda a sexta, das 9h às 12h. Não atendemos sábados, domingos ou feriados.'+ENDE}]},
 
@@ -765,7 +765,7 @@ const S=[
  who:'Assistido',wc:'#8b5cf6',sim:'Como está o meu processo?',
  tags:[{t:'Acompanhamento',c:'tg-blue'},{t:'Situação delicada',c:'tg-gold'}],ctx:'Acompanhamento é presencial.',
  resps:[{title:'🔄 Orientar comparecimento',badge:'Padrão',primary:true,nao:false,
-  tpl:n=>'Oi'+(n?', '+n:'')+'! 😊\n\nAqui é a Cássia. Para acompanhar o seu processo, precisa vir pessoalmente aqui na sede.\n\nTraga seus documentos e, se tiver, o protocolo de atendimento. A gente te ajuda assim que você chegar! 😊'+DOCS+END}],
+  tpl:n=>'Para acompanhar o seu caso, é necessário comparecer pessoalmente à nossa sede.\n\nTraga seus documentos e, se disponível, o protocolo do atendimento anterior.'+DOCS+END}],
  emailResps:[{title:'📧 Acompanhamento',subj:'CAD – Acompanhamento do seu caso',badge:'Padrão',primary:true,nao:false,
   tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nO acompanhamento de processos é realizado exclusivamente de forma presencial. Compareça com seus documentos e protocolo de atendimento (se tiver).'+ENDE}]},
 {grp:'😓 Situações delicadas',id:'del3',icon:'📧',ic:'i-slate',pip:null,
@@ -773,7 +773,7 @@ const S=[
  who:'Assistido',wc:'#8b5cf6',sim:'Não consigo ir até vocês. Podem me ajudar pelo WhatsApp?',
  tags:[{t:'Situação delicada',c:'tg-gold'}],ctx:'Não fazemos orientação jurídica por WhatsApp.',
  resps:[{title:'📧 Indicar canal correto',badge:'Padrão',primary:true,nao:false,
-  tpl:n=>'Oi'+(n?', '+n:'')+'! 😊\n\nAqui é a Cássia. Infelizmente não consigo dar orientação jurídica pelo WhatsApp.\n\nMas você pode nos mandar um e-mail contando sua situação:\n📧 aj.santana.parnai@oabsp.org.br\n\nO atendimento completo precisa ser presencial, tá? Se tiver como vir, a gente te ajuda aqui! 😊'+DOCS+END}],
+  tpl:n=>'Não é possível fornecer orientação jurídica por WhatsApp.\n\nPara dúvidas gerais, entre em contato pelo e-mail:\n📧 aj.santana.parnai@oabsp.org.br\n\nO atendimento completo é presencial. Caso seja possível comparecer, estaremos à disposição.'+DOCS+END}],
  emailResps:[{title:'📧 Orientação à distância',subj:'CAD – Informações sobre atendimento',badge:'Padrão',primary:true,nao:false,
   tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nPodemos esclarecer dúvidas gerais por e-mail, mas o atendimento jurídico completo é presencial.'+ENDE}]},
 {grp:'😓 Situações delicadas',id:'del4',icon:'👥',ic:'i-slate',pip:null,
@@ -781,7 +781,7 @@ const S=[
  who:'Assistido',wc:'#8b5cf6',sim:'Posso levar minha filha para me ajudar?',
  tags:[{t:'Situação delicada',c:'tg-gold'}],ctx:'Consulta é só com a parte.',
  resps:[{title:'👥 Orientar acompanhante',badge:'Padrão',primary:true,nao:false,
-  tpl:n=>'Oi'+(n?', '+n:'')+'! 😊\n\nAqui é a Cássia — pode vir acompanhada sim! Só que a consulta com o advogado é só com a pessoa do caso, o acompanhante aguarda do lado de fora.\n\nSe tiver dificuldade de locomoção ou comunicação, pode vir com alguém de confiança para ajudar. 😊'+DOCS+END}],
+  tpl:n=>'Sim, é permitido comparecer acompanhado(a).\n\nA consulta com o advogado é realizada exclusivamente com a parte envolvida — o acompanhante aguarda na área externa.\n\nExceção aplica-se a casos de dificuldade de locomoção ou comunicação.'+DOCS+END}],
  emailResps:[{title:'📧 Orientar acompanhante',subj:'CAD – Sobre acompanhante no atendimento',badge:'Padrão',primary:true,nao:false,
   tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nPode vir acompanhado(a). O atendimento com o advogado é apenas com a parte envolvida — o acompanhante aguarda na área externa. Exceção para dificuldade de locomoção ou comunicação.'+ENDE}]},
 {grp:'😓 Situações delicadas',id:'del5',icon:'🔁',ic:'i-slate',pip:null,
@@ -790,7 +790,7 @@ const S=[
  tags:[{t:'Retorno',c:'tg-purple'},{t:'Situação delicada',c:'tg-gold'}],ctx:'Pessoa já atendida quer dar continuidade.',
  resps:[
   {title:'🔁 Orientar retorno',badge:'Recomendada',primary:true,nao:false,
-   tpl:n=>'Oi'+(n?', '+n:'')+'! 😊\n\nAqui é a Cássia — claro, pode voltar sim!\n\nVenha de segunda a sexta, das 9h às 12h. Se tiver o protocolo do atendimento anterior, traz junto — facilita muito!'+DOCS+END},
+   tpl:n=>'Claro'+(n?', '+n:'')+'! Pode retornar sem problemas.\n\nCompareça de segunda a sexta, das 9h às 12h. Se disponível, traga o protocolo do atendimento anterior — isso facilita o processo.'+DOCS+END},
   {title:'🔁 Caso encerrado',badge:'Alternativa',primary:false,nao:false,
    tpl:n=>'Oi'+(n?', '+n:'')+'! 😊\n\nPode sim retornar! Se o caso anterior já foi encerrado e você tem uma situação nova, basta vir com a documentação atualizada.'+DOCS+END}
  ],
@@ -802,9 +802,9 @@ const S=[
  tags:[{t:'Urgente',c:'tg-red'},{t:'Situação delicada',c:'tg-gold'}],ctx:'Acolher antes de orientar. Se houver risco físico: 190 ou 180.',
  resps:[
   {title:'🚨 Acolher e orientar',badge:'Recomendada',primary:true,nao:false,
-   tpl:n=>'Oi'+(n?', '+n:'')+'! 😊 Aqui é a Cássia.\n\nFico feliz que você entrou em contato — você não está sozinha nisso. 💙\n\nMe conta um pouquinho o que está acontecendo para eu entender como posso te ajudar?'},
+   tpl:n=>'Fico feliz que você entrou em contato — você não está sozinha nisso. 💙\n\nConte-me o que está acontecendo para que eu possa orientar melhor.'},
   {title:'🚨 Se houver risco físico',badge:'Urgente',primary:false,nao:false,
-   tpl:n=>'Oi'+(n?', '+n:'')+'! Aqui é a Cássia.\n\nAntes de qualquer coisa — você está em segurança agora?\n\nSe estiver em risco, ligue imediatamente:\n🔴 190 – Polícia Militar\n🔴 180 – Central da Mulher (24h, gratuito)\n\nEstou aqui assim que puder me contar o que está acontecendo. 💙'}
+   tpl:n=>'Antes de qualquer coisa — você está em segurança agora?\n\nSe estiver em risco, ligue imediatamente:\n🔴 190 – Polícia Militar\n🔴 180 – Central da Mulher (24h, gratuito)\n\nEstou aqui assim que puder me contar o que está acontecendo. 💙'}
  ],emailResps:[]},
 {grp:'😓 Situações delicadas',id:'del7',icon:'🔔',ic:'i-slate',pip:null,
  label:'Pessoa que sumiu sem responder',sub:'Retomar contato educadamente',
@@ -812,9 +812,9 @@ const S=[
  tags:[{t:'Retorno',c:'tg-purple'},{t:'Situação delicada',c:'tg-gold'}],ctx:'Retomar contato de forma leve, sem pressionar.',
  resps:[
   {title:'🔔 Retomar contato',badge:'Recomendada',primary:true,nao:false,
-   tpl:n=>'Oi'+(n?', '+n:'')+'! 😊 Aqui é a Cássia, tudo bem?\n\nPassei para saber se ainda precisa de ajuda ou se já resolveu sua situação. Qualquer coisa, estou aqui! 😊'},
+   tpl:n=>'Olá'+(n?', '+n:'')+'! Tudo bem?\n\nEstou verificando se ainda precisa de assistência ou se a situação já foi resolvida. Estou à disposição, caso necessário.'},
   {title:'🔔 Variação',badge:'Alternativa',primary:false,nao:false,
-   tpl:n=>'Oi'+(n?', '+n:'')+'! 😊 Aqui é a Cássia, ficou tudo bem?\n\nPassei para dar um oi e ver se ainda posso te ajudar em alguma coisa. Se não tiver mais dúvidas, tudo certo também! 😊'}
+   tpl:n=>'Olá'+(n?', '+n:'')+'! Tudo bem?\n\nPassei para verificar se posso ser útil em algo. Caso as dúvidas já tenham sido sanadas, fico feliz em ter ajudado.'}
  ],emailResps:[]},
 
 // ── ADVOGADOS ──
@@ -897,7 +897,7 @@ const S=[
  cpfChecker:true,
  resps:[
   {title:'⚠️ Solicitar CPF ao assistido',badge:'1º Passo',primary:true,nao:false,
-   tpl:n=>'Oi'+(n?', '+n:'')+'! 😊 Aqui é a Cássia.\n\nEntendo a sua situação. Para verificar o seu caso no nosso sistema, preciso que você me informe o seu CPF, por favor.'},
+   tpl:n=>'Compreendemos a sua situação.\n\nPara verificar o seu caso no sistema, precisamos que informe o seu CPF, por gentileza.'},
   {title:'⚠️ Confirmação de recebimento',badge:'Alternativa',primary:false,nao:false,
    tpl:n=>'Oi'+(n?', '+n:'')+'! 😊\n\nAnotei o seu CPF. Vou verificar a situação do seu caso no sistema e já te retorno com as orientações necessárias. Um momento! 🙂'}
  ],
@@ -911,7 +911,7 @@ const S=[
  ctx:'CPF consultado mas não há processo cadastrado. Orientar a vir pessoalmente com senha.',
  resps:[
   {title:'📂 Sem processo — Orientar senha',badge:'Padrão',primary:true,nao:false,
-   tpl:n=>'Oi'+(n?', '+n:'')+'! 😊\n\nAqui é a Cássia. Verifiquei aqui e não encontrei nenhum processo cadastrado para o seu CPF no nosso sistema.\n\nPara darmos andamento, você precisa vir pessoalmente aqui na sede pegar uma senha de atendimento.\n\nO atendimento é de segunda a sexta, das 9h às 17h — sem agendamento, por ordem de chegada. Não esqueça de trazer seus documentos!'+DOCS+END_REC},
+   tpl:n=>'Verificamos o seu CPF no sistema e não foi localizado nenhum processo cadastrado.\n\nPara darmos andamento, é necessário comparecer pessoalmente à nossa sede e retirar uma senha de atendimento.\n\nAtendemos de segunda a sexta, das 9h às 17h, por ordem de chegada.'+DOCS+END_REC},
   {title:'📂 Sem processo — Versão curta',badge:'Alternativa',primary:false,nao:false,
    tpl:n=>'Oi'+(n?', '+n:'')+'! 😊\n\nNão localizei processo para o seu CPF no sistema. Você precisa comparecer pessoalmente para pegar uma senha de atendimento.\n\n🕘 Seg–Sex, 9h–17h — sem agendamento, por ordem de chegada.'+DOCS+END_REC}
  ],
@@ -925,7 +925,7 @@ const S=[
  ctx:'A nomeação foi recusada pelo advogado. Orientar o assistido a voltar ao atendimento presencialmente para nova indicação.',
  resps:[
   {title:'🔄 Nomeação recusada — Orientar retorno',badge:'Recomendada',primary:true,nao:false,
-   tpl:n=>'Oi'+(n?', '+n:'')+'! 😊\n\nAqui é a Cássia. Verifiquei aqui e a nomeação do advogado para o seu caso consta como recusada no sistema.\n\nNesse caso, você precisa voltar ao atendimento aqui na sede para que possamos fazer uma nova indicação.\n\nVenha de segunda a sexta, das 9h às 17h, por ordem de chegada. Traga seus documentos e, se tiver, qualquer comprovante relacionado ao seu processo!'+DOCS+END_REC},
+   tpl:n=>'Verificamos o seu caso no sistema e a nomeação do advogado consta como recusada.\n\nNesse caso, é necessário retornar presencialmente à nossa sede para nova indicação de advogado.\n\nAtendemos de segunda a sexta, das 9h às 17h, por ordem de chegada. Traga seus documentos e, se disponível, comprovantes relacionados ao processo.'+DOCS+END_REC},
   {title:'🔄 Nomeação recusada — Com mais detalhes',badge:'Alternativa',primary:false,nao:false,
    tpl:n=>'Oi'+(n?', '+n:'')+'! 😊\n\nVerifiquei o seu caso aqui. A nomeação do advogado que foi indicado para você consta como recusada — isso significa que ele não aceitou o caso.\n\nVocê precisará vir pessoalmente para que possamos fazer uma nova indicação de advogado. Não se preocupe, isso faz parte do processo!\n\n🕘 Seg–Sex, 9h–12h — sem agendamento, por ordem de chegada.'+DOCS+END}
  ],
@@ -939,7 +939,7 @@ const S=[
  ctx:'Nomeação foi aceita. Não é possível trocar sem procedimento. Orientar reclamação escrita (a próprio punho) e trazer senha.',
  resps:[
   {title:'✍️ Nomeação aceita — Orientar reclamação',badge:'Recomendada',primary:true,nao:false,
-   tpl:n=>'Oi'+(n?', '+n:'')+'! 😊\n\nAqui é a Cássia. Verifiquei aqui e o advogado indicado para o seu caso aceitou a nomeação no sistema.\n\nComo a nomeação foi aceita, não é possível simplesmente trocar de advogado — precisamos seguir os procedimentos corretos, pois dependemos de um sistema específico para isso.\n\nO que você precisa fazer é:\n\n✍️ Escrever uma reclamação a próprio punho (de seu próprio punho mesmo, não precisa ser digitado), contando tudo o que aconteceu: que o advogado não te atende, não dá retorno, não atua no processo — com o máximo de detalhes possível.\n\nDepois, venha pessoalmente aqui na sede com:\n- Essa reclamação escrita\n- Seus documentos\n- Se tiver processo: traga o número ou qualquer papel do processo\n\nCom isso em mãos, conseguimos dar andamento à sua reclamação! 😊'+END_REC},
+   tpl:n=>'Verificamos o seu caso no sistema e a nomeação do advogado indicado está aceita.\n\nComo a nomeação foi formalmente aceita, não é possível realizar a substituição direta — o sistema exige o cumprimento de um procedimento específico.\n\nO que deve ser feito:\n\n✍️ Redigir uma reclamação a próprio punho relatando todos os problemas ocorridos: falta de atendimento, ausência de retorno, inércia no processo — com o máximo de detalhes possível.\n\nComparecer pessoalmente à nossa sede com:\n- A reclamação redigida\n- Seus documentos de identificação\n- Número ou documentos do processo (se disponível)\n\nCom esses documentos em mãos, daremos andamento à sua reclamação.'+END_REC},
   {title:'✍️ Nomeação aceita — Versão objetiva',badge:'Alternativa',primary:false,nao:false,
    tpl:n=>'Oi'+(n?', '+n:'')+'! 😊\n\nA nomeação do advogado está aceita no sistema. Não podemos trocar de advogado sem seguir os procedimentos — dependemos do sistema para isso.\n\nVocê precisa:\n1️⃣ Escrever uma reclamação a próprio punho descrevendo os problemas com o advogado\n2️⃣ Vir pessoalmente aqui com essa reclamação + seus documentos + número do processo (se tiver)\n\n🕘 Seg–Sex, 9h–17h — sem agendamento.'+END_REC}
  ],
@@ -1207,10 +1207,4 @@ function toast(msg){
 }
 function clock(){
   const n=new Date(),d=['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
-  const h=String(n.getHours()).padStart(2,'0'),m=String(n.getMinutes()).padStart(2,'0'),s=String(n.getSeconds()).padStart(2,'0');
-  document.getElementById('clock').textContent=d[n.getDay()]+' '+h+':'+m+':'+s;
-}
-clock();setInterval(clock,1000);
-</script>
-</body>
-</html>
+  const h=String(n.getHours())
