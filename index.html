@@ -113,6 +113,8 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .btn-wapp:hover{background:rgba(31,210,120,.15)}
 .btn-email{background:rgba(24,184,204,.08);border:1px solid rgba(24,184,204,.22);color:var(--teal)}
 .btn-email:hover{background:rgba(24,184,204,.15)}
+.btn-sec{background:rgba(167,139,250,.1);border:1px solid rgba(167,139,250,.25);color:#c4b5fd}
+.btn-sec:hover{background:rgba(167,139,250,.18)}
 .btn-ghost{background:rgba(255,255,255,.04);border:1px solid var(--border);color:var(--sub)}
 .btn-ghost:hover{background:rgba(255,255,255,.08);color:var(--text)}
 
@@ -315,6 +317,8 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
       <button class="chip" onclick="filtro(this,'Encerramento')">✅ Encerrar</button>
       <button class="chip" onclick="filtro(this,'Urgente')">🚨 Urgente</button>
       <button class="chip" onclick="filtro(this,'Localização')">📍 Como chegar</button>
+      <button class="chip" onclick="filtro(this,'Comunicado')">📢 Comunicados</button>
+      <button class="chip" onclick="filtro(this,'Ofício')">📄 Ofícios</button>
     </div>
     <div class="sb-list" id="sb-list"></div>
   </div>
@@ -446,6 +450,7 @@ const HDRE = 'CAD – Comissão de Advocacia Dativa\nOAB Subseção Santana de P
 const DOCS = '\n\nDocumentos necessários:\n- RG original e CPF\n- Comprovante de residência atualizado\n- Comprovante de renda de todos que moram com você\n- Se tiver bens (imóvel, carro, poupança): documentação desses bens';
 const END  = '\n\n📍 Av. Tenente Marques, 5297 – Jd. do Luar, Santana de Parnaíba/SP (POUPATEMPO)\n📞 (11) 4154-5191\n🕘 Seg–Sex, 9h–12h  ⚠️ 30 senhas/dia';
 const ENDE = '\n\nAtenciosamente,\nCássia Kelly\nCentral de Atendimento – CAD\nOAB Subseção Santana de Parnaíba\n📍 Av. Tenente Marques, 5297 – Jd. do Luar, Santana de Parnaíba/SP\n📞 (11) 4154-5191\n🕘 Seg–Sex, 9h–12h  ⚠️ 30 senhas/dia';
+const SECWAPP = 'https://wa.me/5511937248448';
 const AREAS = '\n\nA CAD atende: família (divórcio, pensão, guarda), cível, inventário, herança, violência doméstica e habitacional.';
 const SIG  = '\n\nCássia Kelly\nCentral de Atendimento – CAD';
 const SIGE = '\n\nAtenciosamente,\nCássia Kelly\nCentral de Atendimento – CAD\nOAB Subseção Santana de Parnaíba\n📍 Av. Tenente Marques, 5297 – Jd. do Luar, Santana de Parnaíba/SP\n📞 (11) 4154-5191\n🕘 Seg–Sex, 9h–12h  ⚠️ 30 senhas/dia';
@@ -1058,6 +1063,153 @@ const S = [
    ],
    emailResps:[]},
 
+
+  // ── COMUNICADOS ───────────────────────────────────────────────
+  {grp:'📢 Comunicados', id:'com1', icon:'📢', ic:'i-purple', pip:null,
+   label:'Lembrete de triagem — advogado(a)', sub:'Duas versões: segunda-feira e amanhã',
+   who:'Advogado(a)', wc:'#a78bfa',
+   sim:'[Envio de lembrete de triagem]',
+   tags:[{t:'Comunicado',c:'tg-purple'},{t:'Advogado',c:'tg-teal'}],
+   ctx:'Enviar lembrete de triagem para os advogados da escala. Use a versão "segunda-feira" no final de semana e "amanhã" no dia anterior.',
+   resps:[
+    {title:'📢 Lembrete — segunda-feira', badge:'Recomendada', primary:true, nao:false,
+     tpl: n => `Prezado(a)${n?' '+n:''}Advogado(a),
+
+Gostaríamos de lembrá-lo(a) que a triagem para os atendimentos da Assistência Judiciária ocorrerá segunda-feira, no Poupatempo, localizado no endereço:
+
+📍 Avenida Tenente Marques, 5297, Jardim do Luar (Fazendinha), Santana de Parnaíba.
+
+Agradecemos a sua colaboração e pedimos que esteja presente no horário agendado para garantir um atendimento eficiente. Caso haja qualquer dúvida ou necessidade de esclarecimento, estamos à disposição.`},
+    {title:'📢 Lembrete — amanhã', badge:'Recomendada', primary:false, nao:false,
+     tpl: n => `Prezado(a)${n?' '+n:''}Advogado(a),
+
+Gostaríamos de lembrá-lo(a) que a triagem para os atendimentos da Assistência Judiciária ocorrerá amanhã, no Poupatempo, localizado no endereço:
+
+📍 Avenida Tenente Marques, 5297, Jardim do Luar (Fazendinha), Santana de Parnaíba.
+
+Agradecemos a sua colaboração e pedimos que esteja presente no horário agendado para garantir um atendimento eficiente. Caso haja qualquer dúvida ou necessidade de esclarecimento, estamos à disposição.`}
+   ],
+   emailResps:[
+    {title:'📧 Lembrete — segunda-feira (e-mail)', subj:'CAD – Lembrete: Triagem na segunda-feira', badge:'Recomendada', primary:true, nao:false,
+     tpl: n => `${HDRE}
+Prezado(a)${n?' '+n:''}Advogado(a),
+
+Gostaríamos de lembrá-lo(a) que a triagem para os atendimentos da Assistência Judiciária ocorrerá segunda-feira, no Poupatempo, localizado no endereço:
+
+📍 Avenida Tenente Marques, 5297, Jardim do Luar (Fazendinha), Santana de Parnaíba.
+
+Agradecemos a sua colaboração e pedimos que esteja presente no horário agendado para garantir um atendimento eficiente. Caso haja qualquer dúvida ou necessidade de esclarecimento, estamos à disposição.${ENDE}`},
+    {title:'📧 Lembrete — amanhã (e-mail)', subj:'CAD – Lembrete: Triagem amanhã', badge:'Recomendada', primary:false, nao:false,
+     tpl: n => `${HDRE}
+Prezado(a)${n?' '+n:''}Advogado(a),
+
+Gostaríamos de lembrá-lo(a) que a triagem para os atendimentos da Assistência Judiciária ocorrerá amanhã, no Poupatempo, localizado no endereço:
+
+📍 Avenida Tenente Marques, 5297, Jardim do Luar (Fazendinha), Santana de Parnaíba.
+
+Agradecemos a sua colaboração e pedimos que esteja presente no horário agendado para garantir um atendimento eficiente. Caso haja qualquer dúvida ou necessidade de esclarecimento, estamos à disposição.${ENDE}`}
+   ]},
+
+  // ── OFÍCIOS DO FÓRUM ──────────────────────────────────────────
+  {grp:'⚖️ Ofícios do Fórum', id:'ofic1', icon:'📄', ic:'i-amber', pip:'pip-amber',
+   label:'Indicação de Curador Especial', sub:'Encaminhar ofício de indicação ao fórum',
+   who:'Advogado(a)', wc:'#f59e0b',
+   sim:'[Ofício de indicação de Curador Especial]',
+   tags:[{t:'Ofício',c:'tg-amber'},{t:'Curador',c:'tg-blue'}],
+   ctx:'Resposta à demanda do fórum por indicação de Curador Especial. Encaminhar com ofício em anexo.',
+   resps:[
+    {title:'📄 Encaminhar ofício de indicação', badge:'Recomendada', primary:true, nao:false,
+     tpl: n => `${HDR}
+
+Bom dia${n?', '+n:''}!
+
+Em atendimento à demanda enviada por V.Sa. à nossa Subseção, a fim de que seja indicado Curador Especial, segue em anexo Ofício de Indicação para as devidas providências.`}
+   ],
+   emailResps:[
+    {title:'📧 Encaminhar ofício por e-mail', subj:'CAD – Ofício de Indicação de Curador Especial', badge:'Recomendada', primary:true, nao:false,
+     tpl: n => `${HDRE}
+Prezado(a)${n?' '+n:''}!
+
+Em atendimento à demanda enviada por V.Sa. à nossa Subseção, a fim de que seja indicado Curador Especial, segue em anexo Ofício de Indicação para as devidas providências.
+
+Coloco-me à disposição para quaisquer esclarecimentos adicionais.${ENDE}`}
+   ]},
+
+  // ── COMUNICADOS ───────────────────────────────────────────────
+  {grp:'📢 Comunicados', id:'com1', icon:'📢', ic:'i-purple', pip:null,
+   label:'Lembrete de triagem — advogado(a)', sub:'Duas versões: segunda-feira e amanhã',
+   who:'Advogado(a)', wc:'#a78bfa',
+   sim:'[Envio de lembrete de triagem]',
+   tags:[{t:'Comunicado',c:'tg-purple'},{t:'Advogado',c:'tg-teal'}],
+   ctx:'Enviar lembrete de triagem para advogados da escala. Use "segunda-feira" no fim de semana e "amanhã" no dia anterior.',
+   resps:[
+    {title:'📢 Lembrete — segunda-feira', badge:'Recomendada', primary:true, nao:false,
+     tpl: n => `Prezado(a) Advogado(a),
+
+Gostaríamos de lembrá-lo(a) que a triagem para os atendimentos da Assistência Judiciária ocorrerá segunda-feira, no Poupatempo, localizado no endereço:
+
+📍 Avenida Tenente Marques, 5297, Jardim do Luar (Fazendinha), Santana de Parnaíba.
+
+Agradecemos a sua colaboração e pedimos que esteja presente no horário agendado para garantir um atendimento eficiente. Caso haja qualquer dúvida ou necessidade de esclarecimento, estamos à disposição.`},
+    {title:'📢 Lembrete — amanhã', badge:'Recomendada', primary:false, nao:false,
+     tpl: n => `Prezado(a) Advogado(a),
+
+Gostaríamos de lembrá-lo(a) que a triagem para os atendimentos da Assistência Judiciária ocorrerá amanhã, no Poupatempo, localizado no endereço:
+
+📍 Avenida Tenente Marques, 5297, Jardim do Luar (Fazendinha), Santana de Parnaíba.
+
+Agradecemos a sua colaboração e pedimos que esteja presente no horário agendado para garantir um atendimento eficiente. Caso haja qualquer dúvida ou necessidade de esclarecimento, estamos à disposição.`}
+   ],
+   emailResps:[
+    {title:'📧 Lembrete — segunda-feira (e-mail)', subj:'CAD – Lembrete: Triagem na segunda-feira', badge:'Recomendada', primary:true, nao:false,
+     tpl: n => `${HDRE}
+Prezado(a) Advogado(a),
+
+Gostaríamos de lembrá-lo(a) que a triagem para os atendimentos da Assistência Judiciária ocorrerá segunda-feira, no Poupatempo, localizado no endereço:
+
+📍 Avenida Tenente Marques, 5297, Jardim do Luar (Fazendinha), Santana de Parnaíba.
+
+Agradecemos a sua colaboração e pedimos que esteja presente no horário agendado para garantir um atendimento eficiente. Caso haja qualquer dúvida ou necessidade de esclarecimento, estamos à disposição.${ENDE}`},
+    {title:'📧 Lembrete — amanhã (e-mail)', subj:'CAD – Lembrete: Triagem amanhã', badge:'Recomendada', primary:false, nao:false,
+     tpl: n => `${HDRE}
+Prezado(a) Advogado(a),
+
+Gostaríamos de lembrá-lo(a) que a triagem para os atendimentos da Assistência Judiciária ocorrerá amanhã, no Poupatempo, localizado no endereço:
+
+📍 Avenida Tenente Marques, 5297, Jardim do Luar (Fazendinha), Santana de Parnaíba.
+
+Agradecemos a sua colaboração e pedimos que esteja presente no horário agendado para garantir um atendimento eficiente. Caso haja qualquer dúvida ou necessidade de esclarecimento, estamos à disposição.${ENDE}`}
+   ]},
+
+  // ── OFÍCIOS DO FÓRUM ──────────────────────────────────────────
+  {grp:'⚖️ Ofícios do Fórum', id:'ofic1', icon:'📄', ic:'i-amber', pip:'pip-amber',
+   label:'Indicação de Curador Especial', sub:'Solicitar ao WhatsApp da secretaria',
+   who:'Advogado(a)', wc:'#f59e0b',
+   sim:'[Ofício do fórum solicitando Curador Especial]',
+   tags:[{t:'Ofício',c:'tg-amber'},{t:'Curador',c:'tg-blue'},{t:'Fórum',c:'tg-gold'}],
+   ctx:'Fórum solicitou indicação de Curador Especial. Encaminhar texto ao WhatsApp da secretaria (11) 93724-8448 e/ou responder ao fórum.',
+   resps:[
+    {title:'📄 Encaminhar ao WhatsApp da secretaria', badge:'Recomendada', primary:true, nao:false,
+     tpl: n => `Bom dia!
+
+Em atendimento à demanda enviada por V.Sa. à nossa Subseção, a fim de que seja indicado Curador Especial, segue em anexo Ofício de Indicação para as devidas providências.`},
+    {title:'📄 Mensagem para a secretaria — pedir indicação', badge:'Interno', primary:false, nao:false,
+     tpl: n => `Bom dia! 😊
+
+Chegou aqui um ofício do fórum solicitando indicação de Curador Especial${n?' para o processo de '+n:''}.
+
+Poderia verificar e providenciar a indicação? Obrigada! 🙂`}
+   ],
+   emailResps:[
+    {title:'📧 Resposta ao fórum por e-mail', subj:'CAD – Ofício de Indicação de Curador Especial', badge:'Recomendada', primary:true, nao:false,
+     tpl: n => `${HDRE}
+Prezado(a)${n?' '+n:''}!
+
+Em atendimento à demanda enviada por V.Sa. à nossa Subseção, a fim de que seja indicado Curador Especial, segue em anexo Ofício de Indicação para as devidas providências.
+
+Coloco-me à disposição para quaisquer esclarecimentos adicionais.${ENDE}`}
+   ]},
+
 ];
 
 // ── ESTADO ──────────────────────────────────────────────
@@ -1174,6 +1326,7 @@ function renderResps(s) {
       <div class="rcard-ft">
         <button class="btn btn-copy" onclick="copiar('ta${i}','${r.title}')">📋 Copiar</button>
         <button class="btn btn-wapp" onclick="wapp('ta${i}')">📱 WhatsApp</button>
+        ${activeId==='ofic1'?`<button class="btn btn-sec" onclick="wappSec('ta${i}')">📲 Secretaria</button>`:''}
         <button class="btn btn-ghost" onclick="resetMsg('ta${i}',${i},'wapp')" title="Redefinir">↩</button>
         <span class="chars" id="cc${i}">${txt.length} chars</span>
       </div>
@@ -1272,6 +1425,11 @@ function abrirEmail(subjId, bodyId) {
   window.open(`mailto:aj.santana.parnai@oabsp.org.br?subject=${s}&body=${b}`, '_blank');
 }
 
+function wappSec(id) {
+  const el = document.getElementById(id); if (!el) return;
+  window.open('https://wa.me/5511937248448?text=' + encodeURIComponent(el.value), '_blank');
+  toast('📲 Abrindo WhatsApp da secretaria...');
+}
 function wapp(id) {
   const el = document.getElementById(id); if (!el) return;
   window.open('https://wa.me/?text=' + encodeURIComponent(el.value), '_blank');
