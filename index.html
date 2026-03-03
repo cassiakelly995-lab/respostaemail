@@ -3,946 +3,446 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OAB · Central de Atendimento</title>
+<title>CAJ · Central de Atendimento</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
 <style>
-*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-html, body { height:100%; overflow:hidden; }
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden}
+:root{
+  --ink:#060e20;--deep:#08152a;
+  --gold:#c9973a;--gold-lt:#e4b55a;--gold-gl:rgba(201,151,58,0.1);--gold-b:rgba(201,151,58,0.2);
+  --text:#dde6f7;--sub:#6e89b8;--dim:#374f75;--white:#f0f5ff;
+  --green:#22c97a;--red:#e8495a;--teal:#22b8c9;--amber:#f59e0b;
+  --tr:all .18s cubic-bezier(.4,0,.2,1);--r:10px;--rs:6px
+}
+body{font-family:'DM Sans',sans-serif;background:var(--ink);color:var(--text);display:flex;flex-direction:column}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(ellipse 900px 700px at -80px -60px,rgba(15,34,72,.85) 0%,transparent 65%),
+             radial-gradient(ellipse 500px 500px at 100% 100%,rgba(8,15,40,.9) 0%,transparent 60%)}
+body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:radial-gradient(circle,rgba(110,137,184,.1) 1px,transparent 1px);background-size:28px 28px}
 
-:root {
-  --ink:      #06122b;
-  --deep:     #081630;
-  --mid:      #0c1e42;
-  --lift:     #112354;
-  --rim:      #1a3068;
-  --gold:     #c9973a;
-  --gold-lt:  #e4b55a;
-  --gold-glow:rgba(201,151,58,0.15);
-  --gold-rim: rgba(201,151,58,0.22);
-  --text:     #dde6f7;
-  --sub:      #6e89b8;
-  --dim:      #374f75;
-  --white:    #f0f5ff;
-  --g:        rgba(201,151,58,0.08);
-  --r-sm:     6px;
-  --r:        10px;
-  --r-lg:     16px;
-  --green:    #22c97a;
-  --red:      #e8495a;
-  --teal:     #22b8c9;
-  --purple:   #a78bfa;
-  --trans:    all .18s cubic-bezier(.4,0,.2,1);
-}
+/* TOPBAR */
+.topbar{position:relative;z-index:50;height:60px;background:rgba(8,15,40,.97);backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(201,151,58,.13);display:flex;align-items:center;padding:0 24px;
+  flex-shrink:0;box-shadow:0 4px 40px rgba(0,0,0,.55)}
+.topbar::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold) 25%,var(--gold-lt) 50%,var(--gold) 75%,transparent);opacity:.65}
+.brand{display:flex;align-items:center;gap:12px;flex-shrink:0}
+.seal{width:40px;height:40px;border-radius:50%;border:1.5px solid rgba(201,151,58,.45);
+  background:rgba(201,151,58,.07);display:flex;flex-direction:column;align-items:center;justify-content:center;
+  box-shadow:0 0 0 4px rgba(201,151,58,.05)}
+.seal .s1{font-family:'DM Serif Display',serif;font-size:13px;color:var(--gold-lt);line-height:1;letter-spacing:.5px}
+.seal .s2{font-size:6px;color:var(--gold);letter-spacing:2px;line-height:1.3}
+.brand-txt h1{font-family:'DM Serif Display',serif;font-size:16px;color:var(--white);line-height:1}
+.brand-txt p{font-size:9px;color:var(--sub);letter-spacing:1.5px;text-transform:uppercase;margin-top:2px}
+.tdiv{width:1px;height:30px;background:rgba(255,255,255,.06);margin:0 20px;flex-shrink:0}
+.tmeta{display:flex;gap:24px}
+.tm{text-align:center}
+.tm-v{font-family:'DM Serif Display',serif;font-size:13px;color:var(--gold-lt);line-height:1}
+.tm-l{font-size:8px;color:var(--dim);letter-spacing:1.5px;text-transform:uppercase;margin-top:2px}
+.tright{margin-left:auto;display:flex;align-items:center;gap:16px}
+.live{display:flex;align-items:center;gap:6px;padding:4px 10px;border-radius:20px;
+  background:rgba(34,201,122,.08);border:1px solid rgba(34,201,122,.18)}
+.live-dot{width:5px;height:5px;border-radius:50%;background:var(--green);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+.live span{font-size:9px;font-weight:600;color:var(--green);letter-spacing:1px;text-transform:uppercase}
+.ublock{text-align:right}
+.uname{font-family:'DM Serif Display',serif;font-size:14px;color:var(--gold-lt);line-height:1}
+.urole{font-size:8.5px;color:var(--dim);letter-spacing:1px;text-transform:uppercase;margin-top:2px}
+.uclock{font-size:9px;color:var(--sub);margin-top:2px}
 
-body {
-  font-family: 'DM Sans', sans-serif;
-  background: var(--ink);
-  color: var(--text);
-  display: flex;
-  flex-direction: column;
-}
+/* LAYOUT */
+.shell{display:grid;grid-template-columns:282px 1fr;flex:1;overflow:hidden;position:relative;z-index:1}
 
-/* === MESH BACKGROUND === */
-body::before {
-  content: '';
-  position: fixed; inset: 0; z-index: 0; pointer-events: none;
-  background:
-    radial-gradient(ellipse 900px 700px at -100px -80px, rgba(17,35,84,0.8) 0%, transparent 70%),
-    radial-gradient(ellipse 600px 600px at 100% 100%, rgba(8,22,48,0.9) 0%, transparent 65%),
-    radial-gradient(ellipse 400px 300px at 60% 30%, rgba(201,151,58,0.04) 0%, transparent 60%);
-}
+/* SIDEBAR */
+.sidebar{background:rgba(8,15,40,.72);border-right:1px solid rgba(255,255,255,.05);
+  display:flex;flex-direction:column;overflow:hidden;backdrop-filter:blur(10px)}
+.sb-head{padding:14px 14px 10px;border-bottom:1px solid rgba(255,255,255,.04);flex-shrink:0}
+.sb-lbl{font-size:8px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px}
+.sw{position:relative}
+.sw svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:13px;height:13px;color:var(--dim);pointer-events:none}
+.si{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:var(--rs);
+  padding:8px 10px 8px 30px;font-family:'DM Sans',sans-serif;font-size:12px;color:var(--text);outline:none;transition:var(--tr)}
+.si::placeholder{color:var(--dim)}
+.si:focus{border-color:var(--gold-b);background:rgba(201,151,58,.05)}
+.chips{display:flex;flex-wrap:wrap;gap:4px;padding:10px 12px;border-bottom:1px solid rgba(255,255,255,.04)}
+.chip{padding:3px 9px;border-radius:20px;border:1px solid rgba(255,255,255,.07);background:transparent;
+  font-size:9.5px;color:var(--sub);cursor:pointer;transition:var(--tr);font-family:'DM Sans',sans-serif;white-space:nowrap}
+.chip:hover,.chip.on{background:var(--gold-gl);border-color:var(--gold-b);color:var(--gold-lt)}
+.sb-list{flex:1;overflow-y:auto;padding:6px 8px 16px}
+.sb-list::-webkit-scrollbar{width:2px}
+.sb-list::-webkit-scrollbar-thumb{background:rgba(201,151,58,.2);border-radius:2px}
+.grp-lbl{font-size:8px;font-weight:600;letter-spacing:1.8px;text-transform:uppercase;color:var(--dim);
+  padding:12px 6px 5px;display:flex;align-items:center;gap:6px}
+.grp-lbl::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.05)}
+.sc-row{width:100%;text-align:left;background:transparent;border:1px solid transparent;border-radius:var(--rs);
+  padding:8px;margin-bottom:2px;cursor:pointer;display:flex;align-items:center;gap:9px;
+  transition:var(--tr);font-family:'DM Sans',sans-serif}
+.sc-row:hover{background:rgba(255,255,255,.03);border-color:rgba(255,255,255,.06)}
+.sc-row.active{background:var(--gold-gl);border-color:var(--gold-b)}
+.sc-ico{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.i-blue{background:rgba(26,48,104,.8)}.i-green{background:rgba(34,201,122,.1)}.i-red{background:rgba(232,73,90,.1)}
+.i-gold{background:rgba(201,151,58,.1)}.i-slate{background:rgba(100,130,190,.1)}
+.i-teal{background:rgba(34,184,201,.1)}.i-amber{background:rgba(245,158,11,.1)}
+.sc-info{flex:1;min-width:0}
+.sc-title{font-size:11.5px;font-weight:500;color:var(--text);line-height:1.3}
+.sc-desc{font-size:9.5px;color:var(--sub);margin-top:1px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sc-pip{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.pip-green{background:var(--green)}.pip-red{background:var(--red)}.pip-teal{background:var(--teal)}.pip-amber{background:var(--amber)}
 
-/* Subtle dot grid */
-body::after {
-  content: '';
-  position: fixed; inset: 0; z-index: 0; pointer-events: none;
-  background-image: radial-gradient(circle, rgba(110,137,184,0.12) 1px, transparent 1px);
-  background-size: 28px 28px;
-}
+/* MAIN */
+.main{display:flex;flex-direction:column;overflow:hidden}
+.breadbar{height:48px;background:rgba(8,15,40,.65);border-bottom:1px solid rgba(255,255,255,.04);
+  display:flex;align-items:center;justify-content:space-between;padding:0 24px;flex-shrink:0;backdrop-filter:blur(8px)}
+.btitle{font-family:'DM Serif Display',serif;font-size:16px;color:var(--white);display:flex;align-items:center;gap:7px}
+.bsub{font-size:10px;color:var(--sub);margin-top:2px}
+.btn{display:flex;align-items:center;gap:5px;padding:6px 13px;border-radius:var(--rs);
+  font-family:'DM Sans',sans-serif;font-size:11px;font-weight:500;border:none;cursor:pointer;transition:var(--tr)}
+.btn:hover{transform:translateY(-1px)}
+.btn-guide{background:rgba(201,151,58,.1);border:1px solid var(--gold-b);color:var(--gold-lt)}
+.btn-guide:hover{background:rgba(201,151,58,.18)}
+.btn-copy{background:linear-gradient(135deg,var(--gold),var(--gold-lt));color:#07102a;font-weight:700;font-size:12px;padding:9px 18px}
+.btn-copy:hover{box-shadow:0 4px 20px rgba(201,151,58,.35)}
+.btn-wapp{background:rgba(34,201,122,.1);border:1px solid rgba(34,201,122,.2);color:var(--green)}
+.btn-wapp:hover{background:rgba(34,201,122,.18)}
+.btn-ghost{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);color:var(--sub)}
+.btn-ghost:hover{background:rgba(255,255,255,.09);color:var(--text)}
 
-/* === TOPBAR === */
-.topbar {
-  position: relative; z-index: 50;
-  height: 58px;
-  background: rgba(8,22,48,0.96);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(201,151,58,0.14);
-  display: flex; align-items: center;
-  padding: 0 24px;
-  gap: 0;
-  flex-shrink: 0;
-  box-shadow: 0 1px 0 rgba(201,151,58,0.08), 0 4px 40px rgba(0,0,0,0.5);
-}
+/* WELCOME */
+.welcome{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:48px;text-align:center}
+.wglyph{width:80px;height:80px;border-radius:50%;border:1px solid var(--gold-b);background:var(--gold-gl);
+  display:flex;align-items:center;justify-content:center;font-size:34px;
+  box-shadow:0 0 0 10px rgba(201,151,58,.04),0 0 40px rgba(201,151,58,.08);animation:float 4s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+.welcome h2{font-family:'DM Serif Display',serif;font-size:26px;font-weight:400;color:var(--white);opacity:.8}
+.welcome p{font-size:13px;color:var(--sub);max-width:420px;line-height:1.85}
+.wtags{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:4px}
+.wtag{padding:5px 14px;border-radius:20px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);
+  font-size:11px;color:var(--sub);cursor:pointer;transition:var(--tr);font-family:'DM Sans',sans-serif}
+.wtag:hover{background:var(--gold-gl);border-color:var(--gold-b);color:var(--gold-lt)}
 
-/* Gold accent line */
-.topbar::before {
-  content: '';
-  position: absolute; top: 0; left: 0; right: 0; height: 2px;
-  background: linear-gradient(90deg, transparent 0%, var(--gold) 30%, var(--gold-lt) 50%, var(--gold) 70%, transparent 100%);
-  opacity: .7;
-}
+/* SCENARIO VIEW */
+.sc-view{flex:1;display:none;flex-direction:column;overflow:hidden}
+.sc-view.on{display:flex}
+.namebar{height:44px;background:rgba(201,151,58,.04);border-bottom:1px solid var(--gold-b);
+  display:flex;align-items:center;gap:14px;padding:0 24px;flex-shrink:0}
+.namebar label{font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--gold-lt);white-space:nowrap}
+.namebar input{width:240px;background:rgba(255,255,255,.06);border:1px solid var(--gold-b);border-radius:var(--rs);
+  padding:5px 11px;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--white);outline:none;transition:var(--tr)}
+.namebar input::placeholder{color:var(--dim)}
+.namebar input:focus{border-color:var(--gold-lt);background:rgba(201,151,58,.08)}
+.namebar-hint{font-size:10px;color:var(--dim)}
+.cols{flex:1;display:grid;grid-template-columns:1fr 1fr;overflow:hidden}
+.col{display:flex;flex-direction:column;overflow:hidden}
+.col-l{border-right:1px solid rgba(255,255,255,.04)}
+.col-hd{height:38px;border-bottom:1px solid rgba(255,255,255,.04);display:flex;align-items:center;
+  padding:0 20px;gap:6px;font-size:8.5px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--dim);flex-shrink:0}
+.col-body{flex:1;overflow-y:auto;padding:18px 20px}
+.col-body::-webkit-scrollbar{width:3px}
+.col-body::-webkit-scrollbar-thumb{background:rgba(201,151,58,.18);border-radius:3px}
+.who-row{display:flex;align-items:center;gap:6px;font-size:9.5px;color:var(--sub);margin-bottom:8px}
+.who-pip{width:6px;height:6px;border-radius:50%}
+.bubble{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:12px 12px 12px 3px;
+  padding:13px 16px;font-size:13px;color:var(--sub);line-height:1.75;font-style:italic;margin-bottom:14px}
+.tag-row{display:flex;gap:5px;flex-wrap:wrap}
+.tag{font-size:9px;font-weight:600;padding:2px 9px;border-radius:20px;letter-spacing:.4px;text-transform:uppercase}
+.tg-green{background:rgba(34,201,122,.1);color:#4ade80;border:1px solid rgba(34,201,122,.2)}
+.tg-red{background:rgba(232,73,90,.1);color:#f87171;border:1px solid rgba(232,73,90,.2)}
+.tg-gold{background:var(--gold-gl);color:var(--gold-lt);border:1px solid var(--gold-b)}
+.tg-blue{background:rgba(26,48,104,.4);color:#93b4fb;border:1px solid rgba(100,130,200,.2)}
+.tg-teal{background:rgba(34,184,201,.1);color:#5eead4;border:1px solid rgba(34,184,201,.2)}
+.tg-amber{background:rgba(245,158,11,.1);color:#fbbf24;border:1px solid rgba(245,158,11,.2)}
+.tg-purple{background:rgba(167,139,250,.1);color:#c4b5fd;border:1px solid rgba(167,139,250,.2)}
+.ctx{margin-top:12px;background:rgba(201,151,58,.05);border:1px solid var(--gold-b);border-radius:var(--rs);
+  padding:10px 13px;font-size:11.5px;color:var(--sub);line-height:1.65}
+.ctx strong{color:var(--gold-lt)}
+.resp-stack{display:flex;flex-direction:column;gap:14px}
+.rcard{border-radius:var(--r);border:1px solid rgba(255,255,255,.06);background:rgba(11,27,58,.6);overflow:hidden;transition:border-color .2s}
+.rcard:hover{border-color:rgba(255,255,255,.1)}
+.rcard.primary{border-color:rgba(201,151,58,.28);background:rgba(201,151,58,.04)}
+.rcard.danger{border-color:rgba(232,73,90,.25);background:rgba(232,73,90,.04)}
+.rcard-hd{padding:9px 14px;border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:center;justify-content:space-between}
+.rcard-title{font-size:11.5px;font-weight:600;color:var(--gold-lt);display:flex;align-items:center;gap:5px}
+.rcard-title.danger{color:#f87171}
+.badge{font-size:7.5px;font-weight:700;padding:2px 8px;border-radius:8px;letter-spacing:.6px;text-transform:uppercase}
+.b-main{background:rgba(201,151,58,.18);color:var(--gold-lt)}
+.b-alt{background:rgba(100,130,200,.15);color:#93b4fb}
+.b-no{background:rgba(232,73,90,.18);color:#f87171}
+.reditor{width:100%;background:rgba(0,0,0,.18);border:none;border-bottom:1px solid rgba(255,255,255,.05);
+  padding:13px 15px;font-family:'DM Sans',sans-serif;font-size:13px;line-height:1.85;color:var(--text);
+  resize:none;outline:none;min-height:120px;max-height:260px;overflow-y:auto;transition:background .2s}
+.reditor:focus{background:rgba(255,255,255,.02)}
+.reditor::-webkit-scrollbar{width:3px}
+.reditor::-webkit-scrollbar-thumb{background:var(--gold-b);border-radius:3px}
+.rcard-ft{padding:9px 14px;display:flex;align-items:center;gap:7px}
+.chars{font-size:9px;color:var(--dim);margin-left:auto}
 
-.brand {
-  display: flex; align-items: center; gap: 12px;
-  flex-shrink: 0;
-}
+/* HISTBAR */
+.histbar{border-top:1px solid rgba(255,255,255,.04);height:40px;background:rgba(6,14,32,.85);
+  display:flex;align-items:center;gap:12px;padding:0 24px;flex-shrink:0;backdrop-filter:blur(8px)}
+.hist-lbl{font-size:8px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--dim);white-space:nowrap}
+.hist-chips{display:flex;gap:5px;overflow-x:auto;flex:1}
+.hist-chips::-webkit-scrollbar{display:none}
+.hchip{padding:3px 11px;border-radius:20px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);
+  font-size:10px;color:var(--sub);cursor:pointer;white-space:nowrap;transition:var(--tr);
+  font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:6px}
+.hchip:hover{border-color:var(--gold-b);color:var(--gold-lt)}
+.hchip-t{font-size:8px;color:var(--dim)}
+.hist-empty{font-size:10px;color:var(--dim)}
 
-.brand-seal {
-  width: 36px; height: 36px; border-radius: 50%;
-  border: 1.5px solid rgba(201,151,58,0.5);
-  background: rgba(201,151,58,0.08);
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  gap: 0;
-  box-shadow: 0 0 0 3px rgba(201,151,58,0.06), inset 0 0 12px rgba(201,151,58,0.06);
-}
-.brand-seal span:first-child {
-  font-family: 'DM Serif Display', serif;
-  font-size: 13px; color: var(--gold-lt); line-height: 1; letter-spacing: .5px;
-}
-.brand-seal span:last-child {
-  font-size: 6px; color: var(--gold); letter-spacing: 2px; line-height: 1;
-}
+/* GUIDE */
+.guide{position:absolute;inset:0;z-index:40;background:rgba(6,14,32,.98);backdrop-filter:blur(20px);
+  display:none;flex-direction:column;overflow-y:auto}
+.guide.open{display:flex}
+.guide-inner{padding:32px 36px;max-width:900px;margin:0 auto;width:100%}
+.guide-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}
+.guide-hd h2{font-family:'DM Serif Display',serif;font-size:22px;font-weight:400;color:var(--white)}
+.gg{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.gc{border-radius:var(--r);padding:22px}
+.gc-yes{background:rgba(34,201,122,.07);border:1px solid rgba(34,201,122,.18)}
+.gc-no{background:rgba(232,73,90,.07);border:1px solid rgba(232,73,90,.18)}
+.gc h3{font-family:'DM Serif Display',serif;font-size:18px;font-weight:400;margin-bottom:14px;display:flex;align-items:center;gap:7px}
+.gc-yes h3{color:#4ade80}.gc-no h3{color:#f87171}
+.gi{padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:12.5px;color:var(--sub);display:flex;gap:9px;line-height:1.55}
+.gi:last-child{border-bottom:none}
+.gi strong{color:var(--text);display:block}
+.ginfo{margin-top:16px;background:var(--gold-gl);border:1px solid var(--gold-b);border-radius:var(--r);
+  padding:16px 18px;font-size:12px;color:var(--sub);line-height:1.85}
+.ginfo strong{color:var(--gold-lt)}
 
-.brand-text h1 {
-  font-family: 'DM Serif Display', serif;
-  font-size: 15px; font-weight: 400; color: var(--white);
-  letter-spacing: .1px; line-height: 1;
-}
-.brand-text p {
-  font-size: 9px; color: var(--sub); letter-spacing: 1.5px;
-  text-transform: uppercase; margin-top: 2px;
-}
-
-.topbar-divider {
-  width: 1px; height: 28px;
-  background: rgba(255,255,255,0.06);
-  margin: 0 20px;
-  flex-shrink: 0;
-}
-
-.topbar-meta {
-  display: flex; gap: 24px; align-items: center;
-}
-.meta-item { text-align: center; }
-.meta-val {
-  font-family: 'DM Serif Display', serif;
-  font-size: 13px; color: var(--gold-lt); line-height: 1;
-}
-.meta-lbl {
-  font-size: 8px; color: var(--dim);
-  letter-spacing: 1.5px; text-transform: uppercase; margin-top: 2px;
-}
-
-.topbar-right {
-  margin-left: auto;
-  display: flex; align-items: center; gap: 16px;
-}
-
-.live-badge {
-  display: flex; align-items: center; gap: 6px;
-  padding: 4px 10px; border-radius: 20px;
-  background: rgba(34,201,122,0.08);
-  border: 1px solid rgba(34,201,122,0.18);
-}
-.live-dot {
-  width: 5px; height: 5px; border-radius: 50%;
-  background: var(--green);
-  animation: livepulse 2s ease-in-out infinite;
-}
-@keyframes livepulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.8)} }
-.live-badge span { font-size: 9px; font-weight: 600; color: var(--green); letter-spacing: 1px; text-transform: uppercase; }
-
-.user-block { text-align: right; }
-.user-name {
-  font-family: 'DM Serif Display', serif;
-  font-size: 14px; color: var(--gold-lt); line-height: 1;
-}
-.user-role { font-size: 8.5px; color: var(--dim); letter-spacing: 1px; text-transform: uppercase; margin-top: 2px; }
-.user-time { font-size: 9px; color: var(--sub); margin-top: 2px; }
-
-/* === LAYOUT === */
-.shell {
-  display: grid;
-  grid-template-columns: 260px 1fr;
-  flex: 1;
-  overflow: hidden;
-  position: relative; z-index: 1;
-}
-
-/* === SIDEBAR === */
-.sidebar {
-  background: rgba(8,22,48,0.7);
-  border-right: 1px solid rgba(255,255,255,0.05);
-  display: flex; flex-direction: column;
-  overflow: hidden;
-  backdrop-filter: blur(10px);
-}
-
-.sb-head {
-  padding: 14px 14px 10px;
-  border-bottom: 1px solid rgba(255,255,255,0.04);
-  flex-shrink: 0;
-}
-
-.sb-label {
-  font-size: 8px; font-weight: 600; letter-spacing: 2px;
-  text-transform: uppercase; color: var(--dim);
-  margin-bottom: 8px;
-}
-
-/* Search */
-.search-wrap {
-  position: relative;
-}
-.search-wrap svg {
-  position: absolute; left: 10px; top: 50%; transform: translateY(-50%);
-  width: 13px; height: 13px;
-  color: var(--dim); pointer-events: none;
-}
-.search-input {
-  width: 100%;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.07);
-  border-radius: var(--r-sm);
-  padding: 8px 10px 8px 30px;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 12px; color: var(--text); outline: none;
-  transition: var(--trans);
-}
-.search-input::placeholder { color: var(--dim); }
-.search-input:focus {
-  border-color: var(--gold-rim);
-  background: rgba(201,151,58,0.05);
-}
-
-/* Chips */
-.chips {
-  display: flex; flex-wrap: wrap; gap: 4px;
-  padding: 10px 14px;
-  border-bottom: 1px solid rgba(255,255,255,0.04);
-}
-.chip {
-  padding: 3px 9px; border-radius: 20px;
-  border: 1px solid rgba(255,255,255,0.07);
-  background: transparent;
-  font-size: 9.5px; color: var(--sub);
-  cursor: pointer; transition: var(--trans);
-  font-family: 'DM Sans', sans-serif;
-  white-space: nowrap;
-}
-.chip:hover, .chip.on {
-  background: var(--gold-glow);
-  border-color: var(--gold-rim);
-  color: var(--gold-lt);
-}
-
-/* List */
-.sb-list {
-  flex: 1; overflow-y: auto;
-  padding: 6px 8px 16px;
-}
-.sb-list::-webkit-scrollbar { width: 2px; }
-.sb-list::-webkit-scrollbar-thumb { background: rgba(201,151,58,0.2); border-radius: 2px; }
-
-.grp-label {
-  font-size: 8px; font-weight: 600; letter-spacing: 1.8px;
-  text-transform: uppercase; color: var(--dim);
-  padding: 12px 6px 5px;
-  display: flex; align-items: center; gap: 6px;
-}
-.grp-label::after {
-  content: ''; flex: 1; height: 1px;
-  background: rgba(255,255,255,0.05);
-}
-
-.sc-row {
-  width: 100%; text-align: left;
-  background: transparent;
-  border: 1px solid transparent;
-  border-radius: var(--r-sm);
-  padding: 8px 8px;
-  margin-bottom: 2px;
-  cursor: pointer;
-  display: flex; align-items: center; gap: 9px;
-  transition: var(--trans);
-  font-family: 'DM Sans', sans-serif;
-}
-.sc-row:hover {
-  background: rgba(255,255,255,0.03);
-  border-color: rgba(255,255,255,0.05);
-}
-.sc-row.active {
-  background: var(--gold-glow);
-  border-color: var(--gold-rim);
-}
-
-.sc-ico {
-  width: 30px; height: 30px; border-radius: 8px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 14px; flex-shrink: 0;
-}
-.i-blue   { background: rgba(26,48,104,0.8); }
-.i-green  { background: rgba(34,201,122,0.1); }
-.i-red    { background: rgba(232,73,90,0.1); }
-.i-gold   { background: rgba(201,151,58,0.1); }
-.i-slate  { background: rgba(100,130,190,0.1); }
-.i-purple { background: rgba(167,139,250,0.1); }
-.i-teal   { background: rgba(34,184,201,0.1); }
-
-.sc-info { flex: 1; min-width: 0; }
-.sc-title { font-size: 11.5px; font-weight: 500; color: var(--text); line-height: 1.3; }
-.sc-desc  { font-size: 9.5px; color: var(--sub); margin-top: 1px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-
-.sc-pip {
-  width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0;
-}
-.pip-green  { background: var(--green); }
-.pip-red    { background: var(--red); }
-.pip-teal   { background: var(--teal); }
-
-/* === MAIN PANEL === */
-.main {
-  display: flex; flex-direction: column; overflow: hidden;
-}
-
-/* Breadcrumb bar */
-.breadbar {
-  height: 48px;
-  background: rgba(8,22,48,0.6);
-  border-bottom: 1px solid rgba(255,255,255,0.04);
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 0 24px;
-  flex-shrink: 0;
-  backdrop-filter: blur(8px);
-}
-.bread-left { display: flex; align-items: center; gap: 8px; }
-.bread-title {
-  font-family: 'DM Serif Display', serif;
-  font-size: 16px; color: var(--white);
-  display: flex; align-items: center; gap: 7px;
-}
-.bread-sub { font-size: 10px; color: var(--sub); margin-top: 2px; }
-
-.btn {
-  display: flex; align-items: center; gap: 5px;
-  padding: 6px 13px; border-radius: var(--r-sm);
-  font-family: 'DM Sans', sans-serif;
-  font-size: 11px; font-weight: 500;
-  border: none; cursor: pointer;
-  transition: var(--trans);
-}
-.btn:hover { transform: translateY(-1px); }
-
-.btn-guide {
-  background: rgba(201,151,58,0.1);
-  border: 1px solid var(--gold-rim);
-  color: var(--gold-lt);
-}
-.btn-guide:hover { background: rgba(201,151,58,0.18); }
-
-.btn-copy {
-  background: linear-gradient(135deg, var(--gold), var(--gold-lt));
-  color: #07102a; font-weight: 700; font-size: 12px;
-  padding: 9px 18px; border-radius: var(--r-sm);
-}
-.btn-copy:hover { box-shadow: 0 4px 20px rgba(201,151,58,0.35); }
-
-.btn-wapp {
-  background: rgba(34,201,122,0.1);
-  border: 1px solid rgba(34,201,122,0.2);
-  color: var(--green);
-}
-.btn-wapp:hover { background: rgba(34,201,122,0.18); }
-
-.btn-ghost {
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.08);
-  color: var(--sub);
-}
-.btn-ghost:hover { background: rgba(255,255,255,0.09); color: var(--text); }
-
-/* === WELCOME SCREEN === */
-.welcome {
-  flex: 1;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  gap: 16px; padding: 48px;
-  text-align: center;
-}
-
-.welcome-glyph {
-  width: 80px; height: 80px;
-  border-radius: 50%;
-  border: 1px solid var(--gold-rim);
-  background: var(--gold-glow);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 34px;
-  box-shadow: 0 0 0 10px rgba(201,151,58,0.04), 0 0 40px rgba(201,151,58,0.08);
-  animation: floatup 4s ease-in-out infinite;
-}
-@keyframes floatup {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
-}
-
-.welcome h2 {
-  font-family: 'DM Serif Display', serif;
-  font-size: 26px; font-weight: 400; color: var(--white);
-  opacity: .8; line-height: 1.3;
-}
-.welcome p {
-  font-size: 13px; color: var(--sub); max-width: 400px; line-height: 1.85;
-}
-
-.welcome-tags {
-  display: flex; flex-wrap: wrap; gap: 6px;
-  justify-content: center; margin-top: 4px;
-}
-.wtag {
-  padding: 5px 14px; border-radius: 20px;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.07);
-  font-size: 11px; color: var(--sub);
-  cursor: pointer; transition: var(--trans);
-  font-family: 'DM Sans', sans-serif;
-}
-.wtag:hover {
-  background: var(--gold-glow); border-color: var(--gold-rim); color: var(--gold-lt);
-}
-
-/* === SCENARIO VIEW === */
-.sc-view { flex: 1; display: none; flex-direction: column; overflow: hidden; }
-.sc-view.on { display: flex; }
-
-/* Name bar */
-.namebar {
-  height: 44px;
-  background: rgba(201,151,58,0.04);
-  border-bottom: 1px solid var(--gold-rim);
-  display: flex; align-items: center; gap: 14px;
-  padding: 0 24px; flex-shrink: 0;
-}
-.namebar label {
-  font-size: 9px; font-weight: 600; letter-spacing: 2px;
-  text-transform: uppercase; color: var(--gold-lt);
-  white-space: nowrap;
-}
-.namebar input {
-  width: 240px;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid var(--gold-rim);
-  border-radius: var(--r-sm); padding: 5px 11px;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 13px; color: var(--white); outline: none;
-  transition: var(--trans);
-}
-.namebar input::placeholder { color: var(--dim); }
-.namebar input:focus { border-color: var(--gold-lt); background: rgba(201,151,58,0.08); }
-.namebar-hint { font-size: 10px; color: var(--dim); }
-
-/* Split columns */
-.cols {
-  flex: 1; display: grid;
-  grid-template-columns: 1fr 1fr;
-  overflow: hidden;
-}
-.col { display: flex; flex-direction: column; overflow: hidden; }
-.col-l { border-right: 1px solid rgba(255,255,255,0.04); }
-
-.col-hd {
-  height: 38px;
-  border-bottom: 1px solid rgba(255,255,255,0.04);
-  display: flex; align-items: center;
-  padding: 0 20px; gap: 6px;
-  font-size: 8.5px; font-weight: 600; letter-spacing: 2px;
-  text-transform: uppercase; color: var(--dim);
-  flex-shrink: 0;
-}
-
-.col-body {
-  flex: 1; overflow-y: auto; padding: 18px 20px;
-}
-.col-body::-webkit-scrollbar { width: 3px; }
-.col-body::-webkit-scrollbar-thumb { background: rgba(201,151,58,0.18); border-radius: 3px; }
-
-/* Inbound bubble */
-.who-row {
-  display: flex; align-items: center; gap: 6px;
-  font-size: 9.5px; color: var(--sub);
-  margin-bottom: 8px;
-}
-.who-pip { width: 6px; height: 6px; border-radius: 50%; }
-
-.bubble {
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 12px 12px 12px 3px;
-  padding: 13px 16px;
-  font-size: 13px; color: var(--sub);
-  line-height: 1.75; font-style: italic;
-  margin-bottom: 14px;
-}
-
-/* Tags */
-.tag-row { display: flex; gap: 5px; flex-wrap: wrap; }
-.tag {
-  font-size: 9px; font-weight: 600; padding: 2px 9px;
-  border-radius: 20px; letter-spacing: .4px; text-transform: uppercase;
-}
-.tg-green  { background: rgba(34,201,122,0.1); color: #4ade80; border: 1px solid rgba(34,201,122,0.2); }
-.tg-red    { background: rgba(232,73,90,0.1);  color: #f87171; border: 1px solid rgba(232,73,90,0.2); }
-.tg-gold   { background: var(--gold-glow);      color: var(--gold-lt); border: 1px solid var(--gold-rim); }
-.tg-blue   { background: rgba(26,48,104,0.4);  color: #93b4fb; border: 1px solid rgba(100,130,200,0.2); }
-.tg-teal   { background: rgba(34,184,201,0.1); color: #5eead4; border: 1px solid rgba(34,184,201,0.2); }
-
-.ctx {
-  margin-top: 12px;
-  background: rgba(201,151,58,0.05);
-  border: 1px solid var(--gold-rim);
-  border-radius: var(--r-sm);
-  padding: 10px 13px;
-  font-size: 11.5px; color: var(--sub); line-height: 1.65;
-}
-.ctx strong { color: var(--gold-lt); }
-
-/* Response cards */
-.resp-stack { display: flex; flex-direction: column; gap: 14px; }
-
-.rcard {
-  border-radius: var(--r);
-  border: 1px solid rgba(255,255,255,0.06);
-  background: rgba(11,27,58,0.6);
-  overflow: hidden;
-  transition: border-color .2s;
-}
-.rcard:hover { border-color: rgba(255,255,255,0.1); }
-.rcard.primary {
-  border-color: rgba(201,151,58,0.28);
-  background: rgba(201,151,58,0.04);
-}
-.rcard.danger {
-  border-color: rgba(232,73,90,0.25);
-  background: rgba(232,73,90,0.04);
-}
-
-.rcard-head {
-  padding: 9px 14px;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
-  display: flex; align-items: center; justify-content: space-between;
-}
-.rcard-title {
-  font-size: 11.5px; font-weight: 600; color: var(--gold-lt);
-  display: flex; align-items: center; gap: 5px;
-}
-.rcard-title.danger { color: #f87171; }
-.badge {
-  font-size: 7.5px; font-weight: 700;
-  padding: 2px 8px; border-radius: 8px;
-  letter-spacing: .6px; text-transform: uppercase;
-}
-.badge-main { background: rgba(201,151,58,0.18); color: var(--gold-lt); }
-.badge-alt  { background: rgba(100,130,200,0.15); color: #93b4fb; }
-.badge-no   { background: rgba(232,73,90,0.18); color: #f87171; }
-
-.reditor {
-  width: 100%;
-  background: rgba(0,0,0,0.18);
-  border: none; border-bottom: 1px solid rgba(255,255,255,0.05);
-  padding: 13px 15px;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 13px; line-height: 1.85; color: var(--text);
-  resize: none; outline: none;
-  min-height: 120px; max-height: 240px; overflow-y: auto;
-  transition: background .2s;
-}
-.reditor:focus { background: rgba(255,255,255,0.02); }
-.reditor::-webkit-scrollbar { width: 3px; }
-.reditor::-webkit-scrollbar-thumb { background: var(--gold-rim); border-radius: 3px; }
-
-.rcard-foot {
-  padding: 9px 14px;
-  display: flex; align-items: center; gap: 7px;
-}
-.chars { font-size: 9px; color: var(--dim); margin-left: auto; }
-
-/* === HISTORY BAR === */
-.histbar {
-  border-top: 1px solid rgba(255,255,255,0.04);
-  height: 40px;
-  background: rgba(6,18,43,0.8);
-  display: flex; align-items: center; gap: 12px;
-  padding: 0 24px; flex-shrink: 0;
-  backdrop-filter: blur(8px);
-}
-.hist-lbl {
-  font-size: 8px; font-weight: 600; letter-spacing: 2px;
-  text-transform: uppercase; color: var(--dim); white-space: nowrap;
-}
-.hist-chips {
-  display: flex; gap: 5px; overflow-x: auto; flex: 1;
-}
-.hist-chips::-webkit-scrollbar { display: none; }
-.hchip {
-  padding: 3px 11px; border-radius: 20px;
-  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07);
-  font-size: 10px; color: var(--sub); cursor: pointer;
-  white-space: nowrap; transition: var(--trans);
-  font-family: 'DM Sans', sans-serif;
-  display: flex; align-items: center; gap: 6px;
-}
-.hchip:hover { border-color: var(--gold-rim); color: var(--gold-lt); }
-.hchip-t { font-size: 8px; color: var(--dim); }
-.hist-empty { font-size: 10px; color: var(--dim); }
-
-/* === GUIDE OVERLAY === */
-.guide {
-  position: absolute; inset: 0; z-index: 40;
-  background: rgba(6,18,43,0.98);
-  backdrop-filter: blur(20px);
-  display: none; flex-direction: column; overflow-y: auto;
-}
-.guide.open { display: flex; }
-.guide-inner { padding: 32px 36px; max-width: 880px; margin: 0 auto; width: 100%; }
-.guide-hd { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
-.guide-hd h2 {
-  font-family: 'DM Serif Display', serif;
-  font-size: 22px; font-weight: 400; color: var(--white);
-}
-.gg { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.gc {
-  border-radius: var(--r-lg); padding: 22px;
-}
-.gc-yes { background: rgba(34,201,122,0.07); border: 1px solid rgba(34,201,122,0.18); }
-.gc-no  { background: rgba(232,73,90,0.07);  border: 1px solid rgba(232,73,90,0.18); }
-.gc h3 {
-  font-family: 'DM Serif Display', serif;
-  font-size: 18px; font-weight: 400; margin-bottom: 14px;
-  display: flex; align-items: center; gap: 7px;
-}
-.gc-yes h3 { color: #4ade80; }
-.gc-no  h3 { color: #f87171; }
-.gi {
-  padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.04);
-  font-size: 12.5px; color: var(--sub);
-  display: flex; gap: 9px; line-height: 1.55;
-}
-.gi:last-child { border-bottom: none; }
-.gi strong { color: var(--text); display: block; }
-.ginfo {
-  margin-top: 16px;
-  background: var(--gold-glow); border: 1px solid var(--gold-rim);
-  border-radius: var(--r); padding: 16px 18px;
-  font-size: 12px; color: var(--sub); line-height: 1.85;
-}
-.ginfo strong { color: var(--gold-lt); }
-
-/* === TOAST === */
-.toast {
-  position: fixed; bottom: 22px; right: 22px; z-index: 9999;
-  background: rgba(9,22,50,0.96);
-  border: 1px solid var(--gold); color: var(--white);
-  padding: 10px 16px; border-radius: var(--r-sm);
-  font-size: 12px; font-weight: 500;
-  transform: translateY(70px) scale(.96); opacity: 0;
-  transition: all .3s cubic-bezier(.34,1.56,.64,1);
-  display: flex; align-items: center; gap: 8px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.6), 0 0 0 1px rgba(201,151,58,0.1);
-  backdrop-filter: blur(16px);
-}
-.toast.show { transform: translateY(0) scale(1); opacity: 1; }
-
-@media print {
-  .sidebar,.breadbar,.histbar,.toast,.namebar { display: none !important; }
-  .shell { grid-template-columns: 1fr; }
-  .guide { position: static; display: flex !important; }
-}
+/* TOAST */
+.toast{position:fixed;bottom:22px;right:22px;z-index:9999;background:rgba(9,18,45,.97);border:1px solid var(--gold);
+  color:var(--white);padding:10px 16px;border-radius:var(--rs);font-size:12px;font-weight:500;
+  transform:translateY(70px) scale(.96);opacity:0;transition:all .3s cubic-bezier(.34,1.56,.64,1);
+  display:flex;align-items:center;gap:8px;box-shadow:0 8px 32px rgba(0,0,0,.6);backdrop-filter:blur(16px)}
+.toast.show{transform:translateY(0) scale(1);opacity:1}
+@media print{.sidebar,.breadbar,.histbar,.toast,.namebar{display:none!important}.shell{grid-template-columns:1fr}.guide{position:static;display:flex!important}}
 </style>
 </head>
 <body>
 
-<!-- TOPBAR -->
 <div class="topbar">
   <div class="brand">
-    <div class="brand-seal">
-      <span>OAB</span>
-      <span>SP</span>
-    </div>
-    <div class="brand-text">
-      <h1>OAB – Assistência Judiciária Gratuita</h1>
+    <div class="seal"><span class="s1">OAB</span><span class="s2">SP</span></div>
+    <div class="brand-txt">
+      <h1>CAJ – Comissão de Advocacia Dativa</h1>
       <p>Subseção Santana de Parnaíba · Central de Atendimento</p>
     </div>
   </div>
-
-  <div class="topbar-divider"></div>
-
-  <div class="topbar-meta">
-    <div class="meta-item">
-      <div class="meta-val">09h – 12h</div>
-      <div class="meta-lbl">Horário</div>
-    </div>
-    <div class="meta-item">
-      <div class="meta-val">30 / dia</div>
-      <div class="meta-lbl">Vagas</div>
-    </div>
-    <div class="meta-item">
-      <div class="meta-val">(11) 4154-5191</div>
-      <div class="meta-lbl">Telefone</div>
-    </div>
+  <div class="tdiv"></div>
+  <div class="tmeta">
+    <div class="tm"><div class="tm-v">09h – 12h</div><div class="tm-l">Horário</div></div>
+    <div class="tm"><div class="tm-v">30 / dia</div><div class="tm-l">Vagas</div></div>
+    <div class="tm"><div class="tm-v">(11) 4154-5191</div><div class="tm-l">Telefone</div></div>
   </div>
-
-  <div class="topbar-right">
-    <div class="live-badge">
-      <div class="live-dot"></div>
-      <span>Online</span>
-    </div>
-    <div class="topbar-divider"></div>
-    <div class="user-block">
-      <div class="user-name">Cássia Kelly Lins Reis</div>
-      <div class="user-role">Auxiliar Administrativo</div>
-      <div class="user-time" id="clock"></div>
+  <div class="tright">
+    <div class="live"><div class="live-dot"></div><span>Online</span></div>
+    <div class="tdiv"></div>
+    <div class="ublock">
+      <div class="uname">Cássia Kelly Lins Reis</div>
+      <div class="urole">Auxiliar Administrativo</div>
+      <div class="uclock" id="clock"></div>
     </div>
   </div>
 </div>
 
-<!-- SHELL -->
 <div class="shell">
-
-  <!-- SIDEBAR -->
   <div class="sidebar">
     <div class="sb-head">
-      <div class="sb-label">Que mensagem você recebeu?</div>
-      <div class="search-wrap">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-        </svg>
-        <input class="search-input" id="search" type="text" placeholder="Buscar situação..." oninput="buscar(this.value)">
+      <div class="sb-lbl">Que mensagem você recebeu?</div>
+      <div class="sw">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input class="si" id="search" type="text" placeholder="Buscar situação..." oninput="buscar(this.value)">
       </div>
     </div>
-
     <div class="chips" id="chips">
       <button class="chip on" onclick="filtro(this,'')">Todos</button>
       <button class="chip" onclick="filtro(this,'Primeiro contato')">1º Contato</button>
       <button class="chip" onclick="filtro(this,'Atendemos')">✅ Atend.</button>
       <button class="chip" onclick="filtro(this,'Não atendemos')">🚫 Não atend.</button>
+      <button class="chip" onclick="filtro(this,'Convênio')">🤝 Convênio</button>
+      <button class="chip" onclick="filtro(this,'Dativo')">⚖️ Dativo</button>
       <button class="chip" onclick="filtro(this,'Documentos')">📋 Docs</button>
       <button class="chip" onclick="filtro(this,'Agendamento')">📅 Agenda</button>
-      <button class="chip" onclick="filtro(this,'delicada')">🤝 Delicado</button>
-      <button class="chip" onclick="filtro(this,'Advogado')">⚖️ Adv.</button>
+      <button class="chip" onclick="filtro(this,'delicada')">😓 Delicado</button>
     </div>
-
     <div class="sb-list" id="sb-list"></div>
   </div>
 
-  <!-- MAIN -->
   <div class="main">
-
-    <!-- BREADBAR -->
     <div class="breadbar">
-      <div class="bread-left">
-        <div>
-          <div class="bread-title" id="bread-title">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity=".4">
-              <path d="M15 19l-7-7 7-7"/>
-            </svg>
-            Selecione um cenário
-          </div>
-          <div class="bread-sub" id="bread-sub">Escolha uma situação ao lado para ver as respostas prontas</div>
-        </div>
-      </div>
       <div>
-        <button class="btn btn-guide" onclick="toggleGuide()">📌 O que atendemos?</button>
+        <div class="btitle" id="btitle">Selecione um cenário</div>
+        <div class="bsub" id="bsub">Escolha uma situação ao lado para ver e editar as respostas</div>
       </div>
+      <button class="btn btn-guide" onclick="toggleGuide()">📌 O que atendemos?</button>
     </div>
 
-    <!-- BODY -->
     <div style="flex:1;display:flex;flex-direction:column;overflow:hidden;position:relative">
 
-      <!-- WELCOME -->
       <div class="welcome" id="welcome">
-        <div class="welcome-glyph">⚖️</div>
+        <div class="wglyph">⚖️</div>
         <h2>Central de Respostas Prontas</h2>
-        <p>Selecione uma situação na barra lateral. A resposta aparece pronta com o nome da pessoa — edite se precisar e copie com um clique.</p>
-        <div class="welcome-tags" id="welcome-tags"></div>
+        <p>Selecione ao lado o tipo de mensagem recebida. A resposta aparece pronta com o nome da pessoa — edite se precisar e copie com um clique.</p>
+        <div class="wtags" id="wtags"></div>
       </div>
 
-      <!-- SCENARIO VIEW -->
       <div class="sc-view" id="sc-view">
-
-        <!-- Name bar -->
         <div class="namebar">
           <label>✏️ Nome da pessoa</label>
           <input id="person-name" type="text" placeholder="Ex: Maria Silva" oninput="atualizaNome()">
           <span class="namebar-hint">Inserido automaticamente nas mensagens</span>
         </div>
-
-        <!-- Columns -->
         <div class="cols">
-
-          <!-- LEFT -->
           <div class="col col-l">
             <div class="col-hd">📩 Mensagem recebida</div>
             <div class="col-body">
-              <div class="who-row">
-                <div class="who-pip" id="who-pip"></div>
-                <span id="who-label">—</span>
-              </div>
+              <div class="who-row"><div class="who-pip" id="who-pip"></div><span id="who-lbl">—</span></div>
               <div class="bubble" id="bubble">—</div>
               <div class="tag-row" id="tag-row"></div>
               <div class="ctx" id="ctx" style="display:none"></div>
             </div>
           </div>
-
-          <!-- RIGHT -->
           <div class="col">
             <div class="col-hd">✏️ Respostas prontas — edite e copie</div>
-            <div class="col-body">
-              <div class="resp-stack" id="resp-stack"></div>
-            </div>
+            <div class="col-body"><div class="resp-stack" id="resp-stack"></div></div>
           </div>
-
         </div>
       </div>
 
-      <!-- GUIDE -->
       <div class="guide" id="guide">
         <div class="guide-inner">
           <div class="guide-hd">
-            <h2>📌 O que atendemos ou não</h2>
+            <h2>📌 O que a CAJ atende</h2>
             <button class="btn btn-ghost" onclick="toggleGuide()">✕ Fechar</button>
           </div>
           <div class="gg">
             <div class="gc gc-yes">
               <h3>✅ Atendemos</h3>
-              <div class="gi"><span>👨‍👩‍👧</span><div><strong>Família</strong>Divórcio, pensão alimentícia, guarda de filhos, separação, reconhecimento de paternidade</div></div>
-              <div class="gi"><span>⚖️</span><div><strong>Cível em geral</strong>Cobranças, contratos, indenizações, danos morais e materiais</div></div>
-              <div class="gi"><span>🏠</span><div><strong>Habitacional</strong>Ações possessórias, regularização de imóvel, usucapião</div></div>
-              <div class="gi"><span>📜</span><div><strong>Inventário e Herança</strong>Abertura de inventário, partilha de bens, arrolamento</div></div>
-              <div class="gi"><span>🛡️</span><div><strong>Violência Doméstica</strong>Medida protetiva de urgência, Lei Maria da Penha</div></div>
+              <div class="gi"><span>👨‍👩‍👧</span><div><strong>Família</strong>Divórcio, pensão alimentícia, guarda de filhos, reconhecimento de paternidade</div></div>
+              <div class="gi"><span>⚖️</span><div><strong>Cível em geral</strong>Cobranças, contratos, indenizações, danos morais</div></div>
+              <div class="gi"><span>🏠</span><div><strong>Habitacional</strong>Posse, regularização de imóvel, usucapião</div></div>
+              <div class="gi"><span>📜</span><div><strong>Inventário e Herança</strong>Abertura de inventário, partilha de bens</div></div>
+              <div class="gi"><span>🛡️</span><div><strong>Violência Doméstica</strong>Medida protetiva, Lei Maria da Penha</div></div>
+              <div class="gi"><span>🤝</span><div><strong>Convênio OAB/DPE</strong>Assistência via convênio com a Defensoria Pública</div></div>
+              <div class="gi"><span>📋</span><div><strong>Advocacia Dativa</strong>Nomeação judicial — réus sem advogado</div></div>
             </div>
             <div class="gc gc-no">
               <h3>🚫 Não Atendemos</h3>
               <div class="gi"><span>🏭</span><div><strong>Trabalhista</strong>Rescisão, FGTS, hora extra, vínculo empregatício</div></div>
               <div class="gi"><span>📋</span><div><strong>Previdenciário / INSS</strong>Aposentadoria, BPC, auxílio-doença, pensão por morte</div></div>
-              <div class="gi"><span>🔒</span><div><strong>Criminal (maioria)</strong>Defesa criminal em geral</div></div>
+              <div class="gi"><span>🔒</span><div><strong>Criminal geral</strong>Exceto dativo nomeado pelo juiz</div></div>
               <div class="gi"><span>🏢</span><div><strong>Empresarial / Comercial</strong>Contratos empresariais, CNPJ, sociedades</div></div>
-              <div class="gi"><span>💰</span><div><strong>Tributário / Fiscal</strong>Dívidas com Receita Federal, parcelamentos fiscais</div></div>
+              <div class="gi"><span>💰</span><div><strong>Tributário / Fiscal</strong>Dívidas com Receita Federal, parcelamentos</div></div>
             </div>
           </div>
           <div class="ginfo">
-            <strong>📋 Documentos obrigatórios:</strong> RG original + CPF · Comprovante de residência atualizado · Comprovante de renda de todos da família · Comprovante de patrimônio (se houver)<br><br>
-            <strong>📍</strong> Av. Tenente Marques, 5297 – Jardim do Luar, Santana de Parnaíba/SP <em>(dentro do POUPATEMPO)</em><br>
-            <strong>📞</strong> (11) 4154-5191 &nbsp;·&nbsp; <strong>📧</strong> aj.santana.parnai@oabsp.org.br &nbsp;·&nbsp; <strong>🕘</strong> Seg–Sex | 09h–12h &nbsp;·&nbsp; <strong>⚠️</strong> 30 pessoas/dia
+            <strong>📋 Documentos básicos:</strong> RG original + CPF · Comprovante de residência · Comprovante de renda de todos da família · Patrimônio se houver<br><br>
+            <strong>📍</strong> Av. Tenente Marques, 5297 – Jd. do Luar, Santana de Parnaíba/SP (POUPATEMPO)<br>
+            <strong>📞</strong> (11) 4154-5191 &nbsp;·&nbsp; <strong>📧</strong> aj.santana.parnai@oabsp.org.br &nbsp;·&nbsp; <strong>🕘</strong> Seg–Sex, 9h–12h &nbsp;·&nbsp; <strong>⚠️</strong> 30 vagas/dia
           </div>
-          <div style="margin-top:14px">
-            <button class="btn btn-ghost" onclick="window.print()">🖨️ Imprimir</button>
-          </div>
+          <div style="margin-top:14px"><button class="btn btn-ghost" onclick="window.print()">🖨️ Imprimir</button></div>
         </div>
-      </div>
-
-    </div><!-- end body -->
-
-    <!-- HISTBAR -->
-    <div class="histbar">
-      <span class="hist-lbl">Recentes</span>
-      <div class="hist-chips" id="hist-chips">
-        <span class="hist-empty">Nenhuma mensagem copiada ainda</span>
       </div>
     </div>
 
-  </div><!-- end main -->
-</div><!-- end shell -->
+    <div class="histbar">
+      <span class="hist-lbl">Recentes</span>
+      <div class="hist-chips" id="hist-chips"><span class="hist-empty">Nenhuma mensagem copiada ainda</span></div>
+    </div>
+  </div>
+</div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-const END  = `\n\n📍 Av. Tenente Marques, 5297 – Jardim do Luar, Santana de Parnaíba/SP (dentro do POUPATEMPO)\n📞 (11) 4154-5191\n📧 aj.santana.parnai@oabsp.org.br\n🕘 Segunda a sexta, das 9h às 12h`;
-const DOCS = `\n\nDocumentos necessários:\n- RG original e CPF\n- Comprovante de residência atualizado\n- Comprovante de renda de todos da família\n- Comprovante de patrimônio, se tiver\n\nSem os documentos completos, não é possível realizar o atendimento.`;
-const AREAS = `\n\nAtendemos: família (divórcio, pensão, guarda), cível em geral, inventário e herança, violência doméstica e habitacional.`;
+const HDR  = 'CAJ – Comissão de Advocacia Dativa\nOAB Subseção Santana de Parnaíba';
+const END  = '\n\n📍 Av. Tenente Marques, 5297 – Jd. do Luar, Santana de Parnaíba/SP (POUPATEMPO)\n📞 (11) 4154-5191   📧 aj.santana.parnai@oabsp.org.br\n🕘 Segunda a sexta, das 9h às 12h';
+const DOCS = '\n\nO que precisa trazer:\n- RG original e CPF\n- Comprovante de residência atualizado\n- Comprovante de renda de todos que moram com você\n- Se tiver bens (imóvel, carro, poupança): documentação desses bens\n\nSem a documentação completa, não conseguimos fazer o atendimento.';
+const AREAS = '\n\nA CAJ atende: família (divórcio, pensão, guarda), cível, inventário, herança, violência doméstica e habitacional.';
 
-const SCENARIOS = [
-  { grp:'👤 Primeiro contato',
-    id:'bv1', icon:'👋', ic:'i-blue', pip:null,
-    label:'Primeiro contato / Oi', sub:'Mensagem inicial — apresentar o serviço',
-    who:'Assistido', whoColor:'#3b82f6',
-    sim:'Oi, tudo bem? Queria saber como funciona para pedir ajuda na OAB.',
-    tags:[{t:'Boas-vindas',c:'tg-blue'},{t:'WhatsApp',c:'tg-teal'}],
-    ctx:'Pessoa entrando em contato pela primeira vez. Apresente o serviço de forma acolhedora e oriente o comparecimento presencial.',
-    resps:[
-      { title:'✉️ Atendimento inicial', badge:'Recomendada', primary:true, nao:false,
-        tpl: n => `OAB – Assistência Judiciária Gratuita
-Subseção Santana de Parnaíba
+const S = [
+
+  // ── PRIMEIRO CONTATO ─────────────────────────────────────────
+  {grp:'👤 Primeiro contato', id:'bv1', icon:'👋', ic:'i-blue', pip:null,
+   label:'Não sabe o que é a CAJ', sub:'Explica o serviço do zero',
+   who:'Assistido', wc:'#3b82f6',
+   sim:'Oi, vi o número aqui. Vocês fazem o quê exatamente?',
+   tags:[{t:'Boas-vindas',c:'tg-blue'}],
+   ctx:'Pessoa sem contexto. Explicar de forma simples e acolhedora.',
+   resps:[
+    {title:'✉️ Apresentar o serviço', badge:'Recomendada', primary:true, nao:false, tpl: n =>
+`${HDR}
 
 Olá${n?', '+n:''}! Tudo bem?
 
-Obrigada por entrar em contato. Aqui é a Assistência Judiciária Gratuita da OAB de Santana de Parnaíba.
+A CAJ é a Comissão de Advocacia Dativa da OAB de Santana de Parnaíba. Oferecemos atendimento jurídico gratuito para pessoas que não têm condições de pagar um advogado particular.
 
-Nosso atendimento é totalmente gratuito para quem não tem condições de pagar um advogado particular. Os atendimentos são feitos por advogados voluntários registrados na OAB-SP.
+O atendimento é feito por advogados conveniados à OAB e funciona de forma presencial aqui na nossa sede.
 
-Para ser atendido(a), é preciso vir pessoalmente até nossa sede com a documentação necessária. Não fazemos orientação jurídica por WhatsApp ou telefone.${END}\n${DOCS}`},
-      { title:'📋 Com áreas atendidas', badge:'Alternativa', primary:false, nao:false,
-        tpl: n => `OAB – Assistência Judiciária Gratuita
-Subseção Santana de Parnaíba
+Se você precisar de ajuda jurídica, é só vir até nós com os documentos necessários.${END}${DOCS}`}
+   ]},
 
-Olá${n?', '+n:''}!
-
-Aqui é a Assistência Judiciária Gratuita da OAB. Atendemos nas seguintes áreas:
-
-- Família: divórcio, pensão alimentícia, guarda de filhos
-- Cível em geral
-- Inventário e herança
-- Violência doméstica (Lei Maria da Penha)
-- Habitacional
-
-O atendimento é gratuito, presencial e por ordem de chegada, com os documentos necessários.${END}\n${DOCS}`},
-    ]},
-
-  { grp:'👤 Primeiro contato',
-    id:'bv2', icon:'❓', ic:'i-blue', pip:null,
-    label:'Pergunta se precisa agendar', sub:'Sem agendamento — por ordem de chegada',
-    who:'Assistido', whoColor:'#3b82f6',
-    sim:'Precisaria de ajuda. Tenho que agendar ou posso ir direto?',
-    tags:[{t:'Agendamento',c:'tg-blue'}],
-    ctx:'Não há agendamento. Atendimento por ordem de chegada, limite de 30 vagas por dia.',
-    resps:[
-      { title:'✉️ Sem agendamento', badge:'Padrão', primary:true, nao:false,
-        tpl: n => `OAB – Assistência Judiciária Gratuita
-Subseção Santana de Parnaíba
+  {grp:'👤 Primeiro contato', id:'bv2', icon:'🙋', ic:'i-blue', pip:null,
+   label:'Sabe que é a OAB e quer ajuda', sub:'Primeiro contato direto',
+   who:'Assistido', wc:'#3b82f6',
+   sim:'Oi, preciso de um advogado e não tenho dinheiro para pagar. Vocês podem me ajudar?',
+   tags:[{t:'Boas-vindas',c:'tg-blue'},{t:'WhatsApp',c:'tg-teal'}],
+   ctx:'Pessoa já sabe que é gratuito. Confirmar e orientar o que fazer.',
+   resps:[
+    {title:'✉️ Confirmar e orientar', badge:'Recomendada', primary:true, nao:false, tpl: n =>
+`${HDR}
 
 Olá${n?', '+n:''}!
 
-Não precisa agendar, pode vir direto. O atendimento é por ordem de chegada.
+Sim, podemos ajudar! A CAJ oferece atendimento jurídico gratuito para quem não tem condições de pagar advogado particular.
 
-Só recomendamos chegar cedo, porque o limite é de 30 atendimentos por dia e as vagas costumam acabar.${END}\n${DOCS}`},
-    ]},
+Para ser atendido(a), basta vir pessoalmente até nossa sede de segunda a sexta, das 9h às 12h, com os documentos necessários. Não precisa agendar — é por ordem de chegada.${END}${DOCS}`}
+   ]},
 
-  { grp:'👤 Primeiro contato',
-    id:'bv3', icon:'🔊', ic:'i-blue', pip:null,
-    label:'Assistido enviou áudio', sub:'Pede para enviar em texto',
-    who:'Assistido', whoColor:'#3b82f6',
-    sim:'[🎙️ Áudio de 0:43]',
-    tags:[{t:'Áudio',c:'tg-gold'}],
-    ctx:'Não conseguimos ouvir áudios por aqui. Solicitar mensagem em texto.',
-    resps:[
-      { title:'✉️ Pedir em texto', badge:'Padrão', primary:true, nao:false,
-        tpl: n => `OAB – Assistência Judiciária Gratuita
-Subseção Santana de Parnaíba
+  {grp:'👤 Primeiro contato', id:'bv3', icon:'❓', ic:'i-blue', pip:null,
+   label:'Pergunta se precisa agendar', sub:'Sem agendamento — ordem de chegada',
+   who:'Assistido', wc:'#3b82f6',
+   sim:'Preciso de ajuda. Tenho que marcar hora ou posso ir direto?',
+   tags:[{t:'Agendamento',c:'tg-blue'}],
+   ctx:'Não há agendamento. Atendimento por ordem de chegada, limite 30 vagas/dia.',
+   resps:[
+    {title:'✉️ Sem agendamento', badge:'Padrão', primary:true, nao:false, tpl: n =>
+`${HDR}
 
-Olá${n?', '+n:''}! Não conseguimos ouvir áudios por aqui.
+Olá${n?', '+n:''}!
 
-Pode me contar o que precisa por mensagem de texto? Assim consigo te orientar melhor.`},
-    ]},
+Não precisa agendar, pode vir direto. O atendimento é por ordem de chegada, de segunda a sexta, das 9h às 12h.
 
-  { grp:'✅ Casos que atendemos',
-    id:'at1', icon:'👨‍👩‍👧', ic:'i-green', pip:'pip-green',
-    label:'Família — Divórcio', sub:'Confirmar atendimento + docs',
-    who:'Assistido', whoColor:'#22c97a',
-    sim:'Preciso me separar do meu marido. Vocês podem me ajudar?',
-    tags:[{t:'Atendemos',c:'tg-green'},{t:'Família',c:'tg-blue'}],
-    ctx:'Divórcio está na competência desta Assistência Judiciária.',
-    resps:[
-      { title:'✉️ Confirmar + docs divórcio', badge:'Recomendada', primary:true, nao:false,
-        tpl: n => `OAB – Assistência Judiciária Gratuita
-Subseção Santana de Parnaíba
+Recomendamos chegar cedo, porque o limite é de 30 atendimentos por dia e as vagas costumam acabar.${END}${DOCS}`}
+   ]},
+
+  {grp:'👤 Primeiro contato', id:'bv4', icon:'🔊', ic:'i-blue', pip:null,
+   label:'Enviou áudio', sub:'Pede para mandar em texto',
+   who:'Assistido', wc:'#3b82f6',
+   sim:'[🎙️ Áudio de 1:12]',
+   tags:[{t:'Áudio',c:'tg-gold'}],
+   ctx:'Não conseguimos ouvir áudios. Pedir que mande em texto.',
+   resps:[
+    {title:'✉️ Pedir em texto', badge:'Padrão', primary:true, nao:false, tpl: n =>
+`${HDR}
+
+Olá${n?', '+n:''}! Não consigo ouvir áudios por aqui.
+
+Pode me contar o que precisa por mensagem de texto? Assim consigo te orientar melhor.`}
+   ]},
+
+  // ── CASOS QUE ATENDEMOS ──────────────────────────────────────
+  {grp:'✅ Casos que atendemos', id:'at1', icon:'👨‍👩‍👧', ic:'i-green', pip:'pip-green',
+   label:'Família — Divórcio', sub:'Confirmar + docs específicos',
+   who:'Assistido', wc:'#22c97a',
+   sim:'Preciso me separar do meu marido. Vocês podem me ajudar?',
+   tags:[{t:'Atendemos',c:'tg-green'},{t:'Família',c:'tg-blue'}],
+   ctx:'Divórcio está dentro da atuação da CAJ.',
+   resps:[
+    {title:'✉️ Confirmar divórcio', badge:'Recomendada', primary:true, nao:false, tpl: n =>
+`${HDR}
 
 Olá${n?', '+n:''}!
 
@@ -951,20 +451,18 @@ Sim, atendemos casos de divórcio. Pode vir até nós.
 Além dos documentos básicos, traga também:
 - Certidão de casamento atualizada (emitida há no máximo 90 dias)
 - Se tiver filhos menores: certidão de nascimento de cada um
-- Se tiver bens: documentação do imóvel ou veículo${END}\n${DOCS}`},
-    ]},
+- Se tiver bens: documentação do imóvel ou veículo${END}${DOCS}`}
+   ]},
 
-  { grp:'✅ Casos que atendemos',
-    id:'at2', icon:'🍼', ic:'i-green', pip:'pip-green',
-    label:'Família — Pensão / Alimentos', sub:'Confirmar + docs específicos',
-    who:'Assistido', whoColor:'#22c97a',
-    sim:'O pai da minha filha não paga a pensão. Posso entrar com processo aqui?',
-    tags:[{t:'Atendemos',c:'tg-green'},{t:'Alimentos',c:'tg-blue'}],
-    ctx:'Pensão alimentícia está na competência desta unidade.',
-    resps:[
-      { title:'✉️ Confirmar + docs pensão', badge:'Recomendada', primary:true, nao:false,
-        tpl: n => `OAB – Assistência Judiciária Gratuita
-Subseção Santana de Parnaíba
+  {grp:'✅ Casos que atendemos', id:'at2', icon:'🍼', ic:'i-green', pip:'pip-green',
+   label:'Família — Pensão / Alimentos', sub:'Confirmar + docs específicos',
+   who:'Assistido', wc:'#22c97a',
+   sim:'O pai da minha filha não paga a pensão. Posso entrar com processo aqui?',
+   tags:[{t:'Atendemos',c:'tg-green'},{t:'Alimentos',c:'tg-blue'}],
+   ctx:'Pensão alimentícia está na atuação da CAJ.',
+   resps:[
+    {title:'✉️ Confirmar pensão', badge:'Recomendada', primary:true, nao:false, tpl: n =>
+`${HDR}
 
 Olá${n?', '+n:''}!
 
@@ -972,118 +470,217 @@ Sim, atendemos casos de pensão alimentícia. Pode vir até nós.
 
 Além dos documentos básicos, traga:
 - Certidão de nascimento do(s) filho(s)
-- Endereço completo da parte contrária${END}\n${DOCS}`},
-    ]},
+- Endereço completo da parte contrária${END}${DOCS}`}
+   ]},
 
-  { grp:'✅ Casos que atendemos',
-    id:'at3', icon:'🛡️', ic:'i-green', pip:'pip-green',
-    label:'Violência Doméstica', sub:'Lei Maria da Penha, medida protetiva',
-    who:'Assistido', whoColor:'#22c97a',
-    sim:'Estou sofrendo violência do meu companheiro. Podem me ajudar com medida protetiva?',
-    tags:[{t:'Atendemos',c:'tg-green'},{t:'Urgente',c:'tg-red'}],
-    ctx:'Atendemos. Se houver risco imediato, orientar ligar antes para 180 ou 190.',
-    resps:[
-      { title:'✉️ Confirmar + emergência', badge:'Recomendada', primary:true, nao:false,
-        tpl: n => `OAB – Assistência Judiciária Gratuita
-Subseção Santana de Parnaíba
+  {grp:'✅ Casos que atendemos', id:'at3', icon:'🛡️', ic:'i-green', pip:'pip-green',
+   label:'Violência Doméstica', sub:'Medida protetiva, Lei Maria da Penha',
+   who:'Assistido', wc:'#22c97a',
+   sim:'Estou sofrendo violência do meu companheiro. Podem me ajudar com medida protetiva?',
+   tags:[{t:'Atendemos',c:'tg-green'},{t:'Urgente',c:'tg-red'}],
+   ctx:'Atendemos. Se houver risco imediato, orientar ligar 180 ou 190 primeiro.',
+   resps:[
+    {title:'✉️ Violência doméstica', badge:'Recomendada', primary:true, nao:false, tpl: n =>
+`${HDR}
 
 Olá${n?', '+n:''}!
 
-Sim, atendemos casos de violência doméstica, inclusive pedido de medida protetiva.
+Sim, atendemos casos de violência doméstica e pedido de medida protetiva.
 
-Se você estiver em risco agora, ligue antes:
+Se você estiver em risco agora, ligue primeiro:
 - Central da Mulher: 180 (24h, gratuito)
 - Polícia Militar: 190
 
-Depois, venha até nós com a documentação.${END}\n${DOCS}`},
-    ]},
+Depois, venha até nós com os documentos.${END}${DOCS}`}
+   ]},
 
-  { grp:'✅ Casos que atendemos',
-    id:'at4', icon:'📜', ic:'i-green', pip:'pip-green',
-    label:'Inventário / Herança', sub:'Confirmar atendimento',
-    who:'Assistido', whoColor:'#22c97a',
-    sim:'Meu pai faleceu e precisamos fazer o inventário. Vocês atendem isso?',
-    tags:[{t:'Atendemos',c:'tg-green'}],
-    ctx:'Inventário e herança estão na competência desta Assistência Judiciária.',
-    resps:[
-      { title:'✉️ Confirmar atendimento', badge:'Padrão', primary:true, nao:false,
-        tpl: n => `OAB – Assistência Judiciária Gratuita
-Subseção Santana de Parnaíba
+  {grp:'✅ Casos que atendemos', id:'at4', icon:'📜', ic:'i-green', pip:'pip-green',
+   label:'Inventário / Herança', sub:'Confirmar atendimento',
+   who:'Assistido', wc:'#22c97a',
+   sim:'Meu pai faleceu e precisamos fazer o inventário. Vocês atendem isso?',
+   tags:[{t:'Atendemos',c:'tg-green'}],
+   ctx:'Inventário e herança estão na atuação da CAJ.',
+   resps:[
+    {title:'✉️ Confirmar inventário', badge:'Padrão', primary:true, nao:false, tpl: n =>
+`${HDR}
 
 Olá${n?', '+n:''}!
 
-Sim, atendemos casos de inventário e herança. Venha até nós com a documentação para que possamos verificar os detalhes do seu caso.${END}\n${DOCS}`},
-    ]},
+Sim, atendemos casos de inventário e herança. Venha até nós com os documentos para que possamos verificar os detalhes do seu caso.${END}${DOCS}`}
+   ]},
 
-  { grp:'🚫 Casos que não atendemos',
-    id:'na1', icon:'🏭', ic:'i-red', pip:'pip-red',
-    label:'Trabalhista', sub:'Rescisão, FGTS, Justiça do Trabalho',
-    who:'Assistido', whoColor:'#e8495a',
-    sim:'Fui demitido sem justa causa e não recebi meu FGTS. Vocês podem me ajudar?',
-    tags:[{t:'Não atendemos',c:'tg-red'}],
-    ctx:'Casos trabalhistas não são da competência desta subseção.',
-    resps:[
-      { title:'🚫 Não atendemos — Trabalhista', badge:'Padrão', primary:false, nao:true,
-        tpl: n => `OAB – Assistência Judiciária Gratuita
-Subseção Santana de Parnaíba
-
-Olá${n?', '+n:''}!
-
-Infelizmente não atendemos casos de direito trabalhista por aqui. Essa área não faz parte da nossa atuação.${AREAS}${END}`},
-    ]},
-
-  { grp:'🚫 Casos que não atendemos',
-    id:'na2', icon:'📋', ic:'i-red', pip:'pip-red',
-    label:'Previdenciário / INSS', sub:'Aposentadoria, benefícios, BPC',
-    who:'Assistido', whoColor:'#e8495a',
-    sim:'Tive meu auxílio-doença negado pelo INSS. Podem me ajudar a recorrer?',
-    tags:[{t:'Não atendemos',c:'tg-red'}],
-    ctx:'Casos previdenciários não são da competência desta subseção.',
-    resps:[
-      { title:'🚫 Não atendemos — Previdenciário', badge:'Padrão', primary:false, nao:true,
-        tpl: n => `OAB – Assistência Judiciária Gratuita
-Subseção Santana de Parnaíba
+  // ── NÃO ATENDEMOS ────────────────────────────────────────────
+  {grp:'🚫 Casos que não atendemos', id:'na1', icon:'🏭', ic:'i-red', pip:'pip-red',
+   label:'Trabalhista', sub:'Rescisão, FGTS, Justiça do Trabalho',
+   who:'Assistido', wc:'#e8495a',
+   sim:'Fui demitido sem justa causa e não recebi meu FGTS. Podem me ajudar?',
+   tags:[{t:'Não atendemos',c:'tg-red'}],
+   ctx:'Casos trabalhistas não são da competência da CAJ.',
+   resps:[
+    {title:'🚫 Não atendemos — Trabalhista', badge:'Padrão', primary:false, nao:true, tpl: n =>
+`${HDR}
 
 Olá${n?', '+n:''}!
 
-Infelizmente não atendemos casos de INSS ou previdenciário por aqui. Essa área não faz parte da nossa atuação.${AREAS}${END}`},
-    ]},
+Infelizmente não atendemos casos trabalhistas por aqui. Essa área não faz parte da nossa atuação.${AREAS}${END}`}
+   ]},
 
-  { grp:'🚫 Casos que não atendemos',
-    id:'na3', icon:'🔒', ic:'i-red', pip:'pip-red',
-    label:'Criminal', sub:'Defesa criminal — indicar Defensoria',
-    who:'Assistido', whoColor:'#e8495a',
-    sim:'Meu filho foi preso. Preciso de um advogado criminal com urgência.',
-    tags:[{t:'Não atendemos',c:'tg-red'}],
-    ctx:'Casos criminais não são atendidos. Indicar Defensoria Pública.',
-    resps:[
-      { title:'🚫 Não atendemos — Criminal', badge:'Padrão', primary:false, nao:true,
-        tpl: n => `OAB – Assistência Judiciária Gratuita
-Subseção Santana de Parnaíba
+  {grp:'🚫 Casos que não atendemos', id:'na2', icon:'📋', ic:'i-red', pip:'pip-red',
+   label:'Previdenciário / INSS', sub:'Aposentadoria, benefícios, BPC',
+   who:'Assistido', wc:'#e8495a',
+   sim:'Tive meu auxílio-doença negado pelo INSS. Podem me ajudar a recorrer?',
+   tags:[{t:'Não atendemos',c:'tg-red'}],
+   ctx:'Casos previdenciários não são da competência da CAJ.',
+   resps:[
+    {title:'🚫 Não atendemos — INSS', badge:'Padrão', primary:false, nao:true, tpl: n =>
+`${HDR}
 
 Olá${n?', '+n:''}!
 
-Infelizmente não fazemos defesa criminal por aqui. Para esse tipo de caso, o mais indicado é procurar a Defensoria Pública do Estado de São Paulo.${AREAS}${END}`},
-      { title:'🚫 Fora da competência (geral)', badge:'Alternativa', primary:false, nao:true,
-        tpl: n => `OAB – Assistência Judiciária Gratuita
-Subseção Santana de Parnaíba
+Infelizmente não atendemos casos do INSS ou previdenciário por aqui. Essa área não faz parte da nossa atuação.${AREAS}${END}`}
+   ]},
+
+  {grp:'🚫 Casos que não atendemos', id:'na3', icon:'🔒', ic:'i-red', pip:'pip-red',
+   label:'Criminal (sem nomeação judicial)', sub:'Indicar Defensoria Pública',
+   who:'Assistido', wc:'#e8495a',
+   sim:'Meu filho foi preso. Preciso de um advogado criminal urgente.',
+   tags:[{t:'Não atendemos',c:'tg-red'}],
+   ctx:'Criminal geral não atendemos. Indicar Defensoria. Exceção: dativo nomeado pelo juiz.',
+   resps:[
+    {title:'🚫 Não atendemos — Criminal', badge:'Padrão', primary:false, nao:true, tpl: n =>
+`${HDR}
 
 Olá${n?', '+n:''}!
 
-Infelizmente o caso que você descreveu não é uma das áreas que atendemos por aqui.${AREAS}${END}`},
-    ]},
+Infelizmente não fazemos defesa criminal por aqui. Para esse tipo de caso, o mais indicado é procurar a Defensoria Pública do Estado de São Paulo.${AREAS}${END}`}
+   ]},
 
-  { grp:'📋 Documentos',
-    id:'doc1', icon:'📋', ic:'i-gold', pip:null,
-    label:'Quais documentos trazer?', sub:'Envia lista completa',
-    who:'Assistido', whoColor:'#c9973a',
-    sim:'Quais documentos preciso levar para ser atendida?',
-    tags:[{t:'Documentos',c:'tg-gold'}],
-    ctx:'Enviar a lista completa de documentos obrigatórios.',
-    resps:[
-      { title:'📋 Lista completa', badge:'Recomendada', primary:true, nao:false,
-        tpl: n => `OAB – Assistência Judiciária Gratuita
-Subseção Santana de Parnaíba
+  // ── CONVÊNIO OAB/DPE ─────────────────────────────────────────
+  {grp:'🤝 Convênio OAB/DPE', id:'cv1', icon:'🤝', ic:'i-teal', pip:'pip-teal',
+   label:'O que é o convênio?', sub:'Explica como funciona o convênio',
+   who:'Assistido', wc:'#22b8c9',
+   sim:'O que é esse convênio OAB com a Defensoria? Como funciona?',
+   tags:[{t:'Convênio',c:'tg-teal'}],
+   ctx:'Explicar de forma simples o que é o convênio OAB/DPE e como o assistido acessa.',
+   resps:[
+    {title:'✉️ Explicar o convênio', badge:'Recomendada', primary:true, nao:false, tpl: n =>
+`${HDR}
+
+Olá${n?', '+n:''}!
+
+O convênio OAB/DPE é uma parceria entre a OAB e a Defensoria Pública que permite que advogados conveniados atendam pessoas que não têm condições de pagar por um advogado particular.
+
+Na prática, funciona assim: você vem até nós, passamos pela triagem para verificar se tem direito ao atendimento gratuito, e se tiver, um advogado conveniado será designado para cuidar do seu caso.
+
+O serviço é totalmente gratuito para quem se enquadra nos critérios de renda.${END}${DOCS}`}
+   ]},
+
+  {grp:'🤝 Convênio OAB/DPE', id:'cv2', icon:'💰', ic:'i-teal', pip:'pip-teal',
+   label:'Quem tem direito ao convênio?', sub:'Critérios de renda e elegibilidade',
+   who:'Assistido', wc:'#22b8c9',
+   sim:'Como sei se tenho direito a esse atendimento gratuito?',
+   tags:[{t:'Convênio',c:'tg-teal'},{t:'Elegibilidade',c:'tg-blue'}],
+   ctx:'Explicar os critérios básicos de elegibilidade para o atendimento gratuito.',
+   resps:[
+    {title:'✉️ Critérios de elegibilidade', badge:'Recomendada', primary:true, nao:false, tpl: n =>
+`${HDR}
+
+Olá${n?', '+n:''}!
+
+O atendimento gratuito é para pessoas que não têm condições financeiras de pagar um advogado particular.
+
+Para verificar se você tem direito, precisamos analisar sua renda e a de quem mora com você. Por isso é importante trazer os comprovantes de renda de toda a família.
+
+A avaliação é feita presencialmente aqui na sede, com toda a documentação.${END}${DOCS}`}
+   ]},
+
+  {grp:'🤝 Convênio OAB/DPE', id:'cv3', icon:'🔄', ic:'i-teal', pip:'pip-teal',
+   label:'Já atendido pela Defensoria', sub:'Veio da DPE e quer atendimento aqui',
+   who:'Assistido', wc:'#22b8c9',
+   sim:'Fui na Defensoria Pública e me mandaram vir aqui. O que eu faço?',
+   tags:[{t:'Convênio',c:'tg-teal'},{t:'DPE',c:'tg-blue'}],
+   ctx:'Pessoa encaminhada pela Defensoria. Orientar o que trazer e como funciona.',
+   resps:[
+    {title:'✉️ Encaminhamento pela DPE', badge:'Recomendada', primary:true, nao:false, tpl: n =>
+`${HDR}
+
+Olá${n?', '+n:''}!
+
+Entendido! Se a Defensoria te encaminhou para cá, você pode vir diretamente à nossa sede com os documentos.
+
+Traga o documento que a Defensoria te deu, junto com a documentação básica, e faremos o atendimento.${END}${DOCS}`}
+   ]},
+
+  // ── ADVOCACIA DATIVA ─────────────────────────────────────────
+  {grp:'⚖️ Advocacia Dativa', id:'dv1', icon:'⚖️', ic:'i-amber', pip:'pip-amber',
+   label:'O que é advocacia dativa?', sub:'Explica o que é o advogado dativo',
+   who:'Assistido', wc:'#f59e0b',
+   sim:'Me falaram que preciso de um advogado dativo. O que é isso?',
+   tags:[{t:'Dativo',c:'tg-amber'}],
+   ctx:'Explicar de forma simples o que é advocacia dativa e como funciona a nomeação.',
+   resps:[
+    {title:'✉️ Explicar advocacia dativa', badge:'Recomendada', primary:true, nao:false, tpl: n =>
+`${HDR}
+
+Olá${n?', '+n:''}!
+
+O advogado dativo é um advogado nomeado pelo juiz para defender uma pessoa que está em um processo judicial e não tem advogado e nem condições de contratar um.
+
+Essa nomeação é feita diretamente pelo juiz do processo. Se você foi citado em algum processo ou está respondendo a alguma ação e não tem advogado, o juiz pode nomear um advogado dativo para te defender.
+
+Tem mais alguma dúvida sobre o seu caso?${END}`}
+   ]},
+
+  {grp:'⚖️ Advocacia Dativa', id:'dv2', icon:'📄', ic:'i-amber', pip:'pip-amber',
+   label:'Recebeu nomeação como dativo', sub:'Advogado recebeu ofício de nomeação',
+   who:'Advogado(a)', wc:'#f59e0b',
+   sim:'Recebi uma nomeação como advogado dativo. Quais são os próximos passos?',
+   tags:[{t:'Dativo',c:'tg-amber'},{t:'Advogado',c:'tg-teal'}],
+   ctx:'Advogado nomeado como dativo. Orientar sobre o processo de aceitação e honorários.',
+   resps:[
+    {title:'✉️ Orientar advogado dativo', badge:'Padrão', primary:true, nao:false, tpl: n =>
+`${HDR}
+
+Bom dia${n?', '+n:''}!
+
+Para dar andamento à nomeação como advogado dativo, você precisará aceitar formalmente nos autos do processo e apresentar os documentos necessários.
+
+Para esclarecimentos sobre honorários dativos e procedimentos, entre em contato conosco pelo telefone ou venha pessoalmente.
+
+📞 (11) 4154-5191
+📧 aj.santana.parnai@oabsp.org.br
+🕘 Segunda a sexta, das 9h às 12h`}
+   ]},
+
+  {grp:'⚖️ Advocacia Dativa', id:'dv3', icon:'💵', ic:'i-amber', pip:'pip-amber',
+   label:'Dúvida sobre honorários dativos', sub:'Como funciona o pagamento ao advogado dativo',
+   who:'Advogado(a)', wc:'#f59e0b',
+   sim:'Como funciona o recebimento dos honorários dativos? Preciso fazer algum requerimento?',
+   tags:[{t:'Dativo',c:'tg-amber'},{t:'Honorários',c:'tg-gold'}],
+   ctx:'Advogado pergunta sobre honorários dativos. Orientar a entrar em contato para detalhes específicos.',
+   resps:[
+    {title:'✉️ Orientar sobre honorários', badge:'Padrão', primary:true, nao:false, tpl: n =>
+`${HDR}
+
+Bom dia${n?', '+n:''}!
+
+Os honorários dativos são fixados pelo juiz na sentença e pagos pelo Estado. Para informações específicas sobre valores, prazos e procedimentos para requerimento, entre em contato conosco diretamente.
+
+📞 (11) 4154-5191
+📧 aj.santana.parnai@oabsp.org.br
+🕘 Segunda a sexta, das 9h às 12h`}
+   ]},
+
+  // ── DOCUMENTOS ───────────────────────────────────────────────
+  {grp:'📋 Documentos', id:'doc1', icon:'📋', ic:'i-gold', pip:null,
+   label:'Quais documentos trazer?', sub:'Lista completa de documentos',
+   who:'Assistido', wc:'#c9973a',
+   sim:'Quais documentos preciso levar para ser atendida?',
+   tags:[{t:'Documentos',c:'tg-gold'}],
+   ctx:'Enviar lista completa de documentos obrigatórios.',
+   resps:[
+    {title:'📋 Lista completa', badge:'Recomendada', primary:true, nao:false, tpl: n =>
+`${HDR}
 
 Olá${n?', '+n:''}!
 
@@ -1091,193 +688,174 @@ Para ser atendido(a), é preciso trazer:
 
 - RG original e CPF
 - Comprovante de residência atualizado (água, luz, gás, telefone ou contrato de aluguel)
-- Comprovante de renda de todos da família:
+- Comprovante de renda de todos que moram com você:
   Se tiver carteira assinada: os 3 últimos holerites
   Se não tiver: extrato bancário dos últimos 3 meses, declaração do empregador ou carta de próprio punho reconhecida em cartório
-- Comprovante de patrimônio, se tiver (IPTU, documento de veículo, extrato de poupança)
+- Se tiver bens (imóvel, carro, poupança): documentação desses bens
 
-Documentos adicionais podem ser pedidos dependendo do caso. Sem a documentação completa, o atendimento não poderá ser feito.${END}`},
-      { title:'📋 Docs — Pensão/Alimentos', badge:'Alternativa', primary:false, nao:false,
-        tpl: n => `OAB – Assistência Judiciária Gratuita
-Subseção Santana de Parnaíba
+Documentos extras podem ser pedidos dependendo do caso. Sem tudo completo, o atendimento não pode ser feito.${END}`},
+    {title:'📋 Docs extras — Pensão', badge:'Alternativa', primary:false, nao:false, tpl: n =>
+`${HDR}
 
 Olá${n?', '+n:''}!
 
-Para casos de pensão alimentícia, além dos documentos básicos, traga também:
-
+Para casos de pensão alimentícia, além dos documentos básicos, traga:
 - Certidão de nascimento do(s) filho(s)
-- Endereço completo da parte contrária${END}\n${DOCS}`},
-      { title:'📋 Docs — Divórcio', badge:'Alternativa', primary:false, nao:false,
-        tpl: n => `OAB – Assistência Judiciária Gratuita
-Subseção Santana de Parnaíba
+- Endereço completo da parte contrária${END}${DOCS}`},
+    {title:'📋 Docs extras — Divórcio', badge:'Alternativa', primary:false, nao:false, tpl: n =>
+`${HDR}
 
 Olá${n?', '+n:''}!
 
-Para casos de divórcio, além dos documentos básicos, traga também:
-
+Para casos de divórcio, além dos documentos básicos, traga:
 - Certidão de casamento atualizada (emitida há no máximo 90 dias)
 - Se tiver filhos menores: certidão de nascimento de cada um
-- Se tiver bens: documentação do imóvel ou veículo${END}\n${DOCS}`},
-    ]},
+- Se tiver bens: documentação do imóvel ou veículo${END}${DOCS}`}
+   ]},
 
-  { grp:'📋 Documentos',
-    id:'doc2', icon:'❌', ic:'i-gold', pip:null,
-    label:'Documentação incompleta', sub:'Orientar providenciar e retornar',
-    who:'Assistido', whoColor:'#c9973a',
-    sim:'Fui lá mas disseram que minha documentação estava incompleta.',
-    tags:[{t:'Documentos',c:'tg-gold'},{t:'Incompleta',c:'tg-red'}],
-    ctx:'Sem documentação completa, o atendimento não pode ser feito. Orientar retorno.',
-    resps:[
-      { title:'❌ Docs incompletos', badge:'Padrão', primary:true, nao:false,
-        tpl: n => `OAB – Assistência Judiciária Gratuita
-Subseção Santana de Parnaíba
+  {grp:'📋 Documentos', id:'doc2', icon:'❌', ic:'i-gold', pip:null,
+   label:'Documentação incompleta', sub:'Orientar providenciar e retornar',
+   who:'Assistido', wc:'#c9973a',
+   sim:'Fui lá mas disseram que minha documentação estava incompleta.',
+   tags:[{t:'Documentos',c:'tg-gold'},{t:'Incompleta',c:'tg-red'}],
+   ctx:'Sem documentação completa, o atendimento não é feito. Orientar retorno.',
+   resps:[
+    {title:'❌ Docs incompletos', badge:'Padrão', primary:true, nao:false, tpl: n =>
+`${HDR}
 
 Olá${n?', '+n:''}!
 
-Infelizmente sem a documentação completa não conseguimos realizar o atendimento. É necessário providenciar tudo e voltar presencialmente.${END}\n${DOCS}`},
-    ]},
+Sem a documentação completa não conseguimos fazer o atendimento. É necessário providenciar tudo e voltar presencialmente.${END}${DOCS}`}
+   ]},
 
-  { grp:'📅 Agendamento e horários',
-    id:'age1', icon:'🚷', ic:'i-slate', pip:null,
-    label:'Vagas esgotadas no dia', sub:'Limite de 30 atingido',
-    who:'Assistido', whoColor:'#6e89b8',
-    sim:'Fui lá hoje cedo mas as vagas já tinham acabado.',
-    tags:[{t:'Vagas esgotadas',c:'tg-red'}],
-    ctx:'Limite de 30 vagas atingido. Orientar retorno no próximo dia útil.',
-    resps:[
-      { title:'📅 Vagas esgotadas', badge:'Padrão', primary:true, nao:false,
-        tpl: n => `OAB – Assistência Judiciária Gratuita
-Subseção Santana de Parnaíba
-
-Olá${n?', '+n:''}!
-
-Hoje já atingimos o limite de 30 atendimentos. Por isso não foi possível te atender.
-
-Volte no próximo dia útil bem cedo para garantir sua vaga.${END}`},
-    ]},
-
-  { grp:'📅 Agendamento e horários',
-    id:'age2', icon:'🌙', ic:'i-slate', pip:null,
-    label:'Mensagem fora do horário', sub:'Fora do expediente',
-    who:'Assistido', whoColor:'#6e89b8',
-    sim:'[Mensagem recebida fora do horário]',
-    tags:[{t:'Fora do horário',c:'tg-gold'}],
-    ctx:'Mensagem fora do horário de atendimento (9h–12h, seg–sex).',
-    resps:[
-      { title:'🌙 Fora do horário', badge:'Padrão', primary:true, nao:false,
-        tpl: n => `OAB – Assistência Judiciária Gratuita
-Subseção Santana de Parnaíba
+  // ── AGENDAMENTO E HORÁRIOS ────────────────────────────────────
+  {grp:'📅 Agendamento e horários', id:'age1', icon:'🚷', ic:'i-slate', pip:null,
+   label:'Vagas esgotadas no dia', sub:'Limite de 30 atingido',
+   who:'Assistido', wc:'#6e89b8',
+   sim:'Fui lá hoje cedo mas as vagas já tinham acabado.',
+   tags:[{t:'Vagas esgotadas',c:'tg-red'},{t:'Agendamento',c:'tg-blue'}],
+   ctx:'Limite de 30 vagas atingido. Orientar retorno no próximo dia útil.',
+   resps:[
+    {title:'📅 Vagas esgotadas', badge:'Padrão', primary:true, nao:false, tpl: n =>
+`${HDR}
 
 Olá${n?', '+n:''}!
 
-No momento estamos fora do horário de atendimento. Sua mensagem será respondida no próximo dia útil.${END}`},
-    ]},
+Hoje já atingimos o limite de 30 atendimentos e não foi possível te atender.
 
-  { grp:'🤝 Situações delicadas',
-    id:'del1', icon:'😤', ic:'i-purple', pip:null,
-    label:'Pessoa nervosa / reclamação', sub:'Resposta calma e respeitosa',
-    who:'Assistido', whoColor:'#a78bfa',
-    sim:'Vocês são um absurdo! Fui lá três vezes e nunca consigo ser atendida!',
-    tags:[{t:'Situação delicada',c:'tg-gold'}],
-    ctx:'Manter postura calma e respeitosa. Registrar e orientar o retorno com documentação.',
-    resps:[
-      { title:'🤝 Resposta respeitosa', badge:'Recomendada', primary:true, nao:false,
-        tpl: n => `OAB – Assistência Judiciária Gratuita
-Subseção Santana de Parnaíba
+Volte no próximo dia útil bem cedo para garantir sua vaga.${END}`}
+   ]},
+
+  {grp:'📅 Agendamento e horários', id:'age2', icon:'🌙', ic:'i-slate', pip:null,
+   label:'Mensagem fora do horário', sub:'Fora do expediente',
+   who:'Assistido', wc:'#6e89b8',
+   sim:'Oi, boa noite! Queria saber como faço para ser atendida.',
+   tags:[{t:'Fora do horário',c:'tg-gold'},{t:'Agendamento',c:'tg-blue'}],
+   ctx:'Mensagem fora do horário. Informar e responder no próximo dia útil.',
+   resps:[
+    {title:'🌙 Fora do horário', badge:'Padrão', primary:true, nao:false, tpl: n =>
+`${HDR}
+
+Olá${n?', '+n:''}!
+
+No momento estamos fora do horário de atendimento. Sua mensagem será respondida no próximo dia útil.${END}`}
+   ]},
+
+  // ── SITUAÇÕES DELICADAS ───────────────────────────────────────
+  {grp:'😓 Situações delicadas', id:'del1', icon:'😤', ic:'i-slate', pip:null,
+   label:'Pessoa nervosa / reclamação', sub:'Resposta calma e respeitosa',
+   who:'Assistido', wc:'#8b5cf6',
+   sim:'Vocês são um absurdo! Fui lá três vezes e nunca consigo ser atendida!',
+   tags:[{t:'Situação delicada',c:'tg-gold'}],
+   ctx:'Manter postura calma. Registrar a insatisfação e orientar retorno com documentação.',
+   resps:[
+    {title:'🤝 Resposta respeitosa', badge:'Recomendada', primary:true, nao:false, tpl: n =>
+`${HDR}
 
 Olá${n?', '+n:''}!
 
 Entendemos sua frustração e lamentamos que não tenha conseguido ser atendida. Isso é importante para nós.
 
-Para que possamos ajudar, venha até nossa sede com toda a documentação necessária. Chegando cedo, sua vaga será garantida.${END}`},
-    ]},
+Para que possamos ajudar, venha até nossa sede com toda a documentação. Chegando cedo, sua vaga será garantida.${END}`}
+   ]},
 
-  { grp:'🤝 Situações delicadas',
-    id:'del2', icon:'🔄', ic:'i-purple', pip:null,
-    label:'Quer saber do processo', sub:'Acompanhamento — presencial',
-    who:'Assistido', whoColor:'#a78bfa',
-    sim:'Olá, fui atendida semana passada. Queria saber como está o meu processo.',
-    tags:[{t:'Acompanhamento',c:'tg-blue'}],
-    ctx:'Acompanhamento de processo é presencial. Solicitar comparecimento com documentos e protocolo.',
-    resps:[
-      { title:'🔄 Orientar comparecimento', badge:'Padrão', primary:true, nao:false,
-        tpl: n => `OAB – Assistência Judiciária Gratuita
-Subseção Santana de Parnaíba
+  {grp:'😓 Situações delicadas', id:'del2', icon:'🔄', ic:'i-slate', pip:null,
+   label:'Quer saber do processo', sub:'Acompanhamento é presencial',
+   who:'Assistido', wc:'#8b5cf6',
+   sim:'Fui atendida semana passada. Como está o meu processo?',
+   tags:[{t:'Acompanhamento',c:'tg-blue'},{t:'Situação delicada',c:'tg-gold'}],
+   ctx:'Acompanhamento é presencial. Solicitar comparecimento com documentos.',
+   resps:[
+    {title:'🔄 Orientar comparecimento', badge:'Padrão', primary:true, nao:false, tpl: n =>
+`${HDR}
 
 Olá${n?', '+n:''}!
 
-Para acompanhar seu processo ou tirar dúvidas sobre um atendimento que já foi feito, é necessário vir pessoalmente. Traga seus documentos e o protocolo de atendimento, se tiver.${END}`},
-    ]},
+Para acompanhar seu processo ou tirar dúvidas sobre um atendimento já feito, precisa vir pessoalmente. Traga seus documentos e o protocolo de atendimento, se tiver.${END}`}
+   ]},
 
-  { grp:'🤝 Situações delicadas',
-    id:'del3', icon:'⏳', ic:'i-purple', pip:null,
-    label:'Quer orientação à distância', sub:'Indicar e-mail para contato formal',
-    who:'Assistido', whoColor:'#a78bfa',
-    sim:'Pode me orientar pelo WhatsApp mesmo? Não consigo ir pessoalmente.',
-    tags:[{t:'Situação delicada',c:'tg-gold'}],
-    ctx:'Orientação jurídica não é feita por WhatsApp. Indicar e-mail para contato formal.',
-    resps:[
-      { title:'⏳ Indicar canal correto', badge:'Padrão', primary:true, nao:false,
-        tpl: n => `OAB – Assistência Judiciária Gratuita
-Subseção Santana de Parnaíba
+  {grp:'😓 Situações delicadas', id:'del3', icon:'📧', ic:'i-slate', pip:null,
+   label:'Quer orientação à distância', sub:'Indicar e-mail para primeiro contato',
+   who:'Assistido', wc:'#8b5cf6',
+   sim:'Não consigo ir até vocês. Podem me ajudar pelo WhatsApp?',
+   tags:[{t:'Situação delicada',c:'tg-gold'}],
+   ctx:'Não fazemos orientação jurídica por WhatsApp. Indicar e-mail para contato formal.',
+   resps:[
+    {title:'📧 Indicar canal correto', badge:'Padrão', primary:true, nao:false, tpl: n =>
+`${HDR}
 
 Olá${n?', '+n:''}!
 
 Infelizmente não conseguimos dar orientação jurídica por WhatsApp.
 
-Se preferir um primeiro contato à distância, pode nos enviar um e-mail explicando sua situação:
+Se quiser um primeiro contato à distância, pode nos enviar um e-mail contando sua situação:
 📧 aj.santana.parnai@oabsp.org.br
 
-Mas para o atendimento completo, é necessário vir até nós pessoalmente com a documentação.${END}\n${DOCS}`},
-    ]},
+Mas para o atendimento completo, é necessário vir presencialmente com a documentação.${END}${DOCS}`}
+   ]},
 
-  { grp:'🤝 Situações delicadas',
-    id:'del4', icon:'👥', ic:'i-purple', pip:null,
-    label:'Quer vir com acompanhante', sub:'Orientação sobre o atendimento',
-    who:'Assistido', whoColor:'#a78bfa',
-    sim:'Posso levar minha filha junto para me ajudar na conversa com o advogado?',
-    tags:[{t:'Situação delicada',c:'tg-gold'}],
-    ctx:'O atendimento é com a parte interessada. Acompanhante pode aguardar do lado de fora.',
-    resps:[
-      { title:'👥 Orientar sobre acompanhante', badge:'Padrão', primary:true, nao:false,
-        tpl: n => `OAB – Assistência Judiciária Gratuita
-Subseção Santana de Parnaíba
+  {grp:'😓 Situações delicadas', id:'del4', icon:'👥', ic:'i-slate', pip:null,
+   label:'Quer vir com acompanhante', sub:'Acompanhante aguarda fora',
+   who:'Assistido', wc:'#8b5cf6',
+   sim:'Posso levar minha filha para me ajudar na consulta com o advogado?',
+   tags:[{t:'Situação delicada',c:'tg-gold'}],
+   ctx:'Atendimento é só com a parte. Acompanhante aguarda fora. Exceção: dificuldade de comunicação.',
+   resps:[
+    {title:'👥 Orientar acompanhante', badge:'Padrão', primary:true, nao:false, tpl: n =>
+`${HDR}
 
 Olá${n?', '+n:''}!
 
-Pode vir acompanhada, sem problema. Mas o atendimento com o advogado é feito só com a pessoa envolvida no caso — o acompanhante aguarda do lado de fora.
+Pode vir acompanhada, sem problema. Só que o atendimento com o advogado é feito apenas com a pessoa do caso — o acompanhante fica aguardando do lado de fora.
 
-Se tiver dificuldade de locomoção ou comunicação, pode vir com alguém de confiança.${END}\n${DOCS}`},
-    ]},
+Se tiver dificuldade de locomoção ou comunicação, pode vir com alguém de confiança para ajudar.${END}${DOCS}`}
+   ]},
 
-  { grp:'⚖️ Mensagem de Advogado(a)',
-    id:'adv1', icon:'⚖️', ic:'i-teal', pip:'pip-teal',
-    label:'Encaminhamento de caso', sub:'Advogado encaminha assistido',
-    who:'Advogado(a)', whoColor:'#22b8c9',
-    sim:'Bom dia. Gostaria de encaminhar um caso de pensão para a Assistência Judiciária.',
-    tags:[{t:'Advogado',c:'tg-teal'}],
-    ctx:'Orientar que o assistido deve comparecer pessoalmente com documentação.',
-    resps:[
-      { title:'⚖️ Orientação ao advogado', badge:'Padrão', primary:true, nao:false,
-        tpl: n => `OAB – Assistência Judiciária Gratuita
-Subseção Santana de Parnaíba
+  // ── MENSAGEM DE ADVOGADO ──────────────────────────────────────
+  {grp:'⚖️ Mensagem de Advogado(a)', id:'adv1', icon:'⚖️', ic:'i-teal', pip:'pip-teal',
+   label:'Encaminhamento de caso', sub:'Advogado conveniado encaminha assistido',
+   who:'Advogado(a)', wc:'#22b8c9',
+   sim:'Bom dia. Gostaria de encaminhar um caso de pensão para a CAJ. Como procedo?',
+   tags:[{t:'Advogado',c:'tg-teal'},{t:'Convênio',c:'tg-blue'}],
+   ctx:'Orientar que o assistido deve comparecer pessoalmente com documentação.',
+   resps:[
+    {title:'⚖️ Orientar encaminhamento', badge:'Padrão', primary:true, nao:false, tpl: n =>
+`${HDR}
 
 Bom dia${n?', '+n:''}!
 
-Para encaminhar um caso, o(a) assistido(a) precisa vir pessoalmente até nossa sede com toda a documentação necessária. Verificamos os requisitos de elegibilidade presencialmente.${END}\n${DOCS}`},
-    ]},
+Para encaminhar um caso, o(a) assistido(a) precisa vir pessoalmente à nossa sede com toda a documentação necessária. Verificamos os critérios de elegibilidade presencialmente.${END}${DOCS}`}
+   ]},
 
-  { grp:'⚖️ Mensagem de Advogado(a)',
-    id:'adv2', icon:'📎', ic:'i-teal', pip:'pip-teal',
-    label:'Solicitação de informações', sub:'Advogado pede dados ou retorno',
-    who:'Advogado(a)', whoColor:'#22b8c9',
-    sim:'Preciso de informações sobre o andamento de um caso. Pode me ajudar?',
-    tags:[{t:'Advogado',c:'tg-teal'},{t:'Informações',c:'tg-gold'}],
-    ctx:'Informações processuais são tratadas presencialmente ou por telefone.',
-    resps:[
-      { title:'📎 Orientar contato', badge:'Padrão', primary:true, nao:false,
-        tpl: n => `OAB – Assistência Judiciária Gratuita
-Subseção Santana de Parnaíba
+  {grp:'⚖️ Mensagem de Advogado(a)', id:'adv2', icon:'📞', ic:'i-teal', pip:'pip-teal',
+   label:'Pede informações de processo', sub:'Orientar contato por telefone',
+   who:'Advogado(a)', wc:'#22b8c9',
+   sim:'Preciso de informações sobre o andamento de um caso. Pode me ajudar?',
+   tags:[{t:'Advogado',c:'tg-teal'},{t:'Informações',c:'tg-gold'}],
+   ctx:'Informações de processo são tratadas por telefone ou presencialmente.',
+   resps:[
+    {title:'📞 Orientar contato', badge:'Padrão', primary:true, nao:false, tpl: n =>
+`${HDR}
 
 Bom dia${n?', '+n:''}!
 
@@ -1285,20 +863,18 @@ Para informações sobre processos, entre em contato pelo telefone ou venha pess
 
 📞 (11) 4154-5191
 📧 aj.santana.parnai@oabsp.org.br
-🕘 Segunda a sexta, das 9h às 12h`},
-    ]},
+🕘 Segunda a sexta, das 9h às 12h`}
+   ]},
 
-  { grp:'⚖️ Mensagem de Advogado(a)',
-    id:'adv3', icon:'📅', ic:'i-teal', pip:'pip-teal',
-    label:'Confirmação de escala', sub:'Advogado voluntário confirma presença',
-    who:'Advogado(a)', whoColor:'#22b8c9',
-    sim:'Bom dia. Gostaria de confirmar minha escala de atendimento desta semana.',
-    tags:[{t:'Advogado',c:'tg-teal'},{t:'Escala',c:'tg-blue'}],
-    ctx:'Confirmação de presença na escala.',
-    resps:[
-      { title:'📅 Confirmação de escala', badge:'Padrão', primary:true, nao:false,
-        tpl: n => `OAB – Assistência Judiciária Gratuita
-Subseção Santana de Parnaíba
+  {grp:'⚖️ Mensagem de Advogado(a)', id:'adv3', icon:'📅', ic:'i-teal', pip:'pip-teal',
+   label:'Confirmação de escala', sub:'Advogado conveniado confirma presença',
+   who:'Advogado(a)', wc:'#22b8c9',
+   sim:'Bom dia. Gostaria de confirmar minha escala de atendimento desta semana.',
+   tags:[{t:'Advogado',c:'tg-teal'},{t:'Escala',c:'tg-blue'}],
+   ctx:'Confirmação de presença na escala de atendimento.',
+   resps:[
+    {title:'📅 Confirmação de escala', badge:'Padrão', primary:true, nao:false, tpl: n =>
+`${HDR}
 
 Bom dia${n?', '+n:''}!
 
@@ -1306,27 +882,27 @@ Confirmamos sua presença na escala. Se precisar de alguma alteração, nos avis
 
 📞 (11) 4154-5191
 📧 aj.santana.parnai@oabsp.org.br
-🕘 Segunda a sexta, das 9h às 12h`},
-    ]},
+🕘 Segunda a sexta, das 9h às 12h`}
+   ]},
 ];
 
-// ── STATE ──────────────────────────────────────
+// ── ESTADO ──────────────────────────────────────────────
 let activeId = null, term = '', hist = [];
 
-// ── SIDEBAR ────────────────────────────────────
+// ── SIDEBAR ─────────────────────────────────────────────
 function renderSb(f) {
   f = (f||'').toLowerCase();
   const el = document.getElementById('sb-list');
   const groups = {};
-  SCENARIOS.forEach(s => {
+  S.forEach(s => {
     const ok = !f || s.label.toLowerCase().includes(f) || s.sub.toLowerCase().includes(f)
-      || s.grp.toLowerCase().includes(f) || s.tags.some(t=>t.t.toLowerCase().includes(f));
+      || s.grp.toLowerCase().includes(f) || s.tags.some(t => t.t.toLowerCase().includes(f));
     if (!ok) return;
     (groups[s.grp] = groups[s.grp]||[]).push(s);
   });
   let h = '';
-  Object.entries(groups).forEach(([g,items]) => {
-    h += `<div class="grp-label">${g}</div>`;
+  Object.entries(groups).forEach(([g, items]) => {
+    h += `<div class="grp-lbl">${g}</div>`;
     items.forEach(s => {
       const pip = s.pip ? `<div class="sc-pip ${s.pip}"></div>` : '';
       h += `<button class="sc-row${s.id===activeId?' active':''}" onclick="pick('${s.id}')">
@@ -1343,60 +919,58 @@ function renderSb(f) {
 }
 renderSb('');
 
-// ── CHIPS ──────────────────────────────────────
 function filtro(el, val) {
-  document.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));
+  document.querySelectorAll('.chip').forEach(c => c.classList.remove('on'));
   el.classList.add('on');
   term = val;
   document.getElementById('search').value = val;
   renderSb(val);
 }
 
-// ── WELCOME TAGS ───────────────────────────────
-(function(){
-  const tags = ['Divórcio','Pensão','Trabalhista','INSS','Criminal','Documentos','Áudio','Vagas esgotadas','Violência doméstica'];
-  document.getElementById('welcome-tags').innerHTML = tags.map(t=>
-    `<button class="wtag" onclick="buscar('${t}')">${t}</button>`).join('');
-})();
-
 function buscar(v) {
-  term = v; document.getElementById('search').value = v;
-  document.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));
+  term = v;
+  document.querySelectorAll('.chip').forEach(c => c.classList.remove('on'));
   document.querySelector('.chip').classList.add('on');
   renderSb(v);
 }
 
-// ── PICK SCENARIO ──────────────────────────────
+// ── WELCOME TAGS ────────────────────────────────────────
+(function(){
+  const tags = ['Divórcio','Pensão','Trabalhista','INSS','Criminal','Documentos','Áudio','Vagas esgotadas','Violência doméstica','Convênio','Dativo'];
+  document.getElementById('wtags').innerHTML = tags.map(t =>
+    `<button class="wtag" onclick="buscar('${t}')">${t}</button>`).join('');
+})();
+
+// ── PICK CENÁRIO ────────────────────────────────────────
 function pick(id) {
   activeId = id; renderSb(term);
-  const s = SCENARIOS.find(x=>x.id===id); if (!s) return;
-  document.getElementById('bread-title').innerHTML = `${s.icon} ${s.label}`;
-  document.getElementById('bread-sub').textContent = s.sub;
+  const s = S.find(x => x.id === id); if (!s) return;
+  document.getElementById('btitle').textContent = `${s.icon} ${s.label}`;
+  document.getElementById('bsub').textContent = s.sub;
   document.getElementById('welcome').style.display = 'none';
   document.getElementById('sc-view').classList.add('on');
-  document.getElementById('who-pip').style.background = s.whoColor;
-  document.getElementById('who-label').textContent = s.who;
+  document.getElementById('who-pip').style.background = s.wc;
+  document.getElementById('who-lbl').textContent = s.who;
   document.getElementById('bubble').textContent = s.sim;
-  document.getElementById('tag-row').innerHTML = s.tags.map(t=>`<span class="tag ${t.c}">${t.t}</span>`).join('');
+  document.getElementById('tag-row').innerHTML = s.tags.map(t => `<span class="tag ${t.c}">${t.t}</span>`).join('');
   const ctx = document.getElementById('ctx');
-  if (s.ctx) { ctx.style.display='block'; ctx.innerHTML=`<strong>💡 Contexto:</strong> ${s.ctx}`; }
-  else ctx.style.display='none';
+  if (s.ctx) { ctx.style.display = 'block'; ctx.innerHTML = `<strong>💡 Contexto:</strong> ${s.ctx}`; }
+  else ctx.style.display = 'none';
   renderResps(s);
 }
 
-// ── RENDER RESPONSES ───────────────────────────
+// ── RENDER RESPOSTAS ────────────────────────────────────
 function renderResps(s) {
   const name = (document.getElementById('person-name').value||'').trim();
-  document.getElementById('resp-stack').innerHTML = s.resps.map((r,i) => {
+  document.getElementById('resp-stack').innerHTML = s.resps.map((r, i) => {
     const txt = r.tpl(name);
-    return `
-    <div class="rcard${r.primary?' primary':''}${r.nao?' danger':''}" id="c${i}">
-      <div class="rcard-head">
+    return `<div class="rcard${r.primary?' primary':''}${r.nao?' danger':''}" id="c${i}">
+      <div class="rcard-hd">
         <div class="rcard-title${r.nao?' danger':''}">${r.title}</div>
-        <span class="badge ${r.primary?'badge-main':r.nao?'badge-no':'badge-alt'}">${r.badge}</span>
+        <span class="badge ${r.primary?'b-main':r.nao?'b-no':'b-alt'}">${r.badge}</span>
       </div>
       <textarea class="reditor" id="ta${i}" oninput="onIn(this,'cc${i}')">${txt}</textarea>
-      <div class="rcard-foot">
+      <div class="rcard-ft">
         <button class="btn btn-copy" onclick="copiar('ta${i}','${r.title}')">📋 Copiar</button>
         <button class="btn btn-wapp" onclick="wapp('ta${i}')">📱 WhatsApp</button>
         <button class="btn btn-ghost" onclick="reset('ta${i}',${i})" title="Redefinir">↩</button>
@@ -1404,74 +978,69 @@ function renderResps(s) {
       </div>
     </div>`;
   }).join('');
-  setTimeout(()=>document.querySelectorAll('.reditor').forEach(autoH), 30);
+  setTimeout(() => document.querySelectorAll('.reditor').forEach(autoH), 30);
 }
 
-function autoH(el) { el.style.height='auto'; el.style.height=Math.min(el.scrollHeight,240)+'px'; }
-function onIn(el,id) { autoH(el); const c=document.getElementById(id); if(c) c.textContent=el.value.length+' chars'; }
+function autoH(el) { el.style.height = 'auto'; el.style.height = Math.min(el.scrollHeight, 260) + 'px'; }
+function onIn(el, id) { autoH(el); const c = document.getElementById(id); if (c) c.textContent = el.value.length + ' chars'; }
 
 function atualizaNome() {
-  const s = SCENARIOS.find(x=>x.id===activeId); if (!s) return;
+  const s = S.find(x => x.id === activeId); if (!s) return;
   const name = (document.getElementById('person-name').value||'').trim();
-  s.resps.forEach((r,i)=>{
-    const el=document.getElementById(`ta${i}`); if(!el) return;
-    el.value=r.tpl(name); autoH(el);
-    const cc=document.getElementById(`cc${i}`); if(cc) cc.textContent=el.value.length+' chars';
+  s.resps.forEach((r, i) => {
+    const el = document.getElementById(`ta${i}`); if (!el) return;
+    el.value = r.tpl(name); autoH(el);
+    const cc = document.getElementById(`cc${i}`); if (cc) cc.textContent = el.value.length + ' chars';
   });
 }
 
 function reset(taId, idx) {
-  const s=SCENARIOS.find(x=>x.id===activeId); if(!s) return;
-  const name=(document.getElementById('person-name').value||'').trim();
-  const el=document.getElementById(taId); el.value=s.resps[idx].tpl(name); autoH(el);
+  const s = S.find(x => x.id === activeId); if (!s) return;
+  const name = (document.getElementById('person-name').value||'').trim();
+  const el = document.getElementById(taId); el.value = s.resps[idx].tpl(name); autoH(el);
   toast('↩ Mensagem redefinida');
 }
 
-// ── COPY / WAPP ────────────────────────────────
 function copiar(id, title) {
-  const el=document.getElementById(id); if(!el) return;
-  navigator.clipboard.writeText(el.value).then(()=>{ toast('📋 Copiado!'); addHist(title,el.value); });
+  const el = document.getElementById(id); if (!el) return;
+  navigator.clipboard.writeText(el.value).then(() => { toast('📋 Copiado!'); addHist(title, el.value); });
 }
 function wapp(id) {
-  const el=document.getElementById(id); if(!el) return;
-  window.open('https://wa.me/?text='+encodeURIComponent(el.value),'_blank');
+  const el = document.getElementById(id); if (!el) return;
+  window.open('https://wa.me/?text=' + encodeURIComponent(el.value), '_blank');
 }
 
-// ── HISTORY ────────────────────────────────────
 function addHist(title, text) {
-  const now=new Date();
-  const t=now.getHours().toString().padStart(2,'0')+':'+now.getMinutes().toString().padStart(2,'0');
-  hist.unshift({title,text,t}); if(hist.length>10) hist.pop(); renderHist();
+  const now = new Date();
+  const t = String(now.getHours()).padStart(2,'0') + ':' + String(now.getMinutes()).padStart(2,'0');
+  hist.unshift({title, text, t}); if (hist.length > 10) hist.pop(); renderHist();
 }
 function renderHist() {
-  const el=document.getElementById('hist-chips');
-  if (!hist.length) { el.innerHTML='<span class="hist-empty">Nenhuma mensagem copiada ainda</span>'; return; }
-  el.innerHTML=hist.map((h,i)=>`
+  const el = document.getElementById('hist-chips');
+  if (!hist.length) { el.innerHTML = '<span class="hist-empty">Nenhuma mensagem copiada ainda</span>'; return; }
+  el.innerHTML = hist.map((h, i) => `
     <div class="hchip" onclick="recop(${i})" title="${h.title}">
-      📋 ${h.title.replace(/[^\w\sÀ-ú]/gu,'').trim().substring(0,24)}
+      📋 ${h.title.replace(/[^\w\sÀ-ú]/gu,'').trim().substring(0,26)}
       <span class="hchip-t">${h.t}</span>
     </div>`).join('');
 }
-function recop(i) { navigator.clipboard.writeText(hist[i].text).then(()=>toast('📋 Recopiado!')); }
+function recop(i) { navigator.clipboard.writeText(hist[i].text).then(() => toast('📋 Recopiado!')); }
 
-// ── GUIDE ──────────────────────────────────────
 function toggleGuide() { document.getElementById('guide').classList.toggle('open'); }
 
-// ── TOAST ──────────────────────────────────────
 let _tt;
 function toast(msg) {
-  const el=document.getElementById('toast');
-  el.textContent=msg; el.classList.add('show');
-  clearTimeout(_tt); _tt=setTimeout(()=>el.classList.remove('show'),2400);
+  const el = document.getElementById('toast');
+  el.textContent = msg; el.classList.add('show');
+  clearTimeout(_tt); _tt = setTimeout(() => el.classList.remove('show'), 2400);
 }
 
-// ── CLOCK ──────────────────────────────────────
 function clock() {
-  const n=new Date();
-  const d=['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
-  document.getElementById('clock').textContent=d[n.getDay()]+' · '+n.getHours().toString().padStart(2,'0')+':'+n.getMinutes().toString().padStart(2,'0');
+  const n = new Date();
+  const d = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
+  document.getElementById('clock').textContent = d[n.getDay()] + ' · ' + String(n.getHours()).padStart(2,'0') + ':' + String(n.getMinutes()).padStart(2,'0');
 }
-clock(); setInterval(clock,30000);
+clock(); setInterval(clock, 30000);
 </script>
 </body>
 </html>
