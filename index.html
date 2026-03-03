@@ -792,7 +792,7 @@ const S = [
    ctx:'Mensagem fora do horário. Informar e responder no próximo dia útil.',
    resps:[
     {title:'🌙 Fora do horário', badge:'Padrão', primary:true, nao:false,
-     tpl: n => `Oi${n?', '+n:''}! 😊\n\nAqui é a Cássia. Obrigada pelo contato! No momento estou fora do horário, mas respondo assim que possível no próximo dia útil.\n\nAtendo de segunda a sexta, das 9h às 12h. Até lá! 🙂`}
+     tpl: n => `Oi${n?', '+n:''}! 😊\n\nAqui é a Cássia. Obrigada pelo contato! No momento estou fora do horário, mas respondo assim que possível no próximo dia útil.\n\nAtendo de segunda a sexta, das 9h às 12h. Até lá! 🙂${DOCS}${END}`
    ],
    emailResps:[
     {title:'📧 Fora do horário por e-mail', subj:'CAD – Mensagem recebida fora do horário', badge:'Padrão', primary:true, nao:false,
@@ -823,7 +823,7 @@ const S = [
    ctx:'Acompanhamento é presencial. Solicitar comparecimento com documentos.',
    resps:[
     {title:'🔄 Orientar comparecimento', badge:'Padrão', primary:true, nao:false,
-     tpl: n => `Oi${n?', '+n:''}! 😊\n\nAqui é a Cássia. Para acompanhar o seu processo, precisa vir pessoalmente aqui na sede.\n\nTraga seus documentos e, se tiver, o protocolo de atendimento. A gente te ajuda assim que você chegar! 😊${END}`}
+     tpl: n => `Oi${n?', '+n:''}! 😊\n\nAqui é a Cássia. Para acompanhar o seu processo, precisa vir pessoalmente aqui na sede.\n\nTraga seus documentos e, se tiver, o protocolo de atendimento. A gente te ajuda assim que você chegar! 😊${DOCS}${END}`
    ],
    emailResps:[
     {title:'📧 Acompanhamento de processo (e-mail)', subj:'CAD – Acompanhamento do seu caso', badge:'Padrão', primary:true, nao:false,
@@ -931,9 +931,9 @@ const S = [
    ctx:'Pessoa já atendida antes quer dar continuidade. Orientar comparecer com documentos e protocolo anterior.',
    resps:[
     {title:'🔁 Orientar retorno', badge:'Recomendada', primary:true, nao:false,
-     tpl: n => `Oi${n?', '+n:''}! 😊\n\nAqui é a Cássia — claro, pode voltar sim!\n\nVenha até a gente de segunda a sexta, das 9h às 12h. Se tiver o protocolo ou qualquer comprovante do atendimento anterior, traz junto — facilita muito na hora de localizar seu histórico.${END}`},
+     tpl: n => `Oi${n?', '+n:''}! 😊\n\nAqui é a Cássia — claro, pode voltar sim!\n\nVenha até a gente de segunda a sexta, das 9h às 12h. Se tiver o protocolo ou qualquer comprovante do atendimento anterior, traz junto — facilita muito na hora de localizar seu histórico.${DOCS}${END}`,
     {title:'🔁 Retorno — caso encerrado', badge:'Alternativa', primary:false, nao:false,
-     tpl: n => `${HDR}\n\nOlá${n?', '+n:''}!\n\nPode sim retornar! Caso o atendimento anterior já tenha sido encerrado e você tenha uma situação nova ou complementar, basta vir até nós com toda a documentação atualizada.\n\nO atendimento é por ordem de chegada, das 9h às 12h, de segunda a sexta.${END}`}
+     tpl: n => `Oi${n?', '+n:''}! 😊\n\nPode sim retornar! Caso o atendimento anterior já tenha sido encerrado e você tenha uma situação nova, basta vir até a gente com a documentação atualizada.\n\nO atendimento é por ordem de chegada, das 9h às 12h, de segunda a sexta.${DOCS}${END}`
    ],
    emailResps:[
     {title:'📧 Retorno por e-mail', subj:'CAD – Retorno para continuidade do atendimento', badge:'Recomendada', primary:true, nao:false,
@@ -958,20 +958,20 @@ const S = [
    emailResps:[]},
 
   {grp:'📍 Como chegar', id:'loc1', icon:'📍', ic:'i-gold', pip:null,
-   label:'Como chegar / estacionamento', sub:'Endereço, referência e dicas de acesso',
+   label:'Como chegar', sub:'Endereço, referência e dicas de acesso',
    who:'Assistido', wc:'#c9973a',
-   sim:'Como faço para chegar aí? Tem estacionamento?',
+   sim:'Como faço para chegar aí?',
    tags:[{t:'Localização',c:'tg-gold'}],
-   ctx:'Informar endereço completo, referência (Poupatempo) e dicas de acesso e estacionamento.',
+   ctx:'Informar endereço completo e referência (Poupatempo).',
    resps:[
     {title:'📍 Como chegar', badge:'Recomendada', primary:true, nao:false,
-     tpl: n => `Oi${n?', '+n:''}! 😊\n\nA gente fica no Poupatempo de Santana de Parnaíba:\n\n📍 Av. Tenente Marques, 5297 – Jd. do Luar, Santana de Parnaíba/SP\n\nTem estacionamento no próprio Poupatempo. Pode vir de carro sem problema!\n\nAtendemos de segunda a sexta, das 9h às 12h, por ordem de chegada. ⚠️ Limite de 30 senhas por dia, vale chegar cedo! 😊`},
+     tpl: n => `Oi${n?', '+n:''}! 😊\n\nA gente fica no Poupatempo de Santana de Parnaíba:\n\n📍 Av. Tenente Marques, 5297 – Jd. do Luar, Santana de Parnaíba/SP\n\nAtendemos de segunda a sexta, das 9h às 12h, por ordem de chegada. ⚠️ Limite de 30 senhas por dia, vale chegar cedo!\n\nNão esqueça de trazer os documentos 😊${DOCS}${END}`,
     {title:'📍 Só o endereço', badge:'Alternativa', primary:false, nao:false,
-     tpl: n => `Oi${n?', '+n:''}! 😊\n\n📍 Av. Tenente Marques, 5297 – Jd. do Luar, Santana de Parnaíba/SP\n(dentro do Poupatempo)\n\n🕘 Seg–Sex, das 9h às 12h — sem agendamento, por ordem de chegada!`}
+     tpl: n => `Oi${n?', '+n:''}! 😊\n\n📍 Av. Tenente Marques, 5297 – Jd. do Luar, Santana de Parnaíba/SP\n(dentro do Poupatempo)\n\n🕘 Seg–Sex, das 9h às 12h — sem agendamento, por ordem de chegada!${DOCS}${END}`
    ],
    emailResps:[
     {title:'📧 Como chegar por e-mail', subj:'CAD – Endereço e informações de acesso', badge:'Padrão', primary:true, nao:false,
-     tpl: n => `${HDRE}\nPrezado(a)${n?' '+n:''}!\n\nEstamos localizados no Poupatempo de Santana de Parnaíba:\n\n📍 Av. Tenente Marques, 5297 – Jd. do Luar, Santana de Parnaíba/SP\n\nHá estacionamento disponível no próprio Poupatempo.\n\nAtendemos de segunda a sexta-feira, das 9h às 12h, por ordem de chegada, com limite de 30 senhas por dia.${ENDE}`}
+     tpl: n => `${HDRE}\nPrezado(a)${n?' '+n:''}!\n\nEstamos localizados no Poupatempo de Santana de Parnaíba:\n\n📍 Av. Tenente Marques, 5297 – Jd. do Luar, Santana de Parnaíba/SP\n\nAtendemos de segunda a sexta-feira, das 9h às 12h, por ordem de chegada, com limite de 30 senhas por dia.${ENDE}`}
    ]},
 
   {grp:'📋 Documentos', id:'doc3', icon:'📸', ic:'i-gold', pip:null,
@@ -996,7 +996,7 @@ const S = [
    ctx:'Não atendemos sábado nem feriado. Apenas dias úteis, 9h às 12h.',
    resps:[
     {title:'📆 Não atendemos sábado', badge:'Padrão', primary:true, nao:false,
-     tpl: n => `Oi${n?', '+n:''}! 😊 Aqui é a Cássia.\n\nInfelizmente não, só atendemos de segunda a sexta, das 9h às 12h — feriados também não.\n\nSe puder, apareça num dia útil bem cedinho para garantir sua vaga! 😊`}
+     tpl: n => `Oi${n?', '+n:''}! 😊 Aqui é a Cássia.\n\nInfelizmente não, só atendemos de segunda a sexta, das 9h às 12h — feriados também não.\n\nSe puder, apareça num dia útil bem cedinho para garantir sua vaga! 😊${DOCS}${END}`
    ],
    emailResps:[
     {title:'📧 Não atendemos sábado (e-mail)', subj:'CAD – Dias e horários de atendimento', badge:'Padrão', primary:true, nao:false,
@@ -1208,6 +1208,24 @@ Prezado(a)${n?' '+n:''}!
 Em atendimento à demanda enviada por V.Sa. à nossa Subseção, a fim de que seja indicado Curador Especial, segue em anexo Ofício de Indicação para as devidas providências.
 
 Coloco-me à disposição para quaisquer esclarecimentos adicionais.${ENDE}`}
+   ]},
+
+
+  {grp:'⚖️ Mensagem de Advogado(a)', id:'adv4', icon:'📲', ic:'i-teal', pip:'pip-teal',
+   label:'Redirecionar para a secretaria', sub:'Passar número da secretaria ao advogado',
+   who:'Advogado(a)', wc:'#22b8c9',
+   sim:'Bom dia, queria tratar sobre...',
+   tags:[{t:'Advogado',c:'tg-teal'},{t:'Secretaria',c:'tg-blue'}],
+   ctx:'Assunto que não é tratado pela CAD diretamente. Redirecionar ao WhatsApp da secretaria.',
+   resps:[
+    {title:'📲 Redirecionar à secretaria', badge:'Recomendada', primary:true, nao:false,
+     tpl: n => `Olá${n?', '+n:''}! 😊\n\nPara tratar sobre esse assunto, você precisa entrar em contato diretamente com a secretaria pelo WhatsApp:\n\n📲 (11) 93724-8448\n\nEles vão conseguir te ajudar melhor! 🙂`},
+    {title:'📲 Variação mais formal', badge:'Alternativa', primary:false, nao:false,
+     tpl: n => `Bom dia${n?', '+n:''}!\n\nPara esse assunto, pedimos que entre em contato com a secretaria da Subseção diretamente pelo WhatsApp:\n\n📲 (11) 93724-8448\n\nEstamos à disposição para demais esclarecimentos.`}
+   ],
+   emailResps:[
+    {title:'📧 Redirecionar à secretaria (e-mail)', subj:'CAD – Contato com a secretaria', badge:'Recomendada', primary:true, nao:false,
+     tpl: n => `${HDRE}\nPrezado(a)${n?' Dr(a). '+n:''}!\n\nPara tratar sobre esse assunto, solicitamos que entre em contato diretamente com a secretaria da Subseção pelo WhatsApp:\n\n📲 (11) 93724-8448\n\nColoco-me à disposição para demais esclarecimentos.${ENDE}`}
    ]},
 
 ];
