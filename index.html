@@ -323,6 +323,7 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
       <button class="chip" onclick="filtro(this,'Comunicado')">📢 Comunicados</button>
       <button class="chip" onclick="filtro(this,'Ofício')">📄 Ofícios</button>
       <button class="chip" onclick="filtro(this,'Secretaria')">📲 Secretaria</button>
+      <button class="chip" onclick="filtro(this,'Informativo')">📣 Informativo</button>
       <button class="chip" onclick="filtro(this,'Reclamação')">⚠️ Reclamação</button>
     </div>
     <div class="sb-list" id="sb-list"></div>
@@ -462,13 +463,34 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 </div>
 <div class="toast" id="toast"></div>
 <script>
-const DOCS='\n\nDocumentos necessários:\n- RG original e CPF\n- Comprovante de residência atualizado\n- Comprovante de renda de todos que moram com você\n- Se tiver bens (imóvel, carro, poupança): documentação desses bens';
+const DOCS='\n\nDocumentos necessários:\n- RG original e CPF (originais)\n- Comprovante de residência atualizado (água, luz, gás ou contrato de aluguel)\n- Comprovante de renda de todos que moram com você:\n  • Com carteira assinada: 3 últimos holerites\n  • Sem carteira assinada: extrato bancário dos últimos 3 meses ou declaração de renda\n- Se tiver bens (imóvel, carro, poupança): documentação desses bens\n\n⚠️ Sem documentação completa, o atendimento não poderá ser realizado.';
 const END='\n\n📍 Av. Tenente Marques, 5297 – Jd. do Luar, Santana de Parnaíba/SP (POUPATEMPO)\n📞 (11) 4154-5191\n🕘 Seg–Sex, 9h–12h  ⚠️ 30 senhas/dia';
+const END_REC='\n\n📍 R. Alberto Frediani, 770 – Jd. Frediani, Santana de Parnaíba/SP\n    CEP 06502-155\n🕘 Seg–Sex, 9h–17h';
 const ENDE='\n\nAtenciosamente,\nCássia Kelly\nCentral de Atendimento – CAD\nOAB Subseção Santana de Parnaíba\n📍 Av. Tenente Marques, 5297 – Jd. do Luar, Santana de Parnaíba/SP\n📞 (11) 4154-5191\n🕘 Seg–Sex, 9h–12h  ⚠️ 30 senhas/dia';
 const HDRE='CAD – Comissão de Advocacia Dativa\nOAB Subseção Santana de Parnaíba\n';
 const AREAS='\n\nA CAD atende: família (divórcio, pensão, guarda), cível, inventário, herança, violência doméstica e habitacional.';
 
 const S=[
+
+// ── INFORMATIVO GERAL ──
+{grp:'📣 Informativo Geral',id:'info1',icon:'📣',ic:'i-blue',pip:null,
+ label:'Informativo completo do atendimento',sub:'Texto pronto para WhatsApp ou e-mail',
+ who:'Assistido',wc:'#3b82f6',sim:'Pode me mandar as informações sobre o atendimento?',
+ tags:[{t:'Informativo',c:'tg-blue'},{t:'Documentos',c:'tg-gold'},{t:'Primeiro contato',c:'tg-teal'}],
+ ctx:'Texto completo com horário, documentos e endereço — ideal para mandar a qualquer pessoa que perguntar sobre o atendimento.',
+ resps:[
+  {title:'📣 Informativo completo — WhatsApp',badge:'Recomendada',primary:true,nao:false,
+   tpl:n=>'*OAB – ASSISTÊNCIA JUDICIÁRIA GRATUITA*\n📍 Subseção Santana de Parnaíba\n \n━━━━━━━━━━━━━━━━━━━━\n🗓️ *Atendimento:* Segunda a Sexta-feira\n🕘 *Horário:* 09h00 às 12h00\n⚠️ *Limite:* 30 pessoas por dia\n_(Senhas apenas para as primeiras 30)_\n━━━━━━━━━━━━━━━━━━━━\n \n📋 *DOCUMENTOS OBRIGATÓRIOS:*\n \n✅ RG original + CPF\n✅ Comprovante de residência atualizado\n   _(água, luz, gás, telefone ou aluguel)_\n✅ Comprovante de renda de todos da família:\n   • *Registrado:* 3 últimos holerites\n   • *Não registrado:* carteira de trabalho, extrato bancário (3 meses), declaração do empregador ou carta de próprio punho reconhecida em cartório\n✅ Comprovante de patrimônio:\n   _(certidão do valor venal, IPTU, veículos, extrato de poupança – se houver)_\n✅ *Alimentos:* documento da criança + endereço da parte contrária\n✅ *Divórcio:* certidão de casamento atualizada\n \n━━━━━━━━━━━━━━━━━━━━\n❗ *Documentos complementares poderão ser solicitados conforme o caso.*\n🚫 *Sem algum documento acima, o atendimento NÃO será realizado.*\n━━━━━━━━━━━━━━━━━━━━\n \n📍 Av. Tenente Marques, 5297\n   Jardim do Luar (Fazendinha) – Santana de Parnaíba/SP\n   _(Dentro do POUPATEMPO)_\n📞 (11) 4154-5191'},
+  {title:'📣 Variação com saudação',badge:'Alternativa',primary:false,nao:false,
+   tpl:n=>'Olá'+(n?', '+n:'')+'! 😊\n\nSegue abaixo as informações sobre o nosso atendimento:\n\n*OAB – ASSISTÊNCIA JUDICIÁRIA GRATUITA*\n📍 Subseção Santana de Parnaíba\n \n━━━━━━━━━━━━━━━━━━━━\n🗓️ *Atendimento:* Segunda a Sexta-feira\n🕘 *Horário:* 09h00 às 12h00\n⚠️ *Limite:* 30 pessoas por dia\n_(Senhas apenas para as primeiras 30)_\n━━━━━━━━━━━━━━━━━━━━\n \n📋 *DOCUMENTOS OBRIGATÓRIOS:*\n \n✅ RG original + CPF\n✅ Comprovante de residência atualizado\n   _(água, luz, gás, telefone ou aluguel)_\n✅ Comprovante de renda de todos da família:\n   • *Registrado:* 3 últimos holerites\n   • *Não registrado:* carteira de trabalho, extrato bancário (3 meses), declaração do empregador ou carta de próprio punho reconhecida em cartório\n✅ Comprovante de patrimônio:\n   _(certidão do valor venal, IPTU, veículos, extrato de poupança – se houver)_\n✅ *Alimentos:* documento da criança + endereço da parte contrária\n✅ *Divórcio:* certidão de casamento atualizada\n \n━━━━━━━━━━━━━━━━━━━━\n❗ *Documentos complementares poderão ser solicitados conforme o caso.*\n🚫 *Sem algum documento acima, o atendimento NÃO será realizado.*\n━━━━━━━━━━━━━━━━━━━━\n \n📍 Av. Tenente Marques, 5297\n   Jardim do Luar (Fazendinha) – Santana de Parnaíba/SP\n   _(Dentro do POUPATEMPO)_\n📞 (11) 4154-5191\n\nQualquer dúvida, estou à disposição! 😊'}
+ ],
+ emailResps:[
+  {title:'📧 Informativo completo — E-mail',subj:'OAB Santana de Parnaíba – Informações sobre Assistência Judiciária Gratuita',badge:'Recomendada',primary:true,nao:false,
+   tpl:n=>'CAD – Comissão de Advocacia Dativa\nOAB Subseção Santana de Parnaíba\n\nPrezado(a)'+(n?' '+n:'')+'!\n\nSegue abaixo todas as informações sobre o nosso atendimento de Assistência Judiciária Gratuita:\n\n──────────────────────────────\nATENDIMENTO\n──────────────────────────────\nDias: Segunda a Sexta-feira\nHorário: 09h00 às 12h00\nLimite: 30 pessoas por dia (senhas distribuídas por ordem de chegada)\n\n──────────────────────────────\nDOCUMENTOS OBRIGATÓRIOS\n──────────────────────────────\n1. RG original + CPF\n2. Comprovante de residência atualizado\n   (água, luz, gás, telefone ou aluguel)\n3. Comprovante de renda de todos os membros da família:\n   - Registrado em carteira: 3 últimos holerites\n   - Não registrado: carteira de trabalho, extrato bancário dos últimos 3 meses, declaração do empregador ou carta de próprio punho reconhecida em cartório\n4. Comprovante de patrimônio (se houver):\n   certidão do valor venal, IPTU, documentação de veículos, extrato de poupança\n5. Para casos de Alimentos: documento da criança + endereço completo da parte contrária\n6. Para casos de Divórcio: certidão de casamento atualizada\n\n──────────────────────────────\nOBSERVAÇÕES IMPORTANTES\n──────────────────────────────\n• Documentos complementares poderão ser solicitados conforme a especificidade do caso.\n• Sem a documentação completa acima, o atendimento NÃO poderá ser realizado.\n• O atendimento é presencial, sem agendamento prévio — por ordem de chegada.\n\n──────────────────────────────\nLOCALIZAÇÃO\n──────────────────────────────\nAv. Tenente Marques, 5297\nJardim do Luar (Fazendinha) – Santana de Parnaíba/SP\n(Dentro do POUPATEMPO)\nTelefone: (11) 4154-5191\n\nAtenciosamente,\nCássia Kelly\nCentral de Atendimento – CAD\nOAB Subseção Santana de Parnaíba'},
+  {title:'📧 Versão curta — E-mail',subj:'OAB Santana de Parnaíba – Assistência Judiciária Gratuita',badge:'Alternativa',primary:false,nao:false,
+   tpl:n=>'CAD – Comissão de Advocacia Dativa\nOAB Subseção Santana de Parnaíba\n\nPrezado(a)'+(n?' '+n:'')+'!\n\nO atendimento de Assistência Judiciária Gratuita funciona da seguinte forma:\n\nDias e horário: Segunda a sexta-feira, das 9h às 12h\nLimite: 30 pessoas por dia, por ordem de chegada — sem agendamento prévio.\n\nDocumentos obrigatórios:\n- RG original e CPF\n- Comprovante de residência atualizado (água, luz, gás, telefone ou aluguel)\n- Comprovante de renda de todos da família (holerites, extrato bancário ou declaração)\n- Documentação de patrimônio, se houver\n- Documentos específicos conforme o tipo de caso\n\nSem a documentação completa, o atendimento não poderá ser realizado.\n\nLocalização: Av. Tenente Marques, 5297 – Jd. do Luar (Fazendinha), Santana de Parnaíba/SP (POUPATEMPO)\nTelefone: (11) 4154-5191\n\nAtenciosamente,\nCássia Kelly\nCentral de Atendimento – CAD\nOAB Subseção Santana de Parnaíba'}
+ ]},
+
 // ── PRIMEIRO CONTATO ──
 {grp:'👤 Primeiro contato',id:'bv0',icon:'💬',ic:'i-blue',pip:null,
  label:'Assistido entra em contato',sub:'Perguntar no que podemos ajudar',
@@ -889,12 +911,12 @@ const S=[
  ctx:'CPF consultado mas não há processo cadastrado. Orientar a vir pessoalmente com senha.',
  resps:[
   {title:'📂 Sem processo — Orientar senha',badge:'Padrão',primary:true,nao:false,
-   tpl:n=>'Oi'+(n?', '+n:'')+'! 😊\n\nAqui é a Cássia. Verifiquei aqui e não encontrei nenhum processo cadastrado para o seu CPF no nosso sistema.\n\nPara darmos andamento, você precisa vir pessoalmente aqui na sede pegar uma senha de atendimento.\n\nO atendimento é de segunda a sexta, das 9h às 12h — sem agendamento, por ordem de chegada. Não esqueça de trazer seus documentos!'+DOCS+END},
+   tpl:n=>'Oi'+(n?', '+n:'')+'! 😊\n\nAqui é a Cássia. Verifiquei aqui e não encontrei nenhum processo cadastrado para o seu CPF no nosso sistema.\n\nPara darmos andamento, você precisa vir pessoalmente aqui na sede pegar uma senha de atendimento.\n\nO atendimento é de segunda a sexta, das 9h às 17h — sem agendamento, por ordem de chegada. Não esqueça de trazer seus documentos!'+DOCS+END_REC},
   {title:'📂 Sem processo — Versão curta',badge:'Alternativa',primary:false,nao:false,
-   tpl:n=>'Oi'+(n?', '+n:'')+'! 😊\n\nNão localizei processo para o seu CPF no sistema. Você precisa comparecer pessoalmente para pegar uma senha de atendimento.\n\n🕘 Seg–Sex, 9h–12h — sem agendamento, por ordem de chegada.'+DOCS+END}
+   tpl:n=>'Oi'+(n?', '+n:'')+'! 😊\n\nNão localizei processo para o seu CPF no sistema. Você precisa comparecer pessoalmente para pegar uma senha de atendimento.\n\n🕘 Seg–Sex, 9h–17h — sem agendamento, por ordem de chegada.'+DOCS+END_REC}
  ],
  emailResps:[{title:'📧 Sem processo — Orientar',subj:'CAD – Reclamação – Processo não localizado',badge:'Padrão',primary:true,nao:false,
-  tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nNão localizamos processo cadastrado para o CPF informado.\n\nPara prosseguir, é necessário comparecer pessoalmente à nossa sede para retirar uma senha de atendimento.\n\nAtendemos de segunda a sexta, das 9h às 12h, por ordem de chegada — limite de 30 senhas por dia.\n\nDocumentos necessários:\n- RG original e CPF\n- Comprovante de residência\n- Comprovante de renda\n- Documentos relacionados ao seu caso'+ENDE}]},
+  tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nNão localizamos processo cadastrado para o CPF informado.\n\nPara prosseguir, é necessário comparecer pessoalmente à nossa sede para retirar uma senha de atendimento.\n\nComparecer em:\n📍 R. Alberto Frediani, 770 – Jd. Frediani, Santana de Parnaíba/SP (CEP 06502-155)\n🕘 Seg–Sex, 9h–17h\n\nDocumentos necessários:\n- RG original e CPF (originais)\n- Comprovante de residência atualizado\n- Comprovante de renda de todos que moram com você\n- Se tiver bens: documentação correspondente\n- Documentos relacionados ao seu caso'+ENDE}]},
 
 {grp:'⚠️ Reclamação de Advogado',id:'rec3',icon:'🔄',ic:'i-amber',pip:'pip-amber',
  label:'CPF verificado — Nomeação recusada',sub:'Advogado recusou a nomeação',
@@ -903,12 +925,12 @@ const S=[
  ctx:'A nomeação foi recusada pelo advogado. Orientar o assistido a voltar ao atendimento presencialmente para nova indicação.',
  resps:[
   {title:'🔄 Nomeação recusada — Orientar retorno',badge:'Recomendada',primary:true,nao:false,
-   tpl:n=>'Oi'+(n?', '+n:'')+'! 😊\n\nAqui é a Cássia. Verifiquei aqui e a nomeação do advogado para o seu caso consta como recusada no sistema.\n\nNesse caso, você precisa voltar ao atendimento aqui na sede para que possamos fazer uma nova indicação.\n\nVenha de segunda a sexta, das 9h às 12h, por ordem de chegada. Traga seus documentos e, se tiver, qualquer comprovante relacionado ao seu processo!'+DOCS+END},
+   tpl:n=>'Oi'+(n?', '+n:'')+'! 😊\n\nAqui é a Cássia. Verifiquei aqui e a nomeação do advogado para o seu caso consta como recusada no sistema.\n\nNesse caso, você precisa voltar ao atendimento aqui na sede para que possamos fazer uma nova indicação.\n\nVenha de segunda a sexta, das 9h às 17h, por ordem de chegada. Traga seus documentos e, se tiver, qualquer comprovante relacionado ao seu processo!'+DOCS+END_REC},
   {title:'🔄 Nomeação recusada — Com mais detalhes',badge:'Alternativa',primary:false,nao:false,
    tpl:n=>'Oi'+(n?', '+n:'')+'! 😊\n\nVerifiquei o seu caso aqui. A nomeação do advogado que foi indicado para você consta como recusada — isso significa que ele não aceitou o caso.\n\nVocê precisará vir pessoalmente para que possamos fazer uma nova indicação de advogado. Não se preocupe, isso faz parte do processo!\n\n🕘 Seg–Sex, 9h–12h — sem agendamento, por ordem de chegada.'+DOCS+END}
  ],
  emailResps:[{title:'📧 Nomeação recusada — Orientar',subj:'CAD – Reclamação – Nomeação recusada',badge:'Recomendada',primary:true,nao:false,
-  tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nA nomeação do advogado indicado para o seu caso consta como recusada em nosso sistema.\n\nÉ necessário comparecer pessoalmente à nossa sede para nova indicação de advogado.\n\nAtendemos de segunda a sexta, das 9h às 12h, por ordem de chegada — limite de 30 senhas por dia.'+ENDE}]},
+  tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nA nomeação do advogado indicado para o seu caso consta como recusada em nosso sistema.\n\nComparecer pessoalmente para nova indicação:\n📍 R. Alberto Frediani, 770 – Jd. Frediani, Santana de Parnaíba/SP (CEP 06502-155)\n🕘 Seg–Sex, 9h–17h'+ENDE}]},
 
 {grp:'⚠️ Reclamação de Advogado',id:'rec4',icon:'✍️',ic:'i-red',pip:'pip-red',
  label:'CPF verificado — Nomeação aceita',sub:'Advogado aceitou — fazer reclamação a próprio punho',
@@ -917,9 +939,9 @@ const S=[
  ctx:'Nomeação foi aceita. Não é possível trocar sem procedimento. Orientar reclamação escrita (a próprio punho) e trazer senha.',
  resps:[
   {title:'✍️ Nomeação aceita — Orientar reclamação',badge:'Recomendada',primary:true,nao:false,
-   tpl:n=>'Oi'+(n?', '+n:'')+'! 😊\n\nAqui é a Cássia. Verifiquei aqui e o advogado indicado para o seu caso aceitou a nomeação no sistema.\n\nComo a nomeação foi aceita, não é possível simplesmente trocar de advogado — precisamos seguir os procedimentos corretos, pois dependemos de um sistema específico para isso.\n\nO que você precisa fazer é:\n\n✍️ Escrever uma reclamação a próprio punho (de seu próprio punho mesmo, não precisa ser digitado), contando tudo o que aconteceu: que o advogado não te atende, não dá retorno, não atua no processo — com o máximo de detalhes possível.\n\nDepois, venha pessoalmente aqui na sede com:\n- Essa reclamação escrita\n- Seus documentos\n- Se tiver processo: traga o número ou qualquer papel do processo\n\nCom isso em mãos, conseguimos dar andamento à sua reclamação! 😊'+END},
+   tpl:n=>'Oi'+(n?', '+n:'')+'! 😊\n\nAqui é a Cássia. Verifiquei aqui e o advogado indicado para o seu caso aceitou a nomeação no sistema.\n\nComo a nomeação foi aceita, não é possível simplesmente trocar de advogado — precisamos seguir os procedimentos corretos, pois dependemos de um sistema específico para isso.\n\nO que você precisa fazer é:\n\n✍️ Escrever uma reclamação a próprio punho (de seu próprio punho mesmo, não precisa ser digitado), contando tudo o que aconteceu: que o advogado não te atende, não dá retorno, não atua no processo — com o máximo de detalhes possível.\n\nDepois, venha pessoalmente aqui na sede com:\n- Essa reclamação escrita\n- Seus documentos\n- Se tiver processo: traga o número ou qualquer papel do processo\n\nCom isso em mãos, conseguimos dar andamento à sua reclamação! 😊'+END_REC},
   {title:'✍️ Nomeação aceita — Versão objetiva',badge:'Alternativa',primary:false,nao:false,
-   tpl:n=>'Oi'+(n?', '+n:'')+'! 😊\n\nA nomeação do advogado está aceita no sistema. Não podemos trocar de advogado sem seguir os procedimentos — dependemos do sistema para isso.\n\nVocê precisa:\n1️⃣ Escrever uma reclamação a próprio punho descrevendo os problemas com o advogado\n2️⃣ Vir pessoalmente aqui com essa reclamação + seus documentos + número do processo (se tiver)\n\n🕘 Seg–Sex, 9h–12h — sem agendamento.'+END}
+   tpl:n=>'Oi'+(n?', '+n:'')+'! 😊\n\nA nomeação do advogado está aceita no sistema. Não podemos trocar de advogado sem seguir os procedimentos — dependemos do sistema para isso.\n\nVocê precisa:\n1️⃣ Escrever uma reclamação a próprio punho descrevendo os problemas com o advogado\n2️⃣ Vir pessoalmente aqui com essa reclamação + seus documentos + número do processo (se tiver)\n\n🕘 Seg–Sex, 9h–17h — sem agendamento.'+END_REC}
  ],
  emailResps:[{title:'📧 Nomeação aceita — Orientar reclamação',subj:'CAD – Reclamação – Orientações importantes',badge:'Recomendada',primary:true,nao:false,
   tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nApós verificação, constatamos que a nomeação do advogado indicado para o seu caso está aceita em nosso sistema.\n\nComo a nomeação foi formalmente aceita, não é possível realizar a substituição sem seguir os procedimentos adequados — nosso sistema exige um trâmite específico para isso.\n\nOrientações:\n1. Redigir uma reclamação escrita a próprio punho, detalhando todos os problemas: falta de atendimento, ausência de retorno, inércia processual, etc.\n2. Comparecer pessoalmente à nossa sede com:\n   - A reclamação escrita\n   - RG original e CPF\n   - Documentos do processo (número do processo, intimações, etc.)\n\nAtendemos de segunda a sexta, das 9h às 12h, por ordem de chegada — limite de 30 senhas por dia.\n\nEstamos à disposição para auxiliá-lo(a) nesse processo.'+ENDE}]},
@@ -1025,7 +1047,7 @@ function buscar(v){
 }
 
 (function(){
-  const tags=['Divórcio','Pensão','Trabalhista','INSS','Criminal','Documentos','Áudio','Vagas esgotadas','Violência doméstica','Convênio','Dativo','Urgente','Como chegar','Encerramento','Secretaria','Reclamação'];
+  const tags=['Informativo geral','Divórcio','Pensão','Trabalhista','INSS','Criminal','Documentos','Áudio','Vagas esgotadas','Violência doméstica','Convênio','Dativo','Urgente','Como chegar','Encerramento','Secretaria','Reclamação'];
   document.getElementById('wtags').innerHTML=tags.map(t=>`<button class="wtag" onclick="buscar('${t}')">${t}</button>`).join('');
 })();
 
