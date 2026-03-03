@@ -24,7 +24,7 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
     radial-gradient(ellipse 500px 400px at 100% 100%,rgba(6,10,32,.95) 0%,transparent 55%)}
 
 /* TOPBAR */
-.topbar{position:relative;z-index:50;height:56px;background:rgba(8,13,26,.98);
+.topbar{position:relative;z-index:50;height:60px;background:rgba(8,13,26,.98);
   backdrop-filter:blur(24px);border-bottom:1px solid var(--gb);
   display:flex;align-items:center;padding:0 20px;flex-shrink:0;
   box-shadow:0 8px 32px rgba(0,0,0,.5)}
@@ -56,12 +56,12 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .uclock{font-size:10.5px;color:var(--sub);margin-top:2px;font-variant-numeric:tabular-nums}
 
 /* LAYOUT */
-.shell{display:grid;grid-template-columns:272px 1fr;flex:1;overflow:hidden;position:relative;z-index:1}
+.shell{display:grid;grid-template-columns:288px 1fr;flex:1;overflow:hidden;position:relative;z-index:1}
 
 /* SIDEBAR */
 .sidebar{background:rgba(9,14,28,.82);border-right:1px solid var(--border);
   display:flex;flex-direction:column;overflow:hidden;backdrop-filter:blur(12px)}
-.sb-head{padding:13px 12px 10px;border-bottom:1px solid var(--border);flex-shrink:0}
+.sb-head{padding:16px 14px 12px;border-bottom:1px solid var(--border);flex-shrink:0}
 .sb-lbl{font-size:9.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:9px}
 .sw{position:relative}
 .sw svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:12px;height:12px;color:var(--dim);pointer-events:none}
@@ -80,7 +80,7 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
   padding:12px 6px 5px;display:flex;align-items:center;gap:6px}
 .grp-lbl::after{content:'';flex:1;height:1px;background:var(--border)}
 .sc-row{width:100%;text-align:left;background:transparent;border:1px solid transparent;border-radius:var(--rs);
-  padding:7px 8px;margin-bottom:2px;cursor:pointer;display:flex;align-items:center;gap:8px;
+  padding:9px 10px;margin-bottom:3px;cursor:pointer;display:flex;align-items:center;gap:9px;
   transition:var(--tr);font-family:'Outfit',sans-serif}
 .sc-row:hover{background:rgba(255,255,255,.025);border-color:var(--border)}
 .sc-row.active{background:var(--glow);border-color:var(--gb)}
@@ -143,7 +143,7 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 /* SCENARIO VIEW */
 .sc-view{flex:1;display:none;flex-direction:column;overflow:hidden}
 .sc-view.on{display:flex}
-.namebar{height:42px;background:rgba(201,146,58,.04);border-bottom:1px solid var(--gb);
+.namebar{height:48px;background:rgba(201,146,58,.04);border-bottom:1px solid var(--gb);
   display:flex;align-items:center;gap:12px;padding:0 22px;flex-shrink:0}
 .namebar label{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold-lt);white-space:nowrap}
 .namebar input{width:210px;background:rgba(255,255,255,.05);border:1px solid var(--gb);border-radius:var(--rs);
@@ -191,7 +191,7 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 
 /* RESPONSE CARDS */
 .resp-stack{display:flex;flex-direction:column;gap:12px}
-.rcard{border-radius:var(--r);border:1px solid var(--border);
+.rcard{border-radius:14px;border:1px solid var(--border);
   background:linear-gradient(160deg,rgba(14,21,42,.85),rgba(11,17,34,.65));
   overflow:hidden;transition:all .2s}
 .rcard:hover{border-color:var(--border2);box-shadow:0 4px 20px rgba(0,0,0,.3)}
@@ -295,7 +295,7 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 <div class="shell">
   <div class="sidebar">
     <div class="sb-head">
-      <div class="sb-lbl">Que tipo de mensagem chegou?</div>
+      <div class="sb-lbl">Que situação você recebeu?</div>
       <div class="sw">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
         <input class="si" id="search" type="text" placeholder="Buscar situação..." oninput="buscar(this.value)">
@@ -319,7 +319,7 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
   <div class="main">
     <div class="breadbar">
       <div>
-        <div class="btitle" id="btitle">Escolha um cenário ao lado</div>
+        <div class="btitle" id="btitle">Selecione uma situação</div>
         <div class="bsub" id="bsub">A resposta aparece pronta para copiar ou enviar direto pelo WhatsApp</div>
       </div>
       <button class="btn btn-guide" onclick="toggleGuide()">📌 O que atendemos?</button>
@@ -457,10 +457,12 @@ const S = [
    tags:[{t:'Boas-vindas',c:'tg-blue'},{t:'Primeiro contato',c:'tg-teal'}],
    ctx:'Assistido mandou mensagem sem dizer o motivo. Cumprimentar e perguntar como podemos ajudar.',
    resps:[
-    {title:'✉️ Boas-vindas calorosa', badge:'Recomendada', primary:true, nao:false,
-     tpl: n => `Olá${n?', '+n:''}! 😊 Tudo bem?\n\nAqui é a Cássia, da CAD – Comissão de Advocacia Dativa da OAB Santana de Parnaíba.\n\nNo que posso te ajudar hoje?`},
-    {title:'✉️ Boas-vindas simples', badge:'Alternativa', primary:false, nao:false,
-     tpl: n => `Olá${n?', '+n:''}! Tudo bem?\n\nSou a Cássia, da Central de Atendimento da CAD – OAB Santana de Parnaíba. 😊\n\nComo posso te ajudar?`}
+    {title:'✉️ Boas-vindas', badge:'Recomendada', primary:true, nao:false,
+     tpl: n => `Olá${n?', '+n:''}! 😊 Aqui é a Cássia, em que posso te ajudar?`},
+    {title:'✉️ Variação com saudação', badge:'Alternativa', primary:false, nao:false,
+     tpl: n => `Oi${n?', '+n:''}! Tudo bem? 😊 Sou a Cássia, em que posso te ajudar?`},
+    {title:'✉️ Variação formal', badge:'Alternativa', primary:false, nao:false,
+     tpl: n => `Olá${n?', '+n:''}! Aqui é a Cássia. Como posso te ajudar hoje?`}
    ],
    emailResps:[
     {title:'📧 Boas-vindas por e-mail', subj:'CAD – Recebemos sua mensagem', badge:'Recomendada', primary:true, nao:false,
@@ -475,7 +477,7 @@ const S = [
    ctx:'Pessoa sem contexto. Explicar de forma simples e acolhedora.',
    resps:[
     {title:'✉️ Apresentar o serviço', badge:'Recomendada', primary:true, nao:false,
-     tpl: n => `Olá${n?', '+n:''}! 😊\n\nAqui é a Cássia, da CAD – Comissão de Advocacia Dativa da OAB Santana de Parnaíba.\n\nA gente oferece atendimento jurídico gratuito para quem não tem condições de pagar um advogado particular. São advogados conveniados à OAB que atendem pessoalmente aqui na nossa sede.\n\nSe precisar de ajuda jurídica, é só vir até a gente com os documentos. Posso te explicar melhor como funciona? 😊${DOCS}${END}`}
+     tpl: n => `Olá${n?', '+n:''}! 😊\n\nAqui é a Cássia.\n\nA gente é a CAD – Comissão de Advocacia Dativa da OAB Santana de Parnaíba. Oferecemos atendimento jurídico gratuito para quem não tem condições de pagar advogado particular.\n\nÉ tudo presencial aqui na nossa sede, com advogados da OAB. É só vir com os documentos e a gente te orienta! 😊${DOCS}${END}`}
    ],
    emailResps:[
     {title:'📧 Apresentação da CAD por e-mail', subj:'CAD – O que somos e como podemos ajudar', badge:'Recomendada', primary:true, nao:false,
@@ -490,7 +492,7 @@ const S = [
    ctx:'Pessoa já sabe que é gratuito. Confirmar e orientar o que fazer.',
    resps:[
     {title:'✉️ Confirmar e orientar', badge:'Recomendada', primary:true, nao:false,
-     tpl: n => `Olá${n?', '+n:''}! 😊\n\nSim, podemos ajudar! A gente oferece atendimento jurídico gratuito para quem não tem condições de pagar advogado.\n\nÉ bem simples: você vem aqui na nossa sede de segunda a sexta, das 9h às 12h, com os documentos. Não precisa agendar, é por ordem de chegada — só chegar cedo porque as vagas são limitadas. 😊${DOCS}${END}`}
+     tpl: n => `Olá${n?', '+n:''}! 😊\n\nSim! Aqui é a Cássia e a gente pode te ajudar sim.\n\nO atendimento é gratuito, presencial, de segunda a sexta das 9h às 12h. Não precisa agendar — é por ordem de chegada, só chegar cedo porque as vagas são limitadas a 30 por dia.${DOCS}${END}`}
    ],
    emailResps:[
     {title:'📧 Confirmar atendimento por e-mail', subj:'CAD – Podemos te ajudar!', badge:'Recomendada', primary:true, nao:false,
@@ -505,7 +507,7 @@ const S = [
    ctx:'Não há agendamento. Atendimento por ordem de chegada, limite 30 senhas/dia.',
    resps:[
     {title:'✉️ Sem agendamento', badge:'Padrão', primary:true, nao:false,
-     tpl: n => `Olá${n?', '+n:''}! 😊\n\nNão precisa agendar não — pode vir direto! O atendimento é por ordem de chegada, de segunda a sexta, das 9h às 12h.\n\nSó fica ligado: o limite é de 30 senhas por dia e costumam acabar cedo. Então, quanto mais cedo chegar, melhor! 😊${DOCS}${END}`}
+     tpl: n => `Oi${n?', '+n:''}! 😊\n\nNão precisa agendar não — pode vir direto! É por ordem de chegada, de segunda a sexta, das 9h às 12h.\n\nSó um aviso: o limite é 30 senhas por dia e costumam acabar cedo. Quanto antes chegar, melhor!${DOCS}${END}`}
    ],
    emailResps:[
     {title:'📧 Explicar atendimento por e-mail', subj:'CAD – Informações sobre como nos visitar', badge:'Padrão', primary:true, nao:false,
@@ -520,7 +522,7 @@ const S = [
    ctx:'Não conseguimos ouvir áudios. Pedir que mande em texto.',
    resps:[
     {title:'✉️ Pedir em texto', badge:'Padrão', primary:true, nao:false,
-     tpl: n => `Olá${n?', '+n:''}! 😊\n\nInfelizmente não consigo ouvir áudios por aqui.\n\nPode me contar por texto o que você precisa? Assim consigo te ajudar melhor! 😊`}
+     tpl: n => `Oi${n?', '+n:''}! 😊\n\nAqui é a Cássia — infelizmente não consigo ouvir áudios por aqui.\n\nPode me mandar em texto? Assim consigo te ajudar direitinho! 😊`}
    ],
    emailResps:[]},
 
@@ -767,7 +769,7 @@ const S = [
    ctx:'Limite de 30 senhas atingido. Orientar retorno no próximo dia útil.',
    resps:[
     {title:'📅 Vagas esgotadas', badge:'Padrão', primary:true, nao:false,
-     tpl: n => `Olá${n?', '+n:''}! 😊\n\nInfelizmente hoje as 30 senhas do dia já se esgotaram. 😔\n\nMas não desanima — volte amanhã bem cedinho (antes das 9h se puder) que você garante a vaga! Qualquer dúvida, estou aqui.${END}`}
+     tpl: n => `Oi${n?', '+n:''}! 😔\n\nAqui é a Cássia — infelizmente hoje as 30 senhas já se esgotaram.\n\nMas não desanima! Volte amanhã antes das 9h que você garante a vaga. Qualquer dúvida, me chama! 😊`}
    ],
    emailResps:[
     {title:'📧 Vagas esgotadas por e-mail', subj:'CAD – Atendimento indisponível hoje', badge:'Padrão', primary:true, nao:false,
@@ -782,7 +784,7 @@ const S = [
    ctx:'Mensagem fora do horário. Informar e responder no próximo dia útil.',
    resps:[
     {title:'🌙 Fora do horário', badge:'Padrão', primary:true, nao:false,
-     tpl: n => `Olá${n?', '+n:''}! 😊\n\nObrigada pelo contato! No momento estamos fora do horário de atendimento, mas responderei assim que possível no próximo dia útil.\n\nAtendemos de segunda a sexta, das 9h às 12h. Até lá! 🙂${END}`}
+     tpl: n => `Oi${n?', '+n:''}! 😊\n\nAqui é a Cássia. Obrigada pelo contato! No momento estou fora do horário, mas respondo assim que possível no próximo dia útil.\n\nAtendo de segunda a sexta, das 9h às 12h. Até lá! 🙂`}
    ],
    emailResps:[
     {title:'📧 Fora do horário por e-mail', subj:'CAD – Mensagem recebida fora do horário', badge:'Padrão', primary:true, nao:false,
@@ -798,7 +800,7 @@ const S = [
    ctx:'Manter postura calma. Registrar a insatisfação e orientar retorno com documentação.',
    resps:[
     {title:'🤝 Resposta respeitosa', badge:'Recomendada', primary:true, nao:false,
-     tpl: n => `Olá${n?', '+n:''}!\n\nEntendo muito bem a sua frustração e me desculpe pelo transtorno. 😔\n\nInfelizmente o limite de 30 senhas por dia às vezes impede que todo mundo seja atendido no mesmo dia.\n\nSe vier cedo amanhã, com certeza vai conseguir! Precisando de qualquer coisa, estou aqui. 🙂${END}`}
+     tpl: n => `Oi${n?', '+n:''}! 😔\n\nAqui é a Cássia. Entendo a sua frustração e me desculpe por não ter conseguido ser atendida.\n\nInfelizmente o limite é de 30 senhas por dia e às vezes não dá para todo mundo. Se vier amanhã bem cedo, antes das 9h, você garante a vaga com certeza!\n\nEstou aqui se precisar de qualquer coisa. 🙂`}
    ],
    emailResps:[
     {title:'📧 Resposta a reclamação (e-mail)', subj:'CAD – Recebemos sua reclamação', badge:'Recomendada', primary:true, nao:false,
@@ -813,7 +815,7 @@ const S = [
    ctx:'Acompanhamento é presencial. Solicitar comparecimento com documentos.',
    resps:[
     {title:'🔄 Orientar comparecimento', badge:'Padrão', primary:true, nao:false,
-     tpl: n => `${HDR}\n\nOlá${n?', '+n:''}!\n\nPara acompanhar seu processo ou tirar dúvidas sobre um atendimento já feito, precisa vir pessoalmente. Traga seus documentos e o protocolo de atendimento, se tiver.${END}`}
+     tpl: n => `Oi${n?', '+n:''}! 😊\n\nAqui é a Cássia. Para acompanhar o seu processo, precisa vir pessoalmente aqui na sede.\n\nTraga seus documentos e, se tiver, o protocolo de atendimento. A gente te ajuda assim que você chegar! 😊${END}`}
    ],
    emailResps:[
     {title:'📧 Acompanhamento de processo (e-mail)', subj:'CAD – Acompanhamento do seu caso', badge:'Padrão', primary:true, nao:false,
@@ -828,7 +830,7 @@ const S = [
    ctx:'Não fazemos orientação jurídica por WhatsApp. Indicar e-mail para contato formal.',
    resps:[
     {title:'📧 Indicar canal correto', badge:'Padrão', primary:true, nao:false,
-     tpl: n => `${HDR}\n\nOlá${n?', '+n:''}!\n\nInfelizmente não conseguimos dar orientação jurídica por WhatsApp.\n\nSe quiser um primeiro contato à distância, pode nos enviar um e-mail contando sua situação:\n📧 aj.santana.parnai@oabsp.org.br\n\nMas para o atendimento completo, é necessário vir presencialmente com a documentação.${DOCS}${END}`}
+     tpl: n => `Oi${n?', '+n:''}! 😊\n\nAqui é a Cássia. Infelizmente não consigo dar orientação jurídica pelo WhatsApp.\n\nMas você pode nos mandar um e-mail contando sua situação, que a gente vê o que pode fazer:\n📧 aj.santana.parnai@oabsp.org.br\n\nO atendimento completo precisa ser presencial, tá? Se tiver como vir, a gente te ajuda aqui! 😊${DOCS}${END}`}
    ],
    emailResps:[
     {title:'📧 Orientação à distância (e-mail)', subj:'CAD – Informações sobre atendimento', badge:'Padrão', primary:true, nao:false,
@@ -843,7 +845,7 @@ const S = [
    ctx:'Atendimento é só com a parte. Acompanhante aguarda fora. Exceção: dificuldade de comunicação.',
    resps:[
     {title:'👥 Orientar acompanhante', badge:'Padrão', primary:true, nao:false,
-     tpl: n => `${HDR}\n\nOlá${n?', '+n:''}!\n\nPode vir acompanhada, sem problema. Só que o atendimento com o advogado é feito apenas com a pessoa do caso — o acompanhante fica aguardando do lado de fora.\n\nSe tiver dificuldade de locomoção ou comunicação, pode vir com alguém de confiança para ajudar.${DOCS}${END}`}
+     tpl: n => `Oi${n?', '+n:''}! 😊\n\nAqui é a Cássia — pode vir acompanhada sim! Só que a consulta com o advogado é só com a pessoa do caso, o acompanhante fica aguardando do lado de fora.\n\nSe tiver dificuldade de locomoção ou comunicação, aí pode vir com alguém de confiança para ajudar. 😊${DOCS}${END}`}
    ],
    emailResps:[
     {title:'📧 Orientar acompanhante (e-mail)', subj:'CAD – Sobre acompanhante no atendimento', badge:'Padrão', primary:true, nao:false,
@@ -905,7 +907,7 @@ const S = [
    ctx:'Informar horário, dias e limite de 30 senhas. Reforçar chegada antecipada.',
    resps:[
     {title:'🕘 Informar horário', badge:'Recomendada', primary:true, nao:false,
-     tpl: n => `${HDR}\n\nOlá${n?', '+n:''}!\n\nNosso horário de atendimento é de segunda a sexta-feira, das 9h às 12h.\n\nO atendimento é presencial, por ordem de chegada, com limite de 30 senhas por dia. Recomendamos chegar antes das 9h para garantir sua vaga.${END}`}
+     tpl: n => `Oi${n?', '+n:''}! 😊\n\nAqui é a Cássia! A gente atende de segunda a sexta, das 9h às 12h, de forma presencial, por ordem de chegada.\n\nSó um aviso: o limite é de 30 senhas por dia, então vale chegar antes das 9h para garantir a vaga! 😊${END}`}
    ],
    emailResps:[
     {title:'📧 Horário por e-mail', subj:'CAD – Horário de atendimento', badge:'Recomendada', primary:true, nao:false,
@@ -921,7 +923,7 @@ const S = [
    ctx:'Pessoa já atendida antes quer dar continuidade. Orientar comparecer com documentos e protocolo anterior.',
    resps:[
     {title:'🔁 Orientar retorno', badge:'Recomendada', primary:true, nao:false,
-     tpl: n => `${HDR}\n\nOlá${n?', '+n:''}!\n\nClaro, pode voltar! Para darmos continuidade ao seu caso, venha até nossa sede nos dias de atendimento — segunda a sexta, das 9h às 12h.\n\nTraga seus documentos e, se tiver, o protocolo ou qualquer comprovante do atendimento anterior. Isso vai ajudar a localizar seu histórico mais rapidamente.${END}`},
+     tpl: n => `Oi${n?', '+n:''}! 😊\n\nAqui é a Cássia — claro, pode voltar sim!\n\nVenha até a gente de segunda a sexta, das 9h às 12h. Se tiver o protocolo ou qualquer comprovante do atendimento anterior, traz junto — facilita muito na hora de localizar seu histórico.${END}`},
     {title:'🔁 Retorno — caso encerrado', badge:'Alternativa', primary:false, nao:false,
      tpl: n => `${HDR}\n\nOlá${n?', '+n:''}!\n\nPode sim retornar! Caso o atendimento anterior já tenha sido encerrado e você tenha uma situação nova ou complementar, basta vir até nós com toda a documentação atualizada.\n\nO atendimento é por ordem de chegada, das 9h às 12h, de segunda a sexta.${END}`}
    ],
