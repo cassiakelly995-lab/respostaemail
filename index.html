@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CAJ · Central de Atendimento</title>
+<title>CAD · Central de Atendimento</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
@@ -226,7 +226,7 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
   <div class="brand">
     <div class="seal"><span class="s1">OAB</span><span class="s2">SP</span></div>
     <div class="brand-txt">
-      <h1>CAJ – Comissão de Advocacia Dativa</h1>
+      <h1>CAD – Comissão de Advocacia Dativa</h1>
       <p>Subseção Santana de Parnaíba · Central de Atendimento</p>
     </div>
   </div>
@@ -314,7 +314,7 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
       <div class="guide" id="guide">
         <div class="guide-inner">
           <div class="guide-hd">
-            <h2>📌 O que a CAJ atende</h2>
+            <h2>📌 O que a CAD atende</h2>
             <button class="btn btn-ghost" onclick="toggleGuide()">✕ Fechar</button>
           </div>
           <div class="gg">
@@ -340,7 +340,7 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
           <div class="ginfo">
             <strong>📋 Documentos básicos:</strong> RG original + CPF · Comprovante de residência · Comprovante de renda de todos da família · Patrimônio se houver<br><br>
             <strong>📍</strong> Av. Tenente Marques, 5297 – Jd. do Luar, Santana de Parnaíba/SP (POUPATEMPO)<br>
-            <strong>📞</strong> (11) 4154-5191 &nbsp;·&nbsp; <strong>📧</strong> aj.santana.parnai@oabsp.org.br &nbsp;·&nbsp; <strong>🕘</strong> Seg–Sex, 9h–12h &nbsp;·&nbsp; <strong>⚠️</strong> 30 vagas/dia
+            <strong>📞</strong> (11) 4154-5191 &nbsp;·&nbsp; <strong>📧</strong> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6302094d10020d17020d024d1302110d020a230c020110134d0c11044d0111">[email&#160;protected]</a> &nbsp;·&nbsp; <strong>🕘</strong> Seg–Sex, 9h–12h &nbsp;·&nbsp; <strong>⚠️</strong> 30 vagas/dia
           </div>
           <div style="margin-top:14px"><button class="btn btn-ghost" onclick="window.print()">🖨️ Imprimir</button></div>
         </div>
@@ -356,17 +356,17 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 
 <div class="toast" id="toast"></div>
 
-<script>
-const HDR  = 'CAJ – Comissão de Advocacia Dativa\nOAB Subseção Santana de Parnaíba';
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+const HDR  = 'CAD – Comissão de Advocacia Dativa\nOAB Subseção Santana de Parnaíba';
+const DOCS = '\n\nDocumentos necessários:\n- RG original e CPF\n- Comprovante de residência atualizado\n- Comprovante de renda de todos que moram com você\n- Se tiver bens (imóvel, carro, poupança): documentação desses bens';
 const END  = '\n\n📍 Av. Tenente Marques, 5297 – Jd. do Luar, Santana de Parnaíba/SP (POUPATEMPO)\n📞 (11) 4154-5191   📧 aj.santana.parnai@oabsp.org.br\n🕘 Segunda a sexta, das 9h às 12h';
-const DOCS = '\n\nO que precisa trazer:\n- RG original e CPF\n- Comprovante de residência atualizado\n- Comprovante de renda de todos que moram com você\n- Se tiver bens (imóvel, carro, poupança): documentação desses bens\n\nSem a documentação completa, não conseguimos fazer o atendimento.';
-const AREAS = '\n\nA CAJ atende: família (divórcio, pensão, guarda), cível, inventário, herança, violência doméstica e habitacional.';
+const AREAS = '\n\nA CAD atende: família (divórcio, pensão, guarda), cível, inventário, herança, violência doméstica e habitacional.';
 
 const S = [
 
   // ── PRIMEIRO CONTATO ─────────────────────────────────────────
   {grp:'👤 Primeiro contato', id:'bv1', icon:'👋', ic:'i-blue', pip:null,
-   label:'Não sabe o que é a CAJ', sub:'Explica o serviço do zero',
+   label:'Não sabe o que é a CAD', sub:'Explica o serviço do zero',
    who:'Assistido', wc:'#3b82f6',
    sim:'Oi, vi o número aqui. Vocês fazem o quê exatamente?',
    tags:[{t:'Boas-vindas',c:'tg-blue'}],
@@ -377,11 +377,11 @@ const S = [
 
 Olá${n?', '+n:''}! Tudo bem?
 
-A CAJ é a Comissão de Advocacia Dativa da OAB de Santana de Parnaíba. Oferecemos atendimento jurídico gratuito para pessoas que não têm condições de pagar um advogado particular.
+A CAD é a Comissão de Advocacia Dativa da OAB de Santana de Parnaíba. Oferecemos atendimento jurídico gratuito para pessoas que não têm condições de pagar um advogado particular.
 
 O atendimento é feito por advogados conveniados à OAB e funciona de forma presencial aqui na nossa sede.
 
-Se você precisar de ajuda jurídica, é só vir até nós com os documentos necessários.${END}${DOCS}`}
+Se você precisar de ajuda jurídica, é só vir até nós com os documentos necessários.${DOCS}${END}`}
    ]},
 
   {grp:'👤 Primeiro contato', id:'bv2', icon:'🙋', ic:'i-blue', pip:null,
@@ -396,9 +396,9 @@ Se você precisar de ajuda jurídica, é só vir até nós com os documentos nec
 
 Olá${n?', '+n:''}!
 
-Sim, podemos ajudar! A CAJ oferece atendimento jurídico gratuito para quem não tem condições de pagar advogado particular.
+Sim, podemos ajudar! A CAD oferece atendimento jurídico gratuito para quem não tem condições de pagar advogado particular.
 
-Para ser atendido(a), basta vir pessoalmente até nossa sede de segunda a sexta, das 9h às 12h, com os documentos necessários. Não precisa agendar — é por ordem de chegada.${END}${DOCS}`}
+Para ser atendido(a), basta vir pessoalmente até nossa sede de segunda a sexta, das 9h às 12h, com os documentos necessários. Não precisa agendar — é por ordem de chegada.${DOCS}${END}`}
    ]},
 
   {grp:'👤 Primeiro contato', id:'bv3', icon:'❓', ic:'i-blue', pip:null,
@@ -415,7 +415,7 @@ Olá${n?', '+n:''}!
 
 Não precisa agendar, pode vir direto. O atendimento é por ordem de chegada, de segunda a sexta, das 9h às 12h.
 
-Recomendamos chegar cedo, porque o limite é de 30 atendimentos por dia e as vagas costumam acabar.${END}${DOCS}`}
+Recomendamos chegar cedo, porque o limite é de 30 atendimentos por dia e as vagas costumam acabar.${DOCS}${END}`}
    ]},
 
   {grp:'👤 Primeiro contato', id:'bv4', icon:'🔊', ic:'i-blue', pip:null,
@@ -439,7 +439,7 @@ Pode me contar o que precisa por mensagem de texto? Assim consigo te orientar me
    who:'Assistido', wc:'#22c97a',
    sim:'Preciso me separar do meu marido. Vocês podem me ajudar?',
    tags:[{t:'Atendemos',c:'tg-green'},{t:'Família',c:'tg-blue'}],
-   ctx:'Divórcio está dentro da atuação da CAJ.',
+   ctx:'Divórcio está dentro da atuação da CAD.',
    resps:[
     {title:'✉️ Confirmar divórcio', badge:'Recomendada', primary:true, nao:false, tpl: n =>
 `${HDR}
@@ -451,7 +451,7 @@ Sim, atendemos casos de divórcio. Pode vir até nós.
 Além dos documentos básicos, traga também:
 - Certidão de casamento atualizada (emitida há no máximo 90 dias)
 - Se tiver filhos menores: certidão de nascimento de cada um
-- Se tiver bens: documentação do imóvel ou veículo${END}${DOCS}`}
+- Se tiver bens: documentação do imóvel ou veículo${DOCS}${END}`}
    ]},
 
   {grp:'✅ Casos que atendemos', id:'at2', icon:'🍼', ic:'i-green', pip:'pip-green',
@@ -459,7 +459,7 @@ Além dos documentos básicos, traga também:
    who:'Assistido', wc:'#22c97a',
    sim:'O pai da minha filha não paga a pensão. Posso entrar com processo aqui?',
    tags:[{t:'Atendemos',c:'tg-green'},{t:'Alimentos',c:'tg-blue'}],
-   ctx:'Pensão alimentícia está na atuação da CAJ.',
+   ctx:'Pensão alimentícia está na atuação da CAD.',
    resps:[
     {title:'✉️ Confirmar pensão', badge:'Recomendada', primary:true, nao:false, tpl: n =>
 `${HDR}
@@ -470,7 +470,7 @@ Sim, atendemos casos de pensão alimentícia. Pode vir até nós.
 
 Além dos documentos básicos, traga:
 - Certidão de nascimento do(s) filho(s)
-- Endereço completo da parte contrária${END}${DOCS}`}
+- Endereço completo da parte contrária${DOCS}${END}`}
    ]},
 
   {grp:'✅ Casos que atendemos', id:'at3', icon:'🛡️', ic:'i-green', pip:'pip-green',
@@ -491,7 +491,7 @@ Se você estiver em risco agora, ligue primeiro:
 - Central da Mulher: 180 (24h, gratuito)
 - Polícia Militar: 190
 
-Depois, venha até nós com os documentos.${END}${DOCS}`}
+Depois, venha até nós com os documentos.${DOCS}${END}`}
    ]},
 
   {grp:'✅ Casos que atendemos', id:'at4', icon:'📜', ic:'i-green', pip:'pip-green',
@@ -499,14 +499,14 @@ Depois, venha até nós com os documentos.${END}${DOCS}`}
    who:'Assistido', wc:'#22c97a',
    sim:'Meu pai faleceu e precisamos fazer o inventário. Vocês atendem isso?',
    tags:[{t:'Atendemos',c:'tg-green'}],
-   ctx:'Inventário e herança estão na atuação da CAJ.',
+   ctx:'Inventário e herança estão na atuação da CAD.',
    resps:[
     {title:'✉️ Confirmar inventário', badge:'Padrão', primary:true, nao:false, tpl: n =>
 `${HDR}
 
 Olá${n?', '+n:''}!
 
-Sim, atendemos casos de inventário e herança. Venha até nós com os documentos para que possamos verificar os detalhes do seu caso.${END}${DOCS}`}
+Sim, atendemos casos de inventário e herança. Venha até nós com os documentos para que possamos verificar os detalhes do seu caso.${DOCS}${END}`}
    ]},
 
   // ── NÃO ATENDEMOS ────────────────────────────────────────────
@@ -515,7 +515,7 @@ Sim, atendemos casos de inventário e herança. Venha até nós com os documento
    who:'Assistido', wc:'#e8495a',
    sim:'Fui demitido sem justa causa e não recebi meu FGTS. Podem me ajudar?',
    tags:[{t:'Não atendemos',c:'tg-red'}],
-   ctx:'Casos trabalhistas não são da competência da CAJ.',
+   ctx:'Casos trabalhistas não são da competência da CAD.',
    resps:[
     {title:'🚫 Não atendemos — Trabalhista', badge:'Padrão', primary:false, nao:true, tpl: n =>
 `${HDR}
@@ -530,7 +530,7 @@ Infelizmente não atendemos casos trabalhistas por aqui. Essa área não faz par
    who:'Assistido', wc:'#e8495a',
    sim:'Tive meu auxílio-doença negado pelo INSS. Podem me ajudar a recorrer?',
    tags:[{t:'Não atendemos',c:'tg-red'}],
-   ctx:'Casos previdenciários não são da competência da CAJ.',
+   ctx:'Casos previdenciários não são da competência da CAD.',
    resps:[
     {title:'🚫 Não atendemos — INSS', badge:'Padrão', primary:false, nao:true, tpl: n =>
 `${HDR}
@@ -572,7 +572,7 @@ O convênio OAB/DPE é uma parceria entre a OAB e a Defensoria Pública que perm
 
 Na prática, funciona assim: você vem até nós, passamos pela triagem para verificar se tem direito ao atendimento gratuito, e se tiver, um advogado conveniado será designado para cuidar do seu caso.
 
-O serviço é totalmente gratuito para quem se enquadra nos critérios de renda.${END}${DOCS}`}
+O serviço é totalmente gratuito para quem se enquadra nos critérios de renda.${DOCS}${END}`}
    ]},
 
   {grp:'🤝 Convênio OAB/DPE', id:'cv2', icon:'💰', ic:'i-teal', pip:'pip-teal',
@@ -591,7 +591,7 @@ O atendimento gratuito é para pessoas que não têm condições financeiras de 
 
 Para verificar se você tem direito, precisamos analisar sua renda e a de quem mora com você. Por isso é importante trazer os comprovantes de renda de toda a família.
 
-A avaliação é feita presencialmente aqui na sede, com toda a documentação.${END}${DOCS}`}
+A avaliação é feita presencialmente aqui na sede, com toda a documentação.${DOCS}${END}`}
    ]},
 
   {grp:'🤝 Convênio OAB/DPE', id:'cv3', icon:'🔄', ic:'i-teal', pip:'pip-teal',
@@ -608,7 +608,7 @@ Olá${n?', '+n:''}!
 
 Entendido! Se a Defensoria te encaminhou para cá, você pode vir diretamente à nossa sede com os documentos.
 
-Traga o documento que a Defensoria te deu, junto com a documentação básica, e faremos o atendimento.${END}${DOCS}`}
+Traga o documento que a Defensoria te deu, junto com a documentação básica, e faremos o atendimento.${DOCS}${END}`}
    ]},
 
   // ── ADVOCACIA DATIVA ─────────────────────────────────────────
@@ -701,7 +701,7 @@ Olá${n?', '+n:''}!
 
 Para casos de pensão alimentícia, além dos documentos básicos, traga:
 - Certidão de nascimento do(s) filho(s)
-- Endereço completo da parte contrária${END}${DOCS}`},
+- Endereço completo da parte contrária${DOCS}${END}`},
     {title:'📋 Docs extras — Divórcio', badge:'Alternativa', primary:false, nao:false, tpl: n =>
 `${HDR}
 
@@ -710,7 +710,7 @@ Olá${n?', '+n:''}!
 Para casos de divórcio, além dos documentos básicos, traga:
 - Certidão de casamento atualizada (emitida há no máximo 90 dias)
 - Se tiver filhos menores: certidão de nascimento de cada um
-- Se tiver bens: documentação do imóvel ou veículo${END}${DOCS}`}
+- Se tiver bens: documentação do imóvel ou veículo${DOCS}${END}`}
    ]},
 
   {grp:'📋 Documentos', id:'doc2', icon:'❌', ic:'i-gold', pip:null,
@@ -725,7 +725,7 @@ Para casos de divórcio, além dos documentos básicos, traga:
 
 Olá${n?', '+n:''}!
 
-Sem a documentação completa não conseguimos fazer o atendimento. É necessário providenciar tudo e voltar presencialmente.${END}${DOCS}`}
+Sem a documentação completa não conseguimos fazer o atendimento. É necessário providenciar tudo e voltar presencialmente.${DOCS}${END}`}
    ]},
 
   // ── AGENDAMENTO E HORÁRIOS ────────────────────────────────────
@@ -811,7 +811,7 @@ Infelizmente não conseguimos dar orientação jurídica por WhatsApp.
 Se quiser um primeiro contato à distância, pode nos enviar um e-mail contando sua situação:
 📧 aj.santana.parnai@oabsp.org.br
 
-Mas para o atendimento completo, é necessário vir presencialmente com a documentação.${END}${DOCS}`}
+Mas para o atendimento completo, é necessário vir presencialmente com a documentação.${DOCS}${END}`}
    ]},
 
   {grp:'😓 Situações delicadas', id:'del4', icon:'👥', ic:'i-slate', pip:null,
@@ -828,14 +828,14 @@ Olá${n?', '+n:''}!
 
 Pode vir acompanhada, sem problema. Só que o atendimento com o advogado é feito apenas com a pessoa do caso — o acompanhante fica aguardando do lado de fora.
 
-Se tiver dificuldade de locomoção ou comunicação, pode vir com alguém de confiança para ajudar.${END}${DOCS}`}
+Se tiver dificuldade de locomoção ou comunicação, pode vir com alguém de confiança para ajudar.${DOCS}${END}`}
    ]},
 
   // ── MENSAGEM DE ADVOGADO ──────────────────────────────────────
   {grp:'⚖️ Mensagem de Advogado(a)', id:'adv1', icon:'⚖️', ic:'i-teal', pip:'pip-teal',
    label:'Encaminhamento de caso', sub:'Advogado conveniado encaminha assistido',
    who:'Advogado(a)', wc:'#22b8c9',
-   sim:'Bom dia. Gostaria de encaminhar um caso de pensão para a CAJ. Como procedo?',
+   sim:'Bom dia. Gostaria de encaminhar um caso de pensão para a CAD. Como procedo?',
    tags:[{t:'Advogado',c:'tg-teal'},{t:'Convênio',c:'tg-blue'}],
    ctx:'Orientar que o assistido deve comparecer pessoalmente com documentação.',
    resps:[
@@ -844,7 +844,7 @@ Se tiver dificuldade de locomoção ou comunicação, pode vir com alguém de co
 
 Bom dia${n?', '+n:''}!
 
-Para encaminhar um caso, o(a) assistido(a) precisa vir pessoalmente à nossa sede com toda a documentação necessária. Verificamos os critérios de elegibilidade presencialmente.${END}${DOCS}`}
+Para encaminhar um caso, o(a) assistido(a) precisa vir pessoalmente à nossa sede com toda a documentação necessária. Verificamos os critérios de elegibilidade presencialmente.${DOCS}${END}`}
    ]},
 
   {grp:'⚖️ Mensagem de Advogado(a)', id:'adv2', icon:'📞', ic:'i-teal', pip:'pip-teal',
@@ -1037,10 +1037,4 @@ function toast(msg) {
 
 function clock() {
   const n = new Date();
-  const d = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
-  document.getElementById('clock').textContent = d[n.getDay()] + ' · ' + String(n.getHours()).padStart(2,'0') + ':' + String(n.getMinutes()).padStart(2,'0');
-}
-clock(); setInterval(clock, 30000);
-</script>
-</body>
-</html>
+  const d = ['Dom','Seg','Ter','Qua','Qu
