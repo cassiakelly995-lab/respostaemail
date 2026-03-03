@@ -4,42 +4,42 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>OAB – Central de Atendimento | Cássia Kelly</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,600&family=Lato:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
 /* ═══════════════════════════════════════════
    RESET & VARIABLES
 ═══════════════════════════════════════════ */
 :root {
-  --bg:       #07102a;
-  --panel:    #0b1736;
-  --card:     #0f1e42;
-  --card2:    #132348;
-  --gold:     #c9a84c;
-  --gold2:    #e8c96d;
-  --goldf:    rgba(201,168,76,0.12);
-  --goldb:    rgba(201,168,76,0.22);
-  --blue:     #1e3a8a;
-  --blue2:    #2e50b8;
-  --white:    #f0f4ff;
-  --gray:     #8ea4cc;
-  --muted:    #4a5e8a;
-  --border:   rgba(201,168,76,0.18);
-  --border2:  rgba(255,255,255,0.07);
-  --green:    #22c55e;
-  --greenf:   rgba(34,197,94,0.12);
-  --greenb:   rgba(34,197,94,0.22);
-  --red:      #ef4444;
-  --redf:     rgba(239,68,68,0.1);
-  --redb:     rgba(239,68,68,0.22);
-  --teal:     #14b8a6;
-  --tealf:    rgba(20,184,166,0.12);
+  --bg:       #060e22;
+  --panel:    #091326;
+  --card:     #0c192e;
+  --card2:    #0f1e38;
+  --gold:     #b8962e;
+  --gold2:    #d4af55;
+  --goldf:    rgba(184,150,46,0.10);
+  --goldb:    rgba(184,150,46,0.20);
+  --blue:     #152e75;
+  --blue2:    #1d44ac;
+  --white:    #ecf0ff;
+  --gray:     #7a96c8;
+  --muted:    #3d5480;
+  --border:   rgba(184,150,46,0.16);
+  --border2:  rgba(255,255,255,0.06);
+  --green:    #1db954;
+  --greenf:   rgba(29,185,84,0.10);
+  --greenb:   rgba(29,185,84,0.20);
+  --red:      #e63946;
+  --redf:     rgba(230,57,70,0.10);
+  --redb:     rgba(230,57,70,0.22);
+  --teal:     #0fa3b1;
+  --tealf:    rgba(15,163,177,0.10);
 }
 
 * { margin:0; padding:0; box-sizing:border-box; }
 html, body { height:100%; overflow:hidden; }
 
 body {
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Lato', sans-serif;
   background: var(--bg);
   color: var(--white);
   display: flex;
@@ -51,7 +51,7 @@ body::before {
   content:'';
   position:fixed; inset:0; z-index:0;
   background:
-    radial-gradient(ellipse 80% 60% at 5% 0%,   rgba(30,58,138,0.45) 0%, transparent 55%),
+    radial-gradient(ellipse 80% 60% at 5% 0%,   rgba(21,46,117,0.55) 0%, transparent 55%),
     radial-gradient(ellipse 50% 70% at 95% 100%, rgba(7,16,42,0.8) 0%, transparent 55%),
     radial-gradient(ellipse 35% 35% at 50% 50%,  rgba(201,168,76,0.04) 0%, transparent 65%);
   pointer-events:none;
@@ -62,12 +62,17 @@ body::before {
 ═══════════════════════════════════════════ */
 header {
   position: relative; z-index: 60;
-  background: linear-gradient(135deg, #07102a 0%, #0b1736 55%, #0f1e42 100%);
+  background: linear-gradient(135deg, #060e22 0%, #091326 55%, #0c192e 100%);
   border-bottom: 1px solid var(--border);
   padding: 13px 28px;
   display: flex; align-items: center; justify-content: space-between;
-  box-shadow: 0 4px 32px rgba(0,0,0,0.55);
+  box-shadow: 0 4px 32px rgba(0,0,0,0.65);
   flex-shrink: 0;
+}
+header::before {
+  content:'';
+  position:absolute; top:0; left:0; right:0; height:2px;
+  background:linear-gradient(90deg, transparent, var(--gold2), var(--gold), var(--gold2), transparent);
 }
 
 .h-left { display:flex; align-items:center; gap:14px; }
@@ -77,14 +82,14 @@ header {
   border: 1.5px solid var(--gold);
   display: flex; flex-direction:column; align-items:center; justify-content:center;
   background: rgba(201,168,76,0.08);
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Playfair Display', serif;
   font-weight: 700; color: var(--gold); line-height: 1.1; flex-shrink:0;
 }
 .oab-seal .s1 { font-size: 17px; letter-spacing:1px; }
 .oab-seal .s2 { font-size: 7px; letter-spacing:2px; color:var(--gold2); }
 
 .h-brand h1 {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Playfair Display', serif;
   font-size: 18px; font-weight: 700; line-height: 1.25;
   color: var(--white);
 }
@@ -152,7 +157,7 @@ header {
   border: 1px solid var(--border2);
   border-radius: 8px;
   padding: 8px 10px 8px 30px;
-  font-family:'DM Sans',sans-serif; font-size:12px;
+  font-family:'Lato',sans-serif; font-size:12px;
   color: var(--white); outline:none;
   transition: border-color .2s;
 }
@@ -163,6 +168,17 @@ header {
   left:9px; top:50%; transform:translateY(-50%);
   font-size:11px; pointer-events:none;
 }
+
+
+/* Quick filters */
+.sb-filters { display:flex; gap:4px; flex-wrap:wrap; padding:8px 10px; border-bottom:1px solid var(--border2); }
+.sf-btn {
+  padding:3px 10px; border-radius:20px;
+  background:transparent; border:1px solid var(--border2);
+  font-size:9px; color:var(--muted); cursor:pointer;
+  transition:all .14s; font-family:'Lato',sans-serif;
+}
+.sf-btn:hover,.sf-btn.active { border-color:var(--border); color:var(--gold2); background:var(--goldf); }
 
 /* Scenario list */
 .sb-list { overflow-y:auto; flex:1; padding:6px 8px 10px; }
@@ -184,7 +200,7 @@ header {
   padding: 8px 9px; border-radius:8px;
   cursor:pointer; transition:all .15s;
   display:flex; align-items:center; gap:9px;
-  font-family:'DM Sans',sans-serif;
+  font-family:'Lato',sans-serif;
   margin-bottom: 2px;
 }
 .sc-btn:hover { background:rgba(255,255,255,0.04); border-color:var(--border2); }
@@ -244,7 +260,7 @@ header {
 /* Buttons */
 .btn {
   padding: 7px 14px; border-radius:7px;
-  font-family:'DM Sans',sans-serif;
+  font-family:'Lato',sans-serif;
   font-size:11.5px; font-weight:600;
   cursor:pointer; border:none;
   transition:all .18s;
@@ -301,7 +317,7 @@ header {
   padding:5px 13px; border-radius:20px;
   background:rgba(255,255,255,0.04); border:1px solid var(--border2);
   font-size:11px; color:var(--gray); cursor:pointer;
-  transition:all .14s; font-family:'DM Sans',sans-serif;
+  transition:all .14s; font-family:'Lato',sans-serif;
 }
 .wpill:hover { border-color:var(--border); color:var(--gold2); background:var(--goldf); }
 
@@ -326,7 +342,7 @@ header {
   background: rgba(255,255,255,0.07);
   border: 1px solid var(--border);
   border-radius:7px; padding:6px 11px;
-  font-family:'DM Sans',sans-serif; font-size:13px;
+  font-family:'Lato',sans-serif; font-size:13px;
   color:var(--white); outline:none;
   transition:border-color .2s, background .2s;
 }
@@ -423,7 +439,7 @@ header {
   border:none;
   border-bottom:1px solid var(--border2);
   padding:13px 14px;
-  font-family:'DM Sans',sans-serif;
+  font-family:'Lato',sans-serif;
   font-size:13px; line-height:1.8;
   color:var(--white);
   resize:none;
@@ -458,7 +474,7 @@ header {
   padding:3px 11px; border-radius:20px;
   background:rgba(255,255,255,0.04); border:1px solid var(--border2);
   font-size:10.5px; color:var(--gray); cursor:pointer;
-  white-space:nowrap; transition:all .14s; font-family:'DM Sans',sans-serif;
+  white-space:nowrap; transition:all .14s; font-family:'Lato',sans-serif;
   display:flex; align-items:center; gap:7px;
 }
 .hchip:hover { border-color:var(--border); color:var(--gold2); }
@@ -506,6 +522,17 @@ header {
 }
 .toast.show { transform:translateY(0); opacity:1; }
 
+
+.status-badge {
+  display:flex; align-items:center; gap:5px;
+  padding:3px 10px; border-radius:20px;
+  background:var(--greenf); border:1px solid var(--greenb);
+  font-size:8px; font-weight:700; color:var(--green);
+  letter-spacing:1px; text-transform:uppercase;
+}
+.status-dot { width:5px; height:5px; border-radius:50%; background:var(--green); animation:pulse 2s infinite; }
+@keyframes pulse { 0%,100%{ opacity:1; } 50%{ opacity:0.4; } }
+
 @media print {
   .sidebar,.topbar-right,.hist-bar,.toast,.name-bar { display:none!important; }
   .app { grid-template-columns:1fr; }
@@ -530,6 +557,7 @@ header {
       <div class="h-info-item"><div class="h-info-val">30 / dia</div><div class="h-info-lbl">Vagas</div></div>
       <div class="h-info-item"><div class="h-info-val">(11) 4154-5191</div><div class="h-info-lbl">Telefone</div></div>
     </div>
+    <div class="status-badge"><div class="status-dot"></div>Online</div>
     <div class="h-sep"></div>
     <div class="h-user">
       <div class="h-user-name">Cássia Kelly Lins Reis</div>
@@ -549,6 +577,16 @@ header {
       <div class="sb-search">
         <input id="search" type="text" placeholder="Buscar situação..." oninput="buscar(this.value)">
       </div>
+    </div>
+    <div class="sb-filters" id="sb-filters">
+      <button class="sf-btn active" onclick="filtroRapido(this,'')">Todos</button>
+      <button class="sf-btn" onclick="filtroRapido(this,'Primeiro contato')">1º Contato</button>
+      <button class="sf-btn" onclick="filtroRapido(this,'Atendemos')">✅ Atend.</button>
+      <button class="sf-btn" onclick="filtroRapido(this,'Não atendemos')">🚫 Não atend.</button>
+      <button class="sf-btn" onclick="filtroRapido(this,'Documentos')">📋 Docs</button>
+      <button class="sf-btn" onclick="filtroRapido(this,'Agendamento')">📅 Agenda</button>
+      <button class="sf-btn" onclick="filtroRapido(this,'delicada')">🤝 Delicado</button>
+      <button class="sf-btn" onclick="filtroRapido(this,'Advogado')">⚖️ Adv.</button>
     </div>
     <div class="sb-list" id="sb-list"></div>
   </div>
@@ -572,7 +610,7 @@ header {
 
       <!-- WELCOME -->
       <div class="welcome" id="welcome">
-        <div class="welcome-emoji">⚡</div>
+        <div class="welcome-emoji">⚖️</div>
         <h2>Central de Respostas Prontas</h2>
         <p>Selecione ao lado o tipo de mensagem recebida. A resposta aparece pronta, com o nome da pessoa já inserido — edite se precisar e copie com um clique.</p>
         <div class="welcome-pills" id="welcome-pills"></div>
@@ -690,9 +728,10 @@ const SCENARIOS = [
     ctx:'Pessoa entrando em contato pela primeira vez. Apresente o serviço e oriente sobre o comparecimento presencial.',
     resps:[
       { title:'✉️ Resposta padrão', badge:'Recomendada', primary:true, nao:false,
-        tpl: n => `*OAB – Assistência Judiciária Gratuita*\nSubseção Santana de Parnaíba\n\nBom dia${n?', '+n:''}.\n\nEste é o canal de atendimento da Assistência Judiciária Gratuita da OAB.\n\nO serviço é *gratuito* para cidadãos sem condições de contratar advogado particular.\n\nPara ser atendido(a), compareça presencialmente com a documentação exigida.${END}\n${DOCS}`},
+        tpl: n => `*OAB – Assistência Judiciária Gratuita*\n*Subseção Santana de Parnaíba*\n\nBoa tarde${n?', '+n:''}.\n\nSeja muito bem-vindo(a) ao canal oficial da Assistência Judiciária Gratuita da OAB.\n\nEstamos aqui para orientar cidadãos que necessitam de apoio jurídico e não possuem condições de arcar com honorários advocatícios particulares.\n\nNosso serviço é *totalmente gratuito*, prestado por advogados voluntários devidamente habilitados pela OAB-SP.\n\nPara dar início ao seu atendimento, solicitamos que compareça *presencialmente* à nossa sede, munido(a) da documentação exigida.${END}\n${DOCS}`},
       { title:'📋 Com áreas atendidas', badge:'Alternativa', primary:false, nao:false,
-        tpl: n => `*OAB – Assistência Judiciária Gratuita*\nSubseção Santana de Parnaíba\n\nBom dia${n?', '+n:''}.\n\nA Assistência Judiciária desta Subseção atende nas seguintes áreas:\n\n✅ Família (divórcio, pensão alimentícia, guarda de filhos)\n✅ Cível em geral\n✅ Inventário e Herança\n✅ Violência Doméstica (Lei Maria da Penha)\n✅ Habitacional\n\nO atendimento é presencial, por ordem de chegada, mediante apresentação dos documentos exigidos.${END}\n${DOCS}`},
+        tpl: n => `*OAB – Assistência Judiciária Gratuita*
+Bom dia${n?', '+n:''}.\n\nA Assistência Judiciária desta Subseção atende nas seguintes áreas:\n\n✅ Família (divórcio, pensão alimentícia, guarda de filhos)\n✅ Cível em geral\n✅ Inventário e Herança\n✅ Violência Doméstica (Lei Maria da Penha)\n✅ Habitacional\n\nO atendimento é presencial, por ordem de chegada, mediante apresentação dos documentos exigidos.${END}\n${DOCS}`},
     ]},
 
   { grp:'👤 Primeiro contato — Assistido',
@@ -704,7 +743,8 @@ const SCENARIOS = [
     ctx:'Não há agendamento. O atendimento é por ordem de chegada, até o limite de 30 vagas.',
     resps:[
       { title:'✉️ Sem agendamento — ir direto', badge:'Padrão', primary:true, nao:false,
-        tpl: n => `*OAB – Assistência Judiciária Gratuita*\nSubseção Santana de Parnaíba\n\nBom dia${n?', '+n:''}.\n\nNão há agendamento prévio. O atendimento é realizado por *ordem de chegada*, mediante apresentação dos documentos exigidos.\n\nRecomendamos chegar com antecedência, pois o limite é de 30 atendimentos por dia.${END}\n${DOCS}`},
+        tpl: n => `*OAB – Assistência Judiciária Gratuita*
+Bom dia${n?', '+n:''}.\n\nNão há agendamento prévio. O atendimento é realizado por *ordem de chegada*, mediante apresentação dos documentos exigidos.\n\nRecomendamos chegar com antecedência, pois o limite é de 30 atendimentos por dia.${END}\n${DOCS}`},
     ]},
 
   { grp:'👤 Primeiro contato — Assistido',
@@ -716,7 +756,8 @@ const SCENARIOS = [
     ctx:'Áudios não podem ser ouvidos por este canal. Solicitar que envie a mensagem em texto.',
     resps:[
       { title:'✉️ Solicitar mensagem em texto', badge:'Padrão', primary:true, nao:false,
-        tpl: n => `*OAB – Assistência Judiciária Gratuita*\nSubseção Santana de Parnaíba\n\nBom dia${n?', '+n:''}.\n\nPedimos que envie sua mensagem em *texto*, pois não conseguimos ouvir áudios por esta via.\n\nPor favor, descreva brevemente sua situação para que possamos orientá-lo(a) corretamente.`},
+        tpl: n => `*OAB – Assistência Judiciária Gratuita*
+Bom dia${n?', '+n:''}.\n\nPedimos que envie sua mensagem em *texto*, pois não conseguimos ouvir áudios por esta via.\n\nPor favor, descreva brevemente sua situação para que possamos orientá-lo(a) corretamente.`},
     ]},
 
   // ─── O QUE ATENDEMOS ────────────────────────
@@ -729,7 +770,8 @@ const SCENARIOS = [
     ctx:'Divórcio está dentro da competência da Assistência Judiciária. Confirmar e informar documentação específica.',
     resps:[
       { title:'✉️ Confirmar + documentação', badge:'Recomendada', primary:true, nao:false,
-        tpl: n => `*OAB – Assistência Judiciária Gratuita*\nSubseção Santana de Parnaíba\n\nBom dia${n?', '+n:''}.\n\nSim, a Assistência Judiciária atende casos de divórcio.\n\nPara dar início, além dos documentos básicos, traga:\n✅ Certidão de casamento atualizada (emitida há no máximo 90 dias)\n✅ Se houver filhos menores: certidão de nascimento de cada um\n✅ Se houver bens: documentação do imóvel ou veículo${END}\n${DOCS}`},
+        tpl: n => `*OAB – Assistência Judiciária Gratuita*
+Bom dia${n?', '+n:''}.\n\nSim, a Assistência Judiciária atende casos de divórcio.\n\nPara dar início, além dos documentos básicos, traga:\n✅ Certidão de casamento atualizada (emitida há no máximo 90 dias)\n✅ Se houver filhos menores: certidão de nascimento de cada um\n✅ Se houver bens: documentação do imóvel ou veículo${END}\n${DOCS}`},
     ]},
 
   { grp:'✅ Casos que atendemos',
@@ -741,7 +783,8 @@ const SCENARIOS = [
     ctx:'Pensão alimentícia está dentro da competência. Informar documentação específica.',
     resps:[
       { title:'✉️ Confirmar + documentação', badge:'Recomendada', primary:true, nao:false,
-        tpl: n => `*OAB – Assistência Judiciária Gratuita*\nSubseção Santana de Parnaíba\n\nBom dia${n?', '+n:''}.\n\nSim, a Assistência Judiciária atende casos de Alimentos e Pensão alimentícia.\n\nAlém dos documentos básicos, traga:\n✅ Certidão de nascimento da(s) criança(s)\n✅ Endereço completo da parte contrária${END}\n${DOCS}`},
+        tpl: n => `*OAB – Assistência Judiciária Gratuita*
+Bom dia${n?', '+n:''}.\n\nSim, a Assistência Judiciária atende casos de Alimentos e Pensão alimentícia.\n\nAlém dos documentos básicos, traga:\n✅ Certidão de nascimento da(s) criança(s)\n✅ Endereço completo da parte contrária${END}\n${DOCS}`},
     ]},
 
   { grp:'✅ Casos que atendemos',
@@ -753,7 +796,8 @@ const SCENARIOS = [
     ctx:'Atendemos. Em risco imediato, acionar 180/190 antes de comparecer.',
     resps:[
       { title:'✉️ Confirmar + emergência', badge:'Recomendada', primary:true, nao:false,
-        tpl: n => `*OAB – Assistência Judiciária Gratuita*\nSubseção Santana de Parnaíba\n\nBom dia${n?', '+n:''}.\n\nSim, a Assistência Judiciária atende casos de Violência Doméstica (Lei Maria da Penha), incluindo pedidos de medida protetiva de urgência.\n\nEm caso de risco imediato, acione antes:\n📞 Central da Mulher: 180 (24h, gratuito)\n📞 Polícia Militar: 190${END}\n${DOCS}`},
+        tpl: n => `*OAB – Assistência Judiciária Gratuita*
+Bom dia${n?', '+n:''}.\n\nSim, a Assistência Judiciária atende casos de Violência Doméstica (Lei Maria da Penha), incluindo pedidos de medida protetiva de urgência.\n\nEm caso de risco imediato, acione antes:\n📞 Central da Mulher: 180 (24h, gratuito)\n📞 Polícia Militar: 190${END}\n${DOCS}`},
     ]},
 
   { grp:'✅ Casos que atendemos',
@@ -765,7 +809,8 @@ const SCENARIOS = [
     ctx:'Inventário e Herança estão dentro da competência da Assistência Judiciária.',
     resps:[
       { title:'✉️ Confirmar atendimento', badge:'Padrão', primary:true, nao:false,
-        tpl: n => `*OAB – Assistência Judiciária Gratuita*\nSubseção Santana de Parnaíba\n\nBom dia${n?', '+n:''}.\n\nSim, a Assistência Judiciária atende casos de Inventário e Herança.\n\nCompareça presencialmente com a documentação exigida para que possamos verificar os requisitos do seu caso.${END}\n${DOCS}`},
+        tpl: n => `*OAB – Assistência Judiciária Gratuita*
+Bom dia${n?', '+n:''}.\n\nSim, a Assistência Judiciária atende casos de Inventário e Herança.\n\nCompareça presencialmente com a documentação exigida para que possamos verificar os requisitos do seu caso.${END}\n${DOCS}`},
     ]},
 
   // ─── NÃO ATENDEMOS ──────────────────────────
@@ -778,7 +823,8 @@ const SCENARIOS = [
     ctx:'Casos trabalhistas NÃO são da competência desta subseção. Informar com clareza e listar o que atendemos.',
     resps:[
       { title:'🚫 Não atendemos — Trabalhista', badge:'Padrão', primary:false, nao:true,
-        tpl: n => `*OAB – Assistência Judiciária Gratuita*\nSubseção Santana de Parnaíba\n\nBom dia${n?', '+n:''}.\n\nInformamos que a Assistência Judiciária desta Subseção *não realiza atendimento em casos de Direito do Trabalho (Trabalhista)*.\n\nEsta área não está na competência desta unidade.${AREAS}${END}`},
+        tpl: n => `*OAB – Assistência Judiciária Gratuita*
+Bom dia${n?', '+n:''}.\n\nInformamos que a Assistência Judiciária desta Subseção *não realiza atendimento em casos de Direito do Trabalho (Trabalhista)*.\n\nEsta área não está na competência desta unidade.${AREAS}${END}`},
     ]},
 
   { grp:'🚫 Casos que não atendemos',
@@ -790,7 +836,8 @@ const SCENARIOS = [
     ctx:'Casos previdenciários NÃO são da competência desta subseção.',
     resps:[
       { title:'🚫 Não atendemos — Previdenciário', badge:'Padrão', primary:false, nao:true,
-        tpl: n => `*OAB – Assistência Judiciária Gratuita*\nSubseção Santana de Parnaíba\n\nBom dia${n?', '+n:''}.\n\nInformamos que a Assistência Judiciária desta Subseção *não realiza atendimento em casos Previdenciários (INSS, aposentadoria, benefícios)*.${AREAS}${END}`},
+        tpl: n => `*OAB – Assistência Judiciária Gratuita*
+Bom dia${n?', '+n:''}.\n\nInformamos que a Assistência Judiciária desta Subseção *não realiza atendimento em casos Previdenciários (INSS, aposentadoria, benefícios)*.${AREAS}${END}`},
     ]},
 
   { grp:'🚫 Casos que não atendemos',
@@ -802,9 +849,11 @@ const SCENARIOS = [
     ctx:'Casos criminais em geral NÃO são atendidos. Indicar Defensoria Pública.',
     resps:[
       { title:'🚫 Não atendemos — Criminal', badge:'Padrão', primary:false, nao:true,
-        tpl: n => `*OAB – Assistência Judiciária Gratuita*\nSubseção Santana de Parnaíba\n\nBom dia${n?', '+n:''}.\n\nInformamos que a Assistência Judiciária desta Subseção *não realiza atendimento na área Criminal*.\n\nPara casos criminais, recomendamos a Defensoria Pública do Estado de São Paulo.${AREAS}${END}`},
+        tpl: n => `*OAB – Assistência Judiciária Gratuita*
+Bom dia${n?', '+n:''}.\n\nInformamos que a Assistência Judiciária desta Subseção *não realiza atendimento na área Criminal*.\n\nPara casos criminais, recomendamos a Defensoria Pública do Estado de São Paulo.${AREAS}${END}`},
       { title:'🚫 Fora da competência (genérica)', badge:'Alternativa', primary:false, nao:true,
-        tpl: n => `*OAB – Assistência Judiciária Gratuita*\nSubseção Santana de Parnaíba\n\nBom dia${n?', '+n:''}.\n\nInformamos que o caso relatado *não está dentro das áreas de atuação* desta Assistência Judiciária.${AREAS}${END}`},
+        tpl: n => `*OAB – Assistência Judiciária Gratuita*
+Bom dia${n?', '+n:''}.\n\nInformamos que o caso relatado *não está dentro das áreas de atuação* desta Assistência Judiciária.${AREAS}${END}`},
     ]},
 
   // ─── DOCUMENTOS ─────────────────────────────
@@ -817,11 +866,14 @@ const SCENARIOS = [
     ctx:'Enviar lista completa de documentos obrigatórios.',
     resps:[
       { title:'📋 Lista completa', badge:'Recomendada', primary:true, nao:false,
-        tpl: n => `*OAB – Assistência Judiciária Gratuita*\nSubseção Santana de Parnaíba\n\nBom dia${n?', '+n:''}.\n\n📋 DOCUMENTOS OBRIGATÓRIOS:\n\n✅ RG original + CPF\n✅ Comprovante de residência atualizado (água, luz, gás, telefone ou aluguel)\n✅ Comprovante de renda de todos da família:\n   • Registrado: 3 últimos holerites\n   • Não registrado: carteira de trabalho, extrato bancário (3 meses), declaração do empregador ou carta de próprio punho reconhecida em cartório\n✅ Comprovante de patrimônio (se houver):\n   certidão do valor venal, IPTU, veículos, extrato de poupança\n\n❗ Documentos extras poderão ser solicitados conforme o caso.\n🚫 Sem os documentos, o atendimento NÃO será realizado.${END}`},
+        tpl: n => `*OAB – Assistência Judiciária Gratuita*
+Bom dia${n?', '+n:''}.\n\n📋 DOCUMENTOS OBRIGATÓRIOS:\n\n✅ RG original + CPF\n✅ Comprovante de residência atualizado (água, luz, gás, telefone ou aluguel)\n✅ Comprovante de renda de todos da família:\n   • Registrado: 3 últimos holerites\n   • Não registrado: carteira de trabalho, extrato bancário (3 meses), declaração do empregador ou carta de próprio punho reconhecida em cartório\n✅ Comprovante de patrimônio (se houver):\n   certidão do valor venal, IPTU, veículos, extrato de poupança\n\n❗ Documentos extras poderão ser solicitados conforme o caso.\n🚫 Sem os documentos, o atendimento NÃO será realizado.${END}`},
       { title:'📋 Docs específicos — Alimentos', badge:'Alternativa', primary:false, nao:false,
-        tpl: n => `*OAB – Assistência Judiciária Gratuita*\nSubseção Santana de Parnaíba\n\nBom dia${n?', '+n:''}.\n\nPara casos de Alimentos / Pensão, além dos documentos básicos, traga:\n\n✅ Certidão de nascimento da(s) criança(s)\n✅ Endereço completo da parte contrária${END}\n${DOCS}`},
+        tpl: n => `*OAB – Assistência Judiciária Gratuita*
+Bom dia${n?', '+n:''}.\n\nPara casos de Alimentos / Pensão, além dos documentos básicos, traga:\n\n✅ Certidão de nascimento da(s) criança(s)\n✅ Endereço completo da parte contrária${END}\n${DOCS}`},
       { title:'📋 Docs específicos — Divórcio', badge:'Alternativa', primary:false, nao:false,
-        tpl: n => `*OAB – Assistência Judiciária Gratuita*\nSubseção Santana de Parnaíba\n\nBom dia${n?', '+n:''}.\n\nPara casos de Divórcio, além dos documentos básicos, traga:\n\n✅ Certidão de casamento atualizada (emitida há no máximo 90 dias)\n✅ Se houver filhos menores: certidão de nascimento de cada um\n✅ Se houver bens: documentação do imóvel ou veículo${END}\n${DOCS}`},
+        tpl: n => `*OAB – Assistência Judiciária Gratuita*
+Bom dia${n?', '+n:''}.\n\nPara casos de Divórcio, além dos documentos básicos, traga:\n\n✅ Certidão de casamento atualizada (emitida há no máximo 90 dias)\n✅ Se houver filhos menores: certidão de nascimento de cada um\n✅ Se houver bens: documentação do imóvel ou veículo${END}\n${DOCS}`},
     ]},
 
   { grp:'📋 Documentos',
@@ -833,7 +885,8 @@ const SCENARIOS = [
     ctx:'Documentação incompleta impede o atendimento. Orientar providenciar e retornar.',
     resps:[
       { title:'❌ Documentação incompleta', badge:'Padrão', primary:true, nao:false,
-        tpl: n => `*OAB – Assistência Judiciária Gratuita*\nSubseção Santana de Parnaíba\n\nBom dia${n?', '+n:''}.\n\nInformamos que a documentação apresentada está incompleta, não sendo possível realizar o atendimento neste momento.\n\nÉ necessário providenciar todos os documentos exigidos e retornar presencialmente.${END}\n${DOCS}`},
+        tpl: n => `*OAB – Assistência Judiciária Gratuita*
+Bom dia${n?', '+n:''}.\n\nInformamos que a documentação apresentada está incompleta, não sendo possível realizar o atendimento neste momento.\n\nÉ necessário providenciar todos os documentos exigidos e retornar presencialmente.${END}\n${DOCS}`},
     ]},
 
   // ─── AGENDAMENTO ────────────────────────────
@@ -846,7 +899,8 @@ const SCENARIOS = [
     ctx:'Limite de 30 vagas diárias atingido. Orientar retorno no próximo dia útil com antecedência.',
     resps:[
       { title:'📅 Vagas esgotadas — retornar amanhã', badge:'Padrão', primary:true, nao:false,
-        tpl: n => `*OAB – Assistência Judiciária Gratuita*\nSubseção Santana de Parnaíba\n\nBom dia${n?', '+n:''}.\n\nInformamos que o limite de 30 atendimentos de hoje já foi atingido.\n\nSolicitamos que retorne no próximo dia útil chegando com antecedência para garantir atendimento.${END}`},
+        tpl: n => `*OAB – Assistência Judiciária Gratuita*
+Bom dia${n?', '+n:''}.\n\nInformamos que o limite de 30 atendimentos de hoje já foi atingido.\n\nSolicitamos que retorne no próximo dia útil chegando com antecedência para garantir atendimento.${END}`},
     ]},
 
   { grp:'📅 Agendamento e horários',
@@ -858,7 +912,8 @@ const SCENARIOS = [
     ctx:'Mensagem recebida fora do horário de atendimento (09h–12h, Seg–Sex).',
     resps:[
       { title:'🌙 Fora do horário de atendimento', badge:'Padrão', primary:true, nao:false,
-        tpl: n => `*OAB – Assistência Judiciária Gratuita*\nSubseção Santana de Parnaíba\n\nOlá${n?', '+n:''}.\n\nEste canal está fora do horário de atendimento no momento.\n\nAs mensagens serão respondidas no próximo dia útil.${END}`},
+        tpl: n => `*OAB – Assistência Judiciária Gratuita*
+Olá${n?', '+n:''}.\n\nEste canal está fora do horário de atendimento no momento.\n\nAs mensagens serão respondidas no próximo dia útil.${END}`},
     ]},
 
   // ─── SITUAÇÕES DELICADAS ────────────────────
@@ -871,7 +926,8 @@ const SCENARIOS = [
     ctx:'Manter postura formal e respeitosa. Registrar a manifestação e orientar comparecimento com documentação.',
     resps:[
       { title:'🤝 Resposta formal e respeitosa', badge:'Recomendada', primary:true, nao:false,
-        tpl: n => `*OAB – Assistência Judiciária Gratuita*\nSubseção Santana de Parnaíba\n\nBom dia${n?', '+n:''}.\n\nRegistramos sua manifestação e lamentamos que não tenha conseguido ser atendida até o momento.\n\nPara que possamos verificar sua situação, solicitamos que compareça presencialmente à nossa sede munido(a) de toda a documentação exigida.${END}`},
+        tpl: n => `*OAB – Assistência Judiciária Gratuita*
+Bom dia${n?', '+n:''}.\n\nRegistramos sua manifestação e lamentamos que não tenha conseguido ser atendida até o momento.\n\nPara que possamos verificar sua situação, solicitamos que compareça presencialmente à nossa sede munido(a) de toda a documentação exigida.${END}`},
     ]},
 
   { grp:'🤝 Situações delicadas',
@@ -883,7 +939,8 @@ const SCENARIOS = [
     ctx:'Acompanhamento de processo é presencial. Solicitar comparecimento com documentos e protocolo.',
     resps:[
       { title:'🔄 Orientar comparecimento', badge:'Padrão', primary:true, nao:false,
-        tpl: n => `*OAB – Assistência Judiciária Gratuita*\nSubseção Santana de Parnaíba\n\nBom dia${n?', '+n:''}.\n\nPara acompanhamento de processo ou retorno de atendimento já realizado, solicitamos que compareça presencialmente à nossa sede portando seus documentos e, se disponível, o protocolo de atendimento.${END}`},
+        tpl: n => `*OAB – Assistência Judiciária Gratuita*
+Bom dia${n?', '+n:''}.\n\nPara acompanhamento de processo ou retorno de atendimento já realizado, solicitamos que compareça presencialmente à nossa sede portando seus documentos e, se disponível, o protocolo de atendimento.${END}`},
     ]},
 
   { grp:'🤝 Situações delicadas',
@@ -895,7 +952,8 @@ const SCENARIOS = [
     ctx:'Orientação jurídica à distância não é possível. Atendimento exclusivamente presencial.',
     resps:[
       { title:'⏳ Atendimento exclusivamente presencial', badge:'Padrão', primary:true, nao:false,
-        tpl: n => `*OAB – Assistência Judiciária Gratuita*\nSubseção Santana de Parnaíba\n\nBom dia${n?', '+n:''}.\n\nInformamos que não é possível fornecer orientação jurídica à distância.\n\nO atendimento é realizado exclusivamente de forma presencial, mediante apresentação da documentação exigida.${END}\n${DOCS}`},
+        tpl: n => `*OAB – Assistência Judiciária Gratuita*
+Bom dia${n?', '+n:''}.\n\nInformamos que não é possível fornecer orientação jurídica à distância.\n\nO atendimento é realizado exclusivamente de forma presencial, mediante apresentação da documentação exigida.${END}\n${DOCS}`},
     ]},
 
   { grp:'🤝 Situações delicadas',
@@ -907,7 +965,8 @@ const SCENARIOS = [
     ctx:'O atendimento é com a parte interessada. Acompanhante pode aguardar.',
     resps:[
       { title:'👥 Orientação sobre acompanhante', badge:'Padrão', primary:true, nao:false,
-        tpl: n => `*OAB – Assistência Judiciária Gratuita*\nSubseção Santana de Parnaíba\n\nBom dia${n?', '+n:''}.\n\nO atendimento é realizado diretamente com a parte interessada. Acompanhantes podem aguardar, porém o atendimento ocorre apenas com quem está diretamente envolvido no caso.\n\nEm casos de dificuldade de locomoção ou comunicação, orientamos o comparecimento com um acompanhante responsável.${END}\n${DOCS}`},
+        tpl: n => `*OAB – Assistência Judiciária Gratuita*
+Bom dia${n?', '+n:''}.\n\nO atendimento é realizado diretamente com a parte interessada. Acompanhantes podem aguardar, porém o atendimento ocorre apenas com quem está diretamente envolvido no caso.\n\nEm casos de dificuldade de locomoção ou comunicação, orientamos o comparecimento com um acompanhante responsável.${END}\n${DOCS}`},
     ]},
 
   // ─── ADVOGADO ───────────────────────────────
@@ -920,7 +979,8 @@ const SCENARIOS = [
     ctx:'Orientar que o assistido deve comparecer pessoalmente com documentação.',
     resps:[
       { title:'⚖️ Orientação ao advogado', badge:'Padrão', primary:true, nao:false,
-        tpl: n => `*OAB – Assistência Judiciária Gratuita*\nSubseção Santana de Parnaíba\n\nBom dia${n?', '+n:''}.\n\nPara encaminhamento de caso, solicitamos que o(a) assistido(a) compareça presencialmente à nossa sede com toda a documentação exigida, para que possamos verificar os requisitos de elegibilidade ao serviço.${END}\n${DOCS}`},
+        tpl: n => `*OAB – Assistência Judiciária Gratuita*
+Bom dia${n?', '+n:''}.\n\nPara encaminhamento de caso, solicitamos que o(a) assistido(a) compareça presencialmente à nossa sede com toda a documentação exigida, para que possamos verificar os requisitos de elegibilidade ao serviço.${END}\n${DOCS}`},
     ]},
 
   { grp:'⚖️ Mensagem de Advogado(a)',
@@ -932,7 +992,8 @@ const SCENARIOS = [
     ctx:'Informações processuais são tratadas presencialmente ou por telefone.',
     resps:[
       { title:'📎 Orientar contato por telefone', badge:'Padrão', primary:true, nao:false,
-        tpl: n => `*OAB – Assistência Judiciária Gratuita*\nSubseção Santana de Parnaíba\n\nBom dia${n?', '+n:''}.\n\nPara acesso a informações e documentos processuais, solicitamos contato pelo telefone da unidade ou comparecimento presencial.\n\n📞 (11) 4154-5191\n🕘 Segunda a Sexta-feira | 09h00 às 12h00`},
+        tpl: n => `*OAB – Assistência Judiciária Gratuita*
+Bom dia${n?', '+n:''}.\n\nPara acesso a informações e documentos processuais, solicitamos contato pelo telefone da unidade ou comparecimento presencial.\n\n📞 (11) 4154-5191\n🕘 Segunda a Sexta-feira | 09h00 às 12h00`},
     ]},
 
   { grp:'⚖️ Mensagem de Advogado(a)',
@@ -944,7 +1005,8 @@ const SCENARIOS = [
     ctx:'Confirmação de presença do advogado voluntário.',
     resps:[
       { title:'📅 Confirmação de escala', badge:'Padrão', primary:true, nao:false,
-        tpl: n => `*OAB – Assistência Judiciária Gratuita*\nSubseção Santana de Parnaíba\n\nBom dia${n?', '+n:''}.\n\nConfirmamos sua escala de atendimento. Em caso de necessidade de alteração, por favor entre em contato com antecedência.\n\n📞 (11) 4154-5191\n🕘 Segunda a Sexta-feira | 09h00 às 12h00`},
+        tpl: n => `*OAB – Assistência Judiciária Gratuita*
+Bom dia${n?', '+n:''}.\n\nConfirmamos sua escala de atendimento. Em caso de necessidade de alteração, por favor entre em contato com antecedência.\n\n📞 (11) 4154-5191\n🕘 Segunda a Sexta-feira | 09h00 às 12h00`},
     ]},
 ];
 
@@ -1005,6 +1067,14 @@ function renderPills() {
   ).join('');
 }
 renderPills();
+
+function filtroRapido(el, val) {
+  document.querySelectorAll('.sf-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  searchTerm = val;
+  document.getElementById('search').value = val;
+  renderSidebar(val);
+}
 
 function buscar(v) {
   searchTerm = v;
