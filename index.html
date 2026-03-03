@@ -924,70 +924,181 @@ const S=[
  emailResps:[{title:'📧 Como chegar por e-mail',subj:'CAD – Endereço e informações de acesso',badge:'Padrão',primary:true,nao:false,
   tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nEstamos localizados no Poupatempo de Santana de Parnaíba:\n\n📍 Av. Tenente Marques, 5297 – Jd. do Luar (Fazendinha), Santana de Parnaíba/SP\n\nAtendemos de segunda a sexta, das 9h às 12h, por ordem de chegada — limite de 30 senhas por dia.'+ENDE}]},
 
+
+// ── NERVOSA / FRUSTRADA ──
 {grp:'😓 Situações delicadas',id:'del1',icon:'😤',ic:'i-slate',pip:null,
- label:'Pessoa nervosa / reclamação',sub:'Resposta calma e respeitosa',
+ label:'Pessoa nervosa — Acalmar e entender',sub:'Acolher, pedir calma e pedir que explique a situação',
  who:'Assistido',wc:'#8b5cf6',sim:'Vocês são um absurdo! Fui lá três vezes e nunca consigo ser atendida!',
- tags:[{t:'Situação delicada',c:'tg-gold'}],ctx:'Manter postura calma.',
- resps:[{title:'🤝 Resposta respeitosa',badge:'Recomendada',primary:true,nao:false,
-  tpl:n=>'Oi'+(n?', '+n:'')+'!\n\nEntendo muito bem a sua frustração e me desculpe pelo transtorno. 😔\n\nInfelizmente o limite de 30 senhas por dia às vezes impede que todo mundo seja atendido no mesmo dia.\n\nSe vier cedo amanhã, com certeza vai conseguir!'+DOCS+END}],
- emailResps:[{title:'📧 Resposta a reclamação',subj:'CAD – Recebemos sua reclamação',badge:'Recomendada',primary:true,nao:false,
-  tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nLamentamos que não tenha conseguido ser atendida. O limite é de 30 senhas por dia, por ordem de chegada. Recomendamos chegar antes das 9h.'+ENDE}]},
+ tags:[{t:'Situação delicada',c:'tg-gold'},{t:'Reclamação',c:'tg-orange'}],
+ ctx:'Passo 1: acalmar com empatia. Passo 2: pedir que explique o que aconteceu para poder orientar corretamente. NÃO dar explicações antes de ouvir.',
+ resps:[
+  {title:'😤 Acalmar + pedir que explique',badge:'Recomendada',primary:true,nao:false,
+   tpl:n=>'Oi'+(n?', '+n:'')+'! 😔\n\nEntendo que você está frustrada e me desculpe pelo transtorno.\n\nPreciso que você respire fundo por um momento — estou aqui para te ajudar de verdade! 🙏\n\nMe conta com calma o que aconteceu? Assim consigo entender a sua situação direitinho e te orientar da melhor forma possível.'},
+  {title:'😤 Versão mais direta',badge:'Alternativa',primary:false,nao:false,
+   tpl:n=>'Olá'+(n?', '+n:'')+'!\n\nEntendo a sua frustração e peço desculpas pela dificuldade. 😔\n\nPara que eu possa te ajudar da melhor forma, me conta o que aconteceu? Preciso entender a sua situação para te dar a orientação certa.'},
+  {title:'😤 Tom mais acolhedor',badge:'Alternativa',primary:false,nao:false,
+   tpl:n=>'Oi'+(n?', '+n:'')+'! 💙\n\nSinto muito pela situação — isso deve estar sendo bem difícil para você.\n\nVamos resolver juntas, tá? Me conta com calma o que está acontecendo, o que você precisa, e eu te oriento no que for possível! 😊'},
+  {title:'😤 Quando a pessoa continua irritada',badge:'Acalmar',primary:false,nao:false,
+   tpl:n=>'Oi'+(n?', '+n:'')+'! 😊\n\nEntendo que a situação é difícil e sua frustração é completamente válida.\n\nMas para que eu consiga te ajudar de verdade, preciso que a gente converse com calma. Me conta o que está acontecendo com mais detalhes? Só assim consigo te dar a orientação certa! 🙏'},
+  {title:'😤 Após ouvir — vagas esgotadas',badge:'Complementar',primary:false,nao:false,
+   tpl:n=>'Obrigada por me explicar'+(n?', '+n:'')+'! 😊\n\nInfelizmente, o nosso limite é de 30 senhas por dia e elas costumam acabar cedo. Não é falta de vontade de atender — é um limite que não depende de nós. 😔\n\nA dica que dou: venha bem cedo, antes das 9h, para garantir sua vez. Com certeza vai conseguir desta vez!'+DOCS+END},
+  {title:'😤 Após ouvir — orientar o caso',badge:'Complementar',primary:false,nao:false,
+   tpl:n=>'Obrigada por me contar'+(n?', '+n:'')+'! 😊\n\nAgora que entendi melhor a sua situação, vou te orientar:\n\nO atendimento para o seu caso é presencial. Venha de segunda a sexta, das 9h às 12h, com os documentos abaixo — e assim que chegar, a gente consegue te ajudar de verdade!'+DOCS+END}
+ ],
+ emailResps:[
+  {title:'📧 Resposta acolhedora',subj:'CAD – Recebemos seu contato',badge:'Recomendada',primary:true,nao:false,
+   tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nRecebemos seu contato e lamentamos muito pela situação.\n\nPara que possamos orientá-lo(a) da melhor forma, pedimos que nos descreva com mais detalhes o que ocorreu e o que você precisa. Assim conseguimos verificar as opções disponíveis e dar a orientação adequada.\n\nEstamos à sua disposição.'+ENDE},
+  {title:'📧 Resposta sobre vagas esgotadas',subj:'CAD – Sobre dificuldade de atendimento',badge:'Alternativa',primary:false,nao:false,
+   tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nLamentamos a dificuldade. O limite diário é de 30 senhas, por ordem de chegada.\n\nRecomendamos comparecer antes das 9h para garantir seu atendimento.'+ENDE}
+ ]},
+
+{grp:'😓 Situações delicadas',id:'del1b',icon:'😠',ic:'i-red',pip:'pip-red',
+ label:'Insatisfeita com atendimento anterior',sub:'Reclamação do atendimento recebido',
+ who:'Assistido',wc:'#e84060',sim:'Fui atendida aí e saí sem nenhuma resposta. Não resolveram nada!',
+ tags:[{t:'Situação delicada',c:'tg-gold'},{t:'Reclamação',c:'tg-orange'}],
+ ctx:'Ouvir com atenção antes de qualquer coisa. Não se defender. Entender o que ela esperava e o que recebeu.',
+ resps:[
+  {title:'😠 Ouvir e entender o que aconteceu',badge:'Recomendada',primary:true,nao:false,
+   tpl:n=>'Oi'+(n?', '+n:'')+'! 😔\n\nSinto muito que o atendimento não tenha correspondido ao que você esperava.\n\nMe conta o que aconteceu com mais detalhes? O que você foi buscar e o que recebeu? Assim consigo entender melhor e te orientar sobre os próximos passos.'},
+  {title:'😠 Quando quer falar com responsável',badge:'Alternativa',primary:false,nao:false,
+   tpl:n=>'Entendo'+(n?', '+n:'')+'! 😔\n\nAnoto o seu contato e encaminho para quem pode te dar um retorno mais completo. Se preferir, pode também entrar em contato pelo:\n\n📞 (11) 4154-5191\n📧 aj.santana.parnai@oabsp.org.br\n🕘 Seg–Sex, 9h–12h'},
+  {title:'😠 Explicar limitações do serviço',badge:'Alternativa',primary:false,nao:false,
+   tpl:n=>'Oi'+(n?', '+n:'')+'!\n\nEntendo a sua decepção e me desculpe. 😔\n\nA nossa função é fazer a triagem e orientar sobre documentos e encaminhamento. A consulta jurídica detalhada é feita pelo advogado no dia do atendimento presencial.\n\nSe quiser tentar novamente, estamos à disposição! Venha de segunda a sexta, das 9h às 12h.'+DOCS+END}
+ ],
+ emailResps:[
+  {title:'📧 Reclamação de atendimento',subj:'CAD – Retorno sobre seu atendimento',badge:'Recomendada',primary:true,nao:false,
+   tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nRecebemos sua mensagem e lamentamos que o atendimento não tenha sido satisfatório.\n\nPara que possamos verificar o que ocorreu, pedimos que nos descreva com detalhes o que aconteceu e o que esperava receber.\n\nEstamos à disposição.'+ENDE}
+ ]},
+
+{grp:'😓 Situações delicadas',id:'del1c',icon:'🛑',ic:'i-red',pip:'pip-red',
+ label:'Pessoa usando linguagem agressiva',sub:'Redirecionar com firmeza e respeito',
+ who:'Assistido',wc:'#e84060',sim:'Isso é uma palhaçada! Vocês não servem pra nada!',
+ tags:[{t:'Situação delicada',c:'tg-gold'},{t:'Urgente',c:'tg-red'}],
+ ctx:'Manter firmeza e respeito. Não rebater. Deixar claro que pode ajudar, mas precisa de cordialidade.',
+ resps:[
+  {title:'🛑 Redirecionar com firmeza',badge:'Recomendada',primary:true,nao:false,
+   tpl:n=>'Oi'+(n?', '+n:'')+'!\n\nEntendo que você está muito frustrada e quero te ajudar. 😊\n\nPorém, para que eu consiga fazer isso, precisamos conversar com respeito de ambos os lados.\n\nMe conta o que está acontecendo com calma, e farei o possível para te orientar! 🙏'},
+  {title:'🛑 Tom mais firme',badge:'Alternativa',primary:false,nao:false,
+   tpl:n=>'Olá'+(n?', '+n:'')+'!\n\nEstou aqui para ajudar, e vou fazer isso com muito prazer. Mas para que isso seja possível, preciso que a gente mantenha uma conversa respeitosa.\n\nQuando estiver pronta para me contar o que aconteceu com calma, estou à disposição. 😊'},
+  {title:'🛑 Última tentativa de abertura',badge:'Alternativa',primary:false,nao:false,
+   tpl:n=>'Oi'+(n?', '+n:'')+'!\n\nPercebo que você está passando por um momento muito difícil, e lamento por isso. 💙\n\nSei que em situações assim a gente fica sem paciência. Mas me ajuda a te ajudar — me conta com calma o que você precisa, e eu te oriento da melhor forma possível.'}
+ ],
+ emailResps:[]},
+
 {grp:'😓 Situações delicadas',id:'del2',icon:'🔄',ic:'i-slate',pip:null,
  label:'Quer saber do processo',sub:'Acompanhamento é presencial',
  who:'Assistido',wc:'#8b5cf6',sim:'Como está o meu processo?',
  tags:[{t:'Acompanhamento',c:'tg-blue'},{t:'Situação delicada',c:'tg-gold'}],ctx:'Acompanhamento é presencial.',
- resps:[{title:'🔄 Orientar comparecimento',badge:'Padrão',primary:true,nao:false,
-  tpl:n=>'Para acompanhar o seu caso, é necessário comparecer pessoalmente à nossa sede.\n\nTraga seus documentos e, se disponível, o protocolo do atendimento anterior.'+DOCS+END}],
+ resps:[
+  {title:'🔄 Orientar comparecimento',badge:'Recomendada',primary:true,nao:false,
+   tpl:n=>'Oi'+(n?', '+n:'')+'! 😊\n\nPara acompanhar o seu caso, é necessário comparecer pessoalmente à nossa sede.\n\nTraga seus documentos e, se disponível, o protocolo do atendimento anterior — isso facilita bastante!'+DOCS+END},
+  {title:'🔄 Não consigo verificar remotamente',badge:'Alternativa',primary:false,nao:false,
+   tpl:n=>'Oi'+(n?', '+n:'')+'!\n\nInfelizmente não consigo verificar o andamento do seu processo por aqui. Essa consulta precisa ser feita presencialmente.\n\nVenha de segunda a sexta, das 9h às 12h, com seus documentos e o número do processo se tiver.'+END},
+  {title:'🔄 Sem número do processo',badge:'Alternativa',primary:false,nao:false,
+   tpl:n=>'Oi'+(n?', '+n:'')+'!\n\nSem o número do processo fica difícil localizar qualquer informação por aqui. 😊\n\nA melhor forma é vir pessoalmente com os documentos que tiver do caso — conseguimos te orientar muito melhor assim!'+DOCS+END}
+ ],
  emailResps:[{title:'📧 Acompanhamento',subj:'CAD – Acompanhamento do seu caso',badge:'Padrão',primary:true,nao:false,
   tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nO acompanhamento de processos é realizado exclusivamente de forma presencial. Compareça com seus documentos e protocolo de atendimento (se tiver).'+ENDE}]},
+
 {grp:'😓 Situações delicadas',id:'del3',icon:'📧',ic:'i-slate',pip:null,
  label:'Quer orientação à distância',sub:'Indicar e-mail para contato',
  who:'Assistido',wc:'#8b5cf6',sim:'Não consigo ir até vocês. Podem me ajudar pelo WhatsApp?',
  tags:[{t:'Situação delicada',c:'tg-gold'}],ctx:'Não fazemos orientação jurídica por WhatsApp.',
- resps:[{title:'📧 Indicar canal correto',badge:'Padrão',primary:true,nao:false,
-  tpl:n=>'Não é possível fornecer orientação jurídica por WhatsApp.\n\nPara dúvidas gerais, entre em contato pelo e-mail:\n📧 aj.santana.parnai@oabsp.org.br\n\nO atendimento completo é presencial. Caso seja possível comparecer, estaremos à disposição.'+DOCS+END}],
+ resps:[
+  {title:'📧 Indicar canal correto',badge:'Recomendada',primary:true,nao:false,
+   tpl:n=>'Oi'+(n?', '+n:'')+'! 😊\n\nPor aqui consigo te passar informações gerais, mas orientação jurídica precisa ser presencial, tá?\n\nPara dúvidas gerais, pode escrever para o e-mail:\n📧 aj.santana.parnai@oabsp.org.br\n\nQuando puder vir, estaremos à disposição!'+DOCS+END},
+  {title:'📧 Explicar o motivo',badge:'Alternativa',primary:false,nao:false,
+   tpl:n=>'Oi'+(n?', '+n:'')+'!\n\nEntendo que às vezes é difícil vir pessoalmente. 😔\n\nMas aqui pelo WhatsApp não consigo dar orientação jurídica — isso só é possível com um advogado, presencialmente. Cada caso tem particularidades que precisam ser analisadas com cuidado.\n\nQuando puder, venha de segunda a sexta, das 9h às 12h. Ou envie um e-mail: aj.santana.parnai@oabsp.org.br'+END},
+  {title:'📧 Dificuldade de locomoção',badge:'Alternativa',primary:false,nao:false,
+   tpl:n=>'Oi'+(n?', '+n:'')+'! 😊\n\nSe tiver alguma dificuldade de locomoção, você pode vir acompanhada ou nos contatar pelo e-mail para explicar a situação:\n\n📧 aj.santana.parnai@oabsp.org.br\n\nVamos ver o que é possível fazer! O atendimento completo ainda precisa ser presencial, mas podemos esclarecer dúvidas gerais por e-mail.'}
+ ],
  emailResps:[{title:'📧 Orientação à distância',subj:'CAD – Informações sobre atendimento',badge:'Padrão',primary:true,nao:false,
   tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nPodemos esclarecer dúvidas gerais por e-mail, mas o atendimento jurídico completo é presencial.'+ENDE}]},
+
 {grp:'😓 Situações delicadas',id:'del4',icon:'👥',ic:'i-slate',pip:null,
  label:'Quer vir com acompanhante',sub:'Acompanhante aguarda fora',
  who:'Assistido',wc:'#8b5cf6',sim:'Posso levar minha filha para me ajudar?',
  tags:[{t:'Situação delicada',c:'tg-gold'}],ctx:'Consulta é só com a parte.',
- resps:[{title:'👥 Orientar acompanhante',badge:'Padrão',primary:true,nao:false,
-  tpl:n=>'Sim, é permitido comparecer acompanhado(a).\n\nA consulta com o advogado é realizada exclusivamente com a parte envolvida — o acompanhante aguarda na área externa.\n\nExceção aplica-se a casos de dificuldade de locomoção ou comunicação.'+DOCS+END}],
+ resps:[
+  {title:'👥 Orientar acompanhante',badge:'Recomendada',primary:true,nao:false,
+   tpl:n=>'Sim'+(n?', '+n:'')+'! Pode vir acompanhada sem problema. 😊\n\nA consulta com o advogado é feita só com você — o acompanhante aguarda na área externa.\n\nExceção para dificuldade de locomoção ou comunicação, aí pode entrar junto.'+DOCS+END},
+  {title:'👥 Com menor de idade',badge:'Alternativa',primary:false,nao:false,
+   tpl:n=>'Oi'+(n?', '+n:'')+'! 😊\n\nSe precisar trazer seu filho(a) menor, pode vir normalmente. A consulta jurídica é feita só com você — a criança pode ficar na área de espera ou entrar caso precise.'+DOCS+END}
+ ],
  emailResps:[{title:'📧 Orientar acompanhante',subj:'CAD – Sobre acompanhante no atendimento',badge:'Padrão',primary:true,nao:false,
   tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nPode vir acompanhado(a). O atendimento com o advogado é apenas com a parte envolvida — o acompanhante aguarda na área externa. Exceção para dificuldade de locomoção ou comunicação.'+ENDE}]},
+
 {grp:'😓 Situações delicadas',id:'del5',icon:'🔁',ic:'i-slate',pip:null,
  label:'Já foi atendida e quer retornar',sub:'Orientar retorno',
  who:'Assistido',wc:'#8b5cf6',sim:'Já fui atendida aí antes. Posso voltar para continuar meu caso?',
  tags:[{t:'Retorno',c:'tg-purple'},{t:'Situação delicada',c:'tg-gold'}],ctx:'Pessoa já atendida quer dar continuidade.',
  resps:[
   {title:'🔁 Orientar retorno',badge:'Recomendada',primary:true,nao:false,
-   tpl:n=>'Claro'+(n?', '+n:'')+'! Pode retornar sem problemas.\n\nCompareça de segunda a sexta, das 9h às 12h. Se disponível, traga o protocolo do atendimento anterior — isso facilita o processo.'+DOCS+END},
-  {title:'🔁 Caso encerrado',badge:'Alternativa',primary:false,nao:false,
-   tpl:n=>'Oi'+(n?', '+n:'')+'! 😊\n\nPode sim retornar! Se o caso anterior já foi encerrado e você tem uma situação nova, basta vir com a documentação atualizada.'+DOCS+END}
+   tpl:n=>'Claro'+(n?', '+n:'')+'! Pode retornar sem problemas. 😊\n\nCompareça de segunda a sexta, das 9h às 12h. Se disponível, traga o protocolo do atendimento anterior — isso facilita bastante o processo!'+DOCS+END},
+  {title:'🔁 Caso encerrado / situação nova',badge:'Alternativa',primary:false,nao:false,
+   tpl:n=>'Oi'+(n?', '+n:'')+'! 😊\n\nPode sim retornar! Se o caso anterior já foi encerrado e você tem uma situação nova, basta vir com a documentação atualizada.'+DOCS+END},
+  {title:'🔁 Sem protocolo anterior',badge:'Alternativa',primary:false,nao:false,
+   tpl:n=>'Oi'+(n?', '+n:'')+'! 😊\n\nMesmo sem o protocolo anterior, pode voltar. Venha com seus documentos e nos conta o que aconteceu no atendimento anterior — faremos o possível para dar continuidade!'+DOCS+END}
  ],
  emailResps:[{title:'📧 Retorno por e-mail',subj:'CAD – Retorno para continuidade',badge:'Recomendada',primary:true,nao:false,
   tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nPode retornar! Compareça com seus documentos e protocolo do atendimento anterior (se tiver).\n\nAtendemos de segunda a sexta, das 9h às 12h, limite de 30 senhas por dia.'+ENDE}]},
+
 {grp:'😓 Situações delicadas',id:'del6',icon:'🚨',ic:'i-red',pip:'pip-red',
  label:'Situação urgente / vulnerável',sub:'Acolher com empatia e orientar',
  who:'Assistido',wc:'#e8495a',sim:'Estou desesperada, preciso muito de ajuda',
  tags:[{t:'Urgente',c:'tg-red'},{t:'Situação delicada',c:'tg-gold'}],ctx:'Acolher antes de orientar. Se houver risco físico: 190 ou 180.',
  resps:[
-  {title:'🚨 Acolher e orientar',badge:'Recomendada',primary:true,nao:false,
-   tpl:n=>'Fico feliz que você entrou em contato — você não está sozinha nisso. 💙\n\nConte-me o que está acontecendo para que eu possa orientar melhor.'},
-  {title:'🚨 Se houver risco físico',badge:'Urgente',primary:false,nao:false,
-   tpl:n=>'Antes de qualquer coisa — você está em segurança agora?\n\nSe estiver em risco, ligue imediatamente:\n🔴 190 – Polícia Militar\n🔴 180 – Central da Mulher (24h, gratuito)\n\nEstou aqui assim que puder me contar o que está acontecendo. 💙'}
+  {title:'🚨 Acolher e pedir que conte',badge:'Recomendada',primary:true,nao:false,
+   tpl:n=>'Fico feliz que você entrou em contato — você não está sozinha nisso. 💙\n\nRespira fundo e me conta o que está acontecendo. Estou aqui para te ouvir e orientar da melhor forma possível. 🙏'},
+  {title:'🚨 Se houver risco físico imediato',badge:'Urgente',primary:false,nao:false,
+   tpl:n=>'Antes de qualquer coisa — você está em segurança agora?\n\nSe estiver em risco, ligue imediatamente:\n🔴 190 – Polícia Militar\n🔴 180 – Central da Mulher (24h, gratuito)\n\nEstou aqui assim que puder me contar o que está acontecendo. 💙'},
+  {title:'🚨 Após ouvir — orientar atendimento',badge:'Complementar',primary:false,nao:false,
+   tpl:n=>'Obrigada por confiar em mim'+(n?', '+n:'')+'! 💙\n\nSeu caso tem solução e vamos conseguir te ajudar. Venha até nós o quanto antes com os documentos abaixo!'+DOCS+END},
+  {title:'🚨 Sofrimento emocional',badge:'Alternativa',primary:false,nao:false,
+   tpl:n=>'Oi'+(n?', '+n:'')+'! 💙\n\nPercebo que você está passando por um momento muito difícil. Antes de tudo, quero que saiba que sua situação importa e que você não está sozinha.\n\nMe conta o que está acontecendo com calma — vou te ouvir e fazer o possível para te ajudar, tá? 🙏'}
  ],emailResps:[]},
+
 {grp:'😓 Situações delicadas',id:'del7',icon:'🔔',ic:'i-slate',pip:null,
  label:'Pessoa que sumiu sem responder',sub:'Retomar contato educadamente',
  who:'Assistido',wc:'#8b5cf6',sim:'[sem resposta há dias]',
  tags:[{t:'Retorno',c:'tg-purple'},{t:'Situação delicada',c:'tg-gold'}],ctx:'Retomar contato de forma leve, sem pressionar.',
  resps:[
   {title:'🔔 Retomar contato',badge:'Recomendada',primary:true,nao:false,
-   tpl:n=>'Olá'+(n?', '+n:'')+'! Tudo bem?\n\nEstou verificando se ainda precisa de assistência ou se a situação já foi resolvida. Estou à disposição, caso necessário.'},
-  {title:'🔔 Variação',badge:'Alternativa',primary:false,nao:false,
-   tpl:n=>'Olá'+(n?', '+n:'')+'! Tudo bem?\n\nPassei para verificar se posso ser útil em algo. Caso as dúvidas já tenham sido sanadas, fico feliz em ter ajudado.'}
+   tpl:n=>'Olá'+(n?', '+n:'')+'! Tudo bem? 😊\n\nEstou verificando se ainda precisa de assistência ou se a situação já foi resolvida. Estou à disposição! 🙂'},
+  {title:'🔔 Segundo contato',badge:'Alternativa',primary:false,nao:false,
+   tpl:n=>'Olá'+(n?', '+n:'')+'! 😊\n\nPassei para verificar se posso ser útil em algo. Caso as dúvidas já tenham sido sanadas, fico feliz em ter ajudado!'},
+  {title:'🔔 Último contato',badge:'Alternativa',primary:false,nao:false,
+   tpl:n=>'Olá'+(n?', '+n:'')+'! 😊\n\nEntrarei em contato mais uma vez para verificar se ainda posso ajudar. Caso não obtenha resposta, encerrarei esta conversa — mas estarei sempre disponível se precisar!'}
  ],emailResps:[]},
+
+{grp:'😓 Situações delicadas',id:'del8',icon:'😢',ic:'i-purple',pip:'pip-purple',
+ label:'Pessoa chorando / muito emocionada',sub:'Acolher antes de qualquer orientação',
+ who:'Assistido',wc:'#8b5cf6',sim:'Estou chorando aqui, não sei mais o que fazer...',
+ tags:[{t:'Situação delicada',c:'tg-gold'},{t:'Urgente',c:'tg-red'}],
+ ctx:'NÃO dar informações jurídicas imediatamente. Primeiro acolher. Só depois de acalmar, perguntar o que precisa.',
+ resps:[
+  {title:'😢 Acolher com cuidado',badge:'Recomendada',primary:true,nao:false,
+   tpl:n=>'Oi'+(n?', '+n:'')+'! 💙\n\nRespira. Você não está sozinha nisso.\n\nMe conta o que está acontecendo — pode ser devagar, sem pressa. Estou aqui para te ouvir. 🙏'},
+  {title:'😢 Após ela contar — validar e orientar',badge:'Complementar',primary:false,nao:false,
+   tpl:n=>'Muito obrigada por me contar'+(n?', '+n:'')+'! 💙\n\nEntendo o quanto isso está pesado. Mas saiba que você fez certo em buscar ajuda.\n\nVenha até nós com os documentos abaixo — nossos advogados vão te ouvir e te orientar pessoalmente. Você vai conseguir superar isso! 💪'+DOCS+END},
+  {title:'😢 Situação envolvendo família',badge:'Alternativa',primary:false,nao:false,
+   tpl:n=>'Oi'+(n?', '+n:'')+'! 💙\n\nSei que situações envolvendo família doem muito. Fica tranquila — existe caminho para resolver isso.\n\nMe conta o que está acontecendo para eu entender melhor e te orientar. Estou aqui! 😊'}
+ ],emailResps:[]},
+
+{grp:'😓 Situações delicadas',id:'del9',icon:'😕',ic:'i-slate',pip:null,
+ label:'Pessoa confusa / sem entender o processo',sub:'Explicar de forma simples e paciente',
+ who:'Assistido',wc:'#8b5cf6',sim:'Não entendi nada do que me explicaram lá. Podem me explicar de novo?',
+ tags:[{t:'Situação delicada',c:'tg-gold'},{t:'Primeiro contato',c:'tg-teal'}],
+ ctx:'Simplificar ao máximo. Evitar termos jurídicos. Ser paciente.',
+ resps:[
+  {title:'😕 Perguntar o que ficou confuso',badge:'Recomendada',primary:true,nao:false,
+   tpl:n=>'Oi'+(n?', '+n:'')+'! 😊 Claro, sem problema nenhum — vamos com calma!\n\nMe conta o que você entendeu e o que ficou confuso? Assim consigo explicar melhor a parte que pegou. 😊'},
+  {title:'😕 Explicar o fluxo geral',badge:'Alternativa',primary:false,nao:false,
+   tpl:n=>'Oi'+(n?', '+n:'')+'! 😊\n\nVeja bem — o processo é bem simples:\n\n1️⃣ Você vem pessoalmente aqui com os documentos\n2️⃣ Fazemos a triagem para ver se atendemos o seu caso\n3️⃣ Se atender, um advogado te orienta na hora\n\nNão precisa agendar — é por ordem de chegada, de segunda a sexta, das 9h às 12h. 😊'+DOCS+END},
+  {title:'😕 Versão super simples (idosos)',badge:'Alternativa',primary:false,nao:false,
+   tpl:n=>'Oi'+(n?', '+n:'')+'! 😊\n\nNão tem problema, vamos com calma!\n\nO que você precisa saber é simples:\n✅ Venha aqui pessoalmente\n✅ Traga seus documentos\n✅ De segunda a sexta, das 9h às 12h\n✅ Chegue cedo — são 30 pessoas por dia\n\nQualquer dúvida, pode me perguntar! 😊'+END}
+ ],emailResps:[]},
+
 
 {grp:'⚖️ Mensagem de Advogado(a)',id:'adv1',icon:'⚖️',ic:'i-teal',pip:'pip-teal',
  label:'Encaminhamento de caso',sub:'Orientar que assistido venha pessoalmente',
