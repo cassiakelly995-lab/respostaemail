@@ -340,7 +340,7 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
           <div class="ginfo">
             <strong>📋 Documentos básicos:</strong> RG original + CPF · Comprovante de residência · Comprovante de renda de todos da família · Patrimônio se houver<br><br>
             <strong>📍</strong> Av. Tenente Marques, 5297 – Jd. do Luar, Santana de Parnaíba/SP (POUPATEMPO)<br>
-            <strong>📞</strong> (11) 4154-5191 &nbsp;·&nbsp; <strong>📧</strong> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6302094d10020d17020d024d1302110d020a230c020110134d0c11044d0111">[email&#160;protected]</a> &nbsp;·&nbsp; <strong>🕘</strong> Seg–Sex, 9h–12h &nbsp;·&nbsp; <strong>⚠️</strong> 30 vagas/dia
+            <strong>📞</strong> (11) 4154-5191 &nbsp;·&nbsp; <strong>📧</strong> aj.santana.parnai@oabsp.org.br &nbsp;·&nbsp; <strong>🕘</strong> Seg–Sex, 9h–12h &nbsp;·&nbsp; <strong>⚠️</strong> 30 vagas/dia
           </div>
           <div style="margin-top:14px"><button class="btn btn-ghost" onclick="window.print()">🖨️ Imprimir</button></div>
         </div>
@@ -356,7 +356,7 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 
 <div class="toast" id="toast"></div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 const HDR  = 'CAD – Comissão de Advocacia Dativa\nOAB Subseção Santana de Parnaíba';
 const DOCS = '\n\nDocumentos necessários:\n- RG original e CPF\n- Comprovante de residência atualizado\n- Comprovante de renda de todos que moram com você\n- Se tiver bens (imóvel, carro, poupança): documentação desses bens';
 const END  = '\n\n📍 Av. Tenente Marques, 5297 – Jd. do Luar, Santana de Parnaíba/SP (POUPATEMPO)\n📞 (11) 4154-5191   📧 aj.santana.parnai@oabsp.org.br\n🕘 Segunda a sexta, das 9h às 12h';
@@ -1037,4 +1037,14 @@ function toast(msg) {
 
 function clock() {
   const n = new Date();
-  const d = ['Dom','Seg','Ter','Qua','Qu
+  const d = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
+  const h = String(n.getHours()).padStart(2,'0');
+  const m = String(n.getMinutes()).padStart(2,'0');
+  const s = String(n.getSeconds()).padStart(2,'0');
+  document.getElementById('clock').textContent = `${d[n.getDay()]} ${h}:${m}:${s}`;
+}
+clock();
+setInterval(clock, 1000);
+</script>
+</body>
+</html>
