@@ -295,7 +295,7 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 <div class="shell">
   <div class="sidebar">
     <div class="sb-head">
-      <div class="sb-lbl">Que mensagem você recebeu?</div>
+      <div class="sb-lbl">Que tipo de mensagem chegou?</div>
       <div class="sw">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
         <input class="si" id="search" type="text" placeholder="Buscar situação..." oninput="buscar(this.value)">
@@ -319,8 +319,8 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
   <div class="main">
     <div class="breadbar">
       <div>
-        <div class="btitle" id="btitle">Selecione um cenário</div>
-        <div class="bsub" id="bsub">Escolha uma situação ao lado para ver e editar as respostas</div>
+        <div class="btitle" id="btitle">Escolha um cenário ao lado</div>
+        <div class="bsub" id="bsub">A resposta aparece pronta para copiar ou enviar direto pelo WhatsApp</div>
       </div>
       <button class="btn btn-guide" onclick="toggleGuide()">📌 O que atendemos?</button>
     </div>
@@ -329,16 +329,20 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 
       <div class="welcome" id="welcome">
         <div class="wglyph">⚖️</div>
-        <h2>Central de Respostas Prontas</h2>
-        <p>Selecione ao lado o tipo de mensagem recebida. A resposta aparece pronta com o nome da pessoa — edite se precisar e copie com um clique.</p>
+        <h2>Olá, Cássia! 👋</h2>
+        <p>Selecione ao lado o tipo de mensagem que você recebeu. A resposta já aparece pronta, com o nome da pessoa — edite se precisar e copie com um clique.</p>
         <div class="wtags" id="wtags"></div>
+        <div style="margin-top:8px;font-size:12px;color:var(--dim);display:flex;align-items:center;gap:6px">
+          <span style="width:6px;height:6px;border-radius:50%;background:var(--green);display:inline-block"></span>
+          CAD · Subseção Santana de Parnaíba · 30 senhas/dia · 9h–12h
+        </div>
       </div>
 
       <div class="sc-view" id="sc-view">
         <div class="namebar">
           <label>✏️ Nome da pessoa</label>
           <input id="person-name" type="text" placeholder="Ex: Maria Silva" oninput="atualizaNome()">
-          <span class="namebar-hint">Inserido automaticamente nas mensagens</span>
+          <span class="namebar-hint">✨ Já entra automático nas mensagens</span>
         </div>
 
         <!-- CHANNEL TABS: WhatsApp / E-mail -->
@@ -425,7 +429,7 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 
     <div class="histbar">
       <span class="hist-lbl">Recentes</span>
-      <div class="hist-chips" id="hist-chips"><span class="hist-empty">Nenhuma mensagem copiada ainda</span></div>
+      <div class="hist-chips" id="hist-chips"><span class="hist-empty">Nenhuma cópia ainda — as últimas aparecerão aqui</span></div>
     </div>
   </div>
 </div>
@@ -437,9 +441,11 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 const HDR  = 'CAD – Comissão de Advocacia Dativa\nOAB Subseção Santana de Parnaíba';
 const HDRE = 'CAD – Comissão de Advocacia Dativa\nOAB Subseção Santana de Parnaíba\n';
 const DOCS = '\n\nDocumentos necessários:\n- RG original e CPF\n- Comprovante de residência atualizado\n- Comprovante de renda de todos que moram com você\n- Se tiver bens (imóvel, carro, poupança): documentação desses bens';
-const END  = '\n\n📍 Av. Tenente Marques, 5297 – Jd. do Luar, Santana de Parnaíba/SP (POUPATEMPO)\n📞 (11) 4154-5191   📧 aj.santana.parnai@oabsp.org.br\n🕘 Segunda a sexta, das 9h às 12h\n⚠️ Limite de 30 senhas por dia — chegue cedo para garantir sua vaga!';
-const ENDE = '\n\nAtenciosamente,\nCentral de Atendimento – CAD\nOAB Subseção Santana de Parnaíba\n📍 Av. Tenente Marques, 5297 – Jd. do Luar, Santana de Parnaíba/SP\n📞 (11) 4154-5191\n🕘 Segunda a sexta, das 9h às 12h\n⚠️ Limite de 30 senhas por dia — chegue cedo para garantir sua vaga!';
+const END  = '\n\n📍 Av. Tenente Marques, 5297 – Jd. do Luar, Santana de Parnaíba/SP (POUPATEMPO)\n📞 (11) 4154-5191\n🕘 Seg–Sex, 9h–12h  ⚠️ 30 senhas/dia';
+const ENDE = '\n\nAtenciosamente,\nCássia Kelly\nCentral de Atendimento – CAD\nOAB Subseção Santana de Parnaíba\n📍 Av. Tenente Marques, 5297 – Jd. do Luar, Santana de Parnaíba/SP\n📞 (11) 4154-5191\n🕘 Seg–Sex, 9h–12h  ⚠️ 30 senhas/dia';
 const AREAS = '\n\nA CAD atende: família (divórcio, pensão, guarda), cível, inventário, herança, violência doméstica e habitacional.';
+const SIG  = '\n\nCássia Kelly\nCentral de Atendimento – CAD';
+const SIGE = '\n\nAtenciosamente,\nCássia Kelly\nCentral de Atendimento – CAD\nOAB Subseção Santana de Parnaíba\n📍 Av. Tenente Marques, 5297 – Jd. do Luar, Santana de Parnaíba/SP\n📞 (11) 4154-5191\n🕘 Seg–Sex, 9h–12h  ⚠️ 30 senhas/dia';
 
 const S = [
 
@@ -451,10 +457,10 @@ const S = [
    tags:[{t:'Boas-vindas',c:'tg-blue'},{t:'Primeiro contato',c:'tg-teal'}],
    ctx:'Assistido mandou mensagem sem dizer o motivo. Cumprimentar e perguntar como podemos ajudar.',
    resps:[
-    {title:'✉️ Boas-vindas — no que podemos ajudar?', badge:'Recomendada', primary:true, nao:false,
-     tpl: n => `${HDR}\n\nOlá${n?', '+n:''}! Tudo bem?\n\nAqui é a CAD – Comissão de Advocacia Dativa da OAB, Subseção Santana de Parnaíba.\n\nNo que podemos te ajudar?`},
-    {title:'✉️ Variação formal', badge:'Alternativa', primary:false, nao:false,
-     tpl: n => `${HDR}\n\nOlá${n?', '+n:''}! Seja bem-vindo(a).\n\nSou da Central de Atendimento da CAD – Comissão de Advocacia Dativa da OAB, Subseção Santana de Parnaíba.\n\nComo posso te ajudar hoje?`}
+    {title:'✉️ Boas-vindas calorosa', badge:'Recomendada', primary:true, nao:false,
+     tpl: n => `Olá${n?', '+n:''}! 😊 Tudo bem?\n\nAqui é a Cássia, da CAD – Comissão de Advocacia Dativa da OAB Santana de Parnaíba.\n\nNo que posso te ajudar hoje?`},
+    {title:'✉️ Boas-vindas simples', badge:'Alternativa', primary:false, nao:false,
+     tpl: n => `Olá${n?', '+n:''}! Tudo bem?\n\nSou a Cássia, da Central de Atendimento da CAD – OAB Santana de Parnaíba. 😊\n\nComo posso te ajudar?`}
    ],
    emailResps:[
     {title:'📧 Boas-vindas por e-mail', subj:'CAD – Recebemos sua mensagem', badge:'Recomendada', primary:true, nao:false,
@@ -469,7 +475,7 @@ const S = [
    ctx:'Pessoa sem contexto. Explicar de forma simples e acolhedora.',
    resps:[
     {title:'✉️ Apresentar o serviço', badge:'Recomendada', primary:true, nao:false,
-     tpl: n => `${HDR}\n\nOlá${n?', '+n:''}! Tudo bem?\n\nA CAD é a Comissão de Advocacia Dativa da OAB de Santana de Parnaíba. Oferecemos atendimento jurídico gratuito para pessoas que não têm condições de pagar um advogado particular.\n\nO atendimento é feito por advogados conveniados à OAB e funciona de forma presencial aqui na nossa sede.\n\nSe você precisar de ajuda jurídica, é só vir até nós com os documentos necessários.${DOCS}${END}`}
+     tpl: n => `Olá${n?', '+n:''}! 😊\n\nAqui é a Cássia, da CAD – Comissão de Advocacia Dativa da OAB Santana de Parnaíba.\n\nA gente oferece atendimento jurídico gratuito para quem não tem condições de pagar um advogado particular. São advogados conveniados à OAB que atendem pessoalmente aqui na nossa sede.\n\nSe precisar de ajuda jurídica, é só vir até a gente com os documentos. Posso te explicar melhor como funciona? 😊${DOCS}${END}`}
    ],
    emailResps:[
     {title:'📧 Apresentação da CAD por e-mail', subj:'CAD – O que somos e como podemos ajudar', badge:'Recomendada', primary:true, nao:false,
@@ -484,7 +490,7 @@ const S = [
    ctx:'Pessoa já sabe que é gratuito. Confirmar e orientar o que fazer.',
    resps:[
     {title:'✉️ Confirmar e orientar', badge:'Recomendada', primary:true, nao:false,
-     tpl: n => `${HDR}\n\nOlá${n?', '+n:''}!\n\nSim, podemos ajudar! A CAD oferece atendimento jurídico gratuito para quem não tem condições de pagar advogado particular.\n\nPara ser atendido(a), basta vir pessoalmente até nossa sede de segunda a sexta, das 9h às 12h, com os documentos necessários. Não precisa agendar — é por ordem de chegada.${DOCS}${END}`}
+     tpl: n => `Olá${n?', '+n:''}! 😊\n\nSim, podemos ajudar! A gente oferece atendimento jurídico gratuito para quem não tem condições de pagar advogado.\n\nÉ bem simples: você vem aqui na nossa sede de segunda a sexta, das 9h às 12h, com os documentos. Não precisa agendar, é por ordem de chegada — só chegar cedo porque as vagas são limitadas. 😊${DOCS}${END}`}
    ],
    emailResps:[
     {title:'📧 Confirmar atendimento por e-mail', subj:'CAD – Podemos te ajudar!', badge:'Recomendada', primary:true, nao:false,
@@ -499,7 +505,7 @@ const S = [
    ctx:'Não há agendamento. Atendimento por ordem de chegada, limite 30 senhas/dia.',
    resps:[
     {title:'✉️ Sem agendamento', badge:'Padrão', primary:true, nao:false,
-     tpl: n => `${HDR}\n\nOlá${n?', '+n:''}!\n\nNão precisa agendar, pode vir direto. O atendimento é por ordem de chegada, de segunda a sexta, das 9h às 12h.\n\nRecomendamos chegar cedo, porque o limite é de 30 senhas por dia e as vagas costumam acabar.${DOCS}${END}`}
+     tpl: n => `Olá${n?', '+n:''}! 😊\n\nNão precisa agendar não — pode vir direto! O atendimento é por ordem de chegada, de segunda a sexta, das 9h às 12h.\n\nSó fica ligado: o limite é de 30 senhas por dia e costumam acabar cedo. Então, quanto mais cedo chegar, melhor! 😊${DOCS}${END}`}
    ],
    emailResps:[
     {title:'📧 Explicar atendimento por e-mail', subj:'CAD – Informações sobre como nos visitar', badge:'Padrão', primary:true, nao:false,
@@ -514,7 +520,7 @@ const S = [
    ctx:'Não conseguimos ouvir áudios. Pedir que mande em texto.',
    resps:[
     {title:'✉️ Pedir em texto', badge:'Padrão', primary:true, nao:false,
-     tpl: n => `${HDR}\n\nOlá${n?', '+n:''}! Não consigo ouvir áudios por aqui.\n\nPode me contar o que precisa por mensagem de texto? Assim consigo te orientar melhor.`}
+     tpl: n => `Olá${n?', '+n:''}! 😊\n\nInfelizmente não consigo ouvir áudios por aqui.\n\nPode me contar por texto o que você precisa? Assim consigo te ajudar melhor! 😊`}
    ],
    emailResps:[]},
 
@@ -761,7 +767,7 @@ const S = [
    ctx:'Limite de 30 senhas atingido. Orientar retorno no próximo dia útil.',
    resps:[
     {title:'📅 Vagas esgotadas', badge:'Padrão', primary:true, nao:false,
-     tpl: n => `${HDR}\n\nOlá${n?', '+n:''}!\n\nHoje já atingimos o limite de 30 senhas e não foi possível te atender.\n\nVolte no próximo dia útil bem cedo para garantir sua vaga.${END}`}
+     tpl: n => `Olá${n?', '+n:''}! 😊\n\nInfelizmente hoje as 30 senhas do dia já se esgotaram. 😔\n\nMas não desanima — volte amanhã bem cedinho (antes das 9h se puder) que você garante a vaga! Qualquer dúvida, estou aqui.${END}`}
    ],
    emailResps:[
     {title:'📧 Vagas esgotadas por e-mail', subj:'CAD – Atendimento indisponível hoje', badge:'Padrão', primary:true, nao:false,
@@ -776,7 +782,7 @@ const S = [
    ctx:'Mensagem fora do horário. Informar e responder no próximo dia útil.',
    resps:[
     {title:'🌙 Fora do horário', badge:'Padrão', primary:true, nao:false,
-     tpl: n => `${HDR}\n\nOlá${n?', '+n:''}!\n\nNo momento estamos fora do horário de atendimento. Sua mensagem será respondida no próximo dia útil.${END}`}
+     tpl: n => `Olá${n?', '+n:''}! 😊\n\nObrigada pelo contato! No momento estamos fora do horário de atendimento, mas responderei assim que possível no próximo dia útil.\n\nAtendemos de segunda a sexta, das 9h às 12h. Até lá! 🙂${END}`}
    ],
    emailResps:[
     {title:'📧 Fora do horário por e-mail', subj:'CAD – Mensagem recebida fora do horário', badge:'Padrão', primary:true, nao:false,
@@ -792,7 +798,7 @@ const S = [
    ctx:'Manter postura calma. Registrar a insatisfação e orientar retorno com documentação.',
    resps:[
     {title:'🤝 Resposta respeitosa', badge:'Recomendada', primary:true, nao:false,
-     tpl: n => `${HDR}\n\nOlá${n?', '+n:''}!\n\nEntendemos sua frustração e lamentamos que não tenha conseguido ser atendida. Isso é importante para nós.\n\nPara que possamos ajudar, venha até nossa sede com toda a documentação. Chegando cedo, sua vaga será garantida.${END}`}
+     tpl: n => `Olá${n?', '+n:''}!\n\nEntendo muito bem a sua frustração e me desculpe pelo transtorno. 😔\n\nInfelizmente o limite de 30 senhas por dia às vezes impede que todo mundo seja atendido no mesmo dia.\n\nSe vier cedo amanhã, com certeza vai conseguir! Precisando de qualquer coisa, estou aqui. 🙂${END}`}
    ],
    emailResps:[
     {title:'📧 Resposta a reclamação (e-mail)', subj:'CAD – Recebemos sua reclamação', badge:'Recomendada', primary:true, nao:false,
@@ -1150,7 +1156,7 @@ function addHist(title, text) {
 }
 function renderHist() {
   const el = document.getElementById('hist-chips');
-  if (!hist.length) { el.innerHTML = '<span class="hist-empty">Nenhuma mensagem copiada ainda</span>'; return; }
+  if (!hist.length) { el.innerHTML = '<span class="hist-empty">Nenhuma cópia ainda — as últimas aparecerão aqui</span>'; return; }
   el.innerHTML = hist.map((h, i) => `
     <div class="hchip" onclick="recop(${i})" title="${h.title}">
       📋 ${h.title.replace(/[^\w\sÀ-ú]/gu,'').trim().substring(0,26)}
