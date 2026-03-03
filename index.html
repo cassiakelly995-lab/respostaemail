@@ -312,6 +312,9 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
       <button class="chip" onclick="filtro(this,'Agendamento')">📅 Agenda</button>
       <button class="chip" onclick="filtro(this,'delicada')">😓 Delicado</button>
       <button class="chip" onclick="filtro(this,'E-mail')">📧 E-mail</button>
+      <button class="chip" onclick="filtro(this,'Encerramento')">✅ Encerrar</button>
+      <button class="chip" onclick="filtro(this,'Urgente')">🚨 Urgente</button>
+      <button class="chip" onclick="filtro(this,'Localização')">📍 Como chegar</button>
     </div>
     <div class="sb-list" id="sb-list"></div>
   </div>
@@ -932,6 +935,129 @@ const S = [
      tpl: n => `${HDRE}\nPrezado(a)${n?' '+n:''}!\n\nClaro, pode retornar! Para darmos continuidade ao seu atendimento, compareça presencialmente à nossa sede com:\n\n- Documentos pessoais (RG e CPF)\n- Protocolo ou comprovante do atendimento anterior (se tiver)\n- Documentação atualizada relacionada ao seu caso\n\nO atendimento é realizado de segunda a sexta-feira, das 9h às 12h, por ordem de chegada, com limite de 30 senhas por dia.${ENDE}`}
    ]},
 
+
+  // ── NOVOS CENÁRIOS ────────────────────────────────────────────
+
+  {grp:'👤 Primeiro contato', id:'bv5', icon:'👋', ic:'i-blue', pip:null,
+   label:"Mandou só 'oi' sem contexto", sub:'Cumprimentar e perguntar o que precisa',
+   who:'Assistido', wc:'#3b82f6',
+   sim:'Oi',
+   tags:[{t:'Boas-vindas',c:'tg-blue'},{t:'Primeiro contato',c:'tg-teal'}],
+   ctx:'Pessoa mandou só um oi. Responder de forma leve e perguntar o que precisa.',
+   resps:[
+    {title:'👋 Responder o oi', badge:'Recomendada', primary:true, nao:false,
+     tpl: n => `Oi${n?', '+n:''}! 😊 Aqui é a Cássia, tudo bem?\n\nEm que posso te ajudar?`},
+    {title:'👋 Variação animada', badge:'Alternativa', primary:false, nao:false,
+     tpl: n => `Oi${n?', '+n:''}! 😊 Tudo bem? Aqui é a Cássia!\n\nMe conta, no que posso ajudar?`}
+   ],
+   emailResps:[]},
+
+  {grp:'📍 Como chegar', id:'loc1', icon:'📍', ic:'i-gold', pip:null,
+   label:'Como chegar / estacionamento', sub:'Endereço, referência e dicas de acesso',
+   who:'Assistido', wc:'#c9973a',
+   sim:'Como faço para chegar aí? Tem estacionamento?',
+   tags:[{t:'Localização',c:'tg-gold'}],
+   ctx:'Informar endereço completo, referência (Poupatempo) e dicas de acesso e estacionamento.',
+   resps:[
+    {title:'📍 Como chegar', badge:'Recomendada', primary:true, nao:false,
+     tpl: n => `Oi${n?', '+n:''}! 😊\n\nA gente fica no Poupatempo de Santana de Parnaíba:\n\n📍 Av. Tenente Marques, 5297 – Jd. do Luar, Santana de Parnaíba/SP\n\nTem estacionamento no próprio Poupatempo. Pode vir de carro sem problema!\n\nAtendemos de segunda a sexta, das 9h às 12h, por ordem de chegada. ⚠️ Limite de 30 senhas por dia, vale chegar cedo! 😊`},
+    {title:'📍 Só o endereço', badge:'Alternativa', primary:false, nao:false,
+     tpl: n => `Oi${n?', '+n:''}! 😊\n\n📍 Av. Tenente Marques, 5297 – Jd. do Luar, Santana de Parnaíba/SP\n(dentro do Poupatempo)\n\n🕘 Seg–Sex, das 9h às 12h — sem agendamento, por ordem de chegada!`}
+   ],
+   emailResps:[
+    {title:'📧 Como chegar por e-mail', subj:'CAD – Endereço e informações de acesso', badge:'Padrão', primary:true, nao:false,
+     tpl: n => `${HDRE}\nPrezado(a)${n?' '+n:''}!\n\nEstamos localizados no Poupatempo de Santana de Parnaíba:\n\n📍 Av. Tenente Marques, 5297 – Jd. do Luar, Santana de Parnaíba/SP\n\nHá estacionamento disponível no próprio Poupatempo.\n\nAtendemos de segunda a sexta-feira, das 9h às 12h, por ordem de chegada, com limite de 30 senhas por dia.${ENDE}`}
+   ]},
+
+  {grp:'📋 Documentos', id:'doc3', icon:'📸', ic:'i-gold', pip:null,
+   label:'Mandou foto de documento pelo WhatsApp', sub:'Não avaliamos documentos por WhatsApp',
+   who:'Assistido', wc:'#c9973a',
+   sim:'[📎 Imagem]',
+   tags:[{t:'Documentos',c:'tg-gold'},{t:'Situação delicada',c:'tg-gold'}],
+   ctx:'Pessoa mandou foto de documento. Não fazemos avaliação por WhatsApp. Orientar comparecer presencialmente.',
+   resps:[
+    {title:'📸 Não avaliamos por aqui', badge:'Recomendada', primary:true, nao:false,
+     tpl: n => `Oi${n?', '+n:''}! 😊 Aqui é a Cássia.\n\nInfelizmente não consigo avaliar documentos pelo WhatsApp.\n\nPara que a gente possa te ajudar direito, precisa vir pessoalmente aqui na sede com os documentos originais. O atendimento é de segunda a sexta, das 9h às 12h — sem agendamento! 😊${DOCS}${END}`},
+    {title:'📸 Variação mais direta', badge:'Alternativa', primary:false, nao:false,
+     tpl: n => `Oi${n?', '+n:''}! 😊\n\nAqui é a Cássia — recebi a imagem, mas infelizmente não consigo analisar documentos por aqui.\n\nA avaliação precisa ser feita presencialmente com os originais. Pode vir de segunda a sexta, das 9h às 12h!${END}`}
+   ],
+   emailResps:[]},
+
+  {grp:'📅 Agendamento e horários', id:'age4', icon:'📆', ic:'i-slate', pip:null,
+   label:'Atende sábado ou feriado?', sub:'Não, apenas dias úteis',
+   who:'Assistido', wc:'#6e89b8',
+   sim:'Vocês atendem no sábado?',
+   tags:[{t:'Agendamento',c:'tg-blue'},{t:'Horário',c:'tg-gold'}],
+   ctx:'Não atendemos sábado nem feriado. Apenas dias úteis, 9h às 12h.',
+   resps:[
+    {title:'📆 Não atendemos sábado', badge:'Padrão', primary:true, nao:false,
+     tpl: n => `Oi${n?', '+n:''}! 😊 Aqui é a Cássia.\n\nInfelizmente não, só atendemos de segunda a sexta, das 9h às 12h — feriados também não.\n\nSe puder, apareça num dia útil bem cedinho para garantir sua vaga! 😊`}
+   ],
+   emailResps:[
+    {title:'📧 Não atendemos sábado (e-mail)', subj:'CAD – Dias e horários de atendimento', badge:'Padrão', primary:true, nao:false,
+     tpl: n => `${HDRE}\nPrezado(a)${n?' '+n:''}!\n\nInformamos que nosso atendimento é realizado apenas em dias úteis, de segunda a sexta-feira, das 9h às 12h.\n\nNão atendemos aos sábados, domingos ou feriados.${ENDE}`}
+   ]},
+
+  {grp:'😓 Situações delicadas', id:'del6', icon:'🚨', ic:'i-red', pip:'pip-red',
+   label:'Situação urgente / vulnerável', sub:'Acolher com empatia e orientar com prioridade',
+   who:'Assistido', wc:'#e8495a',
+   sim:'Estou desesperada, preciso muito de ajuda, não sei o que fazer',
+   tags:[{t:'Urgente',c:'tg-red'},{t:'Situação delicada',c:'tg-gold'}],
+   ctx:'Pessoa em sofrimento ou situação de vulnerabilidade. Acolher antes de orientar. Se houver risco físico, acionar 190 ou 180.',
+   resps:[
+    {title:'🚨 Acolher e orientar', badge:'Recomendada', primary:true, nao:false,
+     tpl: n => `Oi${n?', '+n:''}! 😊 Aqui é a Cássia.\n\nFico feliz que você entrou em contato — você não está sozinha nisso. 💙\n\nMe conta um pouquinho o que está acontecendo para eu entender como posso te ajudar? A gente vai achar um caminho juntas.`},
+    {title:'🚨 Se houver risco físico imediato', badge:'Urgente', primary:false, nao:false,
+     tpl: n => `Oi${n?', '+n:''}! Aqui é a Cássia.\n\nAntes de qualquer coisa — você está em segurança agora?\n\nSe estiver em risco, ligue imediatamente:\n🔴 190 – Polícia Militar\n🔴 180 – Central da Mulher (24h, gratuito)\n\nEstou aqui assim que puder me contar o que está acontecendo. 💙`}
+   ],
+   emailResps:[]},
+
+  {grp:'👤 Primeiro contato', id:'bv6', icon:'✅', ic:'i-green', pip:null,
+   label:'Encerramento de conversa', sub:'Fechar o atendimento com acolhimento',
+   who:'Assistido', wc:'#22c97a',
+   sim:'Ok, muito obrigada!',
+   tags:[{t:'Encerramento',c:'tg-green'}],
+   ctx:'Pessoa agradeceu ou encerrou a conversa. Responder de forma calorosa e abrir para futuras dúvidas.',
+   resps:[
+    {title:'✅ Encerrar com carinho', badge:'Recomendada', primary:true, nao:false,
+     tpl: n => `Disponha${n?', '+n:''}! 😊 Se surgir qualquer dúvida, é só me chamar. Boa sorte! 🍀`},
+    {title:'✅ Encerramento com reforço', badge:'Alternativa', primary:false, nao:false,
+     tpl: n => `Por nada${n?', '+n:''}! 😊 Qualquer coisa que precisar, pode me chamar aqui. Boa sorte e até logo! 🍀`},
+    {title:'✅ Encerramento simples', badge:'Alternativa', primary:false, nao:false,
+     tpl: n => `De nada${n?', '+n:''}! 😊 Estou por aqui se precisar. Até logo!`}
+   ],
+   emailResps:[]},
+
+  {grp:'👤 Primeiro contato', id:'bv7', icon:'⏸️', ic:'i-slate', pip:null,
+   label:'Ausência temporária', sub:'Avisar que volta em breve',
+   who:'Assistido', wc:'#6e89b8',
+   sim:'',
+   tags:[{t:'Ausência',c:'tg-gold'}],
+   ctx:'Usar quando precisar se ausentar brevemente. Informar que retornará em breve.',
+   resps:[
+    {title:'⏸️ Ausência curta', badge:'Recomendada', primary:true, nao:false,
+     tpl: n => `Oi${n?', '+n:''}! 😊 Preciso me ausentar por alguns minutos, mas já volto e respondo você! 🙂`},
+    {title:'⏸️ Ausência com previsão', badge:'Alternativa', primary:false, nao:false,
+     tpl: n => `Oi${n?', '+n:''}! 😊 Preciso me ausentar por aproximadamente 15 minutinhos — assim que voltar te respondo! 🙂`},
+    {title:'⏸️ Ausência mais longa', badge:'Alternativa', primary:false, nao:false,
+     tpl: n => `Oi${n?', '+n:''}! 😊 No momento estou em atendimento presencial, mas respondo assim que finalizar. Obrigada pela paciência! 🙂`}
+   ],
+   emailResps:[]},
+
+  {grp:'😓 Situações delicadas', id:'del7', icon:'🔔', ic:'i-slate', pip:null,
+   label:'Pessoa que sumiu sem responder', sub:'Retomar contato educadamente',
+   who:'Assistido', wc:'#8b5cf6',
+   sim:'[sem resposta há dias]',
+   tags:[{t:'Retorno',c:'tg-purple'},{t:'Situação delicada',c:'tg-gold'}],
+   ctx:'Pessoa deixou de responder. Retomar contato de forma leve, sem pressionar.',
+   resps:[
+    {title:'🔔 Retomar contato', badge:'Recomendada', primary:true, nao:false,
+     tpl: n => `Oi${n?', '+n:''}! 😊 Aqui é a Cássia, tudo bem?\n\nPassei para saber se ainda precisa de ajuda ou se já resolveu sua situação. Qualquer coisa, estou aqui! 😊`},
+    {title:'🔔 Retomar com prazo', badge:'Alternativa', primary:false, nao:false,
+     tpl: n => `Oi${n?', '+n:''}! 😊 Aqui é a Cássia, ficou tudo bem?\n\nPassei para dar um oi e ver se ainda posso te ajudar em alguma coisa. Se não tiver mais dúvidas, tudo certo também! 😊`}
+   ],
+   emailResps:[]},
+
 ];
 
 // ── ESTADO ──────────────────────────────────────────────
@@ -998,7 +1124,7 @@ function buscar(v) {
 
 // ── WELCOME TAGS ────────────────────────────────────────
 (function(){
-  const tags = ['Divórcio','Pensão','Trabalhista','INSS','Criminal','Documentos','Áudio','Vagas esgotadas','Violência doméstica','Convênio','Dativo','E-mail'];
+  const tags = ['Divórcio','Pensão','Trabalhista','INSS','Criminal','Documentos','Áudio','Vagas esgotadas','Violência doméstica','Convênio','Dativo','E-mail','Urgente','Como chegar','Encerramento'];
   document.getElementById('wtags').innerHTML = tags.map(t =>
     `<button class="wtag" onclick="buscar('${t}')">${t}</button>`).join('');
 })();
