@@ -396,6 +396,9 @@ html,body{min-height:100%;font-family:var(--ff);background:var(--bg);color:var(-
   <div class="nav-tab" onclick="switchTab('bravo')" data-tab="bravo">
     <span class="ti">🛡️</span> Assistido Exaltado
   </div>
+  <div class="nav-tab" onclick="switchTab('agendamento')" data-tab="agendamento">
+    <span class="ti">🗓️</span> Agendamento
+  </div>
   <div class="nav-tab" onclick="switchTab('ramais')" data-tab="ramais">
     <span class="ti">📞</span> Ramais
   </div>
@@ -477,6 +480,49 @@ html,body{min-height:100%;font-family:var(--ff);background:var(--bg);color:var(-
     <div class="sec-title">Assistido Exaltado</div>
     <div class="sec-desc">Mensagens firmes, educadas e profissionais para situações de tensão.</div>
     <div class="msg-grid" id="bravo-grid"></div>
+  </div>
+
+  <!-- ══ ABA: AGENDAMENTO ══ -->
+  <div class="tab-panel" id="tab-agendamento">
+    <div class="sec-title">Agendamento — Painel Administrativo</div>
+    <div class="sec-desc">Acesso ao sistema de agendamento da Subseção Santana de Parnaíba.</div>
+    <div class="info-block">
+      <div class="info-block-title"><span>🗓️</span> Acesso ao Sistema</div>
+      <div class="info-item">
+        <div class="info-dot"></div>
+        <div class="info-text">
+          <strong>Painel Admin:</strong><br>
+          <a href="https://agendamentooab.com.br/staparnaiba/agendamento/area-admin" target="_blank" style="color:var(--blue);text-decoration:none;font-weight:600;word-break:break-all;">agendamentooab.com.br/staparnaiba/agendamento/area-admin</a>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="info-dot"></div>
+        <div class="info-text"><strong>Login:</strong> santana.parnaiba@oabsp.org.br</div>
+      </div>
+      <div class="info-item">
+        <div class="info-dot"></div>
+        <div class="info-text" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+          <span><strong>Senha:</strong> <span id="senha-text" style="filter:blur(5px);transition:filter .2s;user-select:none;">Oab247!20@25</span></span>
+          <button onclick="toggleSenha()" id="senha-btn" style="background:var(--blue-light);color:var(--blue);border:none;border-radius:6px;padding:4px 12px;font-size:12px;font-weight:600;cursor:pointer;font-family:var(--ff);">👁 Mostrar</button>
+          <button onclick="copiarSenha()" style="background:var(--surface2);color:var(--text2);border:1px solid var(--border);border-radius:6px;padding:4px 12px;font-size:12px;font-weight:600;cursor:pointer;font-family:var(--ff);">📋 Copiar senha</button>
+        </div>
+      </div>
+    </div>
+    <div class="msg-grid" style="margin-top:4px">
+      <div class="msg-card">
+        <div class="msg-card-hd">
+          <div class="msg-card-icon c-blue">🚀</div>
+          <div class="msg-card-title">Acessar Painel Agora</div>
+          <span class="msg-card-tag tag-blue">Acesso Rápido</span>
+        </div>
+        <div class="msg-card-body">
+          <div class="msg-text">Clique abaixo para abrir o painel administrativo de agendamento em uma nova aba.</div>
+        </div>
+        <div class="msg-card-ft">
+          <a href="https://agendamentooab.com.br/staparnaiba/agendamento/area-admin" target="_blank" style="display:flex;align-items:center;gap:6px;padding:7px 14px;border-radius:7px;background:var(--blue);color:#fff;text-decoration:none;font-size:12px;font-weight:600;font-family:var(--ff);">🔗 Abrir Painel Administrativo</a>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- ══ ABA: RAMAIS ══ -->
@@ -1094,6 +1140,25 @@ document.addEventListener('keydown', function(e){
 document.getElementById('modal-overlay').addEventListener('click', function(e){
   if(e.target===this) closeModal();
 });
+
+function toggleSenha() {
+  var el = document.getElementById('senha-text');
+  var btn = document.getElementById('senha-btn');
+  if(el.style.filter === 'none') {
+    el.style.filter = 'blur(5px)';
+    el.style.userSelect = 'none';
+    btn.textContent = '👁 Mostrar';
+  } else {
+    el.style.filter = 'none';
+    el.style.userSelect = 'text';
+    btn.textContent = '🙈 Ocultar';
+  }
+}
+function copiarSenha() {
+  navigator.clipboard.writeText('Oab247!20@25').then(function(){
+    showToast('Senha copiada!');
+  });
+}
 
 renderMsgGrid(MSGS.mensagens, 'msg-grid');
 renderMsgGrid(MSGS.reclamacao, 'rec-grid');
