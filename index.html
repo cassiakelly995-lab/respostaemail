@@ -3,166 +3,826 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ramais OAB SP</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>Painel de Atendimento — OAB Santana de Parnaíba</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#f7f8fc;--surface:#fff;--border:#e4e7ef;--border2:#d0d5e2;
-  --text:#0f1523;--text2:#4a5568;--text3:#8492a6;
-  --blue:#0066ff;--blue-light:#e8f0fe;--blue-mid:#c2d7fd;
-  --green:#00875a;--green-light:#e3fcef;
-  --ff:'DM Sans',sans-serif;--mono:'DM Mono',monospace;
-  --r:8px;--rs:6px;
-  --sh:0 1px 3px rgba(0,0,0,.08),0 1px 2px rgba(0,0,0,.04);
-  --sh2:0 4px 12px rgba(0,0,0,.10);
+  --bg:#f4f6fb;
+  --surface:#ffffff;
+  --surface2:#f8f9fd;
+  --border:#e5e9f5;
+  --border2:#d0d6eb;
+  --text:#0d1526;
+  --text2:#455069;
+  --text3:#8b95ae;
+  --navy:#0f2d6b;
+  --blue:#1a56db;
+  --blue-light:#eff4ff;
+  --blue-mid:#c7d9ff;
+  --green:#0d7a4e;
+  --green-bg:#ecfdf5;
+  --amber:#b45309;
+  --amber-bg:#fffbeb;
+  --red:#c0392b;
+  --red-bg:#fff5f5;
+  --purple:#6d28d9;
+  --purple-bg:#f5f3ff;
+  --teal:#0f766e;
+  --teal-bg:#f0fdfa;
+  --ff:'Plus Jakarta Sans',sans-serif;
+  --mono:'IBM Plex Mono',monospace;
+  --r:12px;
+  --r2:8px;
+  --sh:0 1px 4px rgba(15,45,107,.06),0 2px 8px rgba(15,45,107,.04);
+  --sh2:0 4px 24px rgba(15,45,107,.10);
+  --sh3:0 8px 40px rgba(15,45,107,.14);
 }
-html,body{min-height:100%;font-family:var(--ff);background:var(--bg);color:var(--text);font-size:14px}
+html,body{min-height:100%;font-family:var(--ff);background:var(--bg);color:var(--text);font-size:14px;line-height:1.5}
 
-/* TOPBAR */
+/* ── TOPBAR ── */
 #topbar{
-  position:sticky;top:0;z-index:50;
-  height:56px;background:var(--surface);border-bottom:1px solid var(--border);
-  display:flex;align-items:center;padding:0 24px;gap:14px;
-  box-shadow:0 1px 0 var(--border);
+  position:sticky;top:0;z-index:200;
+  height:58px;
+  background:var(--navy);
+  display:flex;align-items:center;padding:0 28px;gap:16px;
+  box-shadow:0 2px 12px rgba(15,45,107,.25);
 }
-.tb-icon{width:32px;height:32px;background:var(--blue);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.tb-icon svg{width:18px;height:18px;stroke:#fff;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
-.tb-title{font-size:15px;font-weight:700;letter-spacing:-.3px}
-.tb-tag{font-size:10px;font-weight:700;background:var(--blue-light);color:var(--blue);padding:3px 8px;border-radius:4px;letter-spacing:.4px}
-.tb-r{margin-left:auto;display:flex;align-items:center;gap:10px}
-
-/* SEARCH */
-.search-wrap{position:relative;width:280px}
-.search-wrap svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:15px;height:15px;stroke:var(--text3);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}
-#search{
-  width:100%;border:1.5px solid var(--border);border-radius:var(--rs);
-  padding:8px 10px 8px 32px;font-family:var(--ff);font-size:13px;
-  color:var(--text);outline:none;background:var(--bg);transition:border-color .15s
+.tb-logo{display:flex;align-items:center;gap:10px}
+.tb-logo-icon{
+  width:34px;height:34px;
+  background:rgba(255,255,255,.15);
+  border:1px solid rgba(255,255,255,.2);
+  border-radius:9px;
+  display:flex;align-items:center;justify-content:center;
 }
-#search:focus{border-color:var(--blue);background:var(--surface)}
-#search::placeholder{color:var(--text3)}
-#result-count{font-size:12px;color:var(--text3);white-space:nowrap;font-variant-numeric:tabular-nums}
-
-/* COPY TOAST */
-#toast{
-  position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(8px);
-  background:var(--text);border-radius:var(--rs);padding:9px 18px;
-  font-size:13px;font-weight:600;color:#fff;opacity:0;
-  transition:all .2s;pointer-events:none;z-index:300;white-space:nowrap;
-  box-shadow:var(--sh2)
+.tb-logo-icon svg{width:17px;height:17px;stroke:#fff;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.tb-name{font-size:14px;font-weight:700;color:#fff;letter-spacing:-.3px}
+.tb-sub{font-size:11px;color:rgba(255,255,255,.55);font-weight:500;margin-top:1px}
+.tb-div{width:1px;height:28px;background:rgba(255,255,255,.15)}
+.tb-badge{
+  font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;
+  background:rgba(255,255,255,.12);color:rgba(255,255,255,.8);
+  border:1px solid rgba(255,255,255,.15);
+  padding:3px 10px;border-radius:20px;
 }
-#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-
-/* MAIN */
-#main{padding:20px 24px 40px;max-width:1200px;margin:0 auto}
-
-/* SECTOR GRID */
-.sectors-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
-  gap:12px
+.tb-r{margin-left:auto;display:flex;align-items:center;gap:8px}
+.tb-time{
+  font-family:var(--mono);font-size:12px;color:rgba(255,255,255,.6);
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);
+  padding:5px 12px;border-radius:7px;letter-spacing:.5px;
 }
 
-/* SECTOR CARD */
+/* ── NAV TABS ── */
+#nav{
+  background:var(--surface);
+  border-bottom:1px solid var(--border);
+  padding:0 28px;
+  display:flex;align-items:flex-end;gap:2px;
+  box-shadow:var(--sh);
+  overflow-x:auto;
+}
+#nav::-webkit-scrollbar{height:0}
+.nav-tab{
+  display:flex;align-items:center;gap:7px;
+  padding:14px 18px 13px;
+  font-size:13px;font-weight:600;color:var(--text3);
+  border-bottom:2px solid transparent;
+  cursor:pointer;white-space:nowrap;
+  transition:all .15s;user-select:none;
+  border-radius:8px 8px 0 0;
+}
+.nav-tab:hover{color:var(--text2);background:var(--bg)}
+.nav-tab.active{color:var(--blue);border-bottom-color:var(--blue);background:var(--blue-light)}
+.nav-tab .ti{font-size:15px}
+.nav-tab .badge{
+  font-size:10px;font-weight:700;
+  background:var(--blue);color:#fff;
+  padding:1px 6px;border-radius:10px;
+  line-height:1.6;
+}
+.nav-tab.active .badge{background:var(--blue)}
+
+/* ── MAIN ── */
+#main{padding:24px 28px 60px;max-width:1360px;margin:0 auto}
+.tab-panel{display:none}
+.tab-panel.active{display:block;animation:fadeUp .2s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── SECTION TITLE ── */
+.sec-title{
+  font-size:18px;font-weight:800;color:var(--navy);
+  letter-spacing:-.5px;margin-bottom:4px;
+}
+.sec-desc{font-size:13px;color:var(--text3);margin-bottom:20px}
+
+/* ── MSG GRID ── */
+.msg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px}
+
+/* ── MSG CARD ── */
+.msg-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--r);
+  overflow:hidden;
+  box-shadow:var(--sh);
+  transition:box-shadow .2s,transform .15s;
+}
+.msg-card:hover{box-shadow:var(--sh2);transform:translateY(-1px)}
+
+.msg-card-hd{
+  padding:13px 16px 11px;
+  display:flex;align-items:center;gap:10px;
+  border-bottom:1px solid var(--border);
+}
+.msg-card-icon{
+  width:34px;height:34px;border-radius:9px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;flex-shrink:0;
+}
+.msg-card-title{font-size:13px;font-weight:700;color:var(--text);flex:1}
+.msg-card-tag{
+  font-size:10px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;
+  padding:2px 8px;border-radius:20px;
+}
+
+.msg-card-body{padding:14px 16px}
+.msg-text{
+  font-size:12.5px;color:var(--text2);line-height:1.65;
+  white-space:pre-wrap;word-break:break-word;
+  max-height:180px;overflow-y:auto;
+  font-family:var(--ff);
+}
+.msg-text::-webkit-scrollbar{width:4px}
+.msg-text::-webkit-scrollbar-track{background:transparent}
+.msg-text::-webkit-scrollbar-thumb{background:var(--border2);border-radius:4px}
+
+.msg-card-ft{
+  padding:10px 16px 13px;
+  display:flex;gap:8px;
+  border-top:1px solid var(--border);
+}
+.btn{
+  display:flex;align-items:center;gap:6px;
+  padding:7px 14px;border-radius:7px;border:none;cursor:pointer;
+  font-family:var(--ff);font-size:12px;font-weight:600;
+  transition:all .15s;
+}
+.btn-copy{background:var(--blue-light);color:var(--blue)}
+.btn-copy:hover{background:var(--blue-mid)}
+.btn-copy svg{width:13px;height:13px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.btn-copy.copied{background:var(--green-bg);color:var(--green)}
+
+.btn-expand{background:var(--surface2);color:var(--text2);border:1px solid var(--border)}
+.btn-expand:hover{background:var(--bg)}
+.btn-expand svg{width:13px;height:13px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+
+/* ── MODAL ── */
+#modal-overlay{
+  position:fixed;inset:0;background:rgba(13,21,38,.5);
+  backdrop-filter:blur(4px);z-index:500;
+  display:none;align-items:center;justify-content:center;padding:20px;
+}
+#modal-overlay.open{display:flex;animation:fadeIn .15s ease}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+#modal{
+  background:var(--surface);border-radius:16px;
+  width:100%;max-width:620px;max-height:90vh;
+  box-shadow:var(--sh3);
+  display:flex;flex-direction:column;
+  animation:slideUp .2s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes slideUp{from{opacity:0;transform:translateY(20px) scale(.97)}to{opacity:1;transform:none}}
+#modal-hd{
+  padding:18px 22px;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:12px;
+}
+#modal-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+#modal-title{font-size:15px;font-weight:700;color:var(--text);flex:1}
+#modal-close{
+  width:30px;height:30px;border-radius:7px;border:1px solid var(--border);
+  background:var(--surface2);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .15s;
+}
+#modal-close:hover{background:var(--bg)}
+#modal-close svg{width:14px;height:14px;stroke:var(--text3);stroke-width:2.5;fill:none;stroke-linecap:round;stroke-linejoin:round}
+#modal-body{padding:20px 22px;overflow-y:auto;flex:1}
+#modal-text{
+  font-size:13.5px;color:var(--text2);line-height:1.7;
+  white-space:pre-wrap;word-break:break-word;
+  background:var(--surface2);border:1px solid var(--border);
+  border-radius:10px;padding:16px 18px;font-family:var(--ff);
+}
+#modal-ft{
+  padding:14px 22px;border-top:1px solid var(--border);
+  display:flex;gap:10px;justify-content:flex-end;
+}
+.btn-primary{
+  background:var(--blue);color:#fff;
+  padding:9px 20px;border-radius:8px;border:none;
+  font-family:var(--ff);font-size:13px;font-weight:700;cursor:pointer;
+  display:flex;align-items:center;gap:7px;
+  transition:background .15s, transform .1s;
+}
+.btn-primary:hover{background:#1347c5}
+.btn-primary:active{transform:scale(.97)}
+.btn-primary svg{width:14px;height:14px;stroke:#fff;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.btn-secondary{
+  background:var(--surface2);color:var(--text2);
+  padding:9px 16px;border-radius:8px;border:1px solid var(--border);
+  font-family:var(--ff);font-size:13px;font-weight:600;cursor:pointer;
+  transition:background .15s;
+}
+.btn-secondary:hover{background:var(--bg)}
+
+/* ── RAMAIS TAB ── */
+.sectors-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px}
 .sector-card{
   background:var(--surface);border:1px solid var(--border);
   border-radius:var(--r);overflow:hidden;box-shadow:var(--sh);
-  transition:box-shadow .15s
+  transition:box-shadow .15s,transform .15s;
 }
-.sector-card:hover{box-shadow:var(--sh2)}
+.sector-card:hover{box-shadow:var(--sh2);transform:translateY(-1px)}
 .sector-card.hidden{display:none}
-
 .sec-hd{
-  padding:10px 14px;border-bottom:1px solid var(--border);
-  display:flex;align-items:center;gap:10px;cursor:pointer;
-  user-select:none;background:var(--surface)
+  padding:12px 15px;display:flex;align-items:center;gap:10px;
+  cursor:pointer;user-select:none;transition:background .12s;
 }
-.sec-hd:hover{background:var(--bg)}
-.sec-icon{
-  width:30px;height:30px;border-radius:7px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:15px;flex-shrink:0
-}
-.sec-name{font-size:13px;font-weight:700;color:var(--text);flex:1}
-.sec-count{
-  font-size:10px;font-weight:700;color:var(--text3);
-  background:var(--bg);border:1px solid var(--border);
-  padding:2px 7px;border-radius:20px;font-variant-numeric:tabular-nums
-}
-.sec-chevron{
-  width:16px;height:16px;stroke:var(--text3);stroke-width:2;
-  fill:none;stroke-linecap:round;stroke-linejoin:round;
-  transition:transform .2s;flex-shrink:0
-}
-.sector-card.open .sec-chevron{transform:rotate(90deg)}
-
-.sec-body{display:none;padding:8px 12px 10px}
+.sec-hd:hover{background:#fafbff}
+.sec-icon{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.sec-name{font-size:13px;font-weight:600;color:var(--text);flex:1}
+.sec-count{font-size:11px;font-weight:700;color:var(--text3);background:var(--bg);border:1px solid var(--border);padding:2px 8px;border-radius:20px}
+.sec-chev{width:18px;height:18px;border-radius:6px;background:var(--bg);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;transition:all .15s;flex-shrink:0}
+.sec-chev svg{width:10px;height:10px;stroke:var(--text3);stroke-width:2.5;fill:none;stroke-linecap:round;stroke-linejoin:round;transition:transform .2s}
+.sector-card.open .sec-chev{background:var(--blue-light);border-color:var(--blue-mid)}
+.sector-card.open .sec-chev svg{transform:rotate(90deg);stroke:var(--blue)}
+.sec-divider{height:1px;background:var(--border);display:none}
+.sector-card.open .sec-divider{display:block}
+.sec-body{display:none;padding:8px 12px 12px;animation:slideDown .18s ease}
+@keyframes slideDown{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
 .sector-card.open .sec-body{display:block}
-
-/* RAMAL LIST */
 .ramal-list{display:flex;flex-direction:column;gap:2px}
-.ramal-row{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:6px 8px;border-radius:var(--rs);
-  transition:background .1s;cursor:default
-}
+.ramal-row{display:flex;align-items:center;justify-content:space-between;padding:6px 8px;border-radius:7px;transition:background .1s}
 .ramal-row:hover{background:var(--bg)}
 .ramal-row.highlight{background:var(--blue-light)}
-.ramal-num{
-  font-family:var(--mono);font-size:13px;font-weight:500;color:var(--text);
-  letter-spacing:.5px
-}
+.ramal-num{font-family:var(--mono);font-size:12.5px;font-weight:500;color:var(--text2);letter-spacing:.3px}
 .ramal-row.highlight .ramal-num{color:var(--blue);font-weight:700}
-.copy-btn{
-  width:26px;height:26px;border-radius:5px;border:none;cursor:pointer;
-  background:transparent;display:flex;align-items:center;justify-content:center;
-  opacity:0;transition:all .15s;flex-shrink:0
-}
+.copy-btn{width:27px;height:27px;border-radius:7px;border:none;cursor:pointer;background:transparent;display:flex;align-items:center;justify-content:center;opacity:0;transition:all .15s}
 .ramal-row:hover .copy-btn{opacity:1;background:var(--border)}
-.copy-btn:hover{background:var(--blue-mid) !important}
-.copy-btn svg{width:13px;height:13px;stroke:var(--text2);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.copy-btn:hover{background:var(--blue-light) !important}
+.copy-btn svg{width:13px;height:13px;stroke:var(--text3);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
 .copy-btn:hover svg{stroke:var(--blue)}
-.copy-btn.copied{opacity:1;background:var(--green-light) !important}
+.copy-btn.copied{opacity:1 !important;background:var(--green-bg) !important}
 .copy-btn.copied svg{stroke:var(--green)}
 
-/* EMPTY */
-.empty{
-  grid-column:1/-1;text-align:center;padding:60px 20px;
-  font-size:14px;color:var(--text3);display:none
+/* search in ramais */
+.search-bar{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.sw{position:relative;width:320px}
+.sw svg.si{position:absolute;left:11px;top:50%;transform:translateY(-50%);width:15px;height:15px;stroke:var(--text3);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}
+.sw input{width:100%;border:1.5px solid var(--border);border-radius:9px;padding:9px 12px 9px 34px;font-family:var(--ff);font-size:13px;color:var(--text);outline:none;background:var(--surface2);transition:border-color .15s,box-shadow .15s}
+.sw input:focus{border-color:var(--blue);background:var(--surface);box-shadow:0 0 0 3px rgba(26,86,219,.1)}
+.sw input::placeholder{color:var(--text3)}
+#r-count{font-size:12px;color:var(--text3);font-weight:500}
+
+/* ── TOAST ── */
+#toast{
+  position:fixed;bottom:28px;left:50%;
+  transform:translateX(-50%) translateY(14px);
+  background:var(--navy);border-radius:10px;
+  padding:10px 20px;
+  font-size:13px;font-weight:600;color:#fff;
+  opacity:0;transition:all .22s cubic-bezier(.34,1.56,.64,1);
+  pointer-events:none;z-index:999;white-space:nowrap;
+  box-shadow:var(--sh3);display:flex;align-items:center;gap:8px;
 }
-.empty svg{width:40px;height:40px;stroke:var(--border2);stroke-width:1.5;fill:none;margin:0 auto 12px;display:block}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+#toast svg{width:14px;height:14px;stroke:#4ade80;stroke-width:2.5;fill:none;stroke-linecap:round;stroke-linejoin:round}
+
+/* ── OFÍCIO CONTROL ── */
+.oficio-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;margin-top:4px}
+.oficio-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r);padding:18px 18px 16px;
+  box-shadow:var(--sh);transition:box-shadow .2s;
+  display:flex;flex-direction:column;gap:10px;
+}
+.oficio-card:hover{box-shadow:var(--sh2)}
+.oficio-label{font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text3)}
+.oficio-title{font-size:15px;font-weight:700;color:var(--text)}
+.oficio-desc{font-size:12.5px;color:var(--text2);line-height:1.55}
+.oficio-step{
+  display:flex;gap:10px;align-items:flex-start;
+  background:var(--surface2);border:1px solid var(--border);
+  border-radius:8px;padding:10px 12px;
+}
+.step-num{
+  width:22px;height:22px;border-radius:50%;
+  background:var(--blue);color:#fff;
+  font-size:11px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;
+}
+.step-txt{font-size:12.5px;color:var(--text2);line-height:1.55}
+.oficio-steps{display:flex;flex-direction:column;gap:6px}
+
+/* ── INFO BLOCK ── */
+.info-block{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r);padding:20px 22px;
+  box-shadow:var(--sh);margin-bottom:14px;
+}
+.info-block-title{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.info-block-title span{font-size:17px}
+.info-item{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid var(--border)}
+.info-item:last-child{border-bottom:none;padding-bottom:0}
+.info-dot{width:7px;height:7px;border-radius:50%;background:var(--blue);flex-shrink:0;margin-top:5px}
+.info-text{font-size:13px;color:var(--text2);line-height:1.5}
+.info-text strong{color:var(--text);font-weight:600}
+
+/* Colors helpers */
+.c-blue{background:var(--blue-light);color:var(--blue)}
+.c-green{background:var(--green-bg);color:var(--green)}
+.c-amber{background:var(--amber-bg);color:var(--amber)}
+.c-red{background:var(--red-bg);color:var(--red)}
+.c-purple{background:var(--purple-bg);color:var(--purple)}
+.c-teal{background:var(--teal-bg);color:var(--teal)}
+.c-navy{background:#eef2ff;color:var(--navy)}
+
+.tag-blue{background:var(--blue-light);color:var(--blue)}
+.tag-green{background:var(--green-bg);color:var(--green)}
+.tag-amber{background:var(--amber-bg);color:var(--amber)}
+.tag-red{background:var(--red-bg);color:var(--red)}
+.tag-purple{background:var(--purple-bg);color:var(--purple)}
+.tag-teal{background:var(--teal-bg);color:var(--teal)}
+
+/* Divider */
+.divider{height:1px;background:var(--border);margin:20px 0}
 </style>
 </head>
 <body>
 
+<!-- TOPBAR -->
 <div id="topbar">
-  <div class="tb-icon">
-    <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.37 2 2 0 0 1 3.58 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.46a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 15.55v1.37z"/></svg>
-  </div>
-  <div class="tb-title">Ramais OAB SP</div>
-  <div class="tb-tag">RAMAL INTERNO</div>
-  <div class="tb-r">
-    <div class="search-wrap">
-      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      <input type="text" id="search" placeholder="Buscar setor ou ramal..." oninput="filtrar(this.value)">
+  <div class="tb-logo">
+    <div class="tb-logo-icon">
+      <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
     </div>
-    <span id="result-count"></span>
+    <div>
+      <div class="tb-name">OAB SP — Assistência Judiciária</div>
+      <div class="tb-sub">Subseção Santana de Parnaíba</div>
+    </div>
+  </div>
+  <div class="tb-div"></div>
+  <div class="tb-badge">Painel de Atendimento</div>
+  <div class="tb-r">
+    <div class="tb-time" id="clock">--:--:--</div>
   </div>
 </div>
 
+<!-- NAV -->
+<div id="nav">
+  <div class="nav-tab active" onclick="switchTab('mensagens')" data-tab="mensagens">
+    <span class="ti">💬</span> Mensagens
+  </div>
+  <div class="nav-tab" onclick="switchTab('reclamacao')" data-tab="reclamacao">
+    <span class="ti">⚖️</span> Reclamação de Advogado
+  </div>
+  <div class="nav-tab" onclick="switchTab('oficios')" data-tab="oficios">
+    <span class="ti">📄</span> Controle de Ofícios
+  </div>
+  <div class="nav-tab" onclick="switchTab('secretaria')" data-tab="secretaria">
+    <span class="ti">📲</span> Encaminhamento
+  </div>
+  <div class="nav-tab" onclick="switchTab('bravo')" data-tab="bravo">
+    <span class="ti">🛡️</span> Assistido Exaltado
+  </div>
+  <div class="nav-tab" onclick="switchTab('ramais')" data-tab="ramais">
+    <span class="ti">📞</span> Ramais
+  </div>
+</div>
+
+<!-- MAIN -->
 <div id="main">
-  <div class="sectors-grid" id="grid"></div>
-  <div class="empty" id="empty">
-    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-    Nenhum ramal encontrado para "<span id="empty-term"></span>"
+
+  <!-- ══ ABA: MENSAGENS ══ -->
+  <div class="tab-panel active" id="tab-mensagens">
+    <div class="sec-title">Mensagens de Atendimento</div>
+    <div class="sec-desc">Copie e envie as mensagens conforme o tipo de atendimento ao assistido.</div>
+    <div class="msg-grid" id="msg-grid"></div>
+  </div>
+
+  <!-- ══ ABA: RECLAMAÇÃO ══ -->
+  <div class="tab-panel" id="tab-reclamacao">
+    <div class="sec-title">Reclamação de Advogado</div>
+    <div class="sec-desc">Fluxo completo para receber e tratar reclamações contra advogados nomeados.</div>
+
+    <div class="info-block">
+      <div class="info-block-title"><span>📋</span> Protocolo de Atendimento — Passo a Passo</div>
+      <div class="oficio-steps">
+        <div class="oficio-step">
+          <div class="step-num">1</div>
+          <div class="step-txt"><strong>Perguntar o CPF do assistido</strong> e verificar no sistema se há nomeação vinculada ao caso relatado.</div>
+        </div>
+        <div class="oficio-step">
+          <div class="step-num">2</div>
+          <div class="step-txt"><strong>Se a nomeação estiver RECUSADA:</strong> retornar o assistido ao atendimento presencial para nova triagem e encaminhamento.</div>
+        </div>
+        <div class="oficio-step">
+          <div class="step-num">3</div>
+          <div class="step-txt"><strong>Se a nomeação estiver ACEITA:</strong> orientar o assistido a apresentar reclamação de próprio punho + número do processo + senha + demais documentos.</div>
+        </div>
+        <div class="oficio-step">
+          <div class="step-num">4</div>
+          <div class="step-txt"><strong>Lembrar:</strong> não recebemos áudio. Orientar sempre o assistido ou advogado a enviar mensagem em texto.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="msg-grid" id="rec-grid"></div>
+  </div>
+
+  <!-- ══ ABA: OFÍCIOS ══ -->
+  <div class="tab-panel" id="tab-oficios">
+    <div class="sec-title">Controle de Ofícios</div>
+    <div class="sec-desc">Quando o fórum envia ofício, você responde com o texto padrão abaixo.</div>
+    <div class="msg-grid" id="oficio-grid"></div>
+  </div>
+
+  <!-- ══ ABA: SECRETARIA ══ -->
+  <div class="tab-panel" id="tab-secretaria">
+    <div class="sec-title">Encaminhamento à Secretaria</div>
+    <div class="sec-desc">Mensagens para direcionar o assistido ao contato direto com a secretaria.</div>
+
+    <div class="info-block">
+      <div class="info-block-title"><span>📲</span> Contato da Secretaria</div>
+      <div class="info-item">
+        <div class="info-dot"></div>
+        <div class="info-text"><strong>WhatsApp:</strong> +55 11 93724-8448</div>
+      </div>
+      <div class="info-item">
+        <div class="info-dot"></div>
+        <div class="info-text"><strong>Atendimento:</strong> Segunda a Sexta-feira, das 09h00 às 12h00</div>
+      </div>
+      <div class="info-item">
+        <div class="info-dot"></div>
+        <div class="info-text">Encaminhe apenas casos que realmente necessitam de atendimento direto com a secretaria.</div>
+      </div>
+    </div>
+
+    <div class="msg-grid" id="sec-grid"></div>
+  </div>
+
+  <!-- ══ ABA: ASSISTIDO EXALTADO ══ -->
+  <div class="tab-panel" id="tab-bravo">
+    <div class="sec-title">Assistido Exaltado</div>
+    <div class="sec-desc">Mensagens firmes, educadas e profissionais para situações de tensão.</div>
+    <div class="msg-grid" id="bravo-grid"></div>
+  </div>
+
+  <!-- ══ ABA: RAMAIS ══ -->
+  <div class="tab-panel" id="tab-ramais">
+    <div class="sec-title">Ramais OAB SP</div>
+    <div class="sec-desc">Ramais internos por setor. Clique para expandir e copiar.</div>
+    <div class="search-bar">
+      <div class="sw">
+        <svg class="si" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" id="ramal-search" placeholder="Buscar setor ou número..." oninput="filtrarRamais(this.value)" autocomplete="off">
+      </div>
+      <span id="r-count"></span>
+    </div>
+    <div class="sectors-grid" id="ramal-grid"></div>
+  </div>
+
+</div><!-- /main -->
+
+<!-- MODAL -->
+<div id="modal-overlay" onclick="closeModal(event)">
+  <div id="modal">
+    <div id="modal-hd">
+      <div id="modal-icon"></div>
+      <div id="modal-title"></div>
+      <button id="modal-close" onclick="closeModal()">
+        <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div id="modal-body">
+      <div id="modal-text"></div>
+    </div>
+    <div id="modal-ft">
+      <button class="btn-secondary" onclick="closeModal()">Fechar</button>
+      <button class="btn-primary" id="modal-copy-btn" onclick="copyModal()">
+        <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        Copiar mensagem
+      </button>
+    </div>
   </div>
 </div>
 
-<div id="toast"></div>
+<!-- TOAST -->
+<div id="toast">
+  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  <span id="toast-msg">Copiado!</span>
+</div>
 
 <script>
-var DATA = {
+// ══════════════════════════════════════════
+// DATA — MENSAGENS
+// ══════════════════════════════════════════
+
+var MSGS = {
+  mensagens: [
+    {
+      id:'bv1',
+      icon:'👋',color:'c-blue',tag:'Primeiro Contato',tagColor:'tag-blue',
+      title:'Boas-vindas — Primeiro Contato',
+      text:`Olá! Seja bem-vindo(a) à *OAB SP — Assistência Judiciária Gratuita*, Subseção Santana de Parnaíba. 😊
+
+Para que possamos te ajudar da melhor forma, por favor nos conte: *sobre o que você gostaria de falar?* Como podemos te ajudar hoje?`
+    },
+    {
+      id:'inf1',
+      icon:'📋',color:'c-green',tag:'Informativo',tagColor:'tag-green',
+      title:'Informativo Completo — Documentos',
+      text:`*OAB – ASSISTÊNCIA JUDICIÁRIA GRATUITA*
+📍 Subseção Santana de Parnaíba
+
+━━━━━━━━━━━━━━━━━━━━
+🗓️ *Atendimento:* Segunda a Sexta-feira
+🕘 *Horário:* 09h00 às 12h00
+⚠️ *Limite:* 30 pessoas por dia
+_(Senhas apenas para as primeiras 30)_
+━━━━━━━━━━━━━━━━━━━━
+
+📋 *DOCUMENTOS OBRIGATÓRIOS:*
+
+✅ RG original + CPF
+✅ Comprovante de residência atualizado
+   _(água, luz, gás, telefone ou aluguel)_
+✅ Comprovante de renda de todos da família:
+   • *Registrado:* 3 últimos holerites
+   • *Não registrado:* carteira de trabalho, extrato bancário (3 meses), declaração do empregador ou carta de próprio punho reconhecida em cartório
+✅ Comprovante de patrimônio:
+   _(certidão do valor venal, IPTU, veículos, extrato de poupança – se houver)_
+✅ *Alimentos:* documento da criança + endereço da parte contrária
+✅ *Divórcio:* certidão de casamento atualizada
+
+━━━━━━━━━━━━━━━━━━━━
+❗ *Documentos complementares poderão ser solicitados conforme o caso.*
+🚫 *Sem algum documento acima, o atendimento NÃO será realizado.*
+━━━━━━━━━━━━━━━━━━━━
+
+📍 Av. Tenente Marques, 5297
+   Jardim do Luar (Fazendinha) – Santana de Parnaíba/SP
+   _(Dentro do POUPATEMPO)_
+📞 (11) 4154-5191`
+    },
+    {
+      id:'audio1',
+      icon:'🔇',color:'c-amber',tag:'Áudio',tagColor:'tag-amber',
+      title:'Não Recebemos Áudio',
+      text:`Olá! Informamos que *não recebemos mensagens de áudio* por este canal.
+
+Por favor, envie sua dúvida ou solicitação *por escrito* — texto, documento ou imagem. Assim conseguimos te atender com mais agilidade e eficiência. 📝
+
+Obrigado pela compreensão! 😊`
+    },
+    {
+      id:'horario1',
+      icon:'🕘',color:'c-teal',tag:'Horário',tagColor:'tag-teal',
+      title:'Informação de Horário',
+      text:`Olá! 😊
+
+Nosso atendimento presencial ocorre de *segunda a sexta-feira*, das *09h00 às 12h00*, com limite de *30 senhas por dia*.
+
+As senhas são distribuídas no local, apenas para as primeiras 30 pessoas.
+
+📍 Av. Tenente Marques, 5297 — Jardim do Luar (Fazendinha), Santana de Parnaíba/SP _(Dentro do POUPATEMPO)_
+📞 (11) 4154-5191
+
+Em caso de dúvidas, estamos à disposição! 🙏`
+    },
+    {
+      id:'aguarda1',
+      icon:'⏳',color:'c-purple',tag:'Aguardo',tagColor:'tag-purple',
+      title:'Aguardando Resposta / Retorno',
+      text:`Olá! 😊
+
+Seu contato foi recebido. Estamos verificando as informações e retornaremos em breve.
+
+Pedimos gentileza e paciência — nossa equipe está empenhada em oferecer o melhor atendimento possível. 🙏
+
+Obrigado!`
+    },
+  ],
+
+  reclamacao: [
+    {
+      id:'rec_cpf',
+      icon:'🔎',color:'c-blue',tag:'Passo 1',tagColor:'tag-blue',
+      title:'Solicitar CPF — Verificar Nomeação',
+      text:`Olá! Para analisarmos sua situação, por favor nos informe seu *CPF* para que possamos verificar o status da nomeação em nosso sistema.
+
+Aguardamos seu retorno! 😊`
+    },
+    {
+      id:'rec_recusada',
+      icon:'🔄',color:'c-amber',tag:'Nomeação Recusada',tagColor:'tag-amber',
+      title:'Nomeação Recusada — Retornar ao Atendimento',
+      text:`Olá! Verificamos em nosso sistema que a nomeação referente ao seu caso consta como *recusada*.
+
+Para darmos continuidade, é necessário que você compareça presencialmente à nossa unidade para nova triagem e encaminhamento.
+
+🗓️ *Atendimento:* Segunda a Sexta-feira, das 09h00 às 12h00
+📍 Av. Tenente Marques, 5297 — Jardim do Luar, Santana de Parnaíba/SP _(POUPATEMPO)_
+
+Por favor, traga seus documentos pessoais. Estamos à disposição! 🙏`
+    },
+    {
+      id:'rec_aceita',
+      icon:'📝',color:'c-red',tag:'Nomeação Aceita',tagColor:'tag-red',
+      title:'Nomeação Aceita — Orientar Reclamação Formal',
+      text:`Olá! Verificamos que a nomeação em seu processo consta como *aceita* pelo advogado.
+
+Para formalizar sua reclamação, solicitamos que você nos encaminhe:
+
+📌 *Reclamação escrita de próprio punho*, descrevendo os fatos detalhadamente
+📌 *Número do processo*
+📌 *Senha do processo*
+📌 *Demais documentos* relacionados ao caso
+
+Por gentileza, envie tudo por escrito (texto ou imagem/foto do documento) por este canal. ✍️
+
+Nossa equipe analisará e dará o devido encaminhamento. Obrigado! 🙏`
+    },
+    {
+      id:'rec_audio',
+      icon:'🔇',color:'c-amber',tag:'Sem Áudio',tagColor:'tag-amber',
+      title:'Áudio — Reclamação (Solicitar Texto)',
+      text:`Olá! Informamos que *não recebemos mensagens de áudio* por este canal.
+
+Para registrarmos sua reclamação de forma correta, pedimos que envie todas as informações *por escrito*, incluindo:
+
+• Descrição dos fatos
+• Número do processo
+• Documentos pertinentes (foto/imagem)
+
+Assim garantimos o registro adequado e agilizamos sua solicitação. 📝 Obrigado pela compreensão!`
+    },
+  ],
+
+  oficios: [
+    {
+      id:'of1',
+      icon:'📄',color:'c-navy',tag:'Resposta Padrão',tagColor:'tag-blue',
+      title:'Resposta ao Fórum — Ofício Recebido',
+      text:`Prezada(o) Meritíssima(o),
+
+Cumprimentando-o(a) cordialmente, vimos, em atenção ao ofício recebido, apresentar as informações solicitadas e prestar os esclarecimentos necessários referentes ao caso em questão.
+
+Permanecemos à inteira disposição para quaisquer informações adicionais que se fizerem necessárias.
+
+Atenciosamente,
+
+*OAB SP — Assistência Judiciária Gratuita*
+Subseção Santana de Parnaíba
+📞 (11) 4154-5191`
+    },
+    {
+      id:'of2',
+      icon:'📬',color:'c-teal',tag:'Acuse de Recebimento',tagColor:'tag-teal',
+      title:'Acuse de Recebimento de Ofício',
+      text:`Prezado(a),
+
+Acusamos o recebimento do ofício encaminhado a esta Assistência Judiciária e informamos que o documento foi devidamente recepcionado e encaminhado ao setor competente para as providências cabíveis.
+
+Qualquer atualização será comunicada oportunamente.
+
+Atenciosamente,
+
+*OAB SP — Assistência Judiciária Gratuita*
+Subseção Santana de Parnaíba`
+    },
+    {
+      id:'of3',
+      icon:'🔍',color:'c-purple',tag:'Diligência',tagColor:'tag-purple',
+      title:'Retorno de Diligência ao Fórum',
+      text:`Prezada(o) Meritíssima(o),
+
+Em atenção à diligência determinada, informamos que foram adotadas as providências necessárias junto a esta Assistência Judiciária, encontrando-se o caso devidamente tratado.
+
+Colocamo-nos à disposição para quaisquer informações complementares.
+
+Respeitosamente,
+
+*OAB SP — Assistência Judiciária Gratuita*
+Subseção Santana de Parnaíba
+📞 (11) 4154-5191`
+    },
+  ],
+
+  secretaria: [
+    {
+      id:'sec1',
+      icon:'📲',color:'c-green',tag:'Encaminhamento',tagColor:'tag-green',
+      title:'Encaminhar para a Secretaria',
+      text:`Olá! 😊
+
+Para melhor atendê-lo(a) em sua solicitação, encaminhamos seu contato diretamente à nossa *Secretaria*.
+
+📲 Por favor, entre em contato através do número:
+*+55 11 93724-8448* (WhatsApp)
+
+Nossa equipe estará pronta para auxiliá-lo(a) com toda atenção e cuidado que você merece. 🙏
+
+Atenciosamente,
+*OAB SP — Assistência Judiciária Gratuita*
+Subseção Santana de Parnaíba`
+    },
+    {
+      id:'sec2',
+      icon:'🗂️',color:'c-blue',tag:'Documentação',tagColor:'tag-blue',
+      title:'Encaminhar — Questão Documental',
+      text:`Olá! 😊
+
+Sua solicitação requer tratamento específico junto à nossa Secretaria, que poderá orientá-lo(a) de forma mais precisa sobre a documentação necessária.
+
+📲 Entre em contato diretamente pelo WhatsApp:
+*+55 11 93724-8448*
+
+🕘 Horário de atendimento: Segunda a Sexta-feira, das 09h00 às 12h00.
+
+Estamos aqui para ajudar! 🙏`
+    },
+    {
+      id:'sec3',
+      icon:'⚖️',color:'c-purple',tag:'Processo',tagColor:'tag-purple',
+      title:'Encaminhar — Questão Processual',
+      text:`Olá! 😊
+
+Para tratar de questões relacionadas ao seu processo, precisamos encaminhá-lo(a) à nossa Secretaria, que dispõe das informações e acesso necessários para melhor orientá-lo(a).
+
+📲 Entre em contato pelo WhatsApp:
+*+55 11 93724-8448*
+
+Pedimos que, ao entrar em contato, já tenha em mãos o *número do processo* e seus *documentos pessoais* para agilizar o atendimento.
+
+Atenciosamente! 🙏`
+    },
+  ],
+
+  bravo: [
+    {
+      id:'br1',
+      icon:'🛡️',color:'c-amber',tag:'Limite de Conduta',tagColor:'tag-amber',
+      title:'Estabelecer Limite — Tom Elevado',
+      text:`Olá! Compreendemos que sua situação pode ser difícil e lamentamos qualquer transtorno.
+
+No entanto, para que possamos continuar prestando assistência de qualidade, precisamos que a comunicação se mantenha *respeitosa e cordial*.
+
+Estamos aqui para ajudar, e faremos tudo ao nosso alcance dentro das nossas atribuições. Pedimos gentileza para que possamos avançar juntos na resolução do seu caso. 🙏`
+    },
+    {
+      id:'br2',
+      icon:'⛔',color:'c-red',tag:'Encerramento',tagColor:'tag-red',
+      title:'Encerrar Atendimento — Conduta Inadequada',
+      text:`Prezado(a),
+
+Infelizmente, diante da forma como este atendimento está sendo conduzido, não nos é possível dar continuidade à conversa neste momento.
+
+Nossa equipe está sempre disposta a ajudar, porém o atendimento somente poderá prosseguir com *respeito mútuo*.
+
+Quando desejar retomar o contato de forma cordial, estaremos à disposição.
+
+Atenciosamente,
+*OAB SP — Assistência Judiciária Gratuita*`
+    },
+    {
+      id:'br3',
+      icon:'🤝',color:'c-teal',tag:'Empatia Firme',tagColor:'tag-teal',
+      title:'Empatia com Firmeza',
+      text:`Olá! Entendemos sua frustração e sabemos que enfrentar questões jurídicas pode ser muito desgastante. 💙
+
+Nossa equipe está genuinamente comprometida em ajudá-lo(a). Mas para que isso seja possível, precisamos de colaboração e respeito durante o atendimento.
+
+Podemos continuar? Estamos aqui para encontrar a melhor solução para o seu caso. 🙏`
+    },
+    {
+      id:'br4',
+      icon:'📌',color:'c-navy',tag:'Reforço de Regras',tagColor:'tag-blue',
+      title:'Informar Limitações do Serviço',
+      text:`Prezado(a),
+
+Gostaríamos de esclarecer que nossa atuação segue as *normas e regulamentos da OAB SP*, e nem sempre é possível atender todas as solicitações fora dos procedimentos estabelecidos.
+
+Compreendemos que isso pode gerar insatisfação, mas garantimos que trabalhamos com total dedicação dentro das nossas possibilidades.
+
+Caso deseje orientação sobre os próximos passos, estamos à disposição. 🙏`
+    },
+  ]
+};
+
+// RAMAIS DATA
+var RAMAIS = {
   "AJ": ["(11) 3349-7603","(11) 3349-7617","(11) 3349-7620","(11) 3349-7606","(11) 3349-7609","(11) 3349-7600","(11) 3349-7616","(11) 3349-7611","(11) 3349-7608","(11) 3349-7604","(11) 3349-7614","(11) 3349-7605","(11) 3349-7610","(11) 3349-7619","(11) 3349-7618","(11) 3349-7615","(11) 3349-7601","(11) 3349-7607","(11) 3349-7613","(11) 3349-7612"],
   "Almoxarifado": ["(11) 3349-7558","(11) 3349-7597","(11) 3349-7599"],
   "Biblioteca": ["(11) 3249-3509","(11) 3249-3512","(11) 3249-3511","(11) 3249-3510","(11) 3249-3508"],
@@ -203,126 +863,230 @@ var DATA = {
   "SINAD": ["(11) 3249-3542","(11) 3249-3549","(11) 3249-3556","(11) 3249-3554","(11) 3249-3547","(11) 3249-3557","(11) 3249-3548","(11) 3249-3559","(11) 3249-3555","(11) 3249-3551","(11) 3249-3546","(11) 3249-3563","(11) 3249-3544"]
 };
 
-var ICONS = {
-  "AJ":"⚖","Almoxarifado":"📦","Biblioteca":"📚","Cadastro":"🗂",
-  "Câmaras Recursais":"🏛","Central":"📞","Controladoria":"📊","COPA - SÉ":"☕",
-  "Corregedoria TED":"🔍","Cultural":"🎭","DASI":"💻","Depto. de Subseções":"🏢",
-  "DGI (SGQ)":"📋","Engenharia":"🔧","ESA":"🎓","Escola de Prerrogativas":"📖",
-  "Exame":"📝","Financeiro":"💰","Força Tarefa":"🚨","Gabinete dos TEDs":"👥",
-  "HELPDESK":"🖥","Inscrições":"✍","Logística":"🚚","Microfilmagem":"📷",
-  "Núcleos":"🔵","Ouvidoria":"📣","Pós-Graduação":"🎓","Prerrogativas":"⚡",
-  "Presidente - TED II":"👔","Presidente - TED IV":"👔","Presidente - TED VI":"👔",
-  "Protocolo":"📬","Recepção Largo da Pólvora":"🚪","Recepção MP88 - 01":"🚪",
-  "Recepção MP88 - 02":"🚪","Resgate":"🆘","RH":"👥","SINAD":"🔗"
+var RAMAL_ICONS = {
+  "AJ":["⚖️","#dbeafe"],"Almoxarifado":["📦","#fef3c7"],"Biblioteca":["📚","#ede9fe"],
+  "Cadastro":["🗂️","#fce7f3"],"Câmaras Recursais":["🏛️","#e0f2fe"],"Central":["📞","#dcfce7"],
+  "Controladoria":["📊","#dbeafe"],"COPA - SÉ":["☕","#fef3c7"],"Corregedoria TED":["🔍","#fce7f3"],
+  "Cultural":["🎭","#ede9fe"],"DASI":["💻","#e0f2fe"],"Depto. de Subseções":["🏢","#f0fdf4"],
+  "DGI (SGQ)":["📋","#fef9c3"],"Engenharia":["🔧","#ffedd5"],"ESA":["🎓","#ede9fe"],
+  "Escola de Prerrogativas":["📖","#fce7f3"],"Exame":["📝","#dbeafe"],"Financeiro":["💰","#dcfce7"],
+  "Força Tarefa":["🚨","#fee2e2"],"Gabinete dos TEDs":["👥","#fef3c7"],"HELPDESK":["🖥️","#e0f2fe"],
+  "Inscrições":["✍️","#f0fdf4"],"Logística":["🚚","#ffedd5"],"Microfilmagem":["📷","#ede9fe"],
+  "Núcleos":["🔵","#dbeafe"],"Ouvidoria":["📣","#fce7f3"],"Pós-Graduação":["🎓","#ede9fe"],
+  "Prerrogativas":["⚡","#fef9c3"],"Presidente - TED II":["👔","#dbeafe"],
+  "Presidente - TED IV":["👔","#e0f2fe"],"Presidente - TED VI":["👔","#dcfce7"],
+  "Protocolo":["📬","#ffedd5"],"Recepção Largo da Pólvora":["🚪","#f0fdf4"],
+  "Recepção MP88 - 01":["🚪","#fef3c7"],"Recepção MP88 - 02":["🚪","#fce7f3"],
+  "Resgate":["🆘","#fee2e2"],"RH":["👥","#ede9fe"],"SINAD":["🔗","#dbeafe"]
 };
 
-var COLORS = [
-  '#e8f0fe','#e3fcef','#fff3cd','#fce8e6','#f3e8ff','#e8f5e9',
-  '#e3f2fd','#fff8e1','#fce4ec','#e8eaf6','#e0f2f1','#f3e5f5'
-];
-var colorIdx = 0;
-var sectorColors = {};
+// ══════════════════════════════════════════
+// RENDER
+// ══════════════════════════════════════════
 
-function getColor(name) {
-  if (!sectorColors[name]) {
-    sectorColors[name] = COLORS[colorIdx % COLORS.length];
-    colorIdx++;
-  }
-  return sectorColors[name];
+function renderMsgGrid(msgs, containerId) {
+  var el = document.getElementById(containerId);
+  if(!el) return;
+  el.innerHTML = msgs.map(function(m){
+    return '<div class="msg-card">'
+      +'<div class="msg-card-hd">'
+      +'<div class="msg-card-icon '+m.color+'">'+m.icon+'</div>'
+      +'<div class="msg-card-title">'+m.title+'</div>'
+      +'<span class="msg-card-tag '+m.tagColor+'">'+m.tag+'</span>'
+      +'</div>'
+      +'<div class="msg-card-body">'
+      +'<div class="msg-text">'+escHtml(m.text)+'</div>'
+      +'</div>'
+      +'<div class="msg-card-ft">'
+      +'<button class="btn btn-copy" onclick="copyMsg(this,\''+m.id+'\')">'
+      +'<svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>'
+      +'Copiar'
+      +'</button>'
+      +'<button class="btn btn-expand" onclick="openModal(\''+m.id+'\')">'
+      +'<svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>'
+      +'Ver completo'
+      +'</button>'
+      +'</div>'
+      +'</div>';
+  }).join('');
 }
 
-function renderAll() {
-  var grid = document.getElementById('grid');
+function escHtml(t){
+  return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function getMsgById(id) {
+  var all = [].concat(MSGS.mensagens, MSGS.reclamacao, MSGS.oficios, MSGS.secretaria, MSGS.bravo);
+  return all.find(function(m){ return m.id === id; });
+}
+
+function copyMsg(btn, id) {
+  var m = getMsgById(id);
+  if(!m) return;
+  navigator.clipboard.writeText(m.text).then(function(){
+    btn.classList.add('copied');
+    btn.innerHTML = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Copiado!';
+    showToast('Mensagem copiada!');
+    setTimeout(function(){
+      btn.classList.remove('copied');
+      btn.innerHTML = '<svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copiar';
+    }, 1800);
+  });
+}
+
+var _curModalId = null;
+function openModal(id) {
+  var m = getMsgById(id);
+  if(!m) return;
+  _curModalId = id;
+  document.getElementById('modal-icon').className = 'msg-card-icon '+m.color;
+  document.getElementById('modal-icon').textContent = m.icon;
+  document.getElementById('modal-title').textContent = m.title;
+  document.getElementById('modal-text').textContent = m.text;
+  document.getElementById('modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(e) {
+  if(e && e.target !== document.getElementById('modal-overlay') && e.type==='click' && e.currentTarget === document.getElementById('modal-overlay')) return;
+  document.getElementById('modal-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function copyModal() {
+  if(!_curModalId) return;
+  var m = getMsgById(_curModalId);
+  if(!m) return;
+  navigator.clipboard.writeText(m.text).then(function(){
+    var btn = document.getElementById('modal-copy-btn');
+    btn.innerHTML = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Copiado!';
+    showToast('Mensagem copiada!');
+    setTimeout(function(){
+      btn.innerHTML = '<svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copiar mensagem';
+    }, 1800);
+  });
+}
+
+// ══════════════════════════════════════════
+// RAMAIS
+// ══════════════════════════════════════════
+
+function renderRamais() {
+  var grid = document.getElementById('ramal-grid');
   var html = '';
-  var total = 0;
-  Object.keys(DATA).sort().forEach(function(name) {
-    var nums = DATA[name];
-    total += nums;
-    var color = getColor(name);
-    var icon = ICONS[name] || '📞';
-    html += '<div class="sector-card" id="card-'+encodeURIComponent(name)+'" data-sector="'+name.toLowerCase()+'">'
-      +'<div class="sec-hd" onclick="toggle(this.parentNode)">'
-      +'<div class="sec-icon" style="background:'+color+'">'+icon+'</div>'
+  Object.keys(RAMAIS).sort().forEach(function(name){
+    var nums = RAMAIS[name];
+    var cfg = RAMAL_ICONS[name] || ['📞','#dbeafe'];
+    html += '<div class="sector-card" data-sector="'+name.toLowerCase()+'">'
+      +'<div class="sec-hd" onclick="this.parentNode.classList.toggle(\'open\')">'
+      +'<div class="sec-icon" style="background:'+cfg[1]+'">'+cfg[0]+'</div>'
       +'<div class="sec-name">'+name+'</div>'
       +'<span class="sec-count">'+nums.length+'</span>'
-      +'<svg class="sec-chevron" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>'
+      +'<div class="sec-chev"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>'
       +'</div>'
+      +'<div class="sec-divider"></div>'
       +'<div class="sec-body"><div class="ramal-list">'
       +nums.map(function(n){
+        var s=n.replace(/'/g,"\\'");
         return '<div class="ramal-row" data-num="'+n.toLowerCase()+'">'
           +'<span class="ramal-num">'+n+'</span>'
-          +'<button class="copy-btn" onclick="copiar(this,\''+n+'\')" title="Copiar">'
+          +'<button class="copy-btn" onclick="copyRamal(this,\''+s+'\')" title="Copiar">'
           +'<svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>'
-          +'</button>'
-          +'</div>';
+          +'</button></div>';
       }).join('')
       +'</div></div></div>';
   });
   grid.innerHTML = html;
-  updateCount(Object.keys(DATA).length);
+  document.getElementById('r-count').textContent = Object.keys(RAMAIS).length+' setores';
 }
 
-function toggle(card) {
-  card.classList.toggle('open');
-}
-
-function copiar(btn, num) {
-  navigator.clipboard.writeText(num).then(function() {
+function copyRamal(btn, num) {
+  navigator.clipboard.writeText(num).then(function(){
     btn.classList.add('copied');
     setTimeout(function(){ btn.classList.remove('copied'); }, 1500);
-    toast('Copiado: ' + num);
+    showToast('Copiado: '+num);
   });
 }
+
+function filtrarRamais(term) {
+  term=(term||'').toLowerCase().trim();
+  var cards=document.querySelectorAll('#ramal-grid .sector-card');
+  var vis=0;
+  cards.forEach(function(card){
+    var sec=card.getAttribute('data-sector');
+    var rows=card.querySelectorAll('.ramal-row');
+    var secMatch=!term||sec.indexOf(term)>=0;
+    var anyMatch=secMatch;
+    rows.forEach(function(row){
+      var num=row.getAttribute('data-num');
+      var match=!term||secMatch||num.indexOf(term)>=0;
+      row.style.display=match?'':'none';
+      row.classList.toggle('highlight',!!term&&match&&!secMatch);
+      if(match) anyMatch=true;
+    });
+    var show=!term||anyMatch;
+    card.classList.toggle('hidden',!show);
+    if(show){vis++;if(term)card.classList.add('open');else card.classList.remove('open');}
+  });
+  document.getElementById('r-count').textContent=vis+' setor'+(vis!==1?'es':'');
+}
+
+// ══════════════════════════════════════════
+// TABS
+// ══════════════════════════════════════════
+
+function switchTab(name) {
+  document.querySelectorAll('.nav-tab').forEach(function(t){ t.classList.remove('active'); });
+  document.querySelectorAll('.tab-panel').forEach(function(p){ p.classList.remove('active'); });
+  document.querySelector('[data-tab="'+name+'"]').classList.add('active');
+  document.getElementById('tab-'+name).classList.add('active');
+}
+
+// ══════════════════════════════════════════
+// TOAST
+// ══════════════════════════════════════════
 
 var _tt;
-function toast(msg) {
+function showToast(msg) {
+  document.getElementById('toast-msg').textContent = msg;
   var el = document.getElementById('toast');
-  el.textContent = msg;
   el.classList.add('show');
   clearTimeout(_tt);
-  _tt = setTimeout(function(){ el.classList.remove('show'); }, 2000);
+  _tt = setTimeout(function(){ el.classList.remove('show'); }, 2200);
 }
 
-function updateCount(n) {
-  var total = 0;
-  Object.keys(DATA).forEach(function(k){ total += DATA[k].length; });
-  document.getElementById('result-count').textContent = n > 0 ? n + ' setores' : 'Nenhum resultado';
+// ══════════════════════════════════════════
+// CLOCK
+// ══════════════════════════════════════════
+
+function updateClock() {
+  var now = new Date();
+  var h=String(now.getHours()).padStart(2,'0');
+  var m=String(now.getMinutes()).padStart(2,'0');
+  var s=String(now.getSeconds()).padStart(2,'0');
+  document.getElementById('clock').textContent = h+':'+m+':'+s;
 }
+setInterval(updateClock, 1000);
+updateClock();
 
-function filtrar(term) {
-  term = (term || '').toLowerCase().trim();
-  var cards = document.querySelectorAll('.sector-card');
-  var visible = 0;
+// ══════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════
 
-  cards.forEach(function(card) {
-    var sector = card.getAttribute('data-sector');
-    var rows = card.querySelectorAll('.ramal-row');
-    var sectorMatch = !term || sector.indexOf(term) >= 0;
-    var anyNum = false;
+document.addEventListener('keydown', function(e){
+  if(e.key==='Escape') closeModal();
+});
 
-    rows.forEach(function(row) {
-      var num = row.getAttribute('data-num');
-      var match = !term || sectorMatch || num.indexOf(term) >= 0;
-      row.classList.toggle('hidden-row', !match);
-      row.classList.toggle('highlight', !!term && match && !sectorMatch);
-      if (match) anyNum = true;
-    });
+document.getElementById('modal-overlay').addEventListener('click', function(e){
+  if(e.target===this) closeModal();
+});
 
-    var show = !term || sectorMatch || anyNum;
-    card.classList.toggle('hidden', !show);
-    if (show) {
-      visible++;
-      if (term) card.classList.add('open');
-      else if (!sectorMatch) card.classList.add('open');
-    }
-  });
-
-  document.getElementById('empty').style.display = visible === 0 ? 'block' : 'none';
-  document.getElementById('empty-term').textContent = term;
-  updateCount(visible);
-}
-
-renderAll();
+renderMsgGrid(MSGS.mensagens, 'msg-grid');
+renderMsgGrid(MSGS.reclamacao, 'rec-grid');
+renderMsgGrid(MSGS.oficios, 'oficio-grid');
+renderMsgGrid(MSGS.secretaria, 'sec-grid');
+renderMsgGrid(MSGS.bravo, 'bravo-grid');
+renderRamais();
 </script>
 </body>
 </html>
