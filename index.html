@@ -2,208 +2,666 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CAD · Atendimento</title>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CAD · Sistema de Atendimento</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html,body{height:100%;overflow:hidden}
+html,body{height:100%;overflow:hidden;font-family:'Inter',sans-serif}
+
 :root{
-  --bg:#f4f6f9;--white:#fff;--border:#e2e6ed;
-  --text:#1a2332;--sub:#6b7a8d;--dim:#b0bac6;
-  --green:#1a9e5c;--green-bg:#edfaf3;--green-bd:#b6ecd4;
-  --red:#c8213f;--red-bg:#fef0f3;--red-bd:#f4bdc8;
-  --blue:#1a5ec8;--blue-bg:#eef3fd;--blue-bd:#b6cef4;
-  --amber:#b06010;--amber-bg:#fdf5ea;--amber-bd:#f0d4a0;
-  --purple:#6630c8;--purple-bg:#f3effe;--purple-bd:#d0b8f4;
-  --teal:#0e8a9e;--teal-bg:#eafafc;--teal-bd:#9ddde6;
-  --ff:'Nunito',sans-serif;
-  --sh:0 2px 8px rgba(0,0,0,.07);
-  --r:10px;--rs:7px;
+  --c-bg:#f4f5f7;
+  --c-surface:#ffffff;
+  --c-surface2:#f8f9fb;
+  --c-navy:#0a1628;
+  --c-navy2:#112240;
+  --c-navy3:#1b3461;
+  --c-blue:#2563eb;
+  --c-blue2:#1d4ed8;
+  --c-blue-s:#eff6ff;
+  --c-blue-b:#bfdbfe;
+  --c-text:#0f172a;
+  --c-text2:#334155;
+  --c-text3:#64748b;
+  --c-text4:#94a3b8;
+  --c-border:#e2e8f0;
+  --c-border2:#cbd5e1;
+  --c-green:#059669;--c-green-s:#ecfdf5;--c-green-b:#6ee7b7;
+  --c-red:#dc2626;--c-red-s:#fef2f2;--c-red-b:#fca5a5;
+  --c-amber:#d97706;--c-amber-s:#fffbeb;--c-amber-b:#fcd34d;
+  --c-purple:#7c3aed;--c-purple-s:#f5f3ff;--c-purple-b:#c4b5fd;
+  --c-teal:#0891b2;--c-teal-s:#ecfeff;--c-teal-b:#67e8f9;
+  --c-orange:#ea580c;--c-orange-s:#fff7ed;--c-orange-b:#fdba74;
+  --c-rose:#e11d48;--c-rose-s:#fff1f2;--c-rose-b:#fda4af;
+  --radius:10px;--radius-sm:7px;--radius-xs:5px;
+  --sh-sm:0 1px 2px rgba(0,0,0,.05);
+  --sh:0 1px 3px rgba(0,0,0,.07),0 4px 12px rgba(0,0,0,.05);
+  --sh-md:0 4px 16px rgba(0,0,0,.08),0 1px 4px rgba(0,0,0,.04);
+  --sh-lg:0 20px 60px rgba(0,0,0,.14),0 4px 16px rgba(0,0,0,.06);
+  --tr:.14s ease;
 }
-body{font-family:var(--ff);background:var(--bg);color:var(--text);display:flex;flex-direction:column}
-#topbar{height:50px;background:var(--white);border-bottom:2px solid var(--border);display:flex;align-items:center;padding:0 16px;gap:10px;flex-shrink:0}
-.tb-logo{font-size:15px;font-weight:800;color:var(--text)}.tb-logo span{color:var(--blue)}
-.tb-sep{width:1px;height:20px;background:var(--border)}
-.tb-name{border:1.5px solid var(--border);border-radius:var(--rs);background:transparent;padding:5px 10px;font-family:var(--ff);font-size:13px;font-weight:600;color:var(--text);outline:none;width:180px}
-.tb-name::placeholder{color:var(--dim);font-weight:400}.tb-name:focus{border-color:var(--blue)}
-.tb-hint{font-size:11px;color:var(--dim)}
-.tb-r{margin-left:auto;display:flex;align-items:center;gap:10px}
-.tb-clock{font-size:12px;font-weight:700;color:var(--sub);font-variant-numeric:tabular-nums}
-.live{display:flex;align-items:center;gap:5px;font-size:10px;font-weight:700;color:var(--green)}
-.live-dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 2s ease-in-out infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-#shell{display:grid;grid-template-columns:210px 1fr;flex:1;overflow:hidden}
-#sidebar{background:var(--white);border-right:2px solid var(--border);display:flex;flex-direction:column;overflow:hidden}
-.sb-search{padding:10px 8px 6px}
-.sb-search input{width:100%;border:1.5px solid var(--border);border-radius:var(--rs);padding:7px 11px;font-family:var(--ff);font-size:12.5px;color:var(--text);outline:none;background:var(--bg)}
-.sb-search input::placeholder{color:var(--dim)}.sb-search input:focus{border-color:var(--blue);background:var(--white)}
-#sb-list{flex:1;overflow-y:auto;padding:2px 6px 12px}
+
+body{background:var(--c-bg);color:var(--c-text);display:flex;flex-direction:column}
+
+/* ══════════════════════════════
+   TOPBAR
+══════════════════════════════ */
+#topbar{
+  height:56px;background:var(--c-navy);
+  display:flex;align-items:center;padding:0 18px;gap:0;
+  flex-shrink:0;position:relative;z-index:100;
+  box-shadow:0 1px 0 rgba(255,255,255,.05),0 4px 20px rgba(0,0,0,.3);
+}
+.tb-brand{display:flex;align-items:center;gap:10px;padding-right:18px;border-right:1px solid rgba(255,255,255,.1)}
+.tb-brand-mark{
+  width:32px;height:32px;border-radius:8px;
+  background:linear-gradient(135deg,#3b82f6,#1d4ed8);
+  display:flex;align-items:center;justify-content:center;
+  font-size:15px;box-shadow:0 2px 8px rgba(37,99,235,.5);flex-shrink:0;
+}
+.tb-brand-text{display:flex;flex-direction:column;gap:0}
+.tb-brand-title{font-size:13px;font-weight:700;color:#fff;letter-spacing:-.1px;line-height:1.2}
+.tb-brand-sub{font-size:9.5px;font-weight:400;color:rgba(255,255,255,.4);letter-spacing:.3px;line-height:1}
+
+.tb-divider{width:1px;height:28px;background:rgba(255,255,255,.1);margin:0 16px;flex-shrink:0}
+
+.tb-operator{display:flex;align-items:center;gap:8px}
+.tb-op-avatar{
+  width:28px;height:28px;border-radius:50%;
+  background:linear-gradient(135deg,#3b82f6,#7c3aed);
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:700;color:#fff;flex-shrink:0;letter-spacing:0;
+}
+.tb-op-info{display:flex;flex-direction:column;gap:1px}
+.tb-op-name{font-size:12px;font-weight:600;color:#fff;line-height:1.2}
+.tb-op-role{font-size:9px;color:rgba(255,255,255,.4);font-weight:400;letter-spacing:.3px;line-height:1}
+
+.tb-input-wrap{
+  display:flex;align-items:center;gap:8px;
+  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);
+  border-radius:8px;padding:0 12px;height:34px;width:220px;transition:all var(--tr);
+}
+.tb-input-wrap:focus-within{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.25);box-shadow:0 0 0 3px rgba(59,130,246,.25)}
+.tb-input-wrap svg{flex-shrink:0;opacity:.4}
+.tb-input-wrap input{background:transparent;border:none;outline:none;font-family:'Inter',sans-serif;font-size:12.5px;font-weight:400;color:#fff;width:100%}
+.tb-input-wrap input::placeholder{color:rgba(255,255,255,.3)}
+
+.tb-right{margin-left:auto;display:flex;align-items:center;gap:8px}
+
+.tb-clock{
+  font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;
+  color:rgba(255,255,255,.5);letter-spacing:.5px;padding:5px 10px;
+  border:1px solid rgba(255,255,255,.1);border-radius:6px;background:rgba(255,255,255,.04);
+}
+.tb-status{
+  display:flex;align-items:center;gap:6px;padding:5px 12px;
+  border-radius:6px;border:1px solid;cursor:pointer;transition:all var(--tr);
+  font-size:10.5px;font-weight:600;letter-spacing:.2px;
+}
+.tb-status.online{background:rgba(5,150,105,.15);border-color:rgba(5,150,105,.35);color:#34d399}
+.tb-status.busy{background:rgba(217,119,6,.15);border-color:rgba(217,119,6,.3);color:#fbbf24}
+.tb-status.away{background:rgba(220,38,38,.15);border-color:rgba(220,38,38,.3);color:#f87171}
+.tb-status-dot{width:6px;height:6px;border-radius:50%;background:currentColor;animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+
+.tb-btn{
+  height:34px;padding:0 12px;border-radius:7px;border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.07);color:rgba(255,255,255,.75);
+  font-family:'Inter',sans-serif;font-size:11px;font-weight:600;
+  cursor:pointer;transition:all var(--tr);display:flex;align-items:center;gap:5px;letter-spacing:.1px;
+}
+.tb-btn:hover{background:rgba(255,255,255,.13);color:#fff;border-color:rgba(255,255,255,.2)}
+
+/* ══════════════════════════════
+   LAYOUT
+══════════════════════════════ */
+#shell{display:grid;grid-template-columns:248px 1fr;flex:1;overflow:hidden;min-height:0}
+
+/* ══════════════════════════════
+   SIDEBAR
+══════════════════════════════ */
+#sidebar{
+  background:var(--c-surface);border-right:1px solid var(--c-border);
+  display:flex;flex-direction:column;overflow:hidden;
+}
+.sb-top{padding:14px 12px 10px;border-bottom:1px solid var(--c-border);flex-shrink:0}
+.sb-top-label{font-size:8.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--c-text4);margin-bottom:9px}
+.sb-search{
+  display:flex;align-items:center;gap:7px;
+  background:var(--c-bg);border:1.5px solid var(--c-border);
+  border-radius:var(--radius-sm);padding:7px 11px;transition:all var(--tr);
+}
+.sb-search:focus-within{background:#fff;border-color:var(--c-blue);box-shadow:0 0 0 3px var(--c-blue-s)}
+.sb-search svg{color:var(--c-text4);flex-shrink:0}
+.sb-search input{background:transparent;border:none;outline:none;font-family:'Inter',sans-serif;font-size:12px;color:var(--c-text);width:100%}
+.sb-search input::placeholder{color:var(--c-text4)}
+.sb-search kbd{
+  font-family:'JetBrains Mono',monospace;font-size:9px;padding:1px 5px;
+  background:var(--c-surface2);border:1px solid var(--c-border2);border-radius:3px;
+  color:var(--c-text4);flex-shrink:0;
+}
+
+#sb-list{flex:1;overflow-y:auto;padding:6px 8px 16px}
 #sb-list::-webkit-scrollbar{width:3px}
-#sb-list::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px}
-.grp-lbl{font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--dim);padding:12px 6px 4px}
-.sc-btn{width:100%;text-align:left;background:transparent;border:2px solid transparent;border-radius:var(--rs);padding:8px 9px;margin-bottom:2px;cursor:pointer;display:flex;align-items:center;gap:8px;transition:all .12s;font-family:var(--ff)}
-.sc-btn:hover{background:var(--bg);border-color:var(--border)}.sc-btn.active{background:var(--blue-bg);border-color:var(--blue-bd)}
-.sc-icon{font-size:15px;width:20px;text-align:center;flex-shrink:0}
-.sc-label{font-size:12px;font-weight:700;color:var(--text);line-height:1.3}.sc-btn.active .sc-label{color:var(--blue)}
-.sc-sub{font-size:10px;color:var(--sub);margin-top:1px}
-.pip{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-left:auto}
-.pip-green{background:var(--green)}.pip-red{background:var(--red)}.pip-amber{background:var(--amber)}
-.pip-teal{background:var(--teal)}.pip-orange{background:#d05020}.pip-purple{background:var(--purple)}
-#main{display:flex;flex-direction:column;overflow:hidden;position:relative}
-#breadbar{height:46px;background:var(--white);border-bottom:2px solid var(--border);display:flex;align-items:center;padding:0 18px;gap:8px;flex-shrink:0}
-#btitle{font-size:14px;font-weight:800;color:var(--text)}.bb-r{margin-left:auto;display:flex;gap:7px}
-.ctabs{display:flex;background:var(--white);border-bottom:2px solid var(--border);flex-shrink:0;padding:0 6px}
-.ctab{height:36px;padding:0 16px;font-family:var(--ff);font-size:10.5px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;background:transparent;border:none;cursor:pointer;color:var(--dim);transition:all .12s;border-bottom:3px solid transparent;margin-bottom:-2px}
-.ctab.act{color:var(--blue);border-bottom-color:var(--blue)}
-.cpf-box{background:var(--white);border:2px solid var(--amber-bd);border-radius:var(--r);overflow:hidden;margin-bottom:14px;box-shadow:var(--sh)}
-.cpf-hd{padding:9px 13px;background:var(--amber-bg);border-bottom:2px solid var(--amber-bd);display:flex;align-items:center;gap:7px}
-.cpf-hd-title{font-size:13px;font-weight:800;color:var(--amber)}
-.cpf-body{padding:11px 13px;display:flex;flex-direction:column;gap:9px}
+#sb-list::-webkit-scrollbar-thumb{background:var(--c-border);border-radius:2px}
+
+.grp-hdr{
+  display:flex;align-items:center;gap:6px;
+  padding:14px 6px 5px;
+}
+.grp-hdr-line{flex:1;height:1px;background:var(--c-border)}
+.grp-hdr span{font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--c-text4);white-space:nowrap}
+
+.sc-item{
+  width:100%;text-align:left;background:transparent;border:1px solid transparent;
+  border-radius:var(--radius-sm);padding:8px 10px;margin-bottom:1px;
+  cursor:pointer;display:flex;align-items:center;gap:9px;
+  transition:all var(--tr);font-family:'Inter',sans-serif;
+}
+.sc-item:hover{background:var(--c-bg);border-color:var(--c-border)}
+.sc-item.active{background:var(--c-blue-s);border-color:var(--c-blue-b)}
+.sc-ico{font-size:14px;width:22px;text-align:center;flex-shrink:0;line-height:1}
+.sc-txt{flex:1;min-width:0}
+.sc-name{font-size:12px;font-weight:600;color:var(--c-text2);transition:color var(--tr);line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sc-desc{font-size:10px;color:var(--c-text4);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sc-item:hover .sc-name{color:var(--c-text)}
+.sc-item.active .sc-name{color:var(--c-blue)}
+.sc-item.active .sc-desc{color:#93c5fd}
+.sc-pip{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.pip-green{background:var(--c-green)}.pip-red{background:var(--c-red)}
+.pip-amber{background:var(--c-amber)}.pip-teal{background:var(--c-teal)}
+.pip-orange{background:var(--c-orange)}.pip-purple{background:var(--c-purple)}
+.no-result{padding:24px;text-align:center;font-size:12px;color:var(--c-text4);line-height:1.8}
+
+/* ══════════════════════════════
+   MAIN
+══════════════════════════════ */
+#main{display:flex;flex-direction:column;overflow:hidden;position:relative;background:var(--c-bg)}
+
+/* Subbar */
+#subbar{
+  height:48px;background:var(--c-surface);border-bottom:1px solid var(--c-border);
+  display:flex;align-items:center;padding:0 20px;gap:12px;flex-shrink:0;
+  box-shadow:var(--sh-sm);
+}
+.subbar-crumb{font-size:12px;font-weight:500;color:var(--c-text3)}
+.subbar-crumb span{font-weight:600;color:var(--c-text)}
+.subbar-right{margin-left:auto;display:flex;align-items:center;gap:8px}
+
+/* Senha counter */
+.senha-widget{
+  display:flex;align-items:center;gap:10px;
+  background:var(--c-bg);border:1.5px solid var(--c-border);
+  border-radius:var(--radius-sm);padding:6px 12px;
+  box-shadow:var(--sh-sm);transition:border-color var(--tr);
+}
+.senha-widget:hover{border-color:var(--c-border2)}
+.senha-left{display:flex;flex-direction:column;gap:4px}
+.senha-label{font-size:8px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--c-text4)}
+.senha-track{width:72px;height:3px;background:var(--c-border);border-radius:2px;overflow:hidden}
+.senha-fill{height:100%;border-radius:2px;background:var(--c-green);transition:width .3s,background .3s}
+.senha-fill.warn{background:var(--c-amber)}.senha-fill.crit{background:var(--c-red)}
+.senha-ctrl{display:flex;align-items:center;gap:6px}
+.senha-val{font-family:'JetBrains Mono',monospace;font-size:17px;font-weight:700;color:var(--c-text);min-width:22px;text-align:center}
+.senha-max{font-size:10px;color:var(--c-text4);font-weight:500}
+.senha-btn{width:24px;height:24px;border-radius:5px;border:1.5px solid var(--c-border);background:var(--c-surface);color:var(--c-text3);font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all var(--tr);font-weight:600;line-height:1}
+.senha-btn:hover{border-color:var(--c-blue);color:var(--c-blue);background:var(--c-blue-s)}
+
+/* Action btn */
+.action-btn{
+  height:34px;padding:0 14px;border-radius:var(--radius-sm);
+  font-family:'Inter',sans-serif;font-size:11px;font-weight:600;
+  border:1.5px solid transparent;cursor:pointer;transition:all var(--tr);
+  display:flex;align-items:center;gap:6px;letter-spacing:.1px;
+}
+.action-btn:active{transform:scale(.97)}
+.ab-primary{background:var(--c-blue);border-color:var(--c-blue2);color:#fff;box-shadow:0 1px 4px rgba(37,99,235,.3)}
+.ab-primary:hover{background:var(--c-blue2);box-shadow:0 2px 8px rgba(37,99,235,.4)}
+.ab-ghost{background:var(--c-surface);border-color:var(--c-border);color:var(--c-text2)}
+.ab-ghost:hover{border-color:var(--c-border2);color:var(--c-text);background:var(--c-bg)}
+.ab-amber{background:var(--c-amber-s);border-color:var(--c-amber-b);color:var(--c-amber)}
+.ab-amber:hover{background:#fef3c7}
+
+/* Channel tabs */
+.ch-tabs{
+  display:flex;background:var(--c-surface);border-bottom:1px solid var(--c-border);
+  flex-shrink:0;padding:0 12px;gap:2px;
+}
+.ch-tab{
+  height:40px;padding:0 16px;font-family:'Inter',sans-serif;
+  font-size:11px;font-weight:600;letter-spacing:.3px;text-transform:uppercase;
+  background:transparent;border:none;cursor:pointer;color:var(--c-text4);
+  transition:all var(--tr);border-bottom:2px solid transparent;margin-bottom:-1px;
+  display:flex;align-items:center;gap:6px;
+}
+.ch-tab:hover{color:var(--c-text2)}
+.ch-tab.act{color:var(--c-blue);border-bottom-color:var(--c-blue)}
+
+/* ══════════════════════════════
+   WELCOME
+══════════════════════════════ */
+#welcome{
+  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:18px;padding:48px;text-align:center;
+  background:
+    radial-gradient(ellipse 55% 35% at 50% 50%,rgba(37,99,235,.06) 0%,transparent 70%),
+    var(--c-bg);
+}
+.welcome-icon{
+  width:68px;height:68px;border-radius:18px;
+  background:linear-gradient(135deg,#2563eb,#1d4ed8);
+  display:flex;align-items:center;justify-content:center;font-size:26px;
+  box-shadow:0 8px 28px rgba(37,99,235,.3);margin-bottom:4px;
+  animation:float 5s ease-in-out infinite;
+}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+.welcome-title{font-size:22px;font-weight:800;color:var(--c-text);letter-spacing:-.5px}
+.welcome-sub{font-size:13px;color:var(--c-text3);max-width:340px;line-height:1.75;font-weight:400}
+.welcome-quick{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;max-width:520px}
+.quick-chip{
+  padding:6px 14px;border-radius:20px;background:var(--c-surface);
+  border:1.5px solid var(--c-border);font-size:11px;font-weight:500;
+  color:var(--c-text2);cursor:pointer;transition:all var(--tr);box-shadow:var(--sh-sm);
+}
+.quick-chip:hover{border-color:var(--c-blue);color:var(--c-blue);background:var(--c-blue-s)}
+.welcome-stats{display:flex;gap:16px;margin-top:4px}
+.wstat{
+  background:var(--c-surface);border:1.5px solid var(--c-border);border-radius:var(--radius);
+  padding:12px 20px;text-align:center;box-shadow:var(--sh-sm);min-width:80px;
+}
+.wstat-n{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700;color:var(--c-text)}
+.wstat-l{font-size:9px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--c-text4);margin-top:2px}
+
+/* ══════════════════════════════
+   CPF CHECKER
+══════════════════════════════ */
+.cpf-panel{
+  background:var(--c-surface);border:1.5px solid var(--c-amber-b);
+  border-radius:var(--radius);overflow:hidden;margin-bottom:14px;box-shadow:var(--sh);
+  border-left:4px solid var(--c-amber);
+}
+.cpf-panel-hd{
+  padding:10px 14px;background:var(--c-amber-s);border-bottom:1.5px solid var(--c-amber-b);
+  display:flex;align-items:center;gap:8px;
+}
+.cpf-panel-title{font-size:11.5px;font-weight:700;color:var(--c-amber);letter-spacing:-.1px}
+.cpf-body{padding:14px;display:flex;flex-direction:column;gap:11px}
 .cpf-row{display:flex;gap:8px;align-items:center}
-.cpf-lbl{font-size:9.5px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--amber);white-space:nowrap}
-.cpf-inp{flex:1;border:2px solid var(--amber-bd);border-radius:var(--rs);padding:7px 11px;font-family:var(--ff);font-size:15px;font-weight:700;color:var(--text);outline:none;letter-spacing:3px;background:var(--amber-bg)}
-.cpf-inp:focus{border-color:var(--amber);background:var(--white)}
-.cpf-hint{font-size:11.5px;color:var(--sub);line-height:1.6;padding:7px 10px;background:var(--bg);border-radius:var(--rs);border:1.5px solid var(--border)}
-.cpf-status-lbl{font-size:9px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);margin-bottom:4px}
+.cpf-tag{font-size:8px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--c-amber);white-space:nowrap}
+.cpf-inp{
+  flex:1;background:var(--c-amber-s);border:1.5px solid var(--c-amber-b);
+  border-radius:var(--radius-sm);padding:8px 12px;font-family:'JetBrains Mono',monospace;
+  font-size:15px;font-weight:600;color:var(--c-text);outline:none;
+  letter-spacing:3px;transition:all var(--tr);
+}
+.cpf-inp:focus{border-color:var(--c-amber);background:#fff;box-shadow:0 0 0 3px var(--c-amber-s)}
+.cpf-hint{font-size:11.5px;color:var(--c-text3);line-height:1.6;padding:8px 12px;background:var(--c-bg);border-radius:var(--radius-xs);border:1.5px solid var(--c-border)}
+.cpf-status-tag{font-size:8px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--c-text4);margin-bottom:6px}
 .cpf-btns{display:flex;gap:5px;flex-wrap:wrap}
-.sbtn{padding:6px 13px;border-radius:var(--rs);font-family:var(--ff);font-size:11.5px;font-weight:700;border:2px solid transparent;cursor:pointer;transition:all .12s}
-.sbtn:active{transform:scale(.97)}
-.sbtn-teal{background:var(--teal-bg);border-color:var(--teal-bd);color:var(--teal)}
-.sbtn-amber{background:var(--amber-bg);border-color:var(--amber-bd);color:var(--amber)}
-.sbtn-red{background:var(--red-bg);border-color:var(--red-bd);color:var(--red)}
-.cpf-result{border-radius:var(--rs);padding:11px 13px;display:none;animation:fadeUp .2s ease;margin-top:2px}
+.chip-btn{padding:6px 13px;border-radius:var(--radius-xs);font-family:'Inter',sans-serif;font-size:11px;font-weight:600;border:1.5px solid transparent;cursor:pointer;transition:all var(--tr)}
+.chip-btn:active{transform:scale(.97)}
+.cb-teal{background:var(--c-teal-s);border-color:var(--c-teal-b);color:var(--c-teal)}
+.cb-amber{background:var(--c-amber-s);border-color:var(--c-amber-b);color:var(--c-amber)}
+.cb-red{background:var(--c-red-s);border-color:var(--c-red-b);color:var(--c-red)}
+.cpf-result{border-radius:var(--radius-sm);padding:12px 14px;display:none;animation:fadeUp .2s ease;border-left:4px solid}
 .cpf-result.show{display:block}
-@keyframes fadeUp{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
-.sr-noproc{background:var(--teal-bg);border:2px solid var(--teal-bd)}
-.sr-recused{background:var(--amber-bg);border:2px solid var(--amber-bd)}
-.sr-accepted{background:var(--red-bg);border:2px solid var(--red-bd)}
-.sr-title{font-size:13px;font-weight:800;margin-bottom:5px}
-.sr-noproc .sr-title{color:var(--teal)}.sr-recused .sr-title{color:var(--amber)}.sr-accepted .sr-title{color:var(--red)}
-.sr-body{font-size:11.5px;color:var(--sub);line-height:1.65;margin-bottom:7px}
-.sr-step{display:flex;align-items:flex-start;gap:8px;font-size:11.5px;color:var(--text);padding:3px 0}
-.sr-num{width:19px;height:19px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9.5px;font-weight:800;color:#fff;flex-shrink:0;margin-top:1px}
-.sr-noproc .sr-num{background:var(--teal)}.sr-recused .sr-num{background:var(--amber)}.sr-accepted .sr-num{background:var(--red)}
-.resp-col{flex:1;overflow-y:auto;padding:14px 16px}
-.resp-col::-webkit-scrollbar{width:3px}
-.resp-col::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px}
-.resp-stack{display:flex;flex-direction:column;gap:10px}
-.rcard{background:var(--white);border-radius:var(--r);border:2px solid var(--border);overflow:hidden;box-shadow:var(--sh)}
-.rcard.primary{border-color:var(--blue-bd);background:var(--blue-bg)}
-.rcard.danger{border-color:var(--red-bd);background:var(--red-bg)}
-.rcard-hd{padding:9px 13px;border-bottom:2px solid var(--border);display:flex;align-items:center;justify-content:space-between}
-.rcard.primary .rcard-hd{border-bottom-color:var(--blue-bd)}.rcard.danger .rcard-hd{border-bottom-color:var(--red-bd)}
-.rcard-title{font-size:12.5px;font-weight:800;color:var(--text)}
-.rcard.primary .rcard-title{color:var(--blue)}.rcard.danger .rcard-title{color:var(--red)}
-.badge{font-size:9px;font-weight:800;padding:2px 8px;border-radius:4px;letter-spacing:.4px;text-transform:uppercase;flex-shrink:0}
-.b-main{background:var(--blue-bg);color:var(--blue);border:1.5px solid var(--blue-bd)}
-.b-alt{background:var(--bg);color:var(--sub);border:1.5px solid var(--border)}
-.b-no{background:var(--red-bg);color:var(--red);border:1.5px solid var(--red-bd)}
-.b-email{background:var(--teal-bg);color:var(--teal);border:1.5px solid var(--teal-bd)}
-.b-int{background:var(--purple-bg);color:var(--purple);border:1.5px solid var(--purple-bd)}
-.b-orange{background:var(--amber-bg);color:var(--amber);border:1.5px solid var(--amber-bd)}
-.reditor{width:100%;background:transparent;border:none;border-bottom:2px solid var(--border);padding:11px 13px;font-family:var(--ff);font-size:13px;line-height:1.9;font-weight:600;color:var(--text);resize:none;outline:none;min-height:72px;max-height:240px;overflow-y:auto}
-.email-subj-row{display:flex;align-items:center;gap:8px;padding:6px 12px;border-bottom:2px solid var(--border);background:var(--teal-bg)}
-.email-subj-lbl{font-size:8.5px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--teal);white-space:nowrap}
-.email-subj-inp{flex:1;background:transparent;border:none;outline:none;font-family:var(--ff);font-size:12.5px;font-weight:600;color:var(--text)}
-.email-subj-inp::placeholder{color:var(--dim)}
-.rcard-ft{padding:7px 11px;display:flex;align-items:center;gap:5px;flex-wrap:wrap;background:rgba(0,0,0,.015)}
-.chars{font-size:9.5px;color:var(--dim);margin-left:auto;font-weight:700}
-.btn{display:inline-flex;align-items:center;gap:5px;padding:6px 13px;border-radius:var(--rs);font-family:var(--ff);font-size:11.5px;font-weight:700;border:none;cursor:pointer;transition:all .12s}
-.btn:active{transform:scale(.97)}
-.btn-copy{background:var(--blue);color:#fff}.btn-copy:hover{background:#1450b0}
-.btn-wapp{background:var(--green-bg);border:2px solid var(--green-bd);color:var(--green)}
-.btn-email{background:var(--teal-bg);border:2px solid var(--teal-bd);color:var(--teal)}
-.btn-sec{background:var(--purple-bg);border:2px solid var(--purple-bd);color:var(--purple)}
-.btn-ghost{background:transparent;border:2px solid var(--border);color:var(--sub)}
-.btn-ghost:hover{border-color:var(--sub);color:var(--text)}
-.btn-guide{background:var(--amber-bg);border:2px solid var(--amber-bd);color:var(--amber)}
-#welcome{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:40px;text-align:center}
-#welcome h2{font-size:19px;font-weight:800;color:var(--text)}
-#welcome p{font-size:13px;color:var(--sub);max-width:300px;line-height:1.7}
-.wtags{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:4px}
-.wtag{padding:5px 12px;border-radius:20px;background:var(--white);border:2px solid var(--border);font-size:11.5px;font-weight:600;color:var(--sub);cursor:pointer;transition:all .12s}
-.wtag:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-bg)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+.cr-np{background:var(--c-teal-s);border-color:var(--c-teal);border:1.5px solid var(--c-teal-b);border-left:4px solid var(--c-teal)}
+.cr-rc{background:var(--c-amber-s);border:1.5px solid var(--c-amber-b);border-left:4px solid var(--c-amber)}
+.cr-ac{background:var(--c-red-s);border:1.5px solid var(--c-red-b);border-left:4px solid var(--c-red)}
+.cr-title{font-size:12px;font-weight:700;margin-bottom:7px}
+.cr-np .cr-title{color:var(--c-teal)}.cr-rc .cr-title{color:var(--c-amber)}.cr-ac .cr-title{color:var(--c-red)}
+.cr-body{font-size:11.5px;color:var(--c-text3);margin-bottom:10px;line-height:1.6}
+.cr-step{display:flex;align-items:flex-start;gap:9px;font-size:11.5px;padding:3px 0}
+.cr-num{width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8.5px;font-weight:700;color:#fff;flex-shrink:0}
+.cr-np .cr-num{background:var(--c-teal)}.cr-rc .cr-num{background:var(--c-amber)}.cr-ac .cr-num{background:var(--c-red)}
+
+/* ══════════════════════════════
+   RESPONSE CARDS
+══════════════════════════════ */
+.resp-pane{flex:1;overflow-y:auto;padding:16px 18px}
+.resp-pane::-webkit-scrollbar{width:4px}
+.resp-pane::-webkit-scrollbar-thumb{background:var(--c-border);border-radius:2px}
+.resp-stack{display:flex;flex-direction:column;gap:12px}
+
+.rcard{
+  background:var(--c-surface);border-radius:var(--radius);
+  border:1.5px solid var(--c-border);overflow:hidden;box-shadow:var(--sh);
+  transition:all var(--tr);
+}
+.rcard:hover{box-shadow:var(--sh-md);border-color:var(--c-border2)}
+.rcard.rcard-primary{border-color:var(--c-blue-b);border-left:4px solid var(--c-blue)}
+.rcard.rcard-danger{border-color:var(--c-red-b);border-left:4px solid var(--c-red)}
+
+.rcard-head{
+  padding:10px 14px;border-bottom:1.5px solid var(--c-border);
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+}
+.rcard-primary .rcard-head{background:linear-gradient(180deg,var(--c-blue-s),var(--c-surface))}
+.rcard-danger .rcard-head{background:linear-gradient(180deg,var(--c-red-s),var(--c-surface))}
+
+.rcard-title{font-size:12px;font-weight:700;color:var(--c-text);letter-spacing:-.1px}
+.rcard-primary .rcard-title{color:var(--c-blue)}.rcard-danger .rcard-title{color:var(--c-red)}
+
+.tag{font-size:9px;font-weight:700;padding:3px 8px;border-radius:4px;letter-spacing:.4px;text-transform:uppercase;border:1.5px solid;flex-shrink:0}
+.tag-blue{background:var(--c-blue-s);color:var(--c-blue);border-color:var(--c-blue-b)}
+.tag-gray{background:var(--c-bg);color:var(--c-text4);border-color:var(--c-border)}
+.tag-red{background:var(--c-red-s);color:var(--c-red);border-color:var(--c-red-b)}
+.tag-teal{background:var(--c-teal-s);color:var(--c-teal);border-color:var(--c-teal-b)}
+.tag-purple{background:var(--c-purple-s);color:var(--c-purple);border-color:var(--c-purple-b)}
+.tag-orange{background:var(--c-orange-s);color:var(--c-orange);border-color:var(--c-orange-b)}
+.tag-amber{background:var(--c-amber-s);color:var(--c-amber);border-color:var(--c-amber-b)}
+
+.rcard-body textarea{
+  width:100%;background:transparent;border:none;border-bottom:1.5px solid var(--c-border);
+  padding:12px 14px;font-family:'Inter',sans-serif;font-size:12.5px;line-height:1.85;
+  font-weight:400;color:var(--c-text);resize:none;outline:none;
+  min-height:72px;max-height:260px;overflow-y:auto;transition:background var(--tr);
+}
+.rcard-body textarea:focus{background:#fafcff}
+
+.email-subj{
+  display:flex;align-items:center;gap:8px;padding:7px 14px;
+  border-bottom:1.5px solid var(--c-border);background:var(--c-teal-s);
+}
+.email-subj-tag{font-size:8px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--c-teal);white-space:nowrap}
+.email-subj input{flex:1;background:transparent;border:none;outline:none;font-family:'Inter',sans-serif;font-size:12.5px;font-weight:500;color:var(--c-text)}
+.email-subj input::placeholder{color:var(--c-text4)}
+
+.rcard-foot{
+  padding:8px 12px;display:flex;align-items:center;gap:5px;flex-wrap:wrap;
+  background:var(--c-surface2);border-top:1.5px solid var(--c-border);
+}
+.rcard-foot .chars{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--c-text4);margin-left:auto;font-weight:500}
+
+/* Action buttons in cards */
+.act-btn{
+  display:inline-flex;align-items:center;gap:5px;padding:5px 13px;
+  border-radius:var(--radius-xs);font-family:'Inter',sans-serif;font-size:11px;
+  font-weight:600;border:1.5px solid transparent;cursor:pointer;
+  transition:all var(--tr);letter-spacing:.1px;
+}
+.act-btn:active{transform:scale(.97)}
+.ab-navy{background:var(--c-navy);border-color:var(--c-navy2);color:#fff}
+.ab-navy:hover{background:var(--c-navy2);box-shadow:0 2px 8px rgba(10,22,40,.3)}
+.ab-wapp{background:var(--c-green-s);border-color:var(--c-green-b);color:var(--c-green)}
+.ab-wapp:hover{background:#d1fae5}
+.ab-email{background:var(--c-teal-s);border-color:var(--c-teal-b);color:var(--c-teal)}
+.ab-email:hover{background:#cffafe}
+.ab-sec{background:var(--c-purple-s);border-color:var(--c-purple-b);color:var(--c-purple)}
+.ab-reset{background:var(--c-surface);border-color:var(--c-border);color:var(--c-text3)}
+.ab-reset:hover{border-color:var(--c-border2);color:var(--c-text2)}
+
 #sc-view{flex:1;display:none;flex-direction:column;overflow:hidden}
 #sc-view.on{display:flex}
 .cpane{display:none;flex:1;flex-direction:column;overflow:hidden}
 .cpane.on{display:flex}
-#guide{position:absolute;inset:0;background:rgba(0,0,0,.4);z-index:100;display:none;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
+.empty-pane{padding:36px;text-align:center;font-size:13px;color:var(--c-text4);line-height:2}
+
+/* ══════════════════════════════
+   GUIDE MODAL
+══════════════════════════════ */
+#guide{
+  position:absolute;inset:0;background:rgba(10,22,40,.55);z-index:200;
+  display:none;align-items:center;justify-content:center;backdrop-filter:blur(8px);
+}
 #guide.open{display:flex}
-.guide-inner{background:var(--white);border:2px solid var(--border);border-radius:var(--r);max-width:620px;width:90%;max-height:85vh;overflow-y:auto;padding:20px;box-shadow:0 8px 32px rgba(0,0,0,.12)}
-.guide-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;padding-bottom:12px;border-bottom:2px solid var(--border)}
-.guide-hd h2{font-size:16px;font-weight:800}
-.guide-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
-.gc{border-radius:var(--rs);border:2px solid var(--border);padding:12px}
-.gc-yes{border-color:var(--green-bd);background:var(--green-bg)}.gc-no{border-color:var(--red-bd);background:var(--red-bg)}
-.gc h3{font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
-.gc-yes h3{color:var(--green)}.gc-no h3{color:var(--red)}
-.gi{display:flex;gap:8px;padding:5px 0;border-bottom:1px solid rgba(0,0,0,.05);font-size:11.5px}
-.gi:last-child{border-bottom:none}
-.gi span{width:18px;text-align:center;flex-shrink:0}
-.gi strong{display:block;color:var(--text);font-weight:800;margin-bottom:1px}
-.gi div{color:var(--sub);line-height:1.4}
-.guide-info{background:var(--bg);border-radius:var(--rs);border:2px solid var(--border);padding:12px;font-size:11.5px;color:var(--sub);line-height:1.9}
-.guide-info strong{color:var(--text)}
-#histbar{height:34px;border-top:2px solid var(--border);background:var(--white);display:flex;align-items:center;gap:9px;padding:0 12px;flex-shrink:0;overflow:hidden}
-.hist-lbl{font-size:8.5px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--dim);white-space:nowrap}
+.guide-box{
+  background:var(--c-surface);border:1.5px solid var(--c-border);border-radius:14px;
+  max-width:660px;width:90%;max-height:88vh;overflow-y:auto;padding:28px;
+  box-shadow:var(--sh-lg);animation:fadeUp .2s ease;
+}
+.guide-box::-webkit-scrollbar{width:4px}
+.guide-box::-webkit-scrollbar-thumb{background:var(--c-border);border-radius:2px}
+.guide-hdr{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:20px;padding-bottom:16px;border-bottom:1.5px solid var(--c-border)}
+.guide-hdr h2{font-size:18px;font-weight:800;color:var(--c-text);letter-spacing:-.5px}
+.guide-hdr p{font-size:11.5px;color:var(--c-text3);margin-top:3px}
+.guide-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.guide-col{border-radius:var(--radius);border:1.5px solid;padding:14px;overflow:hidden}
+.guide-col.yes{border-color:var(--c-green-b);background:var(--c-green-s);border-left:4px solid var(--c-green)}
+.guide-col.no{border-color:var(--c-red-b);background:var(--c-red-s);border-left:4px solid var(--c-red)}
+.guide-col-hdr{font-size:8.5px;font-weight:800;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px}
+.guide-col.yes .guide-col-hdr{color:var(--c-green)}.guide-col.no .guide-col-hdr{color:var(--c-red)}
+.guide-item{display:flex;gap:8px;padding:5px 0;border-bottom:1px solid rgba(0,0,0,.05);font-size:11.5px}
+.guide-item:last-child{border-bottom:none}
+.guide-item-ico{width:18px;text-align:center;flex-shrink:0}
+.guide-item-name{font-weight:600;color:var(--c-text);font-size:11.5px;margin-bottom:1px}
+.guide-item-desc{color:var(--c-text3);font-size:10.5px;line-height:1.4}
+.guide-info-bar{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:4px;
+}
+.gib{background:var(--c-bg);border:1.5px solid var(--c-border);border-radius:var(--radius-sm);padding:10px 12px;text-align:center}
+.gib-val{font-size:13px;font-weight:700;color:var(--c-text)}
+.gib-lbl{font-size:9px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--c-text4);margin-top:2px}
+
+/* ══════════════════════════════
+   BOTTOM BARS
+══════════════════════════════ */
+#histbar{
+  height:36px;border-top:1.5px solid var(--c-border);background:var(--c-surface);
+  display:flex;align-items:center;gap:10px;padding:0 14px;flex-shrink:0;overflow:hidden;
+}
+.hist-tag{font-size:7.5px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--c-text4);white-space:nowrap}
 .hist-chips{display:flex;gap:4px;overflow-x:auto;flex:1}
 .hist-chips::-webkit-scrollbar{display:none}
-.hist-empty{font-size:11px;color:var(--dim)}
-.hchip{display:flex;align-items:center;gap:5px;padding:3px 9px;border-radius:20px;background:var(--bg);border:1.5px solid var(--border);font-size:10.5px;font-weight:600;color:var(--sub);cursor:pointer;white-space:nowrap;transition:all .12s;flex-shrink:0}
-.hchip:hover{border-color:var(--blue);color:var(--blue)}
-.hchip-t{font-size:9px;color:var(--dim);margin-left:2px}
-#toast{position:fixed;bottom:48px;left:50%;transform:translateX(-50%) translateY(6px);background:var(--text);border-radius:var(--rs);padding:8px 16px;font-size:13px;font-weight:700;color:#fff;opacity:0;transition:all .2s;pointer-events:none;z-index:200;white-space:nowrap}
+.hist-empty{font-size:11px;color:var(--c-text4)}
+.hist-chip{
+  display:flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;
+  background:var(--c-bg);border:1.5px solid var(--c-border);
+  font-size:10px;font-weight:500;color:var(--c-text3);cursor:pointer;
+  white-space:nowrap;transition:all var(--tr);flex-shrink:0;
+}
+.hist-chip:hover{border-color:var(--c-blue);color:var(--c-blue);background:var(--c-blue-s)}
+.hist-chip-t{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--c-text4);margin-left:2px}
+
+/* ══════════════════════════════
+   TELEFONES — DRAWER PANEL
+══════════════════════════════ */
+#phone-panel{
+  border-top:1.5px solid var(--c-border);background:var(--c-surface);
+  flex-shrink:0;max-height:36px;overflow:hidden;
+  transition:max-height .32s cubic-bezier(.4,0,.2,1);
+}
+#phone-panel.open{max-height:220px}
+.phone-bar{
+  height:36px;display:flex;align-items:center;gap:10px;padding:0 14px;
+  cursor:pointer;user-select:none;transition:background var(--tr);
+}
+.phone-bar:hover{background:var(--c-bg)}
+.phone-bar-icon{font-size:12px;flex-shrink:0}
+.phone-bar-label{font-size:8px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--c-text4);flex-shrink:0}
+.phone-bar-div{width:1px;height:16px;background:var(--c-border);flex-shrink:0}
+.phone-bar-preview{display:flex;gap:5px;overflow:hidden;flex:1}
+.phone-preview-tag{
+  padding:2px 9px;border-radius:20px;background:var(--c-bg);border:1.5px solid var(--c-border);
+  font-size:9px;font-weight:600;color:var(--c-text3);white-space:nowrap;
+}
+.phone-preview-tag.emerg{background:var(--c-red-s);border-color:var(--c-red-b);color:var(--c-red)}
+.phone-bar-toggle{
+  margin-left:auto;flex-shrink:0;display:flex;align-items:center;gap:6px;
+}
+.phone-bar-count{
+  font-size:9px;font-weight:700;padding:2px 7px;border-radius:10px;
+  background:var(--c-blue-s);border:1.5px solid var(--c-blue-b);color:var(--c-blue);
+}
+.phone-bar-chevron{font-size:10px;color:var(--c-text4);transition:transform .3s}
+#phone-panel.open .phone-bar-chevron{transform:rotate(180deg)}
+
+.phone-body{
+  padding:0 14px 12px;
+  display:grid;grid-template-columns:repeat(6,1fr);gap:8px;
+  overflow:hidden;
+}
+.ph-group{
+  background:var(--c-surface2);border:1.5px solid var(--c-border);
+  border-radius:var(--radius-sm);overflow:hidden;
+}
+.ph-group-head{
+  padding:6px 10px;border-bottom:1.5px solid var(--c-border);
+  background:linear-gradient(180deg,#f1f5ff,var(--c-surface2));
+  display:flex;align-items:center;gap:5px;
+}
+.ph-group-ico{font-size:11px}
+.ph-group-lbl{font-size:7.5px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--c-text4)}
+.ph-entry{display:flex;flex-direction:column;padding:5px 10px;border-bottom:1.5px solid var(--c-border)}
+.ph-entry:last-child{border-bottom:none}
+.ph-entry-name{font-size:9.5px;color:var(--c-text3);font-weight:500;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ph-entry-num{
+  font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;
+  color:var(--c-text);user-select:all;cursor:default;
+}
+.ph-entry-num.emerg{color:var(--c-red)}
+.ph-entry-num.blue{color:var(--c-blue)}
+
+/* ══════════════════════════════
+   NOTES PANEL (slide-in)
+══════════════════════════════ */
+#notes-panel{
+  position:absolute;top:0;right:0;bottom:0;width:300px;
+  background:var(--c-surface);border-left:1.5px solid var(--c-border);
+  display:flex;flex-direction:column;z-index:150;
+  transform:translateX(100%);transition:transform .22s ease;
+  box-shadow:-8px 0 32px rgba(0,0,0,.1);
+}
+#notes-panel.open{transform:translateX(0)}
+.notes-hdr{
+  padding:14px 16px;border-bottom:1.5px solid var(--c-border);
+  display:flex;align-items:center;justify-content:space-between;flex-shrink:0;
+  background:linear-gradient(180deg,var(--c-bg),var(--c-surface));
+}
+.notes-hdr h3{font-size:13px;font-weight:700;color:var(--c-text)}
+#notes-area{
+  flex:1;padding:14px;background:transparent;border:none;
+  font-family:'Inter',sans-serif;font-size:12.5px;line-height:1.85;
+  color:var(--c-text);resize:none;outline:none;
+}
+#notes-area::placeholder{color:var(--c-text4)}
+.notes-foot{padding:8px 12px;border-top:1.5px solid var(--c-border);display:flex;gap:6px;background:var(--c-bg);flex-shrink:0}
+
+/* ══════════════════════════════
+   TOAST
+══════════════════════════════ */
+#toast{
+  position:fixed;bottom:56px;left:50%;transform:translateX(-50%) translateY(10px);
+  background:var(--c-navy);border-radius:var(--radius-sm);padding:8px 18px;
+  font-size:12.5px;font-weight:600;color:#fff;opacity:0;
+  transition:all .2s;pointer-events:none;z-index:500;white-space:nowrap;
+  box-shadow:0 8px 28px rgba(0,0,0,.3);letter-spacing:.1px;
+}
 #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-.empty-pane{padding:28px;text-align:center;font-size:13px;color:var(--dim);line-height:1.8}
-.no-result{padding:20px;text-align:center;font-size:12px;color:var(--dim)}
 </style>
 </head>
 <body>
+
+<!-- ══ TOPBAR ══ -->
 <div id="topbar">
-  <div class="tb-logo">CAD <span>·</span> Atendimento</div>
-  <div class="tb-sep"></div>
-  <input class="tb-name" type="text" id="person-name" placeholder="Nome do assistido..." oninput="atualizaNome()">
-  <span class="tb-hint">← personaliza as mensagens</span>
-  <div class="tb-r">
-    <div class="live"><div class="live-dot"></div>Online</div>
-    <div class="tb-clock" id="clock-el">--:--</div>
+  <div class="tb-brand">
+    <div class="tb-brand-mark">⚖️</div>
+    <div class="tb-brand-text">
+      <div class="tb-brand-title">CAD · Atendimento</div>
+      <div class="tb-brand-sub">OAB Subseção Santana de Parnaíba</div>
+    </div>
+  </div>
+  <div class="tb-divider"></div>
+  <div class="tb-operator">
+    <div class="tb-op-avatar">CK</div>
+    <div class="tb-op-info">
+      <div class="tb-op-name">Cássia Kelly</div>
+      <div class="tb-op-role">Central de Atendimento</div>
+    </div>
+  </div>
+  <div class="tb-divider"></div>
+  <div class="tb-input-wrap">
+    <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="text" id="search" placeholder="Buscar cenário… (Ctrl+K)" oninput="buscar(this.value)">
+  </div>
+  <div class="tb-right">
+    <div class="tb-clock" id="clock-el">--:--:--</div>
+    <div id="status-pill" class="tb-status online" onclick="cycleStatus()">
+      <span class="tb-status-dot"></span><span id="status-txt">Online</span>
+    </div>
+    <button class="tb-btn" onclick="toggleNotes()">📝 Notas</button>
   </div>
 </div>
+
 <div id="shell">
+  <!-- ══ SIDEBAR ══ -->
   <div id="sidebar">
-    <div class="sb-search"><input type="text" id="search" placeholder="🔍 Buscar..." oninput="buscar(this.value)"></div>
+    <div class="sb-top">
+      <div class="sb-top-label">Cenários de Atendimento</div>
+      <div class="sb-search">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" id="search2" placeholder="Filtrar…" oninput="buscar(this.value)">
+        <kbd>Ctrl K</kbd>
+      </div>
+    </div>
     <div id="sb-list"></div>
   </div>
+
+  <!-- ══ MAIN ══ -->
   <div id="main">
-    <div id="breadbar">
-      <div id="btitle">Selecione um cenário →</div>
-      <div class="bb-r"><button class="btn btn-guide" onclick="toggleGuide()">📋 O que atendemos</button></div>
+    <!-- Subbar -->
+    <div id="subbar">
+      <div class="subbar-crumb">
+        <span id="btitle">Selecione um cenário para começar</span>
+      </div>
+      <div class="subbar-right">
+        <div class="senha-widget">
+          <div class="senha-left">
+            <div class="senha-label">Senhas hoje</div>
+            <div class="senha-track"><div class="senha-fill" id="senha-fill" style="width:0%"></div></div>
+          </div>
+          <div class="senha-ctrl">
+            <button class="senha-btn" onclick="changeSenha(-1)">−</button>
+            <span class="senha-val" id="senha-n">0</span>
+            <span class="senha-max">/30</span>
+            <button class="senha-btn" onclick="changeSenha(1)">+</button>
+          </div>
+        </div>
+        <input type="text" id="person-name" oninput="atualizaNome()"
+          placeholder="Nome do assistido…"
+          style="height:34px;padding:0 12px;border-radius:7px;border:1.5px solid var(--c-border);background:var(--c-surface2);font-family:'Inter',sans-serif;font-size:12px;font-weight:500;color:var(--c-text);outline:none;width:190px;transition:all var(--tr)">
+        <button class="action-btn ab-amber" onclick="toggleGuide()">📋 O que atendemos</button>
+      </div>
     </div>
+
+    <!-- Welcome -->
     <div id="welcome">
-      <h2>Olá, Cássia! 👋</h2>
-      <p>Clique num cenário à esquerda ou use os atalhos abaixo.</p>
-      <div class="wtags" id="wtags"></div>
+      <div class="welcome-icon">⚖️</div>
+      <div class="welcome-title">Bom dia, Cássia!</div>
+      <div class="welcome-sub">Sistema de atendimento da CAD. Selecione um cenário na barra lateral ou use os atalhos abaixo.</div>
+      <div class="welcome-quick" id="wtags"></div>
+      <div class="welcome-stats">
+        <div class="wstat"><div class="wstat-n" id="ws-senhas">0</div><div class="wstat-l">Senhas</div></div>
+        <div class="wstat"><div class="wstat-n" id="ws-copies">0</div><div class="wstat-l">Cópias</div></div>
+        <div class="wstat"><div class="wstat-n" id="ws-time">--:--</div><div class="wstat-l">Hora</div></div>
+      </div>
     </div>
+
+    <!-- Sc view -->
     <div id="sc-view">
-      <div class="ctabs">
-        <button class="ctab act" id="ctab-wapp" onclick="switchChannel('wapp')">📱 WhatsApp</button>
-        <button class="ctab" id="ctab-email" onclick="switchChannel('email')">📧 E-mail</button>
+      <div class="ch-tabs">
+        <button class="ch-tab act" id="ctab-wapp" onclick="switchChannel('wapp')">📱 WhatsApp</button>
+        <button class="ch-tab" id="ctab-email" onclick="switchChannel('email')">📧 E-mail</button>
       </div>
       <div class="cpane on" id="pane-wapp">
-        <div class="resp-col">
-          <div id="cpf-checker-box" style="display:none">
-            <div class="cpf-box">
-              <div class="cpf-hd"><span>🔍</span><span class="cpf-hd-title">Verificar CPF no sistema</span></div>
+        <div class="resp-pane">
+          <div id="cpf-box" style="display:none">
+            <div class="cpf-panel">
+              <div class="cpf-panel-hd"><span>🔍</span><span class="cpf-panel-title">Verificação de CPF no sistema</span></div>
               <div class="cpf-body">
-                <div class="cpf-row"><span class="cpf-lbl">CPF</span><input class="cpf-inp" id="cpf-input" type="text" placeholder="000.000.000-00" maxlength="14" oninput="fmtCPF(this)"></div>
-                <div class="cpf-hint">💡 Peça o CPF, consulte no sistema e clique na situação encontrada.</div>
+                <div class="cpf-row">
+                  <span class="cpf-tag">CPF</span>
+                  <input class="cpf-inp" id="cpf-input" type="text" placeholder="000.000.000-00" maxlength="14" oninput="fmtCPF(this)">
+                  <button class="chip-btn cb-teal" onclick="copiarCPF()">📋 Copiar</button>
+                </div>
+                <div class="cpf-hint">💡 Consulte o CPF no sistema e selecione a situação encontrada.</div>
                 <div>
-                  <div class="cpf-status-lbl">Situação no sistema:</div>
+                  <div class="cpf-status-tag">Situação encontrada no sistema</div>
                   <div class="cpf-btns">
-                    <button class="sbtn sbtn-teal" onclick="showCPFStatus('noproc')">📂 Sem processo</button>
-                    <button class="sbtn sbtn-amber" onclick="showCPFStatus('recused')">⚠️ Nomeação recusada</button>
-                    <button class="sbtn sbtn-red" onclick="showCPFStatus('accepted')">✅ Nomeação aceita</button>
+                    <button class="chip-btn cb-teal" onclick="showCPFStatus('noproc')">📂 Sem processo</button>
+                    <button class="chip-btn cb-amber" onclick="showCPFStatus('recused')">⚠️ Nomeação recusada</button>
+                    <button class="chip-btn cb-red" onclick="showCPFStatus('accepted')">✅ Nomeação aceita</button>
                   </div>
                 </div>
                 <div id="cpf-status-result"></div>
@@ -214,47 +672,133 @@ body{font-family:var(--ff);background:var(--bg);color:var(--text);display:flex;f
         </div>
       </div>
       <div class="cpane" id="pane-email">
-        <div class="resp-col"><div class="resp-stack" id="resp-stack-email"></div></div>
+        <div class="resp-pane"><div class="resp-stack" id="resp-stack-email"></div></div>
       </div>
     </div>
-    <div id="guide">
-      <div class="guide-inner">
-        <div class="guide-hd"><h2>📋 O que a CAD atende</h2><button class="btn btn-ghost" onclick="toggleGuide()">✕ Fechar</button></div>
+
+    <!-- Guide modal -->
+    <div id="guide" onclick="if(event.target===this)toggleGuide()">
+      <div class="guide-box">
+        <div class="guide-hdr">
+          <div>
+            <h2>O que a CAD atende</h2>
+            <p>Referência rápida de elegibilidade · OAB Subseção Santana de Parnaíba</p>
+          </div>
+          <button class="action-btn ab-ghost" onclick="toggleGuide()">✕ Fechar</button>
+        </div>
         <div class="guide-grid">
-          <div class="gc gc-yes"><h3>✅ Atendemos</h3>
-            <div class="gi"><span>👨‍👩‍👧</span><div><strong>Família</strong>Divórcio, pensão, guarda</div></div>
-            <div class="gi"><span>⚖️</span><div><strong>Cível</strong>Cobranças, contratos, indenizações</div></div>
-            <div class="gi"><span>🏠</span><div><strong>Habitacional</strong>Posse, usucapião, regularização</div></div>
-            <div class="gi"><span>📜</span><div><strong>Inventário</strong>Abertura, partilha de bens</div></div>
-            <div class="gi"><span>🛡️</span><div><strong>Violência Doméstica</strong>Medida protetiva, Maria da Penha</div></div>
-            <div class="gi"><span>🤝</span><div><strong>Convênio OAB/DPE</strong>Via Defensoria Pública</div></div>
-            <div class="gi"><span>📋</span><div><strong>Dativo</strong>Réus sem advogado — nomeação judicial</div></div>
+          <div class="guide-col yes">
+            <div class="guide-col-hdr">✅ Atendemos</div>
+            <div class="guide-item"><span class="guide-item-ico">👨‍👩‍👧</span><div><div class="guide-item-name">Família</div><div class="guide-item-desc">Divórcio, pensão alimentícia, guarda</div></div></div>
+            <div class="guide-item"><span class="guide-item-ico">⚖️</span><div><div class="guide-item-name">Cível</div><div class="guide-item-desc">Cobranças, contratos, indenizações</div></div></div>
+            <div class="guide-item"><span class="guide-item-ico">🏠</span><div><div class="guide-item-name">Habitacional</div><div class="guide-item-desc">Posse, usucapião, regularização</div></div></div>
+            <div class="guide-item"><span class="guide-item-ico">📜</span><div><div class="guide-item-name">Inventário / Herança</div><div class="guide-item-desc">Abertura, partilha de bens</div></div></div>
+            <div class="guide-item"><span class="guide-item-ico">🛡️</span><div><div class="guide-item-name">Violência Doméstica</div><div class="guide-item-desc">Medida protetiva, Lei Maria da Penha</div></div></div>
+            <div class="guide-item"><span class="guide-item-ico">🤝</span><div><div class="guide-item-name">Convênio OAB / DPE</div><div class="guide-item-desc">Via Defensoria Pública do Estado</div></div></div>
+            <div class="guide-item"><span class="guide-item-ico">📋</span><div><div class="guide-item-name">Advocacia Dativa</div><div class="guide-item-desc">Réus sem advogado — nomeação judicial</div></div></div>
           </div>
-          <div class="gc gc-no"><h3>🚫 Não atendemos</h3>
-            <div class="gi"><span>🏭</span><div><strong>Trabalhista</strong>Rescisão, FGTS, vínculo</div></div>
-            <div class="gi"><span>📋</span><div><strong>INSS / Previdenciário</strong>Aposentadoria, BPC, auxílio</div></div>
-            <div class="gi"><span>🔒</span><div><strong>Criminal geral</strong>Exceto dativo nomeado pelo juiz</div></div>
-            <div class="gi"><span>🏢</span><div><strong>Empresarial</strong>CNPJ, sociedades, contratos</div></div>
-            <div class="gi"><span>💰</span><div><strong>Tributário</strong>Receita Federal, parcelamentos</div></div>
+          <div class="guide-col no">
+            <div class="guide-col-hdr">🚫 Não atendemos</div>
+            <div class="guide-item"><span class="guide-item-ico">🏭</span><div><div class="guide-item-name">Trabalhista</div><div class="guide-item-desc">Rescisão, FGTS, vínculo empregatício</div></div></div>
+            <div class="guide-item"><span class="guide-item-ico">📋</span><div><div class="guide-item-name">INSS / Previdenciário</div><div class="guide-item-desc">Aposentadoria, BPC, auxílio-doença</div></div></div>
+            <div class="guide-item"><span class="guide-item-ico">🔒</span><div><div class="guide-item-name">Criminal geral</div><div class="guide-item-desc">Exceto dativo nomeado pelo juiz</div></div></div>
+            <div class="guide-item"><span class="guide-item-ico">🏢</span><div><div class="guide-item-name">Empresarial</div><div class="guide-item-desc">CNPJ, sociedades, contratos PJ</div></div></div>
+            <div class="guide-item"><span class="guide-item-ico">💰</span><div><div class="guide-item-name">Tributário</div><div class="guide-item-desc">Receita Federal, parcelamentos</div></div></div>
           </div>
         </div>
-        <div class="guide-info">
-          <strong>📍</strong> Av. Tenente Marques, 5297 – Jd. do Luar (POUPATEMPO), Santana de Parnaíba/SP<br>
-          <strong>📞</strong> (11) 4154-5191 &nbsp;·&nbsp; <strong>🕘</strong> Seg–Sex, 9h–12h &nbsp;·&nbsp; <strong>⚠️</strong> 30 senhas/dia
+        <div class="guide-info-bar">
+          <div class="gib"><div class="gib-val">Seg–Sex</div><div class="gib-lbl">Dias de atendimento</div></div>
+          <div class="gib"><div class="gib-val">9h–12h</div><div class="gib-lbl">Horário</div></div>
+          <div class="gib"><div class="gib-val">30 senhas</div><div class="gib-lbl">Limite diário</div></div>
         </div>
-        <div style="margin-top:12px"><button class="btn btn-ghost" onclick="window.print()">🖨️ Imprimir</button></div>
+        <p style="font-size:11px;color:var(--c-text4);margin-top:12px">📍 Av. Tenente Marques, 5297 – Jd. do Luar (POUPATEMPO) · (11) 4154-5191</p>
+        <div style="margin-top:14px;display:flex;gap:8px">
+          <button class="action-btn ab-ghost" onclick="window.print()">🖨️ Imprimir</button>
+          <button class="action-btn ab-ghost" onclick="toggleGuide()">✕ Fechar</button>
+        </div>
       </div>
     </div>
+
+    <!-- Histbar -->
     <div id="histbar">
-      <span class="hist-lbl">Recentes</span>
+      <span class="hist-tag">Recentes</span>
       <div class="hist-chips" id="hist-chips"><span class="hist-empty">Nenhuma cópia ainda</span></div>
+      <button class="action-btn ab-ghost" onclick="clearHist()" style="padding:3px 9px;font-size:10px;flex-shrink:0;height:26px">🗑 Limpar</button>
+    </div>
+
+    <!-- ══ TELEFONES ÚTEIS ══ -->
+    <div id="phone-panel">
+      <div class="phone-bar" onclick="document.getElementById('phone-panel').classList.toggle('open')">
+        <span class="phone-bar-icon">📞</span>
+        <span class="phone-bar-label">Telefones Úteis</span>
+        <div class="phone-bar-div"></div>
+        <div class="phone-bar-preview">
+          <span class="phone-preview-tag emerg">190 · 192 · 180</span>
+          <span class="phone-preview-tag">Fórum (11) 4154-6100</span>
+          <span class="phone-preview-tag">Defensoria 0800-882-0606</span>
+          <span class="phone-preview-tag">OAB SP (11) 3346-6200</span>
+        </div>
+        <div class="phone-bar-toggle">
+          <span class="phone-bar-count">18 contatos</span>
+          <span class="phone-bar-chevron">▾</span>
+        </div>
+      </div>
+      <div class="phone-body">
+        <div class="ph-group">
+          <div class="ph-group-head"><span class="ph-group-ico">🚨</span><span class="ph-group-lbl">Emergência</span></div>
+          <div class="ph-entry"><div class="ph-entry-name">Polícia Militar</div><div class="ph-entry-num emerg">190</div></div>
+          <div class="ph-entry"><div class="ph-entry-name">SAMU</div><div class="ph-entry-num emerg">192</div></div>
+          <div class="ph-entry"><div class="ph-entry-name">Central da Mulher</div><div class="ph-entry-num emerg">180</div></div>
+          <div class="ph-entry"><div class="ph-entry-name">Bombeiros</div><div class="ph-entry-num emerg">193</div></div>
+          <div class="ph-entry"><div class="ph-entry-name">CVV</div><div class="ph-entry-num emerg">188</div></div>
+        </div>
+        <div class="ph-group">
+          <div class="ph-group-head"><span class="ph-group-ico">⚖️</span><span class="ph-group-lbl">Fórum / TJ</span></div>
+          <div class="ph-entry"><div class="ph-entry-name">Fórum Santana de Parnaíba</div><div class="ph-entry-num blue">(11) 4154-6100</div></div>
+          <div class="ph-entry"><div class="ph-entry-name">TJ-SP (geral)</div><div class="ph-entry-num blue">(11) 3372-6111</div></div>
+          <div class="ph-entry"><div class="ph-entry-name">Cartório Civil</div><div class="ph-entry-num">(11) XXXX-XXXX</div></div>
+        </div>
+        <div class="ph-group">
+          <div class="ph-group-head"><span class="ph-group-ico">🛡️</span><span class="ph-group-lbl">Defensoria</span></div>
+          <div class="ph-entry"><div class="ph-entry-name">Defensoria (gratuito)</div><div class="ph-entry-num blue">0800-882-0606</div></div>
+          <div class="ph-entry"><div class="ph-entry-name">Núcleo Santana de Parnaíba</div><div class="ph-entry-num">(11) XXXX-XXXX</div></div>
+        </div>
+        <div class="ph-group">
+          <div class="ph-group-head"><span class="ph-group-ico">🏛️</span><span class="ph-group-lbl">OAB / CAD</span></div>
+          <div class="ph-entry"><div class="ph-entry-name">OAB SP (geral)</div><div class="ph-entry-num blue">(11) 3346-6200</div></div>
+          <div class="ph-entry"><div class="ph-entry-name">Subseção — Atendimento</div><div class="ph-entry-num blue">(11) 4154-5191</div></div>
+          <div class="ph-entry"><div class="ph-entry-name">Secretaria CAD (WhatsApp)</div><div class="ph-entry-num blue">(11) 93724-8448</div></div>
+        </div>
+        <div class="ph-group">
+          <div class="ph-group-head"><span class="ph-group-ico">🏢</span><span class="ph-group-lbl">Prefeitura / Social</span></div>
+          <div class="ph-entry"><div class="ph-entry-name">Prefeitura Municipal</div><div class="ph-entry-num">(11) 4154-1000</div></div>
+          <div class="ph-entry"><div class="ph-entry-name">CRAS</div><div class="ph-entry-num">(11) XXXX-XXXX</div></div>
+          <div class="ph-entry"><div class="ph-entry-name">CREAS</div><div class="ph-entry-num">(11) XXXX-XXXX</div></div>
+          <div class="ph-entry"><div class="ph-entry-name">Conselho Tutelar</div><div class="ph-entry-num">(11) XXXX-XXXX</div></div>
+        </div>
+        <div class="ph-group">
+          <div class="ph-group-head"><span class="ph-group-ico">📋</span><span class="ph-group-lbl">Outros</span></div>
+          <div class="ph-entry"><div class="ph-entry-name">Procon SP</div><div class="ph-entry-num">151</div></div>
+          <div class="ph-entry"><div class="ph-entry-name">Disque-Denúncia</div><div class="ph-entry-num">181</div></div>
+          <div class="ph-entry"><div class="ph-entry-name">Assistência Social (24h)</div><div class="ph-entry-num">(11) XXXX-XXXX</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notes panel -->
+    <div id="notes-panel">
+      <div class="notes-hdr"><h3>📝 Notas rápidas</h3><button class="action-btn ab-ghost" onclick="toggleNotes()">✕</button></div>
+      <textarea id="notes-area" placeholder="Anote CPFs, processos, observações do atendimento…"></textarea>
+      <div class="notes-foot">
+        <button class="act-btn ab-navy" onclick="copiarNotes()">📋 Copiar</button>
+        <button class="act-btn ab-reset" onclick="limparNotes()">🗑 Limpar</button>
+      </div>
     </div>
   </div>
 </div>
 <div id="toast"></div>
 <script>
-
-const EMAIL = 'aj.santana.parnai@oabsp.org.br';
+const EMAIL='aj.santana.parnai@oabsp.org.br';
 const DOCS='\n\nDocumentos necessários:\n- RG original e CPF\n- Comprovante de residência atualizado\n- Comprovante de renda de todos que moram com você\n- Se tiver bens: documentação correspondente\n\n⚠️ Sem documentação completa, o atendimento não será realizado.';
 const END='\n\n📍 Av. Tenente Marques, 5297 – Jd. do Luar (Fazendinha)\n   Dentro do POUPATEMPO · Santana de Parnaíba/SP\n📞 (11) 4154-5191\n🕘 Seg–Sex, 9h–12h  ⚠️ 30 senhas/dia';
 const END_REC='\n\n📍 R. Alberto Frediani, 770 – Jd. Frediani, Santana de Parnaíba/SP\n🕘 Seg–Sex, 9h–17h';
@@ -267,302 +811,236 @@ const S=[
   {title:'👋 Boas-vindas',badge:'Recomendada',primary:true,nao:false,tpl:n=>'Olá'+(n?', '+n:'')+'! 😊 Aqui é a Cássia — em que posso te ajudar?'},
   {title:'👋 Tom informal',badge:'Alternativa',primary:false,nao:false,tpl:n=>'Oi'+(n?', '+n:'')+'! Tudo bem? 😊 Sou a Cássia, me conta — no que posso ajudar?'}
 ],emailResps:[]},
-
 {grp:'📞 Atendimento',id:'bv1',icon:'❓',pip:null,label:'O que é a CAD / pode ajudar?',sub:'Apresentar e confirmar',resps:[
   {title:'✉️ Apresentar + orientar',badge:'Recomendada',primary:true,nao:false,tpl:n=>'Olá'+(n?', '+n:'')+'! 😊\n\nSomos a CAD – Comissão de Advocacia Dativa da OAB Santana de Parnaíba. Oferecemos atendimento jurídico gratuito para quem não tem condições de pagar advogado particular.\n\nO atendimento é presencial, de segunda a sexta, das 9h às 12h. Não precisa agendar — é por ordem de chegada.\n\n⚠️ Limite de 30 senhas por dia — recomendamos chegar cedo!'+DOCS+END}
 ],emailResps:[{title:'📧 Apresentação',subj:'CAD – O que somos e como podemos ajudar',badge:'Padrão',primary:true,nao:false,tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nA CAD oferece atendimento jurídico gratuito a quem não pode contratar advogado. Atendemos presencialmente, de segunda a sexta, das 9h às 12h (limite: 30 senhas/dia).'+DOCS+ENDE}]},
-
 {grp:'📞 Atendimento',id:'info1',icon:'📣',pip:null,label:'Informativo completo',sub:'Horário, documentos, endereço',resps:[
   {title:'📣 Informativo completo',badge:'Recomendada',primary:true,nao:false,tpl:n=>'*OAB – ASSISTÊNCIA JUDICIÁRIA GRATUITA*\n📍 Subseção Santana de Parnaíba\n \n━━━━━━━━━━━━━━━━━━━━\n🗓️ *Atendimento:* Segunda a Sexta-feira\n🕘 *Horário:* 09h00 às 12h00\n⚠️ *Limite:* 30 pessoas por dia\n_(Senhas apenas para as primeiras 30)_\n━━━━━━━━━━━━━━━━━━━━\n \n📋 *DOCUMENTOS OBRIGATÓRIOS:*\n \n✅ RG original + CPF\n✅ Comprovante de residência atualizado\n✅ Comprovante de renda de todos da família\n✅ Patrimônio _(se houver)_\n✅ *Alimentos:* documento da criança + endereço da parte contrária\n✅ *Divórcio:* certidão de casamento atualizada\n \n🚫 *Sem os documentos acima, o atendimento NÃO será realizado.*\n \n📍 Av. Tenente Marques, 5297 – Jd. do Luar (Fazendinha)\n   _(Dentro do POUPATEMPO)_ · Santana de Parnaíba/SP\n📞 (11) 4154-5191'},
-  {title:'📣 Versão resumida',badge:'Alternativa',primary:false,nao:false,tpl:n=>'Olá'+(n?', '+n:'')+'! 😊\n\n🗓️ Seg–Sex · 🕘 09h–12h · ⚠️ 30 senhas/dia\n\n📋 Documentos: RG + CPF · Comprovante de residência · Comprovante de renda\n🚫 Sem documentação completa, o atendimento não é realizado.\n\n📍 Av. Tenente Marques, 5297 – Fazendinha (POUPATEMPO)\n📞 (11) 4154-5191'}
+  {title:'📣 Versão resumida',badge:'Alternativa',primary:false,nao:false,tpl:n=>'Olá'+(n?', '+n:'')+'! 😊\n\n🗓️ Seg–Sex · 🕘 09h–12h · ⚠️ 30 senhas/dia\n📋 Documentos: RG + CPF · Comprovante de residência · Comprovante de renda\n🚫 Sem documentação completa, o atendimento não é realizado.\n\n📍 Av. Tenente Marques, 5297 – Fazendinha (POUPATEMPO)\n📞 (11) 4154-5191'}
 ],emailResps:[{title:'📧 Informativo',subj:'OAB Santana de Parnaíba – Assistência Judiciária Gratuita',badge:'Recomendada',primary:true,nao:false,tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nDias: Segunda a Sexta · Horário: 09h–12h · Limite: 30 senhas/dia\n\nDocumentos obrigatórios:\n1. RG original + CPF\n2. Comprovante de residência atualizado\n3. Comprovante de renda de todos da família\n4. Patrimônio se houver\n5. Para pensão: documento da criança + endereço da parte contrária\n6. Para divórcio: certidão de casamento atualizada\n\nLocalização: Av. Tenente Marques, 5297 – Jd. do Luar (POUPATEMPO), Santana de Parnaíba/SP · Tel: (11) 4154-5191'+ENDE}]},
-
 {grp:'📞 Atendimento',id:'age2',icon:'🕘',pip:null,label:'Horário / Sábado / Fora do expediente',sub:'Informar funcionamento',resps:[
   {title:'🕘 Informar horário',badge:'Recomendada',primary:true,nao:false,tpl:n=>'Atendemos de segunda a sexta, das 9h às 12h, por ordem de chegada — sem agendamento prévio.\n\n⚠️ Limite de 30 senhas/dia. Não atendemos sábados, domingos ou feriados.'+DOCS+END},
   {title:'🌙 Fora do horário',badge:'Alternativa',primary:false,nao:false,tpl:n=>'Obrigada pelo contato! Sua mensagem foi recebida fora do nosso horário de atendimento e será respondida no próximo dia útil.\n\n🕘 Seg–Sex, 9h–12h.'}
-],emailResps:[{title:'📧 Horário',subj:'CAD – Horário de atendimento',badge:'Padrão',primary:true,nao:false,tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nAtendemos de segunda a sexta, das 9h às 12h, por ordem de chegada — limite de 30 senhas/dia. Não atendemos sábados, domingos ou feriados.'+ENDE}]},
-
+],emailResps:[{title:'📧 Horário',subj:'CAD – Horário de atendimento',badge:'Padrão',primary:true,nao:false,tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nAtendemos de segunda a sexta, das 9h às 12h, por ordem de chegada — limite de 30 senhas/dia.'+ENDE}]},
 {grp:'📞 Atendimento',id:'age1',icon:'🚷',pip:null,label:'Vagas esgotadas',sub:'Limite de 30 senhas atingido',resps:[
   {title:'📅 Vagas esgotadas',badge:'Padrão',primary:true,nao:false,tpl:n=>'As 30 senhas de hoje já foram distribuídas.\n\nRetorne amanhã antes das 9h para garantir seu atendimento.'+DOCS+END}
 ],emailResps:[{title:'📧 Vagas esgotadas',subj:'CAD – Atendimento indisponível hoje',badge:'Padrão',primary:true,nao:false,tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nO limite de 30 senhas diárias foi atingido. Retorne no próximo dia útil antes das 9h.'+ENDE}]},
-
 {grp:'📞 Atendimento',id:'bv4',icon:'🎙️',pip:null,label:'Enviou áudio',sub:'Pedir em texto',resps:[
   {title:'✉️ Pedir em texto',badge:'Padrão',primary:true,nao:false,tpl:n=>'Oi'+(n?', '+n:'')+'! 😊 Infelizmente não consigo ouvir áudios por aqui. Pode me mandar em texto? Assim te ajudo direitinho!'}
 ],emailResps:[]},
-
 {grp:'📞 Atendimento',id:'bv6',icon:'✅',pip:null,label:'Encerrar conversa',sub:'Fechar com acolhimento',resps:[
   {title:'✅ Encerrar',badge:'Recomendada',primary:true,nao:false,tpl:n=>'Disponha'+(n?', '+n:'')+'! 😊 Se surgir qualquer dúvida, é só me chamar. Boa sorte! 🍀'},
   {title:'✅ Simples',badge:'Alternativa',primary:false,nao:false,tpl:n=>'De nada'+(n?', '+n:'')+'! 😊 Estou por aqui se precisar. Até logo!'}
 ],emailResps:[]},
-
 {grp:'📞 Atendimento',id:'bv7',icon:'⏸️',pip:null,label:'Ausência temporária',sub:'Avisar que volta em breve',resps:[
   {title:'⏸️ Ausência curta',badge:'Recomendada',primary:true,nao:false,tpl:n=>'Oi'+(n?', '+n:'')+'! 😊 Preciso me ausentar por alguns minutos — já volto! 🙂'},
   {title:'⏸️ Em atendimento presencial',badge:'Alternativa',primary:false,nao:false,tpl:n=>'Oi'+(n?', '+n:'')+'! 😊 Estou em atendimento presencial agora — respondo assim que finalizar. Obrigada pela paciência! 🙂'}
 ],emailResps:[]},
-
 {grp:'📞 Atendimento',id:'doc1',icon:'📋',pip:null,label:'Quais documentos trazer?',sub:'Lista completa ou por caso',resps:[
   {title:'📋 Lista completa',badge:'Recomendada',primary:true,nao:false,tpl:n=>'Olá'+(n?', '+n:'')+'!\n\nPara ser atendido(a):\n- RG original e CPF\n- Comprovante de residência atualizado\n- Comprovante de renda de todos que moram com você\n- Se tiver bens: documentação correspondente\n\n⚠️ Sem tudo completo, o atendimento não é realizado.'+END},
   {title:'📋 Pensão — extras',badge:'Alternativa',primary:false,nao:false,tpl:n=>'Olá'+(n?', '+n:'')+'!\n\nPara pensão, além dos documentos básicos:\n- Certidão de nascimento do(s) filho(s)\n- Endereço completo da parte contrária'+DOCS+END},
   {title:'📋 Divórcio — extras',badge:'Alternativa',primary:false,nao:false,tpl:n=>'Olá'+(n?', '+n:'')+'!\n\nPara divórcio, além dos documentos básicos:\n- Certidão de casamento atualizada (máximo 90 dias)\n- Filhos menores: certidão de nascimento de cada um\n- Se tiver bens: documentação do imóvel ou veículo'+DOCS+END}
 ],emailResps:[{title:'📧 Documentos',subj:'CAD – Documentos necessários',badge:'Padrão',primary:true,nao:false,tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\n- RG original e CPF\n- Comprovante de residência atualizado\n- Comprovante de renda de todos que moram com você\n- Se tiver bens: documentação correspondente\n\nSem documentação completa, o atendimento não é realizado.'+ENDE}]},
-
 {grp:'📞 Atendimento',id:'doc2',icon:'❌',pip:null,label:'Documentação incompleta / foto',sub:'Orientar presencial com originais',resps:[
   {title:'❌ Orientar comparecer',badge:'Padrão',primary:true,nao:false,tpl:n=>'Olá'+(n?', '+n:'')+'!\n\nDocumentos não podem ser avaliados por aqui — e sem documentação completa o atendimento não é realizado.\n\nÉ necessário comparecer pessoalmente com os documentos originais.'+DOCS+END}
-],emailResps:[{title:'📧 Docs incompletos',subj:'CAD – Documentação pendente',badge:'Padrão',primary:true,nao:false,tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nO atendimento não pôde ser concluído por documentação incompleta. Compareça presencialmente com todos os originais.'+DOCS+ENDE}]},
-
+],emailResps:[{title:'📧 Docs incompletos',subj:'CAD – Documentação pendente',badge:'Padrão',primary:true,nao:false,tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nO atendimento não pôde ser concluído por documentação incompleta. Compareça com todos os originais.'+DOCS+ENDE}]},
 {grp:'✅ Casos que atendemos',id:'at1',icon:'👨‍👩‍👧',pip:'pip-green',label:'Família',sub:'Divórcio, pensão, guarda',resps:[
   {title:'✉️ Divórcio',badge:'Recomendada',primary:true,nao:false,tpl:n=>'Olá'+(n?', '+n:'')+'!\n\nSim, atendemos divórcio! Além dos documentos básicos, traga:\n- Certidão de casamento atualizada (máximo 90 dias)\n- Filhos menores: certidão de nascimento de cada um\n- Se tiver bens: documentação do imóvel ou veículo'+DOCS+END},
   {title:'✉️ Pensão',badge:'Alternativa',primary:false,nao:false,tpl:n=>'Olá'+(n?', '+n:'')+'!\n\nSim, atendemos pensão! Além dos documentos básicos:\n- Certidão de nascimento do(s) filho(s)\n- Endereço completo da parte contrária'+DOCS+END},
   {title:'✉️ Família — geral',badge:'Alternativa',primary:false,nao:false,tpl:n=>'Olá'+(n?', '+n:'')+'!\n\nSim, atendemos casos de família! Pode vir até nós.'+DOCS+END}
-],emailResps:[{title:'📧 Família',subj:'CAD – Atendemos seu caso',badge:'Padrão',primary:true,nao:false,tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nA CAD atende casos de família (divórcio, pensão, guarda). Compareça com a documentação necessária.'+DOCS+ENDE}]},
-
+],emailResps:[{title:'📧 Família',subj:'CAD – Atendemos seu caso',badge:'Padrão',primary:true,nao:false,tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nA CAD atende casos de família. Compareça com a documentação necessária.'+DOCS+ENDE}]},
 {grp:'✅ Casos que atendemos',id:'at3',icon:'🛡️',pip:'pip-green',label:'Violência Doméstica',sub:'Medida protetiva, Maria da Penha',resps:[
   {title:'✉️ Violência doméstica',badge:'Recomendada',primary:true,nao:false,tpl:n=>'Olá'+(n?', '+n:'')+'!\n\nSim, atendemos violência doméstica e medida protetiva.\n\nSe você estiver em risco agora, ligue primeiro:\n🔴 Central da Mulher: 180 (24h, gratuito)\n🔴 Polícia: 190\n\nDepois venha até nós com os documentos.'+DOCS+END}
-],emailResps:[{title:'📧 Violência doméstica',subj:'CAD – Atendemos violência doméstica',badge:'Padrão',primary:true,nao:false,tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nA CAD atende violência doméstica e medida protetiva.\n\n⚠️ Em risco imediato: ligue 180 (Central da Mulher, 24h) ou 190 (Polícia).'+DOCS+ENDE}]},
-
+],emailResps:[{title:'📧 Violência doméstica',subj:'CAD – Atendemos violência doméstica',badge:'Padrão',primary:true,nao:false,tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nA CAD atende violência doméstica e medida protetiva.\n\n⚠️ Em risco imediato: 180 (Central da Mulher, 24h) ou 190 (Polícia).'+DOCS+ENDE}]},
 {grp:'✅ Casos que atendemos',id:'at4',icon:'📜',pip:'pip-green',label:'Inventário / Herança',sub:'Confirmar atendimento',resps:[
   {title:'✉️ Inventário',badge:'Padrão',primary:true,nao:false,tpl:n=>'Olá'+(n?', '+n:'')+'!\n\nSim, atendemos inventário e herança! Venha com os documentos.'+DOCS+END}
 ],emailResps:[{title:'📧 Inventário',subj:'CAD – Atendemos inventário e herança',badge:'Padrão',primary:true,nao:false,tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nSim, atendemos inventário e herança. Compareça com a documentação.'+DOCS+ENDE}]},
-
 {grp:'✅ Casos que atendemos',id:'cv1',icon:'🤝',pip:'pip-teal',label:'Convênio OAB/DPE',sub:'Explicar e confirmar',resps:[
-  {title:'✉️ Explicar convênio',badge:'Recomendada',primary:true,nao:false,tpl:n=>'Olá'+(n?', '+n:'')+'!\n\nO convênio OAB/DPE é uma parceria entre a OAB e a Defensoria Pública. Advogados conveniados atendem gratuitamente quem não tem condições de pagar advogado particular.\n\nA verificação de elegibilidade é feita presencialmente, com base nos documentos de renda de toda a família.'+DOCS+END}
-],emailResps:[{title:'📧 Convênio',subj:'CAD – Como funciona o Convênio OAB/DPE',badge:'Padrão',primary:true,nao:false,tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nO Convênio OAB/DPE permite atendimento jurídico gratuito. A análise de elegibilidade é presencial, com base na renda familiar.'+ENDE}]},
-
+  {title:'✉️ Explicar convênio',badge:'Recomendada',primary:true,nao:false,tpl:n=>'Olá'+(n?', '+n:'')+'!\n\nO convênio OAB/DPE permite atendimento gratuito. Advogados conveniados atendem quem não pode pagar particular.\n\nA análise de elegibilidade é feita presencialmente, com base na renda familiar.'+DOCS+END}
+],emailResps:[{title:'📧 Convênio',subj:'CAD – Convênio OAB/DPE',badge:'Padrão',primary:true,nao:false,tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nO Convênio OAB/DPE permite atendimento jurídico gratuito. Análise presencial, base na renda familiar.'+ENDE}]},
 {grp:'🚫 Não atendemos',id:'na1',icon:'🏭',pip:'pip-red',label:'Trabalhista / INSS / Criminal',sub:'Fora da nossa atuação',resps:[
   {title:'🚫 Trabalhista',badge:'Não atendemos',primary:false,nao:true,tpl:n=>'Olá'+(n?', '+n:'')+'!\n\nInfelizmente não atendemos casos trabalhistas. Para esses casos: sindicato da sua categoria, Defensoria Pública ou advogado especializado.'+AREAS+END},
   {title:'🚫 INSS / Previdenciário',badge:'Não atendemos',primary:false,nao:true,tpl:n=>'Olá'+(n?', '+n:'')+'!\n\nInfelizmente não atendemos INSS ou previdenciário. Indicamos: CRAS, Defensoria Pública ou advogado especializado.'+AREAS+END},
   {title:'🚫 Criminal geral',badge:'Não atendemos',primary:false,nao:true,tpl:n=>'Olá'+(n?', '+n:'')+'!\n\nInfelizmente não fazemos defesa criminal. Procure a Defensoria Pública do Estado de São Paulo.'+AREAS+END}
-],emailResps:[{title:'📧 Não atendemos',subj:'CAD – Sobre seu contato',badge:'Não atendemos',primary:false,nao:true,tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nEste tipo de caso está fora da atuação da CAD. Indicamos a Defensoria Pública ou advogado especializado.'+AREAS+ENDE}]},
-
+],emailResps:[{title:'📧 Não atendemos',subj:'CAD – Sobre seu contato',badge:'Não atendemos',primary:false,nao:true,tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nEste caso está fora da atuação da CAD. Indicamos a Defensoria Pública ou advogado especializado.'+AREAS+ENDE}]},
 {grp:'😓 Situações delicadas',id:'del1',icon:'😤',pip:null,label:'Pessoa nervosa / frustrada',sub:'Acolher e ouvir antes de orientar',resps:[
   {title:'😤 Acolher e ouvir',badge:'Recomendada',primary:true,nao:false,tpl:n=>'Oi'+(n?', '+n:'')+'! 😔\n\nEntendo a frustração e me desculpe pelo transtorno. Estou aqui para te ajudar de verdade! 🙏\n\nMe conta com calma o que aconteceu?'},
   {title:'😤 Após ouvir — vagas',badge:'Complementar',primary:false,nao:false,tpl:n=>'Obrigada por me explicar! 😊\n\nO limite é de 30 senhas/dia e costumam acabar cedo. Dica: venha antes das 9h!'+DOCS+END},
   {title:'😤 Após ouvir — orientar',badge:'Complementar',primary:false,nao:false,tpl:n=>'Obrigada por me contar! 😊 Venha de segunda a sexta, das 9h às 12h, com os documentos abaixo.'+DOCS+END}
 ],emailResps:[]},
-
 {grp:'😓 Situações delicadas',id:'del1c',icon:'🛑',pip:'pip-red',label:'Linguagem agressiva',sub:'Firmeza e respeito',resps:[
   {title:'🛑 Redirecionar com firmeza',badge:'Recomendada',primary:true,nao:false,tpl:n=>'Oi'+(n?', '+n:'')+'!\n\nQuero te ajudar! 😊 Mas para isso precisamos conversar com respeito de ambos os lados.\n\nMe conta o que está acontecendo com calma e farei o possível para te orientar. 🙏'},
-  {title:'🛑 Tom acolhedor',badge:'Alternativa',primary:false,nao:false,tpl:n=>'Oi'+(n?', '+n:'')+'! 💙\n\nPercebo que você está passando por um momento difícil. Me ajuda a te ajudar — conta o que precisa com calma e te oriento da melhor forma. 🙏'}
+  {title:'🛑 Tom acolhedor',badge:'Alternativa',primary:false,nao:false,tpl:n=>'Oi'+(n?', '+n:'')+'! 💙\n\nPercebo que você está passando por um momento difícil. Me ajuda a te ajudar — conta o que precisa com calma. 🙏'}
 ],emailResps:[]},
-
 {grp:'😓 Situações delicadas',id:'del6',icon:'🚨',pip:'pip-red',label:'Urgente / vulnerável / choro',sub:'Acolher primeiro — orientar depois',resps:[
   {title:'🚨 Acolher',badge:'Recomendada',primary:true,nao:false,tpl:n=>'Fico feliz que você entrou em contato. 💙 Você não está sozinha nisso.\n\nRespira fundo e me conta o que está acontecendo — estou aqui para te ouvir. 🙏'},
   {title:'🚨 Risco físico',badge:'Urgente',primary:false,nao:false,tpl:n=>'Você está em segurança agora?\n\nSe estiver em risco, ligue imediatamente:\n🔴 190 – Polícia Militar\n🔴 180 – Central da Mulher (24h, gratuito)\n\nEstou aqui assim que puder me contar. 💙'},
   {title:'🚨 Após ouvir — orientar',badge:'Complementar',primary:false,nao:false,tpl:n=>'Obrigada por confiar em mim! 💙\n\nSeu caso tem solução — vamos conseguir te ajudar. Venha até nós com os documentos abaixo!'+DOCS+END}
 ],emailResps:[]},
-
 {grp:'😓 Situações delicadas',id:'del2',icon:'🔄',pip:null,label:'Quer saber do processo / retornar',sub:'Acompanhamento é presencial',resps:[
   {title:'🔄 Orientar retorno',badge:'Recomendada',primary:true,nao:false,tpl:n=>'Oi'+(n?', '+n:'')+'! 😊\n\nPara acompanhar ou dar continuidade ao seu caso, é necessário comparecer pessoalmente.\n\nVenha de segunda a sexta, das 9h às 12h. Se tiver o protocolo anterior, traga — facilita bastante!'+DOCS+END}
 ],emailResps:[]},
-
 {grp:'⚠️ Reclamações de advogado',id:'rec1',icon:'⚠️',pip:'pip-orange',label:'Quer reclamar do advogado',sub:'Solicitar CPF → verificar',cpfChecker:true,resps:[
   {title:'⚠️ Solicitar CPF',badge:'1º Passo',primary:true,nao:false,tpl:n=>'Compreendemos a situação.\n\nPara verificar seu caso no sistema, precisamos do seu CPF, por favor.'},
   {title:'⚠️ CPF anotado',badge:'Alternativa',primary:false,nao:false,tpl:n=>'Oi'+(n?', '+n:'')+'! 😊\n\nAnotei o CPF. Vou verificar no sistema e já te retorno. Um momento! 🙂'}
-],emailResps:[{title:'📧 Solicitar CPF',subj:'CAD – Reclamação – Dados necessários',badge:'1º Passo',primary:true,nao:false,tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nRecebemos seu contato. Para verificar seu caso, precisamos do CPF do assistido.'+ENDE}]},
-
+],emailResps:[{title:'📧 Solicitar CPF',subj:'CAD – Reclamação – Dados necessários',badge:'1º Passo',primary:true,nao:false,tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nRecebemos seu contato. Para verificar o caso, precisamos do CPF do assistido.'+ENDE}]},
 {grp:'⚠️ Reclamações de advogado',id:'rec2',icon:'📂',pip:'pip-teal',label:'CPF → Sem processo',sub:'Orientar senha presencial',resps:[
   {title:'📂 Sem processo — orientar',badge:'Padrão',primary:true,nao:false,tpl:n=>'Verificamos o CPF e não encontramos processo cadastrado.\n\nÉ necessário comparecer pessoalmente para retirar uma senha.\n\n🕘 Seg–Sex, 9h–17h'+DOCS+END_REC}
 ],emailResps:[{title:'📧 Sem processo',subj:'CAD – Processo não localizado',badge:'Padrão',primary:true,nao:false,tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nNão localizamos processo. Compareça presencialmente para retirar uma senha.\n\n📍 R. Alberto Frediani, 770 · 🕘 Seg–Sex, 9h–17h'+ENDE}]},
-
 {grp:'⚠️ Reclamações de advogado',id:'rec3',icon:'🔄',pip:'pip-amber',label:'CPF → Nomeação recusada',sub:'Orientar nova indicação',resps:[
   {title:'🔄 Nomeação recusada',badge:'Recomendada',primary:true,nao:false,tpl:n=>'Verificamos o caso — a nomeação consta como recusada.\n\nÉ necessário retornar presencialmente para nova indicação de advogado.\n\n🕘 Seg–Sex, 9h–17h'+DOCS+END_REC}
-],emailResps:[{title:'📧 Nomeação recusada',subj:'CAD – Nomeação recusada',badge:'Padrão',primary:true,nao:false,tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nA nomeação foi recusada. Compareça para nova indicação:\n📍 R. Alberto Frediani, 770 · 🕘 Seg–Sex, 9h–17h'+ENDE}]},
-
+],emailResps:[{title:'📧 Nomeação recusada',subj:'CAD – Nomeação recusada',badge:'Padrão',primary:true,nao:false,tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nA nomeação foi recusada. Compareça para nova indicação.\n📍 R. Alberto Frediani, 770 · 🕘 Seg–Sex, 9h–17h'+ENDE}]},
 {grp:'⚠️ Reclamações de advogado',id:'rec4',icon:'✍️',pip:'pip-red',label:'CPF → Nomeação aceita',sub:'Reclamação formal por escrito',resps:[
   {title:'✍️ Orientar reclamação',badge:'Recomendada',primary:true,nao:false,tpl:n=>'Verificamos — a nomeação está aceita. Como foi formalmente aceita, a troca direta não é possível.\n\nO que fazer:\n✍️ Escrever uma reclamação a próprio punho relatando os problemas (falta de atendimento, sem retorno, inércia)\n\nVir pessoalmente com:\n- A reclamação redigida\n- Seus documentos\n- Número do processo (se tiver)'+END_REC}
-],emailResps:[{title:'📧 Nomeação aceita',subj:'CAD – Reclamação – Orientações',badge:'Padrão',primary:true,nao:false,tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nA nomeação está aceita — substituição exige procedimento formal.\n\n1. Redigir reclamação escrita a próprio punho\n2. Comparecer com: reclamação + RG + CPF + documentos do processo\n\n📍 R. Alberto Frediani, 770 · 🕘 Seg–Sex, 9h–17h'+ENDE}]},
-
+],emailResps:[{title:'📧 Nomeação aceita',subj:'CAD – Reclamação – Orientações',badge:'Padrão',primary:true,nao:false,tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nA nomeação está aceita — substituição exige reclamação escrita formal.\n\n1. Redigir reclamação a próprio punho\n2. Comparecer com: reclamação + RG + CPF + docs do processo\n\n📍 R. Alberto Frediani, 770 · 🕘 Seg–Sex, 9h–17h'+ENDE}]},
 {grp:'📲 Encaminhamento à secretaria',id:'adv4',icon:'📲',pip:'pip-purple',label:'Redirecionar para a secretaria',sub:'(11) 93724-8448',resps:[
   {title:'📲 Gentil',badge:'Recomendada',primary:true,nao:false,tpl:n=>'Olá'+(n?', '+n:'')+'! 😊\n\nMuito obrigada pelo seu contato! 🙏\n\nEsse assunto é tratado diretamente pela nossa secretaria, que vai poder te ajudar com muito mais detalhes.\n\nEntre em contato com eles pelo WhatsApp:\n📲 (11) 93724-8448\n\nTenho certeza que vão te atender muito bem! 💙'},
-  {title:'📲 Direta',badge:'Alternativa',primary:false,nao:false,tpl:n=>'Olá'+(n?', '+n:'')+'! 😊\n\nObrigada por entrar em contato! Para esse assunto, a secretaria é quem pode te ajudar melhor.\n\n📲 WhatsApp secretaria: (11) 93724-8448\n\nQualquer outra dúvida, estou por aqui! 🙂'}
+  {title:'📲 Direta',badge:'Alternativa',primary:false,nao:false,tpl:n=>'Olá'+(n?', '+n:'')+'! 😊\n\nPara esse assunto, a secretaria é quem pode te ajudar melhor.\n\n📲 WhatsApp: (11) 93724-8448\n\nQualquer outra dúvida, estou por aqui! 🙂'}
 ],emailResps:[{title:'📧 Secretaria',subj:'CAD – Contato com a secretaria',badge:'Padrão',primary:true,nao:false,tpl:n=>HDRE+'\nPrezado(a) Dr(a).'+(n?' '+n:'')+'!\n\nSolicito que entre em contato com a secretaria pelo WhatsApp: 📲 (11) 93724-8448'+ENDE}]},
-
 {grp:'📲 Encaminhamento à secretaria',id:'adv1',icon:'⚖️',pip:'pip-teal',label:'Advogado — processo / escala / caso',sub:'Orientar contato ou comparecer',resps:[
   {title:'⚖️ Encaminhar caso',badge:'Recomendada',primary:true,nao:false,tpl:n=>'Bom dia'+(n?', '+n:'')+'!\n\nO(a) assistido(a) precisa vir pessoalmente com a documentação. A triagem é feita presencialmente.'+DOCS+END},
   {title:'📞 Processo / escala',badge:'Alternativa',primary:false,nao:false,tpl:n=>'Bom dia'+(n?', '+n:'')+'!\n\nPara esse assunto:\n📞 (11) 4154-5191\n🕘 Seg–Sex, 9h–12h'}
-],emailResps:[{title:'📧 Advogado',subj:'CAD – Retorno ao seu contato',badge:'Padrão',primary:true,nao:false,tpl:n=>HDRE+'\nPrezado(a) Dr(a).'+(n?' '+n:'')+'!\n\nPara encaminhamentos e informações, entre em contato pelo (11) 4154-5191 ou compareça presencialmente.'+ENDE}]},
-
+],emailResps:[{title:'📧 Advogado',subj:'CAD – Retorno ao seu contato',badge:'Padrão',primary:true,nao:false,tpl:n=>HDRE+'\nPrezado(a) Dr(a).'+(n?' '+n:'')+'!\n\nPara encaminhamentos, entre em contato pelo (11) 4154-5191 ou compareça presencialmente.'+ENDE}]},
 {grp:'📲 Encaminhamento à secretaria',id:'com1',icon:'📢',pip:null,label:'Lembrete de triagem',sub:'Para advogados — 2ª feira ou amanhã',resps:[
   {title:'📢 Segunda-feira',badge:'Recomendada',primary:true,nao:false,tpl:n=>'Prezado(a) Advogado(a),\n\nGostaríamos de lembrá-lo(a) que a triagem ocorrerá segunda-feira no Poupatempo:\n\n📍 Av. Tenente Marques, 5297 – Jd. do Luar (Fazendinha), Santana de Parnaíba.\n\nAgradecemos a colaboração e pedimos que esteja presente no horário agendado.'},
   {title:'📢 Amanhã',badge:'Alternativa',primary:false,nao:false,tpl:n=>'Prezado(a) Advogado(a),\n\nGostaríamos de lembrá-lo(a) que a triagem ocorrerá amanhã no Poupatempo:\n\n📍 Av. Tenente Marques, 5297 – Jd. do Luar (Fazendinha), Santana de Parnaíba.\n\nAgradecemos a colaboração e pedimos que esteja presente no horário agendado.'}
 ],emailResps:[
-  {title:'📧 Segunda-feira',subj:'CAD – Lembrete: Triagem na segunda-feira',badge:'Padrão',primary:true,nao:false,tpl:n=>HDRE+'\nPrezado(a) Advogado(a),\n\nLembramos que a triagem ocorrerá segunda-feira no Poupatempo:\n📍 Av. Tenente Marques, 5297 – Fazendinha, Santana de Parnaíba.\nAgradecemos a colaboração.'+ENDE},
-  {title:'📧 Amanhã',subj:'CAD – Lembrete: Triagem amanhã',badge:'Padrão',primary:false,nao:false,tpl:n=>HDRE+'\nPrezado(a) Advogado(a),\n\nLembramos que a triagem ocorrerá amanhã no Poupatempo:\n📍 Av. Tenente Marques, 5297 – Fazendinha, Santana de Parnaíba.\nAgradecemos a colaboração.'+ENDE}
+  {title:'📧 Segunda-feira',subj:'CAD – Lembrete: Triagem na segunda-feira',badge:'Padrão',primary:true,nao:false,tpl:n=>HDRE+'\nPrezado(a) Advogado(a),\n\nTriagem na segunda-feira no Poupatempo:\n📍 Av. Tenente Marques, 5297 – Fazendinha, Santana de Parnaíba.'+ENDE},
+  {title:'📧 Amanhã',subj:'CAD – Lembrete: Triagem amanhã',badge:'Padrão',primary:false,nao:false,tpl:n=>HDRE+'\nPrezado(a) Advogado(a),\n\nTriagem amanhã no Poupatempo:\n📍 Av. Tenente Marques, 5297 – Fazendinha, Santana de Parnaíba.'+ENDE}
 ]},
-
 {grp:'📄 Ofícios do Fórum',id:'ofic1',icon:'📄',pip:'pip-amber',label:'Curador Especial',sub:'Texto ao fórum + pedir à secretaria',resps:[
   {title:'📄 Texto oficial ao fórum',badge:'Recomendada',primary:true,nao:false,tpl:n=>'Em atendimento à demanda enviada por V.Sa. à nossa Subseção, a fim de que seja indicado Curador Especial, segue em anexo Ofício de Indicação para as devidas providências.'},
   {title:'📲 Pedir à secretaria',badge:'Interno',primary:false,nao:false,tpl:n=>'Bom dia! 😊\n\nChegou um ofício solicitando indicação de Curador Especial'+(n?' – processo: '+n:'')+'\n\nPoderia verificar e providenciar? Obrigada! 🙂'}
-],emailResps:[{title:'📧 Resposta ao fórum',subj:'CAD – Ofício de Indicação de Curador Especial',badge:'Padrão',primary:true,nao:false,tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nEm atendimento à demanda de V.Sa., segue em anexo o Ofício de Indicação de Curador Especial para as devidas providências.'+ENDE}]},
-
+],emailResps:[{title:'📧 Resposta ao fórum',subj:'CAD – Ofício de Indicação de Curador Especial',badge:'Padrão',primary:true,nao:false,tpl:n=>HDRE+'\nPrezado(a)'+(n?' '+n:'')+'!\n\nEm atendimento à demanda de V.Sa., segue em anexo o Ofício de Indicação de Curador Especial.'+ENDE}]},
 {grp:'📄 Ofícios do Fórum',id:'dv2',icon:'📋',pip:'pip-amber',label:'Advogado nomeado como dativo',sub:'Nomeação e honorários',resps:[
   {title:'✉️ Orientar advogado dativo',badge:'Padrão',primary:true,nao:false,tpl:n=>'Bom dia'+(n?', '+n:'')+'!\n\nPara dar andamento, aceite formalmente nos autos. Os honorários são fixados pelo juiz na sentença e pagos pelo Estado.\n\nPara mais detalhes:\n📞 (11) 4154-5191\n🕘 Seg–Sex, 9h–12h'}
-],emailResps:[{title:'📧 Advogado dativo',subj:'CAD – Nomeação e Honorários Dativos',badge:'Padrão',primary:true,nao:false,tpl:n=>HDRE+'\nPrezado(a) Dr(a).'+(n?' '+n:'')+'!\n\n1. Aceitar formalmente nos autos\n2. Apresentar documentos ao juízo\n\nHonorários: fixados pelo juiz, pagos pelo Estado. Dúvidas: (11) 4154-5191.'+ENDE}]},
+],emailResps:[{title:'📧 Advogado dativo',subj:'CAD – Nomeação e Honorários Dativos',badge:'Padrão',primary:true,nao:false,tpl:n=>HDRE+'\nPrezado(a) Dr(a).'+(n?' '+n:'')+'!\n\n1. Aceitar formalmente nos autos\n2. Apresentar documentos ao juízo\n\nHonorários fixados pelo juiz, pagos pelo Estado. Dúvidas: (11) 4154-5191.'+ENDE}]},
 ].filter(Boolean);
 
-let activeId=null,term='',hist=[],activeChannel='wapp';
+let activeId=null,term='',hist=[],copies=0,activeChannel='wapp',senhaCount=0,statusIdx=0;
+const statusList=[{k:'online',t:'Online'},{k:'busy',t:'Ocupada'},{k:'away',t:'Ausente'}];
 
-(function(){
+(function init(){
   const tags=['Primeiro contato','Informativo','Divórcio','Pensão','Violência doméstica','Não atendemos','Vagas esgotadas','Reclamação','Secretaria','Curador Especial'];
-  document.getElementById('wtags').innerHTML=tags.map(t=>`<button class="wtag" onclick="buscar('${t}')">${t}</button>`).join('');
+  document.getElementById('wtags').innerHTML=tags.map(t=>`<button class="quick-chip" onclick="buscarFromTag('${t}')">${t}</button>`).join('');
+  renderSb('');
+  clock();setInterval(clock,1000);
+  setInterval(()=>{const e=document.getElementById('ws-senhas');if(e)e.textContent=senhaCount;const e2=document.getElementById('ws-copies');if(e2)e2.textContent=copies;},500);
 })();
 
 function renderSb(f){
-  f=(f||'').toLowerCase();
-  const groups={};
-  S.forEach(s=>{
-    const ok=!f||s.label.toLowerCase().includes(f)||s.sub.toLowerCase().includes(f)||(s.grp||'').toLowerCase().includes(f);
-    if(!ok)return;
-    (groups[s.grp]=groups[s.grp]||[]).push(s);
-  });
+  f=(f||'').toLowerCase();const groups={};
+  S.forEach(s=>{const ok=!f||s.label.toLowerCase().includes(f)||s.sub.toLowerCase().includes(f)||(s.grp||'').toLowerCase().includes(f);if(!ok)return;(groups[s.grp]=groups[s.grp]||[]).push(s);});
   let h='';
   Object.entries(groups).forEach(([g,items])=>{
-    h+=`<div class="grp-lbl">${g}</div>`;
-    items.forEach(s=>{
-      const pip=s.pip?`<div class="pip ${s.pip}"></div>`:'';
-      h+=`<button class="sc-btn${s.id===activeId?' active':''}" onclick="pick('${s.id}')">
-        <div class="sc-icon">${s.icon}</div>
-        <div style="flex:1;min-width:0"><div class="sc-label">${s.label}</div><div class="sc-sub">${s.sub}</div></div>${pip}
-      </button>`;
-    });
+    h+=`<div class="grp-hdr"><span>${g}</span><div class="grp-hdr-line"></div></div>`;
+    items.forEach(s=>{const pip=s.pip?`<div class="sc-pip ${s.pip}"></div>`:'';
+      h+=`<button class="sc-item${s.id===activeId?' active':''}" onclick="pick('${s.id}')"><div class="sc-ico">${s.icon}</div><div class="sc-txt"><div class="sc-name">${s.label}</div><div class="sc-desc">${s.sub}</div></div>${pip}</button>`;});
   });
-  if(!h)h=`<div class="no-result">Nenhum resultado para "<b>${f}</b>"</div>`;
+  if(!h)h=`<div class="no-result">Nenhum resultado para "<strong>${f}</strong>"</div>`;
   document.getElementById('sb-list').innerHTML=h;
 }
-renderSb('');
-
-function buscar(v){term=v;document.getElementById('search').value=v;renderSb(v);}
-
-function fmtCPF(el){
-  let v=el.value.replace(/\D/g,'').slice(0,11);
-  v=v.replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})\.(\d{3})(\d)/,'$1.$2.$3').replace(/(\d{3})\.(\d{3})\.(\d{3})(\d)/,'$1.$2.$3-$4');
-  el.value=v;
-}
-
+function buscar(v){term=v;document.getElementById('search').value=v;document.getElementById('search2').value=v;renderSb(v);}
+function buscarFromTag(v){buscar(v);document.getElementById('welcome').style.display='none';}
+function fmtCPF(el){let v=el.value.replace(/\D/g,'').slice(0,11);v=v.replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})\.(\d{3})(\d)/,'$1.$2.$3').replace(/(\d{3})\.(\d{3})\.(\d{3})(\d)/,'$1.$2.$3-$4');el.value=v;}
+function copiarCPF(){const v=(document.getElementById('cpf-input')||{value:''}).value;if(!v.trim())return toast('⚠️ CPF vazio');navigator.clipboard.writeText(v).then(()=>toast('📋 CPF copiado!'));}
 function showCPFStatus(type){
-  const cpf=(document.getElementById('cpf-input')||{value:''}).value||'(CPF não informado)';
+  const cpf=(document.getElementById('cpf-input')||{value:''}).value||'(não informado)';
   const name=(document.getElementById('person-name').value||'').trim()||'o(a) assistido(a)';
   let html='';
-  if(type==='noproc'){html=`<div class="cpf-result sr-noproc show"><div class="sr-title">📂 Sem processo — ${cpf}</div><div class="sr-body">Nenhum processo localizado. Vir presencialmente retirar senha.</div><div class="sr-step"><div class="sr-num">1</div><span>Orientar <strong>${name}</strong> a comparecer</span></div><div class="sr-step"><div class="sr-num">2</div><span>Retirar senha — Seg–Sex, 9h–17h</span></div><div class="sr-step"><div class="sr-num">3</div><span>Trazer documentos do caso</span></div></div>`;}
-  else if(type==='recused'){html=`<div class="cpf-result sr-recused show"><div class="sr-title">⚠️ Nomeação recusada — ${cpf}</div><div class="sr-body">Advogado recusou. Retornar para nova indicação.</div><div class="sr-step"><div class="sr-num">1</div><span>Informar <strong>${name}</strong> que a nomeação foi recusada</span></div><div class="sr-step"><div class="sr-num">2</div><span>Orientar retorno presencial</span></div><div class="sr-step"><div class="sr-num">3</div><span>Trazer documentos + comprovantes</span></div></div>`;}
-  else if(type==='accepted'){html=`<div class="cpf-result sr-accepted show"><div class="sr-title">✅ Nomeação aceita — ${cpf}</div><div class="sr-body"><strong>Troca direta não é possível</strong> — exige reclamação escrita formal.</div><div class="sr-step"><div class="sr-num">1</div><span>Explicar que troca direta não é possível</span></div><div class="sr-step"><div class="sr-num">2</div><span>Orientar <strong>${name}</strong> a escrever reclamação <strong>a próprio punho</strong></span></div><div class="sr-step"><div class="sr-num">3</div><span>Vir com reclamação + documentos + nº do processo</span></div></div>`;}
+  if(type==='noproc')html=`<div class="cpf-result cr-np show"><div class="cr-title">📂 Sem processo — ${cpf}</div><div class="cr-body">Nenhum processo localizado no sistema.</div><div class="cr-step"><div class="cr-num">1</div><span>Orientar <strong>${name}</strong> a comparecer presencialmente</span></div><div class="cr-step"><div class="cr-num">2</div><span>Retirar senha — Seg–Sex, 9h–17h</span></div><div class="cr-step"><div class="cr-num">3</div><span>Trazer documentos do caso</span></div></div>`;
+  else if(type==='recused')html=`<div class="cpf-result cr-rc show"><div class="cr-title">⚠️ Nomeação recusada — ${cpf}</div><div class="cr-body">Advogado recusou a nomeação. Nova indicação necessária.</div><div class="cr-step"><div class="cr-num">1</div><span>Informar <strong>${name}</strong> que a nomeação foi recusada</span></div><div class="cr-step"><div class="cr-num">2</div><span>Orientar retorno presencial para nova indicação</span></div><div class="cr-step"><div class="cr-num">3</div><span>Trazer documentos + comprovantes</span></div></div>`;
+  else if(type==='accepted')html=`<div class="cpf-result cr-ac show"><div class="cr-title">✅ Nomeação aceita — ${cpf}</div><div class="cr-body"><strong>Troca direta não é possível</strong> — requer reclamação formal escrita.</div><div class="cr-step"><div class="cr-num">1</div><span>Explicar que troca direta não é possível</span></div><div class="cr-step"><div class="cr-num">2</div><span><strong>${name}</strong> deve escrever reclamação <strong>a próprio punho</strong></span></div><div class="cr-step"><div class="cr-num">3</div><span>Comparecer com reclamação + documentos + nº do processo</span></div></div>`;
   document.getElementById('cpf-status-result').innerHTML=html;
 }
-
-function switchChannel(ch){
-  activeChannel=ch;
-  ['wapp','email'].forEach(c=>{
-    document.getElementById('ctab-'+c).classList.toggle('act',c===ch);
-    document.getElementById('pane-'+c).classList.toggle('on',c===ch);
-  });
-  const s=S.find(x=>x.id===activeId);
-  if(s){ch==='email'?renderEmailResps(s):renderResps(s);}
-}
-
 function pick(id){
   activeId=id;renderSb(term);
   const s=S.find(x=>x.id===id);if(!s)return;
-  document.getElementById('btitle').textContent=s.icon+' '+s.label;
+  document.getElementById('btitle').innerHTML=`<span>${s.icon} ${s.label}</span>`;
   document.getElementById('welcome').style.display='none';
   document.getElementById('sc-view').classList.add('on');
-  const box=document.getElementById('cpf-checker-box');
-  if(box){
-    box.style.display=s.cpfChecker?'block':'none';
-    if(s.cpfChecker){
-      const inp=document.getElementById('cpf-input');if(inp)inp.value='';
-      const res=document.getElementById('cpf-status-result');if(res)res.innerHTML='';
-    }
-  }
+  const box=document.getElementById('cpf-box');
+  if(box){box.style.display=s.cpfChecker?'block':'none';if(s.cpfChecker){const inp=document.getElementById('cpf-input');if(inp)inp.value='';const res=document.getElementById('cpf-status-result');if(res)res.innerHTML='';}}
   renderResps(s);renderEmailResps(s);
 }
-
+function tagClass(r){if(r.primary)return 'tag-blue';if(r.nao)return 'tag-red';if(r.badge==='Interno')return 'tag-purple';if(r.badge==='1º Passo')return 'tag-orange';if(r.badge==='Urgente')return 'tag-red';return 'tag-gray';}
 function renderResps(s){
-  const name=(document.getElementById('person-name').value||'').trim();
-  const isOfic=activeId==='ofic1';
+  const name=(document.getElementById('person-name').value||'').trim();const isOfic=activeId==='ofic1';
   document.getElementById('resp-stack').innerHTML=s.resps.map((r,i)=>{
-    const txt=r.tpl(name);
-    const secBtn=isOfic&&i===1?`<button class="btn btn-sec" onclick="wappSec('ta${i}')">📲 Secretaria</button>`:'';
-    return `<div class="rcard${r.primary?' primary':''}${r.nao?' danger':''}">
-      <div class="rcard-hd"><div class="rcard-title">${r.title}</div><span class="badge ${r.primary?'b-main':r.nao?'b-no':r.badge==='Interno'?'b-int':r.badge==='1º Passo'?'b-orange':'b-alt'}">${r.badge}</span></div>
-      <textarea class="reditor" id="ta${i}" oninput="onIn(this,'cc${i}')"> ${txt}</textarea>
-      <div class="rcard-ft">
-        <button class="btn btn-copy" onclick="copiar('ta${i}','${r.title.replace(/'/g,\"\\'\")}')" >📋 Copiar</button>
-        <button class="btn btn-wapp" onclick="wapp('ta${i}')">📱 WhatsApp</button>
-        ${secBtn}
-        <button class="btn btn-ghost" onclick="resetMsg('ta${i}',${i},'wapp')">↩</button>
-        <span class="chars" id="cc${i}">${txt.length}</span>
-      </div></div>`;
+    const txt=r.tpl(name);const secBtn=isOfic&&i===1?`<button class="act-btn ab-sec" onclick="wappSec('ta${i}')">📲 Secretaria</button>`:'';
+    return `<div class="rcard${r.primary?' rcard-primary':''}${r.nao?' rcard-danger':''}"><div class="rcard-head"><div class="rcard-title">${r.title}</div><span class="tag ${tagClass(r)}">${r.badge}</span></div><div class="rcard-body"><textarea id="ta${i}" oninput="onIn(this,'cc${i}')">${txt}</textarea></div><div class="rcard-foot"><button class="act-btn ab-navy" onclick="copiar('ta${i}','${r.title.replace(/'/g,"\\'")}')">📋 Copiar</button><button class="act-btn ab-wapp" onclick="wapp('ta${i}')">📱 WhatsApp</button>${secBtn}<button class="act-btn ab-reset" onclick="resetMsg('ta${i}',${i},'wapp')">↩ Redefinir</button><span class="chars" id="cc${i}">${txt.length} car.</span></div></div>`;
   }).join('');
-  setTimeout(()=>document.querySelectorAll('#resp-stack .reditor').forEach(autoH),30);
+  setTimeout(()=>document.querySelectorAll('#resp-stack textarea').forEach(autoH),30);
 }
-
 function renderEmailResps(s){
-  const name=(document.getElementById('person-name').value||'').trim();
-  const er=s.emailResps||[];
-  if(!er.length){document.getElementById('resp-stack-email').innerHTML='<div class="empty-pane">📧 Sem e-mail para este cenário.<br><br>Use WhatsApp e adapte.</div>';return;}
+  const name=(document.getElementById('person-name').value||'').trim();const er=s.emailResps||[];
+  if(!er.length){document.getElementById('resp-stack-email').innerHTML='<div class="empty-pane">📧 Nenhum modelo de e-mail para este cenário.<br>Use o WhatsApp e adapte conforme necessário.</div>';return;}
   document.getElementById('resp-stack-email').innerHTML=er.map((r,i)=>{
     const txt=r.tpl(name);
-    return `<div class="rcard${r.primary?' primary':''}${r.nao?' danger':''}">
-      <div class="rcard-hd"><div class="rcard-title">${r.title}</div><span class="badge ${r.primary?'b-email':r.nao?'b-no':'b-alt'}">${r.badge}</span></div>
-      <div class="email-subj-row"><span class="email-subj-lbl">Assunto</span><input class="email-subj-inp" id="esub${i}" type="text" value="${(r.subj||'').replace(/"/g,'&quot;')}" placeholder="Assunto..."></div>
-      <textarea class="reditor" id="eta${i}" oninput="onIn(this,'ecc${i}')"> ${txt}</textarea>
-      <div class="rcard-ft">
-        <button class="btn btn-copy" onclick="copiarEmail('eta${i}','${r.title.replace(/'/g,\"\\'\")}')" >📋 Copiar</button>
-        <button class="btn btn-email" onclick="abrirEmail('esub${i}','eta${i}')">📧 Abrir no e-mail</button>
-        <button class="btn btn-ghost" onclick="resetMsg('eta${i}',${i},'email')">↩</button>
-        <span class="chars" id="ecc${i}">${txt.length}</span>
-      </div></div>`;
+    return `<div class="rcard${r.primary?' rcard-primary':''}${r.nao?' rcard-danger':''}"><div class="rcard-head"><div class="rcard-title">${r.title}</div><span class="tag ${r.primary?'tag-teal':r.nao?'tag-red':'tag-gray'}">${r.badge}</span></div><div class="rcard-body"><div class="email-subj"><span class="email-subj-tag">Assunto</span><input id="esub${i}" type="text" value="${(r.subj||'').replace(/"/g,'&quot;')}" placeholder="Assunto…"></div><textarea id="eta${i}" oninput="onIn(this,'ecc${i}')">${txt}</textarea></div><div class="rcard-foot"><button class="act-btn ab-navy" onclick="copiarEmail('eta${i}','${r.title.replace(/'/g,"\\'")}')">📋 Copiar</button><button class="act-btn ab-email" onclick="abrirEmail('esub${i}','eta${i}')">📧 Abrir no e-mail</button><button class="act-btn ab-reset" onclick="resetMsg('eta${i}',${i},'email')">↩ Redefinir</button><span class="chars" id="ecc${i}">${txt.length} car.</span></div></div>`;
   }).join('');
-  setTimeout(()=>document.querySelectorAll('#resp-stack-email .reditor').forEach(autoH),30);
+  setTimeout(()=>document.querySelectorAll('#resp-stack-email textarea').forEach(autoH),30);
 }
-
-function autoH(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,240)+'px';}
-function onIn(el,id){autoH(el);const c=document.getElementById(id);if(c)c.textContent=el.value.length;}
-
+function autoH(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,260)+'px';}
+function onIn(el,id){autoH(el);const c=document.getElementById(id);if(c)c.textContent=el.value.length+' car.';}
 function atualizaNome(){
-  const s=S.find(x=>x.id===activeId);if(!s)return;
-  const name=(document.getElementById('person-name').value||'').trim();
-  s.resps.forEach((r,i)=>{const el=document.getElementById('ta'+i);if(!el)return;el.value=r.tpl(name);autoH(el);const cc=document.getElementById('cc'+i);if(cc)cc.textContent=el.value.length;});
-  (s.emailResps||[]).forEach((r,i)=>{const el=document.getElementById('eta'+i);if(!el)return;el.value=r.tpl(name);autoH(el);const cc=document.getElementById('ecc'+i);if(cc)cc.textContent=el.value.length;});
+  const s=S.find(x=>x.id===activeId);if(!s)return;const name=(document.getElementById('person-name').value||'').trim();
+  s.resps.forEach((r,i)=>{const el=document.getElementById('ta'+i);if(!el)return;el.value=r.tpl(name);autoH(el);const cc=document.getElementById('cc'+i);if(cc)cc.textContent=el.value.length+' car.';});
+  (s.emailResps||[]).forEach((r,i)=>{const el=document.getElementById('eta'+i);if(!el)return;el.value=r.tpl(name);autoH(el);const cc=document.getElementById('ecc'+i);if(cc)cc.textContent=el.value.length+' car.';});
 }
-
 function resetMsg(taId,idx,ch){
-  const s=S.find(x=>x.id===activeId);if(!s)return;
-  const name=(document.getElementById('person-name').value||'').trim();
-  const el=document.getElementById(taId);if(!el)return;
-  el.value=ch==='email'?s.emailResps[idx].tpl(name):s.resps[idx].tpl(name);
-  autoH(el);toast('↩ Redefinido');
+  const s=S.find(x=>x.id===activeId);if(!s)return;const name=(document.getElementById('person-name').value||'').trim();
+  const el=document.getElementById(taId);if(!el)return;el.value=ch==='email'?(s.emailResps[idx]||{tpl:()=>''}).tpl(name):s.resps[idx].tpl(name);autoH(el);toast('↩ Redefinido');
 }
-
-function copiar(id,title){const el=document.getElementById(id);if(!el)return;navigator.clipboard.writeText(el.value.trim()).then(()=>{toast('📋 Copiado!');addHist(title,el.value.trim());});}
-function copiarEmail(bodyId,title){const body=document.getElementById(bodyId);if(!body)return;navigator.clipboard.writeText(body.value.trim()).then(()=>{toast('📋 Copiado!');addHist(title,body.value.trim());});}
+function copiar(id,title){const el=document.getElementById(id);if(!el)return;navigator.clipboard.writeText(el.value.trim()).then(()=>{copies++;toast('📋 Copiado!');addHist(title,el.value.trim());});}
+function copiarEmail(bodyId,title){const body=document.getElementById(bodyId);if(!body)return;navigator.clipboard.writeText(body.value.trim()).then(()=>{copies++;toast('📋 Copiado!');addHist(title,body.value.trim());});}
 function abrirEmail(subjId,bodyId){const s=document.getElementById(subjId),b=document.getElementById(bodyId);if(!b)return;window.open('mailto:'+EMAIL+'?subject='+encodeURIComponent(s?s.value:'')+'&body='+encodeURIComponent(b.value.trim()),'_blank');}
 function wapp(id){const el=document.getElementById(id);if(!el)return;window.open('https://wa.me/?text='+encodeURIComponent(el.value.trim()),'_blank');}
 function wappSec(id){const el=document.getElementById(id);if(!el)return;window.open('https://wa.me/5511937248448?text='+encodeURIComponent(el.value.trim()),'_blank');toast('📲 Secretaria...');}
-
-function addHist(title,text){
-  const now=new Date();
-  const t=String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');
-  hist.unshift({title,text,t});if(hist.length>10)hist.pop();renderHist();
-}
+function addHist(title,text){const now=new Date();const t=String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');hist.unshift({title,text,t});if(hist.length>12)hist.pop();renderHist();}
 function renderHist(){
   const el=document.getElementById('hist-chips');
   if(!hist.length){el.innerHTML='<span class="hist-empty">Nenhuma cópia ainda</span>';return;}
-  el.innerHTML=hist.map((h,i)=>`<div class="hchip" onclick="recop(${i})" title="${h.title}">📋 ${h.title.replace(/[^\w\sÀ-ú]/gu,'').trim().substring(0,20)}<span class="hchip-t">${h.t}</span></div>`).join('');
+  el.innerHTML=hist.map((h,i)=>`<div class="hist-chip" onclick="recop(${i})">📋 ${h.title.replace(/[^\w\sÀ-ú]/gu,'').trim().substring(0,24)}<span class="hist-chip-t">${h.t}</span></div>`).join('');
 }
 function recop(i){navigator.clipboard.writeText(hist[i].text).then(()=>toast('📋 Recopiado!'));}
+function clearHist(){hist=[];renderHist();toast('🗑 Histórico limpo');}
 function toggleGuide(){document.getElementById('guide').classList.toggle('open');}
-
-let _tt;
-function toast(msg){const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');clearTimeout(_tt);_tt=setTimeout(()=>el.classList.remove('show'),2000);}
-
-function clock(){
-  const n=new Date();
-  const el=document.getElementById('clock-el');
-  if(el)el.textContent=String(n.getHours()).padStart(2,'0')+':'+String(n.getMinutes()).padStart(2,'0')+':'+String(n.getSeconds()).padStart(2,'0');
+function switchChannel(ch){
+  activeChannel=ch;
+  ['wapp','email'].forEach(c=>{document.getElementById('ctab-'+c).classList.toggle('act',c===ch);document.getElementById('pane-'+c).classList.toggle('on',c===ch);});
+  const s=S.find(x=>x.id===activeId);if(s){ch==='email'?renderEmailResps(s):renderResps(s);}
 }
-clock();setInterval(clock,1000);
-
+function cycleStatus(){
+  statusIdx=(statusIdx+1)%statusList.length;const st=statusList[statusIdx];
+  const pill=document.getElementById('status-pill');pill.className='tb-status '+st.k;
+  document.getElementById('status-txt').textContent=st.t;
+  toast((st.k==='online'?'🟢':st.k==='busy'?'🟡':'🔴')+' '+st.t);
+}
+function changeSenha(d){
+  senhaCount=Math.max(0,Math.min(30,senhaCount+d));
+  document.getElementById('senha-n').textContent=senhaCount;
+  const pct=(senhaCount/30)*100;const fill=document.getElementById('senha-fill');
+  fill.style.width=pct+'%';fill.className='senha-fill'+(pct>=90?' crit':pct>=60?' warn':'');
+  if(senhaCount===30)toast('⚠️ Limite atingido — 30 senhas distribuídas!');
+}
+function toggleNotes(){document.getElementById('notes-panel').classList.toggle('open');}
+function copiarNotes(){const v=document.getElementById('notes-area').value;if(!v.trim())return toast('⚠️ Notas vazias');navigator.clipboard.writeText(v).then(()=>toast('📋 Notas copiadas!'));}
+function limparNotes(){document.getElementById('notes-area').value='';toast('🗑 Notas limpas');}
+let _tt;
+function toast(msg){const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');clearTimeout(_tt);_tt=setTimeout(()=>el.classList.remove('show'),2400);}
+function clock(){
+  const n=new Date();const t=String(n.getHours()).padStart(2,'0')+':'+String(n.getMinutes()).padStart(2,'0')+':'+String(n.getSeconds()).padStart(2,'0');
+  const el=document.getElementById('clock-el');if(el)el.textContent=t;
+  const ws=document.getElementById('ws-time');if(ws)ws.textContent=t.substring(0,5);
+}
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){document.getElementById('guide').classList.remove('open');document.getElementById('notes-panel').classList.remove('open');}
+  if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();const s=document.getElementById('search');s.focus();s.select();}
+  if(e.key==='n'&&!e.ctrlKey&&!e.metaKey&&document.activeElement.tagName!=='INPUT'&&document.activeElement.tagName!=='TEXTAREA')toggleNotes();
+});
+document.getElementById('person-name').addEventListener('focus',function(){this.style.borderColor='var(--c-blue)';this.style.boxShadow='0 0 0 3px var(--c-blue-s)';});
+document.getElementById('person-name').addEventListener('blur',function(){this.style.borderColor='var(--c-border)';this.style.boxShadow='none';});
 </script>
 </body>
 </html>
