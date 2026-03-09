@@ -3,857 +3,326 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CAD · Atendimento</title>
-<script src="config.js"></script>
+<title>Ramais OAB SP</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html,body{height:100%;overflow:hidden}
 :root{
-  --bg:#f7f8fc;
-  --surface:#ffffff;
-  --surface2:#f0f2f7;
-  --border:#e4e7ef;
-  --border2:#d0d5e2;
-  --text:#0f1523;
-  --text2:#4a5568;
-  --text3:#8492a6;
-  --blue:#0066ff;
-  --blue-light:#e8f0fe;
-  --blue-mid:#c2d7fd;
-  --green:#00875a;
-  --green-light:#e3fcef;
-  --green-mid:#abf5d1;
-  --red:#de350b;
-  --red-light:#ffebe6;
-  --red-mid:#ffbdad;
-  --amber:#ff8b00;
-  --amber-light:#fffae6;
-  --amber-mid:#ffe380;
-  --purple:#6554c0;
-  --purple-light:#eae6ff;
-  --purple-mid:#c0b6f2;
-  --teal:#00a3bf;
-  --teal-light:#e6fcff;
-  --teal-mid:#b3f5ff;
-  --ff:'DM Sans',sans-serif;
-  --mono:'DM Mono',monospace;
+  --bg:#f7f8fc;--surface:#fff;--border:#e4e7ef;--border2:#d0d5e2;
+  --text:#0f1523;--text2:#4a5568;--text3:#8492a6;
+  --blue:#0066ff;--blue-light:#e8f0fe;--blue-mid:#c2d7fd;
+  --green:#00875a;--green-light:#e3fcef;
+  --ff:'DM Sans',sans-serif;--mono:'DM Mono',monospace;
   --r:8px;--rs:6px;
   --sh:0 1px 3px rgba(0,0,0,.08),0 1px 2px rgba(0,0,0,.04);
-  --sh2:0 4px 12px rgba(0,0,0,.10),0 2px 4px rgba(0,0,0,.06);
-  --sh3:0 8px 24px rgba(0,0,0,.12),0 4px 8px rgba(0,0,0,.08);
+  --sh2:0 4px 12px rgba(0,0,0,.10);
 }
-body{font-family:var(--ff);background:var(--bg);color:var(--text);display:flex;flex-direction:column;font-size:14px}
+html,body{min-height:100%;font-family:var(--ff);background:var(--bg);color:var(--text);font-size:14px}
 
-/* ── TOPBAR ── */
+/* TOPBAR */
 #topbar{
-  height:56px;background:var(--surface);
-  border-bottom:1px solid var(--border);
-  display:flex;align-items:center;padding:0 20px;gap:14px;flex-shrink:0;
+  position:sticky;top:0;z-index:50;
+  height:56px;background:var(--surface);border-bottom:1px solid var(--border);
+  display:flex;align-items:center;padding:0 24px;gap:14px;
   box-shadow:0 1px 0 var(--border);
 }
-.tb-brand{display:flex;align-items:center;gap:10px}
-.tb-icon{width:32px;height:32px;background:var(--blue);border-radius:8px;display:flex;align-items:center;justify-content:center}
-.tb-icon svg{width:18px;height:18px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.tb-title{font-size:15px;font-weight:700;color:var(--text);letter-spacing:-.3px}
-.tb-tag{font-size:10px;font-weight:600;background:var(--blue-light);color:var(--blue);padding:2px 7px;border-radius:4px;letter-spacing:.3px}
-.tb-div{width:1px;height:24px;background:var(--border);margin:0 4px}
-.tb-namewrap{position:relative;display:flex;align-items:center}
-.tb-namewrap svg{position:absolute;left:10px;width:14px;height:14px;stroke:var(--text3);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}
-.tb-name{border:1.5px solid var(--border);border-radius:var(--rs);background:var(--bg);padding:7px 10px 7px 30px;font-family:var(--ff);font-size:13px;font-weight:500;color:var(--text);outline:none;width:200px;transition:border-color .15s,background .15s}
-.tb-name::placeholder{color:var(--text3);font-weight:400}
-.tb-name:focus{border-color:var(--blue);background:var(--surface)}
-.tb-hint{font-size:11.5px;color:var(--text3)}
+.tb-icon{width:32px;height:32px;background:var(--blue);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.tb-icon svg{width:18px;height:18px;stroke:#fff;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.tb-title{font-size:15px;font-weight:700;letter-spacing:-.3px}
+.tb-tag{font-size:10px;font-weight:700;background:var(--blue-light);color:var(--blue);padding:3px 8px;border-radius:4px;letter-spacing:.4px}
 .tb-r{margin-left:auto;display:flex;align-items:center;gap:10px}
-.tb-status{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--green)}
-.tb-dot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 2.5s ease-in-out infinite}
-@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(0,135,90,.4)}50%{opacity:.8;box-shadow:0 0 0 4px rgba(0,135,90,0)}}
-.tb-clock{font-family:var(--mono);font-size:12px;font-weight:500;color:var(--text3);background:var(--surface2);padding:4px 10px;border-radius:var(--rs);border:1px solid var(--border)}
 
-/* ── LAYOUT ── */
-#shell{display:grid;grid-template-columns:240px 1fr;flex:1;overflow:hidden}
+/* SEARCH */
+.search-wrap{position:relative;width:280px}
+.search-wrap svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:15px;height:15px;stroke:var(--text3);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}
+#search{
+  width:100%;border:1.5px solid var(--border);border-radius:var(--rs);
+  padding:8px 10px 8px 32px;font-family:var(--ff);font-size:13px;
+  color:var(--text);outline:none;background:var(--bg);transition:border-color .15s
+}
+#search:focus{border-color:var(--blue);background:var(--surface)}
+#search::placeholder{color:var(--text3)}
+#result-count{font-size:12px;color:var(--text3);white-space:nowrap;font-variant-numeric:tabular-nums}
 
-/* ── SIDEBAR ── */
-#sidebar{background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden}
-.sb-top{padding:12px 12px 8px;border-bottom:1px solid var(--border)}
-.sb-search{position:relative}
-.sb-search svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:14px;height:14px;stroke:var(--text3);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
-.sb-search input{width:100%;border:1.5px solid var(--border);border-radius:var(--rs);padding:8px 10px 8px 30px;font-family:var(--ff);font-size:13px;color:var(--text);outline:none;background:var(--bg);transition:border-color .15s}
-.sb-search input::placeholder{color:var(--text3)}
-.sb-search input:focus{border-color:var(--blue);background:var(--surface)}
-#sb-list{flex:1;overflow-y:auto;padding:6px 8px 16px}
-#sb-list::-webkit-scrollbar{width:4px}
-#sb-list::-webkit-scrollbar-thumb{background:var(--border2);border-radius:4px}
-.grp-lbl{
-  font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
-  color:var(--text3);padding:14px 8px 5px;display:flex;align-items:center;gap:6px
-}
-.grp-lbl::after{content:'';flex:1;height:1px;background:var(--border)}
-.sc-btn{
-  width:100%;text-align:left;background:transparent;border:none;border-radius:var(--rs);
-  padding:9px 10px;margin-bottom:1px;cursor:pointer;display:flex;align-items:center;
-  gap:10px;transition:background .1s;font-family:var(--ff);position:relative
-}
-.sc-btn:hover{background:var(--surface2)}
-.sc-btn.active{background:var(--blue-light)}
-.sc-btn.active::before{content:'';position:absolute;left:0;top:20%;bottom:20%;width:3px;background:var(--blue);border-radius:0 3px 3px 0}
-.sc-icon{font-size:16px;width:22px;text-align:center;flex-shrink:0;line-height:1}
-.sc-text{flex:1;min-width:0}
-.sc-label{font-size:13px;font-weight:600;color:var(--text);line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.sc-btn.active .sc-label{color:var(--blue)}
-.sc-sub{font-size:11px;color:var(--text3);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.pip{width:7px;height:7px;border-radius:50%;flex-shrink:0}
-.pip-green{background:var(--green)}.pip-red{background:var(--red)}.pip-amber{background:var(--amber)}
-.pip-teal{background:var(--teal)}.pip-orange{background:#e56910}.pip-purple{background:var(--purple)}
-
-/* ── MAIN ── */
-#main{display:flex;flex-direction:column;overflow:hidden;position:relative;background:var(--bg)}
-
-/* ── HEADER BAR ── */
-#hbar{
-  height:52px;background:var(--surface);border-bottom:1px solid var(--border);
-  display:flex;align-items:center;padding:0 20px;gap:12px;flex-shrink:0
-}
-#htitle{font-size:15px;font-weight:700;color:var(--text);letter-spacing:-.2px}
-.hbar-r{margin-left:auto;display:flex;gap:8px}
-
-/* ── TABS ── */
-.tabs-bar{
-  display:flex;background:var(--surface);border-bottom:1px solid var(--border);
-  flex-shrink:0;padding:0 20px;gap:2px
-}
-.tab{
-  height:44px;padding:0 18px;font-family:var(--ff);font-size:13px;font-weight:600;
-  background:transparent;border:none;cursor:pointer;color:var(--text3);
-  transition:color .15s;border-bottom:2px solid transparent;margin-bottom:-1px;
-  display:flex;align-items:center;gap:7px
-}
-.tab:hover{color:var(--text)}
-.tab.act{color:var(--blue);border-bottom-color:var(--blue)}
-.tab svg{width:15px;height:15px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
-
-/* ── WELCOME ── */
-#welcome{
-  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:20px;padding:40px;text-align:center
-}
-.welcome-icon{width:64px;height:64px;background:var(--blue-light);border-radius:16px;
-  display:flex;align-items:center;justify-content:center;margin:0 auto}
-.welcome-icon svg{width:32px;height:32px;stroke:var(--blue);stroke-width:1.5;fill:none;stroke-linecap:round;stroke-linejoin:round}
-#welcome h2{font-size:22px;font-weight:700;color:var(--text);letter-spacing:-.4px}
-#welcome p{font-size:14px;color:var(--text2);max-width:340px;line-height:1.7}
-.wtags{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;max-width:480px}
-.wtag{
-  padding:6px 14px;border-radius:20px;background:var(--surface);
-  border:1.5px solid var(--border);font-size:12.5px;font-weight:600;
-  color:var(--text2);cursor:pointer;transition:all .15s
-}
-.wtag:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-light)}
-
-/* ── CONTENT PANES ── */
-#sc-view{flex:1;display:none;flex-direction:column;overflow:hidden}
-#sc-view.on{display:flex}
-.cpane{display:none;flex:1;flex-direction:column;overflow:hidden}
-.cpane.on{display:flex}
-
-/* ── SCROLL AREA ── */
-.resp-col{flex:1;overflow-y:auto;padding:16px 20px;display:flex;flex-direction:column;gap:10px}
-.resp-col::-webkit-scrollbar{width:5px}
-.resp-col::-webkit-scrollbar-thumb{background:var(--border2);border-radius:4px}
-
-/* ── CPF CHECKER ── */
-.cpf-panel{
-  background:var(--surface);border:1.5px solid var(--amber-mid);border-radius:var(--r);
-  overflow:hidden;box-shadow:var(--sh)
-}
-.cpf-ph{
-  padding:10px 16px;background:var(--amber-light);border-bottom:1px solid var(--amber-mid);
-  display:flex;align-items:center;gap:8px
-}
-.cpf-ph-icon{width:28px;height:28px;background:var(--amber);border-radius:6px;display:flex;align-items:center;justify-content:center}
-.cpf-ph-icon svg{width:16px;height:16px;stroke:#fff;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
-.cpf-ph-title{font-size:13px;font-weight:700;color:var(--amber)}
-.cpf-body{padding:14px 16px;display:flex;flex-direction:column;gap:10px}
-.cpf-row{display:flex;gap:8px;align-items:center}
-.cpf-lbl{font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--amber);white-space:nowrap;min-width:32px}
-.cpf-inp{
-  flex:1;border:1.5px solid var(--amber-mid);border-radius:var(--rs);
-  padding:9px 14px;font-family:var(--mono);font-size:16px;font-weight:500;
-  color:var(--text);outline:none;letter-spacing:2px;background:var(--amber-light);
-  transition:border-color .15s,background .15s
-}
-.cpf-inp:focus{border-color:var(--amber);background:var(--surface)}
-.cpf-hint{font-size:12px;color:var(--text2);line-height:1.6;padding:8px 12px;background:var(--surface2);border-radius:var(--rs);border:1px solid var(--border)}
-.cpf-status-lbl{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text3);margin-bottom:6px}
-.cpf-btns{display:flex;gap:6px;flex-wrap:wrap}
-.sbtn{padding:7px 14px;border-radius:var(--rs);font-family:var(--ff);font-size:12.5px;font-weight:600;border:1.5px solid transparent;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:5px}
-.sbtn:active{transform:scale(.97)}
-.sbtn-teal{background:var(--teal-light);border-color:var(--teal-mid);color:var(--teal)}
-.sbtn-teal:hover{background:var(--teal-mid)}
-.sbtn-amber{background:var(--amber-light);border-color:var(--amber-mid);color:var(--amber)}
-.sbtn-amber:hover{background:var(--amber-mid)}
-.sbtn-red{background:var(--red-light);border-color:var(--red-mid);color:var(--red)}
-.sbtn-red:hover{background:var(--red-mid)}
-.cpf-result{border-radius:var(--rs);padding:12px 14px;display:none;animation:fadeUp .2s ease}
-.cpf-result.show{display:block}
-@keyframes fadeUp{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
-.sr-noproc{background:var(--teal-light);border:1.5px solid var(--teal-mid)}
-.sr-recused{background:var(--amber-light);border:1.5px solid var(--amber-mid)}
-.sr-accepted{background:var(--red-light);border:1.5px solid var(--red-mid)}
-.sr-title{font-size:13px;font-weight:700;margin-bottom:4px}
-.sr-noproc .sr-title{color:var(--teal)}.sr-recused .sr-title{color:var(--amber)}.sr-accepted .sr-title{color:var(--red)}
-.sr-body{font-size:12px;color:var(--text2);line-height:1.6;margin-bottom:8px}
-.sr-steps{display:flex;flex-direction:column;gap:4px}
-.sr-step{display:flex;align-items:flex-start;gap:8px;font-size:12.5px;color:var(--text)}
-.sr-num{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;flex-shrink:0;margin-top:1px}
-.sr-noproc .sr-num{background:var(--teal)}.sr-recused .sr-num{background:var(--amber)}.sr-accepted .sr-num{background:var(--red)}
-
-/* ── RESPONSE CARDS ── */
-.rcard{
-  background:var(--surface);border-radius:var(--r);
-  border:1px solid var(--border);overflow:hidden;box-shadow:var(--sh);
-  transition:box-shadow .15s
-}
-.rcard:hover{box-shadow:var(--sh2)}
-.rcard.primary{border-color:var(--blue-mid);background:var(--surface)}
-.rcard.primary .rcard-hd{background:var(--blue-light);border-bottom-color:var(--blue-mid)}
-.rcard.danger{border-color:var(--red-mid)}
-.rcard.danger .rcard-hd{background:var(--red-light);border-bottom-color:var(--red-mid)}
-.rcard-hd{
-  padding:10px 14px;border-bottom:1px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;gap:10px
-}
-.rcard-title{font-size:13px;font-weight:700;color:var(--text)}
-.rcard.primary .rcard-title{color:var(--blue)}
-.rcard.danger .rcard-title{color:var(--red)}
-.badge{
-  font-size:10px;font-weight:700;padding:3px 8px;border-radius:4px;
-  letter-spacing:.3px;text-transform:uppercase;flex-shrink:0;white-space:nowrap
-}
-.b-blue{background:var(--blue-light);color:var(--blue);border:1px solid var(--blue-mid)}
-.b-grey{background:var(--surface2);color:var(--text3);border:1px solid var(--border2)}
-.b-red{background:var(--red-light);color:var(--red);border:1px solid var(--red-mid)}
-.b-teal{background:var(--teal-light);color:var(--teal);border:1px solid var(--teal-mid)}
-.b-purple{background:var(--purple-light);color:var(--purple);border:1px solid var(--purple-mid)}
-.b-amber{background:var(--amber-light);color:var(--amber);border:1px solid var(--amber-mid)}
-.reditor{
-  width:100%;background:var(--surface);border:none;
-  border-bottom:1px solid var(--border);
-  padding:12px 14px;font-family:var(--ff);font-size:13.5px;line-height:1.85;
-  font-weight:400;color:var(--text);resize:none;outline:none;
-  min-height:80px;max-height:220px;overflow-y:auto
-}
-.email-subj{
-  display:flex;align-items:center;gap:8px;padding:8px 14px;
-  border-bottom:1px solid var(--border);background:var(--surface2)
-}
-.email-subj-lbl{
-  font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;
-  color:var(--text3);white-space:nowrap
-}
-.email-subj-inp{
-  flex:1;background:transparent;border:none;outline:none;
-  font-family:var(--ff);font-size:13px;font-weight:500;color:var(--text)
-}
-.rcard-ft{
-  padding:8px 12px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;
-  background:var(--bg);border-top:1px solid var(--border)
-}
-.chars{font-size:11px;color:var(--text3);margin-left:auto;font-family:var(--mono)}
-
-/* ── BUTTONS ── */
-.btn{
-  display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:var(--rs);
-  font-family:var(--ff);font-size:12.5px;font-weight:600;border:none;cursor:pointer;
-  transition:all .15s;white-space:nowrap
-}
-.btn:active{transform:scale(.97)}
-.btn svg{width:14px;height:14px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
-.btn-primary{background:var(--blue);color:#fff}
-.btn-primary:hover{background:#0055dd}
-.btn-green{background:var(--green-light);color:var(--green);border:1.5px solid var(--green-mid)}
-.btn-green:hover{background:var(--green-mid)}
-.btn-teal{background:var(--teal-light);color:var(--teal);border:1.5px solid var(--teal-mid)}
-.btn-teal:hover{background:var(--teal-mid)}
-.btn-purple{background:var(--purple-light);color:var(--purple);border:1.5px solid var(--purple-mid)}
-.btn-purple:hover{background:var(--purple-mid)}
-.btn-ghost{background:transparent;color:var(--text2);border:1.5px solid var(--border)}
-.btn-ghost:hover{border-color:var(--border2);background:var(--surface2)}
-.btn-amber{background:var(--amber-light);color:var(--amber);border:1.5px solid var(--amber-mid)}
-.btn-amber:hover{background:var(--amber-mid)}
-
-/* ── GUIDE OVERLAY ── */
-#guide{
-  position:absolute;inset:0;background:rgba(15,21,35,.5);z-index:100;
-  display:none;align-items:center;justify-content:center;
-  backdrop-filter:blur(6px)
-}
-#guide.open{display:flex;animation:fadeIn .2s ease}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-.guide-card{
-  background:var(--surface);border:1px solid var(--border);border-radius:12px;
-  max-width:640px;width:92%;max-height:88vh;overflow-y:auto;
-  box-shadow:var(--sh3)
-}
-.guide-card::-webkit-scrollbar{width:5px}
-.guide-card::-webkit-scrollbar-thumb{background:var(--border2);border-radius:4px}
-.guide-hdr{
-  padding:18px 20px;border-bottom:1px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;
-  position:sticky;top:0;background:var(--surface);z-index:1
-}
-.guide-hdr h2{font-size:16px;font-weight:700;letter-spacing:-.3px}
-.guide-body{padding:20px}
-.guide-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
-.gc{border-radius:var(--rs);border:1px solid var(--border);padding:14px}
-.gc-yes{border-color:var(--green-mid);background:var(--green-light)}
-.gc-no{border-color:var(--red-mid);background:var(--red-light)}
-.gc-head{font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:10px}
-.gc-yes .gc-head{color:var(--green)}.gc-no .gc-head{color:var(--red)}
-.gi{display:flex;gap:10px;padding:6px 0;border-bottom:1px solid rgba(0,0,0,.06);font-size:12.5px}
-.gi:last-child{border-bottom:none}
-.gi-icon{width:22px;height:22px;border-radius:5px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px}
-.gc-yes .gi-icon{background:var(--green-mid)}.gc-no .gi-icon{background:var(--red-mid)}
-.gi-text strong{display:block;font-weight:700;color:var(--text);margin-bottom:1px}
-.gi-text span{color:var(--text2);font-size:11.5px}
-.guide-info{
-  background:var(--surface2);border-radius:var(--rs);border:1px solid var(--border);
-  padding:14px 16px;font-size:12.5px;color:var(--text2);line-height:2
-}
-.guide-info strong{color:var(--text);font-weight:600}
-
-/* ── HISTBAR ── */
-#histbar{
-  height:38px;border-top:1px solid var(--border);background:var(--surface);
-  display:flex;align-items:center;gap:10px;padding:0 14px;flex-shrink:0
-}
-.hist-lbl{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text3);white-space:nowrap}
-.hist-chips{display:flex;gap:4px;overflow-x:auto;flex:1}
-.hist-chips::-webkit-scrollbar{display:none}
-.hist-empty{font-size:12px;color:var(--text3);font-style:italic}
-.hchip{
-  display:flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;
-  background:var(--surface2);border:1px solid var(--border);
-  font-size:11.5px;font-weight:500;color:var(--text2);
-  cursor:pointer;white-space:nowrap;transition:all .15s;flex-shrink:0
-}
-.hchip:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-light)}
-.hchip-t{font-size:10px;color:var(--text3);font-family:var(--mono);margin-left:2px}
-
-/* ── TOAST ── */
+/* COPY TOAST */
 #toast{
-  position:fixed;bottom:52px;left:50%;transform:translateX(-50%) translateY(8px);
+  position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(8px);
   background:var(--text);border-radius:var(--rs);padding:9px 18px;
   font-size:13px;font-weight:600;color:#fff;opacity:0;
   transition:all .2s;pointer-events:none;z-index:300;white-space:nowrap;
-  box-shadow:var(--sh3);display:flex;align-items:center;gap:7px
+  box-shadow:var(--sh2)
 }
 #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
-/* ── MISC ── */
-.empty-pane{padding:40px;text-align:center;font-size:13px;color:var(--text3);line-height:1.8}
-.no-result{padding:24px;text-align:center;font-size:13px;color:var(--text3)}
+/* MAIN */
+#main{padding:20px 24px 40px;max-width:1200px;margin:0 auto}
+
+/* SECTOR GRID */
+.sectors-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:12px
+}
+
+/* SECTOR CARD */
+.sector-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r);overflow:hidden;box-shadow:var(--sh);
+  transition:box-shadow .15s
+}
+.sector-card:hover{box-shadow:var(--sh2)}
+.sector-card.hidden{display:none}
+
+.sec-hd{
+  padding:10px 14px;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:10px;cursor:pointer;
+  user-select:none;background:var(--surface)
+}
+.sec-hd:hover{background:var(--bg)}
+.sec-icon{
+  width:30px;height:30px;border-radius:7px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:15px;flex-shrink:0
+}
+.sec-name{font-size:13px;font-weight:700;color:var(--text);flex:1}
+.sec-count{
+  font-size:10px;font-weight:700;color:var(--text3);
+  background:var(--bg);border:1px solid var(--border);
+  padding:2px 7px;border-radius:20px;font-variant-numeric:tabular-nums
+}
+.sec-chevron{
+  width:16px;height:16px;stroke:var(--text3);stroke-width:2;
+  fill:none;stroke-linecap:round;stroke-linejoin:round;
+  transition:transform .2s;flex-shrink:0
+}
+.sector-card.open .sec-chevron{transform:rotate(90deg)}
+
+.sec-body{display:none;padding:8px 12px 10px}
+.sector-card.open .sec-body{display:block}
+
+/* RAMAL LIST */
+.ramal-list{display:flex;flex-direction:column;gap:2px}
+.ramal-row{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:6px 8px;border-radius:var(--rs);
+  transition:background .1s;cursor:default
+}
+.ramal-row:hover{background:var(--bg)}
+.ramal-row.highlight{background:var(--blue-light)}
+.ramal-num{
+  font-family:var(--mono);font-size:13px;font-weight:500;color:var(--text);
+  letter-spacing:.5px
+}
+.ramal-row.highlight .ramal-num{color:var(--blue);font-weight:700}
+.copy-btn{
+  width:26px;height:26px;border-radius:5px;border:none;cursor:pointer;
+  background:transparent;display:flex;align-items:center;justify-content:center;
+  opacity:0;transition:all .15s;flex-shrink:0
+}
+.ramal-row:hover .copy-btn{opacity:1;background:var(--border)}
+.copy-btn:hover{background:var(--blue-mid) !important}
+.copy-btn svg{width:13px;height:13px;stroke:var(--text2);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.copy-btn:hover svg{stroke:var(--blue)}
+.copy-btn.copied{opacity:1;background:var(--green-light) !important}
+.copy-btn.copied svg{stroke:var(--green)}
+
+/* EMPTY */
+.empty{
+  grid-column:1/-1;text-align:center;padding:60px 20px;
+  font-size:14px;color:var(--text3);display:none
+}
+.empty svg{width:40px;height:40px;stroke:var(--border2);stroke-width:1.5;fill:none;margin:0 auto 12px;display:block}
 </style>
 </head>
 <body>
 
-<!-- TOPBAR -->
 <div id="topbar">
-  <div class="tb-brand">
-    <div class="tb-icon">
-      <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-    </div>
-    <div class="tb-title">CAD Atendimento</div>
-    <div class="tb-tag">OAB SP</div>
+  <div class="tb-icon">
+    <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.37 2 2 0 0 1 3.58 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.46a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 15.55v1.37z"/></svg>
   </div>
-  <div class="tb-div"></div>
-  <div class="tb-namewrap">
-    <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-    <input class="tb-name" type="text" id="person-name" placeholder="Nome do assistido..." oninput="atualizaNome()">
-  </div>
-  <span class="tb-hint">personaliza as mensagens</span>
+  <div class="tb-title">Ramais OAB SP</div>
+  <div class="tb-tag">RAMAL INTERNO</div>
   <div class="tb-r">
-    <div class="tb-status"><div class="tb-dot"></div>Online</div>
-    <div class="tb-clock" id="clock-el">--:--:--</div>
+    <div class="search-wrap">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="text" id="search" placeholder="Buscar setor ou ramal..." oninput="filtrar(this.value)">
+    </div>
+    <span id="result-count"></span>
   </div>
 </div>
 
-<div id="shell">
-  <!-- SIDEBAR -->
-  <div id="sidebar">
-    <div class="sb-top">
-      <div class="sb-search">
-        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-        <input type="text" id="search" placeholder="Buscar cenario..." oninput="buscar(this.value)">
-      </div>
-    </div>
-    <div id="sb-list"></div>
-  </div>
-
-  <!-- MAIN -->
-  <div id="main">
-    <div id="hbar">
-      <div id="htitle">Selecione um cenario</div>
-      <div class="hbar-r">
-        <button class="btn btn-amber" onclick="toggleGuide()">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
-          O que atendemos
-        </button>
-      </div>
-    </div>
-
-    <!-- WELCOME -->
-    <div id="welcome">
-      <div class="welcome-icon">
-        <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-      </div>
-      <h2>Ola, Cassia!</h2>
-      <p>Selecione um cenario na barra lateral ou use os atalhos abaixo para comecar rapidamente.</p>
-      <div class="wtags" id="wtags"></div>
-    </div>
-
-    <!-- SC VIEW -->
-    <div id="sc-view">
-      <div class="tabs-bar">
-        <button class="tab act" id="ctab-wapp" onclick="switchChannel('wapp')">
-          <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-          WhatsApp
-        </button>
-        <button class="tab" id="ctab-email" onclick="switchChannel('email')">
-          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          E-mail
-        </button>
-      </div>
-
-      <div class="cpane on" id="pane-wapp">
-        <div class="resp-col">
-          <div id="cpf-checker-box" style="display:none">
-            <div class="cpf-panel">
-              <div class="cpf-ph">
-                <div class="cpf-ph-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div>
-                <div class="cpf-ph-title">Verificar CPF no sistema</div>
-              </div>
-              <div class="cpf-body">
-                <div class="cpf-row">
-                  <span class="cpf-lbl">CPF</span>
-                  <input class="cpf-inp" id="cpf-input" type="text" placeholder="000.000.000-00" maxlength="14" oninput="fmtCPF(this)">
-                </div>
-                <div class="cpf-hint">Peca o CPF, consulte no sistema e clique na situacao encontrada abaixo.</div>
-                <div>
-                  <div class="cpf-status-lbl">Situacao no sistema</div>
-                  <div class="cpf-btns">
-                    <button class="sbtn sbtn-teal" onclick="showCPFStatus('noproc')">Sem processo</button>
-                    <button class="sbtn sbtn-amber" onclick="showCPFStatus('recused')">Nomeacao recusada</button>
-                    <button class="sbtn sbtn-red" onclick="showCPFStatus('accepted')">Nomeacao aceita</button>
-                  </div>
-                </div>
-                <div id="cpf-status-result"></div>
-              </div>
-            </div>
-          </div>
-          <div id="resp-stack"></div>
-        </div>
-      </div>
-
-      <div class="cpane" id="pane-email">
-        <div class="resp-col"><div id="resp-stack-email"></div></div>
-      </div>
-    </div>
-
-    <!-- GUIDE -->
-    <div id="guide">
-      <div class="guide-card">
-        <div class="guide-hdr">
-          <h2>O que a CAD atende</h2>
-          <button class="btn btn-ghost" onclick="toggleGuide()">
-            <svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;stroke-width:2.5;fill:none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-            Fechar
-          </button>
-        </div>
-        <div class="guide-body">
-          <div class="guide-grid">
-            <div class="gc gc-yes">
-              <div class="gc-head">Atendemos</div>
-              <div class="gi"><div class="gi-icon">F</div><div class="gi-text"><strong>Familia</strong><span>Divorcio, pensao, guarda</span></div></div>
-              <div class="gi"><div class="gi-icon">C</div><div class="gi-text"><strong>Civel</strong><span>Cobrancas, contratos, indenizacoes</span></div></div>
-              <div class="gi"><div class="gi-icon">H</div><div class="gi-text"><strong>Habitacional</strong><span>Posse, usucapiao, regularizacao</span></div></div>
-              <div class="gi"><div class="gi-icon">I</div><div class="gi-text"><strong>Inventario</strong><span>Abertura, partilha de bens</span></div></div>
-              <div class="gi"><div class="gi-icon">V</div><div class="gi-text"><strong>Violencia Domestica</strong><span>Medida protetiva, Maria da Penha</span></div></div>
-              <div class="gi"><div class="gi-icon">D</div><div class="gi-text"><strong>Convenio OAB/DPE</strong><span>Via Defensoria Publica</span></div></div>
-              <div class="gi"><div class="gi-icon">D</div><div class="gi-text"><strong>Dativo</strong><span>Nomeacao judicial, reus sem advogado</span></div></div>
-            </div>
-            <div class="gc gc-no">
-              <div class="gc-head">Nao atendemos</div>
-              <div class="gi"><div class="gi-icon">T</div><div class="gi-text"><strong>Trabalhista</strong><span>Rescisao, FGTS, vinculo</span></div></div>
-              <div class="gi"><div class="gi-icon">P</div><div class="gi-text"><strong>INSS / Previdenciario</strong><span>Aposentadoria, BPC, auxilio</span></div></div>
-              <div class="gi"><div class="gi-icon">C</div><div class="gi-text"><strong>Criminal geral</strong><span>Exceto dativo nomeado pelo juiz</span></div></div>
-              <div class="gi"><div class="gi-icon">E</div><div class="gi-text"><strong>Empresarial</strong><span>CNPJ, sociedades, contratos</span></div></div>
-              <div class="gi"><div class="gi-icon">T</div><div class="gi-text"><strong>Tributario</strong><span>Receita Federal, parcelamentos</span></div></div>
-            </div>
-          </div>
-          <div class="guide-info" id="guide-info-box"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- HISTBAR -->
-    <div id="histbar">
-      <span class="hist-lbl">Recentes</span>
-      <div class="hist-chips" id="hist-chips"><span class="hist-empty">Nenhuma copia ainda</span></div>
-    </div>
+<div id="main">
+  <div class="sectors-grid" id="grid"></div>
+  <div class="empty" id="empty">
+    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    Nenhum ramal encontrado para "<span id="empty-term"></span>"
   </div>
 </div>
 
 <div id="toast"></div>
 
 <script>
-var C = CAD_CONFIG;
-var END_ADDR = '\n\n📍 '+C.endPrinc+'\n📞 '+C.tel+'\n🕘 '+C.horAtend+' · '+C.limSenhas;
-var END_SEC  = '\n\n📍 '+C.endSec+'\n🕘 '+C.horSec;
-var DOCS = '\n\nDocumentos necessarios:\n- RG original e CPF\n- Comprovante de residencia atualizado\n- Comprovante de renda de todos que moram com voce\n- Se tiver bens: documentacao correspondente\n\nSem documentacao completa, o atendimento nao sera realizado.';
-var SIGN = '\n\nAtenciosamente,\n'+C.atendente+'\nCentral de Atendimento - CAD\nOAB Subsecao Santana de Parnaiba\n📍 '+C.endPrinc+'\n📞 '+C.tel+'\n🕘 '+C.horAtend;
-var HDR  = 'CAD - Comissao de Advocacia Dativa\nOAB Subsecao Santana de Parnaiba\n';
-var AREAS = '\n\nA CAD atende: familia, civel, inventario, violencia domestica e habitacional.';
+var DATA = {
+  "AJ": ["(11) 3349-7603","(11) 3349-7617","(11) 3349-7620","(11) 3349-7606","(11) 3349-7609","(11) 3349-7600","(11) 3349-7616","(11) 3349-7611","(11) 3349-7608","(11) 3349-7604","(11) 3349-7614","(11) 3349-7605","(11) 3349-7610","(11) 3349-7619","(11) 3349-7618","(11) 3349-7615","(11) 3349-7601","(11) 3349-7607","(11) 3349-7613","(11) 3349-7612"],
+  "Almoxarifado": ["(11) 3349-7558","(11) 3349-7597","(11) 3349-7599"],
+  "Biblioteca": ["(11) 3249-3509","(11) 3249-3512","(11) 3249-3511","(11) 3249-3510","(11) 3249-3508"],
+  "Cadastro": ["(11) 3249-3603","(11) 3249-3598","(11) 3249-3597","(11) 3249-3594","(11) 3249-3596","(11) 3249-3602","(11) 3249-3595","(11) 3249-3601","(11) 3249-3599","(11) 3249-3592","(11) 3249-3591","(11) 3249-3593","(11) 3249-3590"],
+  "Câmaras Recursais": ["(11) 3349-7582","(11) 3349-7595","(11) 3349-7591","(11) 3349-7593","(11) 3349-7586","(11) 3349-7577","(11) 3349-7580","(11) 3349-7584","(11) 3349-7588","(11) 3349-7579","(11) 3349-7583","(11) 3349-7592","(11) 3349-7575","(11) 3349-7581","(11) 3349-7578","(11) 3349-7587","(11) 3349-7594","(11) 3349-7585","(11) 3349-7576","(11) 3349-7589"],
+  "Central": ["(11) 3249-3502","(11) 3249-3505","(11) 3249-3504","(11) 3249-3503"],
+  "Controladoria": ["(11) 3249-6154","(11) 3249-6145","(11) 3249-6166","(11) 3249-6160","(11) 3249-6164","(11) 3249-6152","(11) 3249-6159","(11) 3249-6144","(11) 3249-6151","(11) 3249-6172","(11) 3249-6171","(11) 3249-6143","(11) 3249-6150","(11) 3249-6165","(11) 3249-6163","(11) 3249-6158","(11) 3249-6173","(11) 3249-6161","(11) 3249-6156","(11) 3249-6155","(11) 3249-6148","(11) 3249-6162","(11) 3249-6147","(11) 3249-6153","(11) 3249-6157","(11) 3249-6170","(11) 3249-6149","(11) 3249-6169","(11) 3249-6167","(11) 3249-6146"],
+  "COPA - SÉ": ["(11) 3249-3619"],
+  "Corregedoria TED": ["(11) 3349-7701","(11) 3349-7702"],
+  "Cultural": ["(11) 3249-3521","(11) 3249-3524","(11) 3249-3514","(11) 3249-3525","(11) 3249-3519","(11) 3249-3515","(11) 3249-3516","(11) 3249-3517","(11) 3249-3518","(11) 3249-3523","(11) 3249-3522"],
+  "DASI": ["(11) 3349-7562","(11) 3349-7564","(11) 3349-7561","(11) 3349-7563","(11) 3349-7565","(11) 3349-7560"],
+  "Depto. de Subseções": ["3349-7540","3111-3280","3349-7533","3111-3281","3111-3282","3111-3283","3111-3284","3111-3285","3111-3286"],
+  "DGI (SGQ)": ["(11) 3249-3537","(11) 3249-3541","(11) 3249-3538","(11) 3249-3536","(11) 3249-3539","(11) 3249-3540","(11) 3249-3535"],
+  "Engenharia": ["(11) 3349-7540","(11) 3349-7529","(11) 3349-7528","(11) 3349-7531","(11) 3349-7537","(11) 3349-7535","(11) 3349-7536","(11) 3349-7527","(11) 3349-7534","(11) 3349-7541","(11) 3349-7538","(11) 3349-7539","(11) 3349-7530","(11) 3349-7533","(11) 3349-7542"],
+  "ESA": ["(11) 3346-6839","(11) 3346-6801","(11) 3346-6856","(11) 3346-6807","(11) 3346-6809","(11) 3346-6823","(11) 3346-6814","(11) 3346-6822","(11) 3346-6804","(11) 3346-6838","(11) 3346-6825","(11) 3346-6824","(11) 3346-6850","(11) 3346-6800","(11) 3346-6816","(11) 3346-6853","(11) 3346-6866"],
+  "Escola de Prerrogativas": ["(11) 3346-6820"],
+  "Exame": ["(11) 3249-3567","(11) 3249-3566","(11) 3249-3568","(11) 3249-3565","(11) 3249-3564"],
+  "Financeiro": ["(11) 3249-6131","(11) 3249-6136","(11) 3249-6126","(11) 3249-6127","(11) 3249-6137","(11) 3249-6130","(11) 3249-6128","(11) 3249-6140","(11) 3249-6135","(11) 3249-6138","(11) 3249-6133","(11) 3249-6132","(11) 3249-6124","(11) 3249-6125","(11) 3249-6129","(11) 3249-6123","(11) 3249-6139","(11) 3249-6122","(11) 3249-6134"],
+  "Força Tarefa": ["(11) 3349-7672","(11) 3349-7670","(11) 3349-7671","(11) 3349-7669"],
+  "Gabinete dos TEDs": ["(11) 3349-7569","(11) 3349-7570","(11) 3349-7567","(11) 3349-7568"],
+  "HELPDESK": ["(11) 2571-8760"],
+  "Inscrições": ["(11) 3249-3606","(11) 3249-3611","(11) 3249-3605","(11) 3249-3609","(11) 3249-3607","(11) 3249-3610","(11) 3249-3608"],
+  "Logística": ["(11) 3249-6182","(11) 3249-6178","(11) 3249-6183","(11) 3249-6179","(11) 3249-6181","(11) 3249-6180"],
+  "Microfilmagem": ["(11) 3249-3629","(11) 3249-3628","(11) 3249-3626","(11) 3249-3627"],
+  "Núcleos": ["(11) 3346-6852"],
+  "Ouvidoria": ["(11) 3249-3530","(11) 3249-3529","(11) 3249-3531","(11) 3249-3533","(11) 3249-3528","(11) 3249-3532","(11) 3249-3527"],
+  "Pós-Graduação": ["(11) 3346-6808"],
+  "Prerrogativas": ["(11) 3349-7504","(11) 3349-7506","(11) 3349-7508","(11) 3349-7505","(11) 3349-7507","(11) 3349-7503","(11) 3349-7509"],
+  "Presidente - TED II": ["(11) 3349-7687"],
+  "Presidente - TED IV": ["(11) 3349-7674"],
+  "Presidente - TED VI": ["(11) 3349-7649"],
+  "Protocolo": ["(11) 3249-3612","(11) 3249-3613","(11) 3249-3615","(11) 3249-3614"],
+  "Recepção Largo da Pólvora": ["(11) 3349-6121"],
+  "Recepção MP88 - 01": ["(11) 3349-7704"],
+  "Recepção MP88 - 02": ["(11) 3349-7703"],
+  "Resgate": ["(11) 3249-3623"],
+  "RH": ["(11) 3249-6100","(11) 3249-6101","(11) 3249-6119","(11) 3249-6102","(11) 3249-6103","(11) 3249-6117","(11) 3249-6111","(11) 3249-3632","(11) 3249-6107","(11) 3249-6110","(11) 3249-6112","(11) 3249-6109","(11) 3249-6114","(11) 3249-6116","(11) 3249-6108","(11) 3249-6105","(11) 3249-6118","(11) 3249-6113","(11) 3249-6106","(11) 3249-6120","(11) 3249-6104","(11) 3249-3631"],
+  "SINAD": ["(11) 3249-3542","(11) 3249-3549","(11) 3249-3556","(11) 3249-3554","(11) 3249-3547","(11) 3249-3557","(11) 3249-3548","(11) 3249-3559","(11) 3249-3555","(11) 3249-3551","(11) 3249-3546","(11) 3249-3563","(11) 3249-3544"]
+};
 
-document.getElementById('guide-info-box').innerHTML =
-  '<strong>Endereco:</strong> '+C.endPrinc+'<br>'+
-  '<strong>Telefone:</strong> '+C.tel+' &nbsp;|&nbsp; '+
-  '<strong>Horario:</strong> '+C.horAtend+' &nbsp;|&nbsp; '+
-  '<strong>Limite:</strong> '+C.limSenhas;
+var ICONS = {
+  "AJ":"⚖","Almoxarifado":"📦","Biblioteca":"📚","Cadastro":"🗂",
+  "Câmaras Recursais":"🏛","Central":"📞","Controladoria":"📊","COPA - SÉ":"☕",
+  "Corregedoria TED":"🔍","Cultural":"🎭","DASI":"💻","Depto. de Subseções":"🏢",
+  "DGI (SGQ)":"📋","Engenharia":"🔧","ESA":"🎓","Escola de Prerrogativas":"📖",
+  "Exame":"📝","Financeiro":"💰","Força Tarefa":"🚨","Gabinete dos TEDs":"👥",
+  "HELPDESK":"🖥","Inscrições":"✍","Logística":"🚚","Microfilmagem":"📷",
+  "Núcleos":"🔵","Ouvidoria":"📣","Pós-Graduação":"🎓","Prerrogativas":"⚡",
+  "Presidente - TED II":"👔","Presidente - TED IV":"👔","Presidente - TED VI":"👔",
+  "Protocolo":"📬","Recepção Largo da Pólvora":"🚪","Recepção MP88 - 01":"🚪",
+  "Recepção MP88 - 02":"🚪","Resgate":"🆘","RH":"👥","SINAD":"🔗"
+};
 
-function n(x){return x?', '+x:'';}
-function p(x){return x?' '+x:'';}
-
-var S=[
-{grp:'Atendimento',id:'bv0',icon:'💬',pip:null,label:'Primeiro contato',sub:'Oi / Boa tarde',resps:[
-  {title:'Boas-vindas',badge:'b-blue',bl:'Recomendada',primary:true,nao:false,tpl:function(x){return 'Ola'+n(x)+'! Aqui e a Cassia — em que posso te ajudar?';}},
-  {title:'Tom informal',badge:'b-grey',bl:'Alternativa',primary:false,nao:false,tpl:function(x){return 'Oi'+n(x)+'! Tudo bem? Sou a Cassia, me conta — no que posso ajudar?';}}
-],emailResps:[]},
-
-{grp:'Atendimento',id:'bv1',icon:'❓',pip:null,label:'O que e a CAD?',sub:'Apresentar e confirmar',resps:[
-  {title:'Apresentar + orientar',badge:'b-blue',bl:'Recomendada',primary:true,nao:false,tpl:function(x){return 'Ola'+n(x)+'!\n\nSomos a CAD - Comissao de Advocacia Dativa da OAB Santana de Parnaiba. Oferecemos atendimento juridico gratuito para quem nao tem condicoes de pagar advogado particular.\n\nO atendimento e presencial, '+C.horAtend+', por ordem de chegada — sem agendamento previo.\n\nLimite: '+C.limSenhas+' — recomendamos chegar cedo!'+DOCS+END_ADDR;}}
-],emailResps:[
-  {title:'Apresentacao por email',subj:'CAD - Assistencia Juridica Gratuita',badge:'b-teal',bl:'Padrao',primary:true,nao:false,tpl:function(x){return HDR+'\nPrezado(a)'+p(x)+'!\n\nA CAD oferece atendimento juridico gratuito. Atendemos '+C.horAtend+', sem agendamento previo (limite: '+C.limSenhas+').'+DOCS+SIGN;}}
-]},
-
-{grp:'Atendimento',id:'info1',icon:'📣',pip:null,label:'Informativo completo',sub:'Horario, documentos, endereco',resps:[
-  {title:'Informativo completo',badge:'b-blue',bl:'Recomendada',primary:true,nao:false,tpl:function(x){return '*OAB - ASSISTENCIA JURIDICA GRATUITA*\n📍 Subsecao Santana de Parnaiba\n \n━━━━━━━━━━━━━━━━━━━━\n🗓 Atendimento: Segunda a Sexta-feira\n🕘 Horario: 09h00 as 12h00\n⚠️ Limite: 30 pessoas por dia\n━━━━━━━━━━━━━━━━━━━━\n \n📋 DOCUMENTOS OBRIGATORIOS:\n \n✅ RG original + CPF\n✅ Comprovante de residencia atualizado\n✅ Comprovante de renda de todos da familia\n✅ Patrimonio (se houver)\n✅ Alimentos: documento da crianca + endereco da parte contraria\n✅ Divorcio: certidao de casamento atualizada\n \n🚫 Sem os documentos acima, o atendimento NAO sera realizado.\n \n📍 '+C.endPrinc+'\n📞 '+C.tel;}},
-  {title:'Versao resumida',badge:'b-grey',bl:'Alternativa',primary:false,nao:false,tpl:function(x){return 'Ola'+n(x)+'!\n\n🕘 '+C.horAtend+' · '+C.limSenhas+'\n📋 Documentos: RG + CPF · Comprovante de residencia · Comprovante de renda\n🚫 Sem documentacao completa, o atendimento nao e realizado.\n\n📍 '+C.endPrinc+'\n📞 '+C.tel;}}
-],emailResps:[
-  {title:'Informativo por email',subj:'OAB Santana de Parnaiba - Assistencia Juridica Gratuita',badge:'b-teal',bl:'Recomendada',primary:true,nao:false,tpl:function(x){return HDR+'\nPrezado(a)'+p(x)+'!\n\nAtendemos '+C.horAtend+' · Limite: '+C.limSenhas+'\n\nDocumentos obrigatorios:\n1. RG original + CPF\n2. Comprovante de residencia atualizado\n3. Comprovante de renda de todos da familia\n4. Para pensao: documento da crianca + endereco da parte contraria\n5. Para divorcio: certidao de casamento atualizada\n\n📍 '+C.endPrinc+'\n📞 '+C.tel+SIGN;}}
-]},
-
-{grp:'Atendimento',id:'age2',icon:'🕘',pip:null,label:'Horario / Sabado / Fora do expediente',sub:'Informar funcionamento',resps:[
-  {title:'Informar horario',badge:'b-blue',bl:'Recomendada',primary:true,nao:false,tpl:function(x){return 'Atendemos '+C.horAtend+', por ordem de chegada.\n\nLimite: '+C.limSenhas+'. Nao atendemos sabados, domingos ou feriados.'+DOCS+END_ADDR;}},
-  {title:'Fora do horario',badge:'b-grey',bl:'Alternativa',primary:false,nao:false,tpl:function(x){return 'Obrigada pelo contato! Sua mensagem foi recebida fora do horario de atendimento e sera respondida no proximo dia util.\n\n🕘 '+C.horAtend+' · '+C.tel;}}
-],emailResps:[
-  {title:'Horario por email',subj:'CAD - Horario de atendimento',badge:'b-teal',bl:'Padrao',primary:true,nao:false,tpl:function(x){return HDR+'\nPrezado(a)'+p(x)+'!\n\nAtendemos '+C.horAtend+', por ordem de chegada. Limite: '+C.limSenhas+'. Nao atendemos sabados ou feriados.\n\n📞 '+C.tel+SIGN;}}
-]},
-
-{grp:'Atendimento',id:'age1',icon:'🚷',pip:null,label:'Vagas esgotadas',sub:'Limite de 30 senhas atingido',resps:[
-  {title:'Vagas esgotadas',badge:'b-blue',bl:'Padrao',primary:true,nao:false,tpl:function(x){return 'As '+C.limSenhas+' de hoje ja foram distribuidas.\n\nRetorne amanha antes das 9h para garantir seu atendimento.\n\n📞 '+C.tel+END_ADDR;}}
-],emailResps:[
-  {title:'Vagas esgotadas por email',subj:'CAD - Atendimento indisponivel hoje',badge:'b-teal',bl:'Padrao',primary:true,nao:false,tpl:function(x){return HDR+'\nPrezado(a)'+p(x)+'!\n\nO limite de '+C.limSenhas+' foi atingido hoje. Retorne no proximo dia util antes das 9h.\n\n📞 '+C.tel+SIGN;}}
-]},
-
-{grp:'Atendimento',id:'bv4',icon:'🎙',pip:null,label:'Enviou audio',sub:'Pedir em texto',resps:[
-  {title:'Pedir em texto',badge:'b-blue',bl:'Padrao',primary:true,nao:false,tpl:function(x){return 'Oi'+n(x)+'! Infelizmente nao consigo ouvir audios por aqui. Pode me mandar em texto? Assim te ajudo direitinho!';}}
-],emailResps:[]},
-
-{grp:'Atendimento',id:'bv6',icon:'✅',pip:null,label:'Encerrar conversa',sub:'Fechar com acolhimento',resps:[
-  {title:'Encerrar',badge:'b-blue',bl:'Recomendada',primary:true,nao:false,tpl:function(x){return 'Disponha'+n(x)+'! Se surgir qualquer duvida, e so me chamar. Boa sorte!';}},
-  {title:'Simples',badge:'b-grey',bl:'Alternativa',primary:false,nao:false,tpl:function(x){return 'De nada'+n(x)+'! Estou por aqui se precisar. Ate logo!';}}
-],emailResps:[]},
-
-{grp:'Atendimento',id:'bv7',icon:'⏸',pip:null,label:'Ausencia temporaria',sub:'Avisar que volta em breve',resps:[
-  {title:'Ausencia curta',badge:'b-blue',bl:'Recomendada',primary:true,nao:false,tpl:function(x){return 'Oi'+n(x)+'! Preciso me ausentar por alguns minutos — ja volto!';}}
-],emailResps:[]},
-
-{grp:'Atendimento',id:'doc1',icon:'📋',pip:null,label:'Quais documentos trazer?',sub:'Lista completa ou por caso',resps:[
-  {title:'Lista completa',badge:'b-blue',bl:'Recomendada',primary:true,nao:false,tpl:function(x){return 'Ola'+n(x)+'!\n\nPara ser atendido(a), traga:\n- RG original e CPF\n- Comprovante de residencia atualizado\n- Comprovante de renda de todos que moram com voce\n- Se tiver bens: documentacao correspondente\n\nSem tudo completo, o atendimento nao e realizado.\n\n📞 '+C.tel+END_ADDR;}},
-  {title:'Pensao',badge:'b-grey',bl:'Alternativa',primary:false,nao:false,tpl:function(x){return 'Ola'+n(x)+'!\n\nPara pensao, alem dos documentos basicos:\n- Certidao de nascimento do(s) filho(s)\n- Endereco completo da parte contraria\n\n📞 '+C.tel+END_ADDR;}},
-  {title:'Divorcio',badge:'b-grey',bl:'Alternativa',primary:false,nao:false,tpl:function(x){return 'Ola'+n(x)+'!\n\nPara divorcio, alem dos documentos basicos:\n- Certidao de casamento atualizada (max. 90 dias)\n- Filhos menores: certidao de nascimento\n- Se tiver bens: documentacao do imovel ou veiculo\n\n📞 '+C.tel+END_ADDR;}}
-],emailResps:[
-  {title:'Documentos por email',subj:'CAD - Documentos necessarios',badge:'b-teal',bl:'Padrao',primary:true,nao:false,tpl:function(x){return HDR+'\nPrezado(a)'+p(x)+'!\n\nDocumentos necessarios:\n- RG original e CPF\n- Comprovante de residencia atualizado\n- Comprovante de renda de todos que moram com voce\n- Se tiver bens: documentacao correspondente\n\nSem documentacao completa, o atendimento nao e realizado.\n\n📞 '+C.tel+'\n📍 '+C.endPrinc+SIGN;}}
-]},
-
-{grp:'Atendimento',id:'doc2',icon:'❌',pip:null,label:'Documentacao incompleta',sub:'Orientar presencial com originais',resps:[
-  {title:'Orientar comparecer',badge:'b-blue',bl:'Padrao',primary:true,nao:false,tpl:function(x){return 'Ola'+n(x)+'!\n\nDocumentos nao podem ser avaliados por aqui. E necessario comparecer pessoalmente com os documentos originais.\n\n📞 '+C.tel+END_ADDR;}}
-],emailResps:[
-  {title:'Docs incompletos por email',subj:'CAD - Documentacao pendente',badge:'b-teal',bl:'Padrao',primary:true,nao:false,tpl:function(x){return HDR+'\nPrezado(a)'+p(x)+'!\n\nO atendimento nao pode ser concluido por documentacao incompleta. Compareca presencialmente com todos os originais.\n\n📍 '+C.endPrinc+'\n📞 '+C.tel+'\n🕘 '+C.horAtend+SIGN;}}
-]},
-
-{grp:'Casos que atendemos',id:'at1',icon:'👨‍👩‍👧',pip:'pip-green',label:'Familia',sub:'Divorcio, pensao, guarda',resps:[
-  {title:'Divorcio',badge:'b-blue',bl:'Recomendada',primary:true,nao:false,tpl:function(x){return 'Ola'+n(x)+'!\n\nSim, atendemos divorcio! Alem dos documentos basicos, traga:\n- Certidao de casamento atualizada (max. 90 dias)\n- Filhos menores: certidao de nascimento\n- Bens: documentacao correspondente\n\n📞 '+C.tel+END_ADDR;}},
-  {title:'Pensao',badge:'b-grey',bl:'Alternativa',primary:false,nao:false,tpl:function(x){return 'Ola'+n(x)+'!\n\nSim, atendemos pensao! Alem dos documentos basicos:\n- Certidao de nascimento do(s) filho(s)\n- Endereco completo da parte contraria\n\n📞 '+C.tel+END_ADDR;}},
-  {title:'Familia geral',badge:'b-grey',bl:'Alternativa',primary:false,nao:false,tpl:function(x){return 'Ola'+n(x)+'!\n\nSim, atendemos casos de familia! Pode vir ate nos.\n\n📞 '+C.tel+END_ADDR;}}
-],emailResps:[
-  {title:'Familia por email',subj:'CAD - Atendemos seu caso',badge:'b-teal',bl:'Padrao',primary:true,nao:false,tpl:function(x){return HDR+'\nPrezado(a)'+p(x)+'!\n\nA CAD atende casos de familia (divorcio, pensao, guarda). Compareca com os documentos necessarios.\n\n📍 '+C.endPrinc+'\n📞 '+C.tel+'\n🕘 '+C.horAtend+SIGN;}}
-]},
-
-{grp:'Casos que atendemos',id:'at3',icon:'🛡',pip:'pip-green',label:'Violencia Domestica',sub:'Medida protetiva, Maria da Penha',resps:[
-  {title:'Violencia domestica',badge:'b-blue',bl:'Recomendada',primary:true,nao:false,tpl:function(x){return 'Ola'+n(x)+'!\n\nSim, atendemos violencia domestica e medida protetiva.\n\nSe voce estiver em risco AGORA, ligue:\n🔴 Central da Mulher: 180 (24h, gratuito)\n🔴 Policia: 190\n\nDepois venha ate nos.\n\n📞 '+C.tel+END_ADDR;}}
-],emailResps:[
-  {title:'Violencia domestica por email',subj:'CAD - Atendemos violencia domestica',badge:'b-teal',bl:'Padrao',primary:true,nao:false,tpl:function(x){return HDR+'\nPrezado(a)'+p(x)+'!\n\nA CAD atende violencia domestica e medida protetiva.\n\nEm risco imediato: ligue 180 (Central da Mulher, 24h) ou 190 (Policia).\n\n📍 '+C.endPrinc+'\n📞 '+C.tel+SIGN;}}
-]},
-
-{grp:'Casos que atendemos',id:'at4',icon:'📜',pip:'pip-green',label:'Inventario / Heranca',sub:'Confirmar atendimento',resps:[
-  {title:'Inventario',badge:'b-blue',bl:'Padrao',primary:true,nao:false,tpl:function(x){return 'Ola'+n(x)+'!\n\nSim, atendemos inventario e heranca!\n\n📞 '+C.tel+END_ADDR;}}
-],emailResps:[
-  {title:'Inventario por email',subj:'CAD - Atendemos inventario e heranca',badge:'b-teal',bl:'Padrao',primary:true,nao:false,tpl:function(x){return HDR+'\nPrezado(a)'+p(x)+'!\n\nSim, atendemos inventario e heranca. Compareca com a documentacao necessaria.\n\n📍 '+C.endPrinc+'\n📞 '+C.tel+SIGN;}}
-]},
-
-{grp:'Nao atendemos',id:'na1',icon:'🚫',pip:'pip-red',label:'Trabalhista / INSS / Criminal',sub:'Fora da nossa atuacao',resps:[
-  {title:'Trabalhista',badge:'b-red',bl:'Nao atendemos',primary:false,nao:true,tpl:function(x){return 'Ola'+n(x)+'!\n\nInfelizmente nao atendemos casos trabalhistas.\n\nIndicamos: sindicato da sua categoria, Defensoria Publica ou advogado especializado.'+AREAS+'\n\n📞 '+C.tel+END_ADDR;}},
-  {title:'INSS / Previdenciario',badge:'b-red',bl:'Nao atendemos',primary:false,nao:true,tpl:function(x){return 'Ola'+n(x)+'!\n\nInfelizmente nao atendemos INSS ou previdenciario.\n\nIndicamos: CRAS, Defensoria Publica ou advogado especializado.'+AREAS+'\n\n📞 '+C.tel+END_ADDR;}},
-  {title:'Criminal geral',badge:'b-red',bl:'Nao atendemos',primary:false,nao:true,tpl:function(x){return 'Ola'+n(x)+'!\n\nInfelizmente nao fazemos defesa criminal. Procure a Defensoria Publica do Estado de Sao Paulo.'+AREAS+'\n\n📞 '+C.tel+END_ADDR;}}
-],emailResps:[
-  {title:'Nao atendemos por email',subj:'CAD - Sobre seu contato',badge:'b-red',bl:'Nao atendemos',primary:false,nao:true,tpl:function(x){return HDR+'\nPrezado(a)'+p(x)+'!\n\nEste tipo de caso esta fora da atuacao da CAD. Indicamos a Defensoria Publica ou advogado especializado.'+AREAS+'\n\n📞 '+C.tel+SIGN;}}
-]},
-
-{grp:'Situacoes delicadas',id:'del1',icon:'😤',pip:null,label:'Pessoa nervosa / frustrada',sub:'Acolher e ouvir',resps:[
-  {title:'Acolher e ouvir',badge:'b-blue',bl:'Recomendada',primary:true,nao:false,tpl:function(x){return 'Oi'+n(x)+'!\n\nEntendo a frustracao e me desculpe pelo transtorno. Estou aqui para te ajudar de verdade!\n\nMe conta com calma o que aconteceu?';}},
-  {title:'Apos ouvir — orientar',badge:'b-grey',bl:'Complementar',primary:false,nao:false,tpl:function(x){return 'Obrigada por me contar! Venha de '+C.horAtend+', com os documentos abaixo.'+DOCS+'\n\n📞 '+C.tel+END_ADDR;}}
-],emailResps:[]},
-
-{grp:'Situacoes delicadas',id:'del1c',icon:'🛑',pip:'pip-red',label:'Linguagem agressiva',sub:'Firmeza e respeito',resps:[
-  {title:'Redirecionar com firmeza',badge:'b-blue',bl:'Recomendada',primary:true,nao:false,tpl:function(x){return 'Oi'+n(x)+'!\n\nQuero te ajudar! Mas para isso precisamos conversar com respeito de ambos os lados.\n\nMe conta o que esta acontecendo com calma e farei o possivel para te orientar.';}},
-  {title:'Tom acolhedor',badge:'b-grey',bl:'Alternativa',primary:false,nao:false,tpl:function(x){return 'Oi'+n(x)+'!\n\nPercebo que voce esta passando por um momento dificil. Me ajuda a te ajudar — conta o que precisa com calma e te oriento da melhor forma.';}}
-],emailResps:[]},
-
-{grp:'Situacoes delicadas',id:'del6',icon:'🚨',pip:'pip-red',label:'Urgente / vulneravel / choro',sub:'Acolher primeiro',resps:[
-  {title:'Acolher',badge:'b-blue',bl:'Recomendada',primary:true,nao:false,tpl:function(x){return 'Fico feliz que voce entrou em contato. Voce nao esta sozinha nisso.\n\nRespira fundo e me conta o que esta acontecendo — estou aqui para te ouvir.';}},
-  {title:'Risco fisico',badge:'b-red',bl:'Urgente',primary:false,nao:false,tpl:function(x){return 'Voce esta em seguranca agora?\n\nSe estiver em risco, ligue imediatamente:\n🔴 190 — Policia Militar\n🔴 180 — Central da Mulher (24h, gratuito)';}},
-  {title:'Apos ouvir — orientar',badge:'b-grey',bl:'Complementar',primary:false,nao:false,tpl:function(x){return 'Obrigada por confiar em mim!\n\nSeu caso tem solucao. Venha ate nos com os documentos abaixo.\n\n📞 '+C.tel+END_ADDR;}}
-],emailResps:[]},
-
-{grp:'Situacoes delicadas',id:'del2',icon:'🔄',pip:null,label:'Quer saber do processo',sub:'Acompanhamento e presencial',resps:[
-  {title:'Orientar retorno',badge:'b-blue',bl:'Recomendada',primary:true,nao:false,tpl:function(x){return 'Oi'+n(x)+'!\n\nPara acompanhar seu caso, e necessario comparecer pessoalmente.\n\nVenha de '+C.horAtend+'. Se tiver o protocolo anterior, traga — facilita bastante!\n\n📞 '+C.tel+END_ADDR;}}
-],emailResps:[]},
-
-{grp:'Reclamacoes de advogado',id:'rec1',icon:'⚠',pip:'pip-orange',label:'Quer reclamar do advogado',sub:'Solicitar CPF e verificar',cpfChecker:true,resps:[
-  {title:'Solicitar CPF',badge:'b-amber',bl:'1o Passo',primary:true,nao:false,tpl:function(x){return 'Compreendemos a situacao.\n\nPara verificar seu caso no sistema, precisamos do seu CPF, por favor.';}},
-  {title:'CPF anotado',badge:'b-grey',bl:'Alternativa',primary:false,nao:false,tpl:function(x){return 'Oi'+n(x)+'!\n\nAnotei o CPF. Vou verificar no sistema e ja te retorno. Um momento!';}}
-],emailResps:[
-  {title:'Solicitar CPF por email',subj:'CAD - Reclamacao - Dados necessarios',badge:'b-teal',bl:'1o Passo',primary:true,nao:false,tpl:function(x){return HDR+'\nPrezado(a)'+p(x)+'!\n\nRecebemos seu contato. Para verificar seu caso no sistema, precisamos do CPF do assistido.'+SIGN;}}
-]},
-
-{grp:'Reclamacoes de advogado',id:'rec2',icon:'📂',pip:'pip-teal',label:'CPF — Sem processo',sub:'Orientar senha presencial',resps:[
-  {title:'Sem processo — orientar',badge:'b-blue',bl:'Padrao',primary:true,nao:false,tpl:function(x){return 'Verificamos o CPF e nao encontramos processo cadastrado.\n\nE necessario comparecer presencialmente para retirar uma senha.\n\n📞 '+C.tel+END_SEC;}}
-],emailResps:[
-  {title:'Sem processo por email',subj:'CAD - Processo nao localizado',badge:'b-teal',bl:'Padrao',primary:true,nao:false,tpl:function(x){return HDR+'\nPrezado(a)'+p(x)+'!\n\nNao localizamos processo. Compareca presencialmente para retirar uma senha.\n\n📍 '+C.endSec+'\n🕘 '+C.horSec+SIGN;}}
-]},
-
-{grp:'Reclamacoes de advogado',id:'rec3',icon:'🔄',pip:'pip-amber',label:'CPF — Nomeacao recusada',sub:'Orientar nova indicacao',resps:[
-  {title:'Nomeacao recusada',badge:'b-blue',bl:'Recomendada',primary:true,nao:false,tpl:function(x){return 'Verificamos o caso — a nomeacao consta como recusada.\n\nE necessario retornar presencialmente para nova indicacao de advogado.\n\n📞 '+C.tel+END_SEC;}}
-],emailResps:[
-  {title:'Nomeacao recusada por email',subj:'CAD - Nomeacao recusada',badge:'b-teal',bl:'Padrao',primary:true,nao:false,tpl:function(x){return HDR+'\nPrezado(a)'+p(x)+'!\n\nA nomeacao foi recusada. Compareca para nova indicacao.\n\n📍 '+C.endSec+'\n🕘 '+C.horSec+SIGN;}}
-]},
-
-{grp:'Reclamacoes de advogado',id:'rec4',icon:'✍',pip:'pip-red',label:'CPF — Nomeacao aceita',sub:'Reclamacao formal por escrito',resps:[
-  {title:'Orientar reclamacao',badge:'b-blue',bl:'Recomendada',primary:true,nao:false,tpl:function(x){return 'Verificamos — a nomeacao esta aceita. A troca direta nao e possivel.\n\nO que fazer:\n1. Escrever uma reclamacao a proprio punho (falta de atendimento, sem retorno, inercia)\n2. Vir pessoalmente com: reclamacao redigida + documentos + numero do processo\n\n📞 '+C.tel+END_SEC;}}
-],emailResps:[
-  {title:'Nomeacao aceita por email',subj:'CAD - Reclamacao - Orientacoes',badge:'b-teal',bl:'Padrao',primary:true,nao:false,tpl:function(x){return HDR+'\nPrezado(a)'+p(x)+'!\n\nA nomeacao esta aceita — substituicao exige procedimento formal.\n\n1. Redigir reclamacao escrita a proprio punho\n2. Comparecer com: reclamacao + RG + CPF + documentos do processo\n\n📍 '+C.endSec+'\n🕘 '+C.horSec+SIGN;}}
-]},
-
-{grp:'Encaminhamento a secretaria',id:'adv4',icon:'📲',pip:'pip-purple',label:'Redirecionar para a secretaria',sub:'WhatsApp secretaria',resps:[
-  {title:'Gentil',badge:'b-blue',bl:'Recomendada',primary:true,nao:false,tpl:function(x){return 'Ola'+n(x)+'!\n\nMuito obrigada pelo seu contato!\n\nEsse assunto e tratado diretamente pela nossa secretaria, que vai poder te ajudar com muito mais detalhes.\n\nEntre em contato com eles pelo WhatsApp:\n📲 (11) 93724-8448\n\nTenho certeza que vao te atender muito bem!';}},
-  {title:'Direta',badge:'b-grey',bl:'Alternativa',primary:false,nao:false,tpl:function(x){return 'Ola'+n(x)+'!\n\nObrigada por entrar em contato! Para esse assunto, a secretaria e quem pode te ajudar melhor.\n\n📲 WhatsApp secretaria: (11) 93724-8448\n\nQualquer outra duvida, estou por aqui!';}}
-],emailResps:[
-  {title:'Secretaria por email',subj:'CAD - Contato com a secretaria',badge:'b-teal',bl:'Padrao',primary:true,nao:false,tpl:function(x){return HDR+'\nPrezado(a) Dr(a).'+p(x)+'!\n\nSolicito que entre em contato com a secretaria pelo WhatsApp: 📲 (11) 93724-8448'+SIGN;}}
-]},
-
-{grp:'Encaminhamento a secretaria',id:'adv1',icon:'⚖',pip:'pip-teal',label:'Advogado — processo / escala',sub:'Orientar contato ou comparecer',resps:[
-  {title:'Encaminhar caso',badge:'b-blue',bl:'Recomendada',primary:true,nao:false,tpl:function(x){return 'Bom dia'+n(x)+'!\n\nO(a) assistido(a) precisa vir pessoalmente. A triagem e feita presencialmente.\n\n📞 '+C.tel+END_ADDR;}},
-  {title:'Processo / escala',badge:'b-grey',bl:'Alternativa',primary:false,nao:false,tpl:function(x){return 'Bom dia'+n(x)+'!\n\nPara esse assunto:\n📞 '+C.tel+'\n🕘 '+C.horAtend;}}
-],emailResps:[
-  {title:'Advogado por email',subj:'CAD - Retorno ao seu contato',badge:'b-teal',bl:'Padrao',primary:true,nao:false,tpl:function(x){return HDR+'\nPrezado(a) Dr(a).'+p(x)+'!\n\nPara encaminhamentos, entre em contato pelo '+C.tel+' ou compareca presencialmente.\n\n🕘 '+C.horAtend+SIGN;}}
-]},
-
-{grp:'Encaminhamento a secretaria',id:'com1',icon:'📢',pip:null,label:'Lembrete de triagem',sub:'Para advogados',resps:[
-  {title:'Segunda-feira',badge:'b-blue',bl:'Recomendada',primary:true,nao:false,tpl:function(x){return 'Prezado(a) Advogado(a),\n\nLembramos que a triagem ocorrera segunda-feira no Poupatempo.\n\n📍 '+C.endPrinc+'\n📞 '+C.tel+'\n\nAgradecemos a colaboracao e pedimos que esteja presente no horario agendado.';}},
-  {title:'Amanha',badge:'b-grey',bl:'Alternativa',primary:false,nao:false,tpl:function(x){return 'Prezado(a) Advogado(a),\n\nLembramos que a triagem ocorrera amanha no Poupatempo.\n\n📍 '+C.endPrinc+'\n📞 '+C.tel+'\n\nAgradecemos a colaboracao e pedimos que esteja presente no horario agendado.';}}
-],emailResps:[
-  {title:'Lembrete segunda por email',subj:'CAD - Lembrete: Triagem na segunda-feira',badge:'b-teal',bl:'Padrao',primary:true,nao:false,tpl:function(x){return HDR+'\nPrezado(a) Advogado(a),\n\nLembramos que a triagem ocorrera segunda-feira.\n📍 '+C.endPrinc+'\n📞 '+C.tel+'\nAgradecemos a colaboracao.'+SIGN;}},
-  {title:'Lembrete amanha por email',subj:'CAD - Lembrete: Triagem amanha',badge:'b-teal',bl:'Padrao',primary:false,nao:false,tpl:function(x){return HDR+'\nPrezado(a) Advogado(a),\n\nLembramos que a triagem ocorrera amanha.\n📍 '+C.endPrinc+'\n📞 '+C.tel+'\nAgradecemos a colaboracao.'+SIGN;}}
-]},
-
-{grp:'Oficios do Forum',id:'ofic1',icon:'📄',pip:'pip-amber',label:'Curador Especial',sub:'Texto ao forum + pedir a secretaria',resps:[
-  {title:'Texto oficial ao forum',badge:'b-blue',bl:'Recomendada',primary:true,nao:false,tpl:function(x){return 'Em atendimento a demanda enviada por V.Sa. a nossa Subsecao, a fim de que seja indicado Curador Especial, segue em anexo Oficio de Indicacao para as devidas providencias.';}},
-  {title:'Pedir a secretaria',badge:'b-purple',bl:'Interno',primary:false,nao:false,tpl:function(x){return 'Bom dia!\n\nChegou um oficio solicitando indicacao de Curador Especial'+(x?' — processo: '+x:'')+'.\n\nPoderia verificar e providenciar? Obrigada!';}}
-],emailResps:[
-  {title:'Resposta ao forum por email',subj:'CAD - Oficio de Indicacao de Curador Especial',badge:'b-teal',bl:'Padrao',primary:true,nao:false,tpl:function(x){return HDR+'\nPrezado(a)'+p(x)+'!\n\nEm atendimento a demanda de V.Sa., segue em anexo o Oficio de Indicacao de Curador Especial para as devidas providencias.'+SIGN;}}
-]},
-
-{grp:'Oficios do Forum',id:'dv2',icon:'📋',pip:'pip-amber',label:'Advogado nomeado como dativo',sub:'Nomeacao e honorarios',resps:[
-  {title:'Orientar advogado dativo',badge:'b-blue',bl:'Padrao',primary:true,nao:false,tpl:function(x){return 'Bom dia'+n(x)+'!\n\nPara dar andamento, aceite formalmente nos autos. Os honorarios sao fixados pelo juiz na sentenca e pagos pelo Estado.\n\nDuvidas:\n📞 '+C.tel+'\n🕘 '+C.horAtend;}}
-],emailResps:[
-  {title:'Advogado dativo por email',subj:'CAD - Nomeacao e Honorarios Dativos',badge:'b-teal',bl:'Padrao',primary:true,nao:false,tpl:function(x){return HDR+'\nPrezado(a) Dr(a).'+p(x)+'!\n\n1. Aceitar formalmente nos autos\n2. Apresentar documentos ao juizo\n\nHonorarios: fixados pelo juiz, pagos pelo Estado.\n\nDuvidas: '+C.tel+'\n🕘 '+C.horAtend+SIGN;}}
-]}
+var COLORS = [
+  '#e8f0fe','#e3fcef','#fff3cd','#fce8e6','#f3e8ff','#e8f5e9',
+  '#e3f2fd','#fff8e1','#fce4ec','#e8eaf6','#e0f2f1','#f3e5f5'
 ];
+var colorIdx = 0;
+var sectorColors = {};
 
-var activeId=null,term='',hist=[],activeChannel='wapp';
-
-(function(){
-  var tags=['Primeiro contato','Informativo','Divorcio','Pensao','Violencia domestica','Nao atendemos','Vagas esgotadas','Reclamacao','Secretaria','Curador Especial'];
-  document.getElementById('wtags').innerHTML=tags.map(function(t){return '<button class="wtag" onclick="buscar(\''+t+'\')">'+t+'</button>';}).join('');
-})();
-
-function renderSb(f){
-  f=(f||'').toLowerCase();
-  var groups={};
-  S.forEach(function(s){
-    var ok=!f||s.label.toLowerCase().indexOf(f)>=0||s.sub.toLowerCase().indexOf(f)>=0||(s.grp||'').toLowerCase().indexOf(f)>=0;
-    if(!ok)return;
-    if(!groups[s.grp])groups[s.grp]=[];
-    groups[s.grp].push(s);
-  });
-  var h='';
-  Object.keys(groups).forEach(function(g){
-    h+='<div class="grp-lbl">'+g+'</div>';
-    groups[g].forEach(function(s){
-      var pip=s.pip?'<div class="pip '+s.pip+'"></div>':'';
-      h+='<button class="sc-btn'+(s.id===activeId?' active':'')+'" onclick="pick(\''+s.id+'\')">'
-        +'<div class="sc-icon">'+s.icon+'</div>'
-        +'<div class="sc-text"><div class="sc-label">'+s.label+'</div><div class="sc-sub">'+s.sub+'</div></div>'
-        +pip+'</button>';
-    });
-  });
-  if(!h)h='<div class="no-result">Nenhum resultado para "'+f+'"</div>';
-  document.getElementById('sb-list').innerHTML=h;
-}
-renderSb('');
-
-function buscar(v){term=v;document.getElementById('search').value=v;renderSb(v);}
-
-function fmtCPF(el){
-  var v=el.value.replace(/\D/g,'').slice(0,11);
-  v=v.replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})\.(\d{3})(\d)/,'$1.$2.$3').replace(/(\d{3})\.(\d{3})\.(\d{3})(\d)/,'$1.$2.$3-$4');
-  el.value=v;
-}
-
-function showCPFStatus(type){
-  var cpf=(document.getElementById('cpf-input')||{value:''}).value||'nao informado';
-  var nm=(document.getElementById('person-name').value||'').trim()||'o(a) assistido(a)';
-  var html='';
-  if(type==='noproc')html='<div class="cpf-result sr-noproc show"><div class="sr-title">Sem processo — CPF: '+cpf+'</div><div class="sr-body">Nenhum processo localizado. Orientar comparecer presencialmente.</div><div class="sr-steps"><div class="sr-step"><div class="sr-num">1</div><span>Orientar '+nm+' a comparecer</span></div><div class="sr-step"><div class="sr-num">2</div><span>Retirar senha — '+C.horSec+'</span></div><div class="sr-step"><div class="sr-num">3</div><span>Trazer documentos do caso</span></div></div></div>';
-  else if(type==='recused')html='<div class="cpf-result sr-recused show"><div class="sr-title">Nomeacao recusada — CPF: '+cpf+'</div><div class="sr-body">Advogado recusou a nomeacao. Necessaria nova indicacao presencial.</div><div class="sr-steps"><div class="sr-step"><div class="sr-num">1</div><span>Informar '+nm+' que a nomeacao foi recusada</span></div><div class="sr-step"><div class="sr-num">2</div><span>Orientar retorno presencial — '+C.horSec+'</span></div><div class="sr-step"><div class="sr-num">3</div><span>Trazer documentos + comprovantes</span></div></div></div>';
-  else if(type==='accepted')html='<div class="cpf-result sr-accepted show"><div class="sr-title">Nomeacao aceita — CPF: '+cpf+'</div><div class="sr-body">Troca direta nao e possivel — exige reclamacao formal escrita.</div><div class="sr-steps"><div class="sr-step"><div class="sr-num">1</div><span>Explicar que troca direta nao e possivel</span></div><div class="sr-step"><div class="sr-num">2</div><span>Orientar '+nm+' a redigir reclamacao a proprio punho</span></div><div class="sr-step"><div class="sr-num">3</div><span>Comparecer com reclamacao + documentos + n do processo</span></div></div></div>';
-  document.getElementById('cpf-status-result').innerHTML=html;
-}
-
-function switchChannel(ch){
-  activeChannel=ch;
-  ['wapp','email'].forEach(function(c){
-    document.getElementById('ctab-'+c).classList.toggle('act',c===ch);
-    document.getElementById('pane-'+c).classList.toggle('on',c===ch);
-  });
-  var s=S.filter(function(x){return x.id===activeId;})[0];
-  if(s){if(ch==='email')renderEmailResps(s);else renderResps(s);}
-}
-
-function pick(id){
-  activeId=id;renderSb(term);
-  var s=S.filter(function(x){return x.id===id;})[0];if(!s)return;
-  document.getElementById('htitle').textContent=s.label;
-  document.getElementById('welcome').style.display='none';
-  document.getElementById('sc-view').classList.add('on');
-  var box=document.getElementById('cpf-checker-box');
-  if(box){
-    box.style.display=s.cpfChecker?'block':'none';
-    if(s.cpfChecker){
-      var inp=document.getElementById('cpf-input');if(inp)inp.value='';
-      var res=document.getElementById('cpf-status-result');if(res)res.innerHTML='';
-    }
+function getColor(name) {
+  if (!sectorColors[name]) {
+    sectorColors[name] = COLORS[colorIdx % COLORS.length];
+    colorIdx++;
   }
-  renderResps(s);renderEmailResps(s);
+  return sectorColors[name];
 }
 
-function mkBtn(icon,label,cls,onclick){
-  return '<button class="btn '+cls+'" onclick="'+onclick+'">'+icon+' '+label+'</button>';
+function renderAll() {
+  var grid = document.getElementById('grid');
+  var html = '';
+  var total = 0;
+  Object.keys(DATA).sort().forEach(function(name) {
+    var nums = DATA[name];
+    total += nums;
+    var color = getColor(name);
+    var icon = ICONS[name] || '📞';
+    html += '<div class="sector-card" id="card-'+encodeURIComponent(name)+'" data-sector="'+name.toLowerCase()+'">'
+      +'<div class="sec-hd" onclick="toggle(this.parentNode)">'
+      +'<div class="sec-icon" style="background:'+color+'">'+icon+'</div>'
+      +'<div class="sec-name">'+name+'</div>'
+      +'<span class="sec-count">'+nums.length+'</span>'
+      +'<svg class="sec-chevron" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>'
+      +'</div>'
+      +'<div class="sec-body"><div class="ramal-list">'
+      +nums.map(function(n){
+        return '<div class="ramal-row" data-num="'+n.toLowerCase()+'">'
+          +'<span class="ramal-num">'+n+'</span>'
+          +'<button class="copy-btn" onclick="copiar(this,\''+n+'\')" title="Copiar">'
+          +'<svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>'
+          +'</button>'
+          +'</div>';
+      }).join('')
+      +'</div></div></div>';
+  });
+  grid.innerHTML = html;
+  updateCount(Object.keys(DATA).length);
 }
 
-function renderResps(s){
-  var nm=(document.getElementById('person-name').value||'').trim();
-  var isOfic=activeId==='ofic1';
-  document.getElementById('resp-stack').innerHTML=s.resps.map(function(r,i){
-    var txt=r.tpl(nm);
-    var secBtn=isOfic&&i===1?mkBtn('','Enviar a Secretaria','btn-purple',"wappSec('ta"+i+"')"):'';
-    return '<div class="rcard'+(r.primary?' primary':'')+(r.nao?' danger':'')+'">'
-      +'<div class="rcard-hd"><div class="rcard-title">'+r.title+'</div><span class="badge '+r.badge+'">'+r.bl+'</span></div>'
-      +'<textarea class="reditor" id="ta'+i+'" oninput="onIn(this,\'cc'+i+'\')">'+txt+'</textarea>'
-      +'<div class="rcard-ft">'
-      +mkBtn('','Copiar','btn-primary',"copiar('ta"+i+"','"+r.title.replace(/'/g,"\\'")+"')")
-      +mkBtn('','WhatsApp','btn-green',"wapp('ta"+i+"')")
-      +secBtn
-      +mkBtn('','Redefinir','btn-ghost',"resetMsg('ta"+i+"',"+i+",'wapp')")
-      +'<span class="chars" id="cc'+i+'">'+txt.length+'</span>'
-      +'</div></div>';
-  }).join('');
-  setTimeout(function(){document.querySelectorAll('#resp-stack .reditor').forEach(autoH);},30);
+function toggle(card) {
+  card.classList.toggle('open');
 }
 
-function renderEmailResps(s){
-  var nm=(document.getElementById('person-name').value||'').trim();
-  var er=s.emailResps||[];
-  if(!er.length){document.getElementById('resp-stack-email').innerHTML='<div class="empty-pane">Sem modelo de e-mail para este cenario.<br>Use o WhatsApp e adapte se necessario.</div>';return;}
-  document.getElementById('resp-stack-email').innerHTML=er.map(function(r,i){
-    var txt=r.tpl(nm);
-    return '<div class="rcard'+(r.primary?' primary':'')+(r.nao?' danger':'')+'">'
-      +'<div class="rcard-hd"><div class="rcard-title">'+r.title+'</div><span class="badge '+r.badge+'">'+r.bl+'</span></div>'
-      +'<div class="email-subj"><span class="email-subj-lbl">Assunto</span><input class="email-subj-inp" id="esub'+i+'" type="text" value="'+r.subj.replace(/"/g,'&quot;')+'" placeholder="Assunto..."></div>'
-      +'<textarea class="reditor" id="eta'+i+'" oninput="onIn(this,\'ecc'+i+'\')">'+txt+'</textarea>'
-      +'<div class="rcard-ft">'
-      +mkBtn('','Copiar','btn-primary',"copiarEmail('eta"+i+"','"+r.title.replace(/'/g,"\\'")+"')")
-      +mkBtn('','Abrir no e-mail','btn-teal',"abrirEmail('esub"+i+"','eta"+i+"')")
-      +mkBtn('','Redefinir','btn-ghost',"resetMsg('eta"+i+"',"+i+",'email')")
-      +'<span class="chars" id="ecc'+i+'">'+txt.length+'</span>'
-      +'</div></div>';
-  }).join('');
-  setTimeout(function(){document.querySelectorAll('#resp-stack-email .reditor').forEach(autoH);},30);
+function copiar(btn, num) {
+  navigator.clipboard.writeText(num).then(function() {
+    btn.classList.add('copied');
+    setTimeout(function(){ btn.classList.remove('copied'); }, 1500);
+    toast('Copiado: ' + num);
+  });
 }
-
-function autoH(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,220)+'px';}
-function onIn(el,id){autoH(el);var c=document.getElementById(id);if(c)c.textContent=el.value.length;}
-
-function atualizaNome(){
-  var s=S.filter(function(x){return x.id===activeId;})[0];if(!s)return;
-  var nm=(document.getElementById('person-name').value||'').trim();
-  s.resps.forEach(function(r,i){var el=document.getElementById('ta'+i);if(!el)return;el.value=r.tpl(nm);autoH(el);var cc=document.getElementById('cc'+i);if(cc)cc.textContent=el.value.length;});
-  (s.emailResps||[]).forEach(function(r,i){var el=document.getElementById('eta'+i);if(!el)return;el.value=r.tpl(nm);autoH(el);var cc=document.getElementById('ecc'+i);if(cc)cc.textContent=el.value.length;});
-}
-
-function resetMsg(taId,idx,ch){
-  var s=S.filter(function(x){return x.id===activeId;})[0];if(!s)return;
-  var nm=(document.getElementById('person-name').value||'').trim();
-  var el=document.getElementById(taId);if(!el)return;
-  el.value=ch==='email'?s.emailResps[idx].tpl(nm):s.resps[idx].tpl(nm);
-  autoH(el);toast('Redefinido');
-}
-
-function copiar(id,title){var el=document.getElementById(id);if(!el)return;navigator.clipboard.writeText(el.value.trim()).then(function(){toast('Copiado!');addHist(title,el.value.trim());});}
-function copiarEmail(bid,title){var b=document.getElementById(bid);if(!b)return;navigator.clipboard.writeText(b.value.trim()).then(function(){toast('Copiado!');addHist(title,b.value.trim());});}
-function abrirEmail(sid,bid){var s=document.getElementById(sid),b=document.getElementById(bid);if(!b)return;window.open('mailto:'+C.emailCad+'?subject='+encodeURIComponent(s?s.value:'')+'&body='+encodeURIComponent(b.value.trim()),'_blank');}
-function wapp(id){var el=document.getElementById(id);if(!el)return;window.open('https://wa.me/?text='+encodeURIComponent(el.value.trim()),'_blank');}
-function wappSec(id){var el=document.getElementById(id);if(!el)return;window.open('https://wa.me/'+C.wappSec+'?text='+encodeURIComponent(el.value.trim()),'_blank');toast('Abrindo secretaria...');}
-
-function addHist(title,text){
-  var now=new Date(),t=String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');
-  hist.unshift({title:title,text:text,t:t});if(hist.length>10)hist.pop();renderHist();
-}
-function renderHist(){
-  var el=document.getElementById('hist-chips');
-  if(!hist.length){el.innerHTML='<span class="hist-empty">Nenhuma copia ainda</span>';return;}
-  el.innerHTML=hist.map(function(h,i){return '<div class="hchip" onclick="recop('+i+')" title="'+h.title+'">'+h.title.substring(0,24)+'<span class="hchip-t">'+h.t+'</span></div>';}).join('');
-}
-function recop(i){navigator.clipboard.writeText(hist[i].text).then(function(){toast('Recopiado!');});}
-function toggleGuide(){document.getElementById('guide').classList.toggle('open');}
 
 var _tt;
-function toast(msg){var el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');clearTimeout(_tt);_tt=setTimeout(function(){el.classList.remove('show');},2200);}
+function toast(msg) {
+  var el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(_tt);
+  _tt = setTimeout(function(){ el.classList.remove('show'); }, 2000);
+}
 
-function clock(){var d=new Date(),el=document.getElementById('clock-el');if(el)el.textContent=String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')+':'+String(d.getSeconds()).padStart(2,'0');}
-clock();setInterval(clock,1000);
+function updateCount(n) {
+  var total = 0;
+  Object.keys(DATA).forEach(function(k){ total += DATA[k].length; });
+  document.getElementById('result-count').textContent = n > 0 ? n + ' setores' : 'Nenhum resultado';
+}
+
+function filtrar(term) {
+  term = (term || '').toLowerCase().trim();
+  var cards = document.querySelectorAll('.sector-card');
+  var visible = 0;
+
+  cards.forEach(function(card) {
+    var sector = card.getAttribute('data-sector');
+    var rows = card.querySelectorAll('.ramal-row');
+    var sectorMatch = !term || sector.indexOf(term) >= 0;
+    var anyNum = false;
+
+    rows.forEach(function(row) {
+      var num = row.getAttribute('data-num');
+      var match = !term || sectorMatch || num.indexOf(term) >= 0;
+      row.classList.toggle('hidden-row', !match);
+      row.classList.toggle('highlight', !!term && match && !sectorMatch);
+      if (match) anyNum = true;
+    });
+
+    var show = !term || sectorMatch || anyNum;
+    card.classList.toggle('hidden', !show);
+    if (show) {
+      visible++;
+      if (term) card.classList.add('open');
+      else if (!sectorMatch) card.classList.add('open');
+    }
+  });
+
+  document.getElementById('empty').style.display = visible === 0 ? 'block' : 'none';
+  document.getElementById('empty-term').textContent = term;
+  updateCount(visible);
+}
+
+renderAll();
 </script>
 </body>
 </html>
