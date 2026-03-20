@@ -116,6 +116,17 @@ html,body{min-height:100%;font-family:var(--ff);background:var(--bg);color:var(-
 }
 .sec-desc{font-size:13px;color:var(--text3);margin-bottom:20px}
 
+/* ── ALERT BANNER ── */
+.alert-banner{
+  display:flex;align-items:flex-start;gap:12px;
+  background:#fff7ed;border:1.5px solid #fb923c;
+  border-radius:10px;padding:14px 16px;margin-bottom:20px;
+}
+.alert-banner-icon{font-size:20px;flex-shrink:0;margin-top:1px}
+.alert-banner-body{}
+.alert-banner-title{font-size:13px;font-weight:700;color:#c2410c;margin-bottom:3px}
+.alert-banner-text{font-size:12.5px;color:#7c2d12;line-height:1.55}
+
 /* ── MSG GRID ── */
 .msg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px}
 
@@ -419,6 +430,15 @@ html,body{min-height:100%;font-family:var(--ff);background:var(--bg);color:var(-
     <div class="sec-title">Reclamação de Advogado</div>
     <div class="sec-desc">Fluxo completo para receber e tratar reclamações contra advogados nomeados.</div>
 
+    <!-- ALERTA DESTAQUE -->
+    <div class="alert-banner">
+      <div class="alert-banner-icon">⚠️</div>
+      <div class="alert-banner-body">
+        <div class="alert-banner-title">ATENÇÃO — Reclamações NÃO são aceitas por meios eletrônicos</div>
+        <div class="alert-banner-text">A reclamação contra advogado <strong>deve ser protocolada presencialmente</strong> na Subseção. Não aceitamos reclamações por WhatsApp, e-mail ou qualquer outro canal eletrônico. Oriente sempre o assistido a comparecer pessoalmente.<br><br>📍 <strong>Rua Alberto Frediani, 770 — Jardim Frediani, Santana de Parnaíba/SP — CEP 06502-155</strong></div>
+      </div>
+    </div>
+
     <div class="info-block">
       <div class="info-block-title"><span>📋</span> Protocolo de Atendimento — Passo a Passo</div>
       <div class="oficio-steps">
@@ -432,7 +452,7 @@ html,body{min-height:100%;font-family:var(--ff);background:var(--bg);color:var(-
         </div>
         <div class="oficio-step">
           <div class="step-num">3</div>
-          <div class="step-txt"><strong>Se a nomeação estiver ACEITA:</strong> orientar o assistido a apresentar reclamação de próprio punho + número do processo + senha + demais documentos.</div>
+          <div class="step-txt"><strong>Se a nomeação estiver ACEITA:</strong> orientar o assistido a comparecer <strong>pessoalmente</strong> à Subseção para protocolar a reclamação. Documentos necessários: reclamação escrita de próprio punho + número do processo + senha + demais documentos. <strong>NÃO aceitamos por meios eletrônicos.</strong></div>
         </div>
         <div class="oficio-step">
           <div class="step-num">4</div>
@@ -497,7 +517,7 @@ html,body{min-height:100%;font-family:var(--ff);background:var(--bg);color:var(-
       </div>
       <div class="info-item">
         <div class="info-dot"></div>
-        <div class="info-text"><strong>Login:</strong> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ef9c8e819b8e818ec19f8e9d818e868d8eaf808e8d9c9fc1809d88c18d9d">[email&#160;protected]</a></div>
+        <div class="info-text"><strong>Login:</strong> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="98f7f9faebecf9e8f9eaf6f9f1faf9d8fff5f9f1f4b6fbf7f5">[email&#160;protected]</a></div>
       </div>
       <div class="info-item">
         <div class="info-dot"></div>
@@ -690,7 +710,7 @@ Aguardamos seu retorno! 😊`
       title:'Nomeação Recusada — Retornar ao Atendimento',
       text:`Olá! Verificamos em nosso sistema que a nomeação referente ao seu caso consta como *recusada*.
 
-Para darmos continuidade, é necessário que você compareça presencialmente à nossa unidade para nova triagem e encaminhamento.
+Para darmos continuidade, é necessário que você compareça *presencialmente* à nossa unidade para nova triagem e encaminhamento.
 
 🗓️ *Atendimento:* Segunda a Sexta-feira, das 09h00 às 12h00
 📍 Av. Tenente Marques, 5297 — Jardim do Luar, Santana de Parnaíba/SP _(POUPATEMPO)_
@@ -700,19 +720,44 @@ Por favor, traga seus documentos pessoais. Estamos à disposição! 🙏`
     {
       id:'rec_aceita',
       icon:'📝',color:'c-red',tag:'Nomeação Aceita',tagColor:'tag-red',
-      title:'Nomeação Aceita — Orientar Reclamação Formal',
+      title:'Nomeação Aceita — Orientar Protocolo Presencial',
       text:`Olá! Verificamos que a nomeação em seu processo consta como *aceita* pelo advogado.
 
-Para formalizar sua reclamação, solicitamos que você nos encaminhe:
+Para formalizar sua reclamação, é necessário que você compareça *presencialmente* à nossa Subseção para protocolar o pedido.
 
-📌 *Reclamação escrita de próprio punho*, descrevendo os fatos detalhadamente
-📌 *Número do processo*
-📌 *Senha do processo*
-📌 *Demais documentos* relacionados ao caso
+⚠️ *Reclamações NÃO são aceitas por WhatsApp, e-mail ou qualquer outro meio eletrônico.*
 
-Por gentileza, envie tudo por escrito (texto ou imagem/foto do documento) por este canal. ✍️
+📌 Ao comparecer, traga:
+• *Reclamação escrita de próprio punho*, descrevendo os fatos detalhadamente
+• *Número do processo*
+• *Senha do processo*
+• *Demais documentos* relacionados ao caso
 
-Nossa equipe analisará e dará o devido encaminhamento. Obrigado! 🙏`
+🗓️ *Atendimento:* Segunda a Sexta-feira, das 09h00 às 12h00
+📍 Rua Alberto Frediani, 770 — Jardim Frediani, Santana de Parnaíba/SP
+   CEP: 06502-155
+📞 (11) 4154-5191
+
+Estamos à disposição para auxiliá-lo(a)! 🙏`
+    },
+    {
+      id:'rec_eletronica',
+      icon:'🚫',color:'c-red',tag:'Sem Meio Eletrônico',tagColor:'tag-red',
+      title:'Reclamação Eletrônica — Não Aceita',
+      text:`Olá! Informamos que *reclamações contra advogados não podem ser recebidas por este canal* nem por qualquer outro meio eletrônico (WhatsApp, e-mail, etc.).
+
+O protocolo da reclamação deve ser realizado *presencialmente* na Subseção, trazendo:
+
+📌 Reclamação escrita de próprio punho
+📌 Número e senha do processo
+📌 Documentos relacionados ao caso
+
+🗓️ *Atendimento:* Segunda a Sexta-feira, das 09h00 às 12h00
+📍 Rua Alberto Frediani, 770 — Jardim Frediani, Santana de Parnaíba/SP
+   CEP: 06502-155
+📞 (11) 4154-5191
+
+Obrigado pela compreensão! 🙏`
     },
     {
       id:'rec_audio',
@@ -720,13 +765,11 @@ Nossa equipe analisará e dará o devido encaminhamento. Obrigado! 🙏`
       title:'Áudio — Reclamação (Solicitar Texto)',
       text:`Olá! Informamos que *não recebemos mensagens de áudio* por este canal.
 
-Para registrarmos sua reclamação de forma correta, pedimos que envie todas as informações *por escrito*, incluindo:
+Para que possamos orientá-lo(a) corretamente, pedimos que envie sua mensagem *por escrito*.
 
-• Descrição dos fatos
-• Número do processo
-• Documentos pertinentes (foto/imagem)
+Lembrando que reclamações contra advogados devem ser protocoladas *presencialmente* na Subseção — não aceitamos por meios eletrônicos. 📝
 
-Assim garantimos o registro adequado e agilizamos sua solicitação. 📝 Obrigado pela compreensão!`
+Obrigado pela compreensão!`
     },
   ],
 
@@ -1176,12 +1219,4 @@ function copiarSenha() {
   });
 }
 
-renderMsgGrid(MSGS.mensagens, 'msg-grid');
-renderMsgGrid(MSGS.reclamacao, 'rec-grid');
-renderMsgGrid(MSGS.oficios, 'oficio-grid');
-renderMsgGrid(MSGS.secretaria, 'sec-grid');
-renderMsgGrid(MSGS.bravo, 'bravo-grid');
-renderRamais();
-</script>
-</body>
-</html>
+renderMsgGrid(MSGS.mens
