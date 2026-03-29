@@ -522,9 +522,8 @@ html,body{min-height:100%;font-family:var(--ff);background:var(--bg);color:var(-
       <div class="info-item">
         <div class="info-dot"></div>
         <div class="info-text" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-          <span><strong>Senha:</strong> <span id="senha-text" style="filter:blur(5px);transition:filter .2s;user-select:none;">Oab247!20@25</span></span>
+          <span><strong>Senha:</strong> <span id="senha-text" style="filter:blur(5px);transition:filter .2s;user-select:none;">••••••••••••</span></span>
           <button onclick="toggleSenha()" id="senha-btn" style="background:var(--blue-light);color:var(--blue);border:none;border-radius:6px;padding:4px 12px;font-size:12px;font-weight:600;cursor:pointer;font-family:var(--ff);">👁 Mostrar</button>
-          <button onclick="copiarSenha()" style="background:var(--surface2);color:var(--text2);border:1px solid var(--border);border-radius:6px;padding:4px 12px;font-size:12px;font-weight:600;cursor:pointer;font-family:var(--ff);">📋 Copiar senha</button>
         </div>
       </div>
     </div>
@@ -1214,9 +1213,7 @@ function toggleSenha() {
   }
 }
 function copiarSenha() {
-  navigator.clipboard.writeText('Oab247!20@25').then(function(){
-    showToast('Senha copiada!');
-  });
+  // senha removida por segurança
 }
 
 renderMsgGrid(MSGS.mensagens, 'msg-grid');
