@@ -40,7 +40,6 @@
 }
 html,body{min-height:100%;font-family:var(--ff);background:var(--bg);color:var(--text);font-size:14px;line-height:1.5}
 
-/* ── TOPBAR ── */
 #topbar{
   position:sticky;top:0;z-index:200;
   height:58px;
@@ -73,7 +72,6 @@ html,body{min-height:100%;font-family:var(--ff);background:var(--bg);color:var(-
   padding:5px 12px;border-radius:7px;letter-spacing:.5px;
 }
 
-/* ── NAV TABS ── */
 #nav{
   background:var(--surface);
   border-bottom:1px solid var(--border);
@@ -95,42 +93,26 @@ html,body{min-height:100%;font-family:var(--ff);background:var(--bg);color:var(-
 .nav-tab:hover{color:var(--text2);background:var(--bg)}
 .nav-tab.active{color:var(--blue);border-bottom-color:var(--blue);background:var(--blue-light)}
 .nav-tab .ti{font-size:15px}
-.nav-tab .badge{
-  font-size:10px;font-weight:700;
-  background:var(--blue);color:#fff;
-  padding:1px 6px;border-radius:10px;
-  line-height:1.6;
-}
-.nav-tab.active .badge{background:var(--blue)}
 
-/* ── MAIN ── */
 #main{padding:24px 28px 60px;max-width:1360px;margin:0 auto}
 .tab-panel{display:none}
 .tab-panel.active{display:block;animation:fadeUp .2s ease}
 @keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 
-/* ── SECTION TITLE ── */
-.sec-title{
-  font-size:18px;font-weight:800;color:var(--navy);
-  letter-spacing:-.5px;margin-bottom:4px;
-}
+.sec-title{font-size:18px;font-weight:800;color:var(--navy);letter-spacing:-.5px;margin-bottom:4px;}
 .sec-desc{font-size:13px;color:var(--text3);margin-bottom:20px}
 
-/* ── ALERT BANNER ── */
 .alert-banner{
   display:flex;align-items:flex-start;gap:12px;
   background:#fff7ed;border:1.5px solid #fb923c;
   border-radius:10px;padding:14px 16px;margin-bottom:20px;
 }
 .alert-banner-icon{font-size:20px;flex-shrink:0;margin-top:1px}
-.alert-banner-body{}
 .alert-banner-title{font-size:13px;font-weight:700;color:#c2410c;margin-bottom:3px}
 .alert-banner-text{font-size:12.5px;color:#7c2d12;line-height:1.55}
 
-/* ── MSG GRID ── */
 .msg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px}
 
-/* ── MSG CARD ── */
 .msg-card{
   background:var(--surface);
   border:1px solid var(--border);
@@ -183,12 +165,10 @@ html,body{min-height:100%;font-family:var(--ff);background:var(--bg);color:var(-
 .btn-copy:hover{background:var(--blue-mid)}
 .btn-copy svg{width:13px;height:13px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
 .btn-copy.copied{background:var(--green-bg);color:var(--green)}
-
 .btn-expand{background:var(--surface2);color:var(--text2);border:1px solid var(--border)}
 .btn-expand:hover{background:var(--bg)}
 .btn-expand svg{width:13px;height:13px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
 
-/* ── MODAL ── */
 #modal-overlay{
   position:fixed;inset:0;background:rgba(13,21,38,.5);
   backdrop-filter:blur(4px);z-index:500;
@@ -234,7 +214,7 @@ html,body{min-height:100%;font-family:var(--ff);background:var(--bg);color:var(-
   padding:9px 20px;border-radius:8px;border:none;
   font-family:var(--ff);font-size:13px;font-weight:700;cursor:pointer;
   display:flex;align-items:center;gap:7px;
-  transition:background .15s, transform .1s;
+  transition:background .15s,transform .1s;
 }
 .btn-primary:hover{background:#1347c5}
 .btn-primary:active{transform:scale(.97)}
@@ -247,7 +227,6 @@ html,body{min-height:100%;font-family:var(--ff);background:var(--bg);color:var(-
 }
 .btn-secondary:hover{background:var(--bg)}
 
-/* ── RAMAIS TAB ── */
 .sectors-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px}
 .sector-card{
   background:var(--surface);border:1px solid var(--border);
@@ -287,7 +266,6 @@ html,body{min-height:100%;font-family:var(--ff);background:var(--bg);color:var(-
 .copy-btn.copied{opacity:1 !important;background:var(--green-bg) !important}
 .copy-btn.copied svg{stroke:var(--green)}
 
-/* search in ramais */
 .search-bar{display:flex;align-items:center;gap:12px;margin-bottom:20px}
 .sw{position:relative;width:320px}
 .sw svg.si{position:absolute;left:11px;top:50%;transform:translateY(-50%);width:15px;height:15px;stroke:var(--text3);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}
@@ -296,47 +274,6 @@ html,body{min-height:100%;font-family:var(--ff);background:var(--bg);color:var(-
 .sw input::placeholder{color:var(--text3)}
 #r-count{font-size:12px;color:var(--text3);font-weight:500}
 
-/* ── TOAST ── */
-#toast{
-  position:fixed;bottom:28px;left:50%;
-  transform:translateX(-50%) translateY(14px);
-  background:var(--navy);border-radius:10px;
-  padding:10px 20px;
-  font-size:13px;font-weight:600;color:#fff;
-  opacity:0;transition:all .22s cubic-bezier(.34,1.56,.64,1);
-  pointer-events:none;z-index:999;white-space:nowrap;
-  box-shadow:var(--sh3);display:flex;align-items:center;gap:8px;
-}
-#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-#toast svg{width:14px;height:14px;stroke:#4ade80;stroke-width:2.5;fill:none;stroke-linecap:round;stroke-linejoin:round}
-
-/* ── OFÍCIO CONTROL ── */
-.oficio-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;margin-top:4px}
-.oficio-card{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--r);padding:18px 18px 16px;
-  box-shadow:var(--sh);transition:box-shadow .2s;
-  display:flex;flex-direction:column;gap:10px;
-}
-.oficio-card:hover{box-shadow:var(--sh2)}
-.oficio-label{font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text3)}
-.oficio-title{font-size:15px;font-weight:700;color:var(--text)}
-.oficio-desc{font-size:12.5px;color:var(--text2);line-height:1.55}
-.oficio-step{
-  display:flex;gap:10px;align-items:flex-start;
-  background:var(--surface2);border:1px solid var(--border);
-  border-radius:8px;padding:10px 12px;
-}
-.step-num{
-  width:22px;height:22px;border-radius:50%;
-  background:var(--blue);color:#fff;
-  font-size:11px;font-weight:700;
-  display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;
-}
-.step-txt{font-size:12.5px;color:var(--text2);line-height:1.55}
-.oficio-steps{display:flex;flex-direction:column;gap:6px}
-
-/* ── INFO BLOCK ── */
 .info-block{
   background:var(--surface);border:1px solid var(--border);
   border-radius:var(--r);padding:20px 22px;
@@ -350,7 +287,33 @@ html,body{min-height:100%;font-family:var(--ff);background:var(--bg);color:var(-
 .info-text{font-size:13px;color:var(--text2);line-height:1.5}
 .info-text strong{color:var(--text);font-weight:600}
 
-/* Colors helpers */
+.oficio-steps{display:flex;flex-direction:column;gap:6px}
+.oficio-step{
+  display:flex;gap:10px;align-items:flex-start;
+  background:var(--surface2);border:1px solid var(--border);
+  border-radius:8px;padding:10px 12px;
+}
+.step-num{
+  width:22px;height:22px;border-radius:50%;
+  background:var(--blue);color:#fff;
+  font-size:11px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;
+}
+.step-txt{font-size:12.5px;color:var(--text2);line-height:1.55}
+
+#toast{
+  position:fixed;bottom:28px;left:50%;
+  transform:translateX(-50%) translateY(14px);
+  background:var(--navy);border-radius:10px;
+  padding:10px 20px;
+  font-size:13px;font-weight:600;color:#fff;
+  opacity:0;transition:all .22s cubic-bezier(.34,1.56,.64,1);
+  pointer-events:none;z-index:999;white-space:nowrap;
+  box-shadow:var(--sh3);display:flex;align-items:center;gap:8px;
+}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+#toast svg{width:14px;height:14px;stroke:#4ade80;stroke-width:2.5;fill:none;stroke-linecap:round;stroke-linejoin:round}
+
 .c-blue{background:var(--blue-light);color:var(--blue)}
 .c-green{background:var(--green-bg);color:var(--green)}
 .c-amber{background:var(--amber-bg);color:var(--amber)}
@@ -358,21 +321,16 @@ html,body{min-height:100%;font-family:var(--ff);background:var(--bg);color:var(-
 .c-purple{background:var(--purple-bg);color:var(--purple)}
 .c-teal{background:var(--teal-bg);color:var(--teal)}
 .c-navy{background:#eef2ff;color:var(--navy)}
-
 .tag-blue{background:var(--blue-light);color:var(--blue)}
 .tag-green{background:var(--green-bg);color:var(--green)}
 .tag-amber{background:var(--amber-bg);color:var(--amber)}
 .tag-red{background:var(--red-bg);color:var(--red)}
 .tag-purple{background:var(--purple-bg);color:var(--purple)}
 .tag-teal{background:var(--teal-bg);color:var(--teal)}
-
-/* Divider */
-.divider{height:1px;background:var(--border);margin:20px 0}
 </style>
 </head>
 <body>
 
-<!-- TOPBAR -->
 <div id="topbar">
   <div class="tb-logo">
     <div class="tb-logo-icon">
@@ -390,137 +348,78 @@ html,body{min-height:100%;font-family:var(--ff);background:var(--bg);color:var(-
   </div>
 </div>
 
-<!-- NAV -->
 <div id="nav">
-  <div class="nav-tab active" onclick="switchTab('mensagens')" data-tab="mensagens">
-    <span class="ti">💬</span> Mensagens
-  </div>
-  <div class="nav-tab" onclick="switchTab('reclamacao')" data-tab="reclamacao">
-    <span class="ti">⚖️</span> Reclamação de Advogado
-  </div>
-  <div class="nav-tab" onclick="switchTab('oficios')" data-tab="oficios">
-    <span class="ti">📄</span> Controle de Ofícios
-  </div>
-  <div class="nav-tab" onclick="switchTab('secretaria')" data-tab="secretaria">
-    <span class="ti">📲</span> Encaminhamento
-  </div>
-  <div class="nav-tab" onclick="switchTab('bravo')" data-tab="bravo">
-    <span class="ti">🛡️</span> Assistido Exaltado
-  </div>
-  <div class="nav-tab" onclick="switchTab('agendamento')" data-tab="agendamento">
-    <span class="ti">🗓️</span> Agendamento
-  </div>
-  <div class="nav-tab" onclick="switchTab('ramais')" data-tab="ramais">
-    <span class="ti">📞</span> Ramais
-  </div>
+  <div class="nav-tab active" onclick="switchTab('mensagens')" data-tab="mensagens"><span class="ti">💬</span> Mensagens</div>
+  <div class="nav-tab" onclick="switchTab('reclamacao')" data-tab="reclamacao"><span class="ti">⚖️</span> Reclamação de Advogado</div>
+  <div class="nav-tab" onclick="switchTab('oficios')" data-tab="oficios"><span class="ti">📄</span> Controle de Ofícios</div>
+  <div class="nav-tab" onclick="switchTab('secretaria')" data-tab="secretaria"><span class="ti">📲</span> Encaminhamento</div>
+  <div class="nav-tab" onclick="switchTab('bravo')" data-tab="bravo"><span class="ti">🛡️</span> Assistido Exaltado</div>
+  <div class="nav-tab" onclick="switchTab('agendamento')" data-tab="agendamento"><span class="ti">🗓️</span> Agendamento</div>
+  <div class="nav-tab" onclick="switchTab('ramais')" data-tab="ramais"><span class="ti">📞</span> Ramais</div>
 </div>
 
-<!-- MAIN -->
 <div id="main">
 
-  <!-- ══ ABA: MENSAGENS ══ -->
   <div class="tab-panel active" id="tab-mensagens">
     <div class="sec-title">Mensagens de Atendimento</div>
     <div class="sec-desc">Copie e envie as mensagens conforme o tipo de atendimento ao assistido.</div>
     <div class="msg-grid" id="msg-grid"></div>
   </div>
 
-  <!-- ══ ABA: RECLAMAÇÃO ══ -->
   <div class="tab-panel" id="tab-reclamacao">
     <div class="sec-title">Reclamação de Advogado</div>
     <div class="sec-desc">Fluxo completo para receber e tratar reclamações contra advogados nomeados.</div>
-
-    <!-- ALERTA DESTAQUE -->
     <div class="alert-banner">
       <div class="alert-banner-icon">⚠️</div>
-      <div class="alert-banner-body">
+      <div>
         <div class="alert-banner-title">ATENÇÃO — Reclamações NÃO são aceitas por meios eletrônicos</div>
-        <div class="alert-banner-text">A reclamação contra advogado <strong>deve ser protocolada presencialmente</strong> na Subseção. Não aceitamos reclamações por WhatsApp, e-mail ou qualquer outro canal eletrônico. Oriente sempre o assistido a comparecer pessoalmente.<br><br>📍 <strong>Rua Alberto Frediani, 770 — Jardim Frediani, Santana de Parnaíba/SP — CEP 06502-155</strong></div>
+        <div class="alert-banner-text">A reclamação contra advogado deve ser protocolada presencialmente na Subseção. Não aceitamos reclamações por WhatsApp, e-mail ou qualquer outro canal eletrônico. Oriente sempre o assistido a comparecer pessoalmente.<br><br>Rua Alberto Frediani, 770 — Jardim Frediani, Santana de Parnaíba/SP — CEP 06502-155</div>
       </div>
     </div>
-
     <div class="info-block">
       <div class="info-block-title"><span>📋</span> Protocolo de Atendimento — Passo a Passo</div>
       <div class="oficio-steps">
-        <div class="oficio-step">
-          <div class="step-num">1</div>
-          <div class="step-txt"><strong>Perguntar o CPF do assistido</strong> e verificar no sistema se há nomeação vinculada ao caso relatado.</div>
-        </div>
-        <div class="oficio-step">
-          <div class="step-num">2</div>
-          <div class="step-txt"><strong>Se a nomeação estiver RECUSADA:</strong> retornar o assistido ao atendimento presencial para nova triagem e encaminhamento.</div>
-        </div>
-        <div class="oficio-step">
-          <div class="step-num">3</div>
-          <div class="step-txt"><strong>Se a nomeação estiver ACEITA:</strong> orientar o assistido a comparecer <strong>pessoalmente</strong> à Subseção para protocolar a reclamação. Documentos necessários: reclamação escrita de próprio punho + número do processo + senha + demais documentos. <strong>NÃO aceitamos por meios eletrônicos.</strong></div>
-        </div>
-        <div class="oficio-step">
-          <div class="step-num">4</div>
-          <div class="step-txt"><strong>Lembrar:</strong> não recebemos áudio. Orientar sempre o assistido ou advogado a enviar mensagem em texto.</div>
-        </div>
+        <div class="oficio-step"><div class="step-num">1</div><div class="step-txt">Perguntar o CPF do assistido e verificar no sistema se há nomeação vinculada ao caso relatado.</div></div>
+        <div class="oficio-step"><div class="step-num">2</div><div class="step-txt">Se a nomeação estiver RECUSADA: retornar o assistido ao atendimento presencial para nova triagem e encaminhamento.</div></div>
+        <div class="oficio-step"><div class="step-num">3</div><div class="step-txt">Se a nomeação estiver ACEITA: orientar o assistido a comparecer presencialmente à Subseção para protocolar a reclamação. Documentos necessários: reclamação escrita de próprio punho + número do processo + senha + demais documentos. NÃO aceitamos por meios eletrônicos.</div></div>
+        <div class="oficio-step"><div class="step-num">4</div><div class="step-txt">Lembrar: não recebemos áudio. Orientar sempre o assistido ou advogado a enviar mensagem em texto.</div></div>
       </div>
     </div>
-
     <div class="msg-grid" id="rec-grid"></div>
   </div>
 
-  <!-- ══ ABA: OFÍCIOS ══ -->
   <div class="tab-panel" id="tab-oficios">
     <div class="sec-title">Controle de Ofícios</div>
     <div class="sec-desc">Quando o fórum envia ofício, você responde com o texto padrão abaixo.</div>
     <div class="msg-grid" id="oficio-grid"></div>
   </div>
 
-  <!-- ══ ABA: SECRETARIA ══ -->
   <div class="tab-panel" id="tab-secretaria">
     <div class="sec-title">Encaminhamento à Secretaria</div>
     <div class="sec-desc">Mensagens para direcionar o assistido ao contato direto com a secretaria.</div>
-
     <div class="info-block">
       <div class="info-block-title"><span>📲</span> Contato da Secretaria</div>
-      <div class="info-item">
-        <div class="info-dot"></div>
-        <div class="info-text"><strong>WhatsApp:</strong> +55 11 93724-8448</div>
-      </div>
-      <div class="info-item">
-        <div class="info-dot"></div>
-        <div class="info-text"><strong>Atendimento:</strong> Segunda a Sexta-feira, das 09h00 às 12h00</div>
-      </div>
-      <div class="info-item">
-        <div class="info-dot"></div>
-        <div class="info-text">Encaminhe apenas casos que realmente necessitam de atendimento direto com a secretaria.</div>
-      </div>
+      <div class="info-item"><div class="info-dot"></div><div class="info-text"><strong>WhatsApp:</strong> +55 11 93724-8448</div></div>
+      <div class="info-item"><div class="info-dot"></div><div class="info-text"><strong>Atendimento:</strong> Segunda a Sexta-feira, das 09h às 12h</div></div>
+      <div class="info-item"><div class="info-dot"></div><div class="info-text">Encaminhe apenas casos que realmente necessitam de atendimento direto com a secretaria.</div></div>
     </div>
-
     <div class="msg-grid" id="sec-grid"></div>
   </div>
 
-  <!-- ══ ABA: ASSISTIDO EXALTADO ══ -->
   <div class="tab-panel" id="tab-bravo">
     <div class="sec-title">Assistido Exaltado</div>
     <div class="sec-desc">Mensagens firmes, educadas e profissionais para situações de tensão.</div>
     <div class="msg-grid" id="bravo-grid"></div>
   </div>
 
-  <!-- ══ ABA: AGENDAMENTO ══ -->
   <div class="tab-panel" id="tab-agendamento">
     <div class="sec-title">Agendamento — Painel Administrativo</div>
     <div class="sec-desc">Acesso ao sistema de agendamento da Subseção Santana de Parnaíba.</div>
     <div class="info-block">
       <div class="info-block-title"><span>🗓️</span> Acesso ao Sistema</div>
-      <div class="info-item">
-        <div class="info-dot"></div>
-        <div class="info-text">
-          <strong>Painel Admin:</strong><br>
-          <a href="https://agendamentooab.com.br/staparnaiba/agendamento/area-admin" target="_blank" style="color:var(--blue);text-decoration:none;font-weight:600;word-break:break-all;">agendamentooab.com.br/staparnaiba/agendamento/area-admin</a>
-        </div>
-      </div>
-      <div class="info-item">
-        <div class="info-dot"></div>
-        <div class="info-text"><strong>Login:</strong> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="98f7f9faebecf9e8f9eaf6f9f1faf9d8fff5f9f1f4b6fbf7f5">[email&#160;protected]</a></div>
-      </div>
-      <div class="info-item">
-        <div class="info-dot"></div>
+      <div class="info-item"><div class="info-dot"></div><div class="info-text"><strong>Painel Admin:</strong><br><a href="https://agendamentooab.com.br/staparnaiba/agendamento/area-admin" target="_blank" style="color:var(--blue);text-decoration:none;font-weight:600;word-break:break-all;">agendamentooab.com.br/staparnaiba/agendamento/area-admin</a></div></div>
+      <div class="info-item"><div class="info-dot"></div><div class="info-text"><strong>Login:</strong> santana.parnaiba@oabsp.org.br</div></div>
+      <div class="info-item"><div class="info-dot"></div>
         <div class="info-text" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
           <span><strong>Senha:</strong> <span id="senha-text" style="filter:blur(5px);transition:filter .2s;user-select:none;">••••••••••••</span></span>
           <button onclick="toggleSenha()" id="senha-btn" style="background:var(--blue-light);color:var(--blue);border:none;border-radius:6px;padding:4px 12px;font-size:12px;font-weight:600;cursor:pointer;font-family:var(--ff);">👁 Mostrar</button>
@@ -534,9 +433,7 @@ html,body{min-height:100%;font-family:var(--ff);background:var(--bg);color:var(-
           <div class="msg-card-title">Acessar Painel Agora</div>
           <span class="msg-card-tag tag-blue">Acesso Rápido</span>
         </div>
-        <div class="msg-card-body">
-          <div class="msg-text">Clique abaixo para abrir o painel administrativo de agendamento em uma nova aba.</div>
-        </div>
+        <div class="msg-card-body"><div class="msg-text">Clique abaixo para abrir o painel administrativo de agendamento em uma nova aba.</div></div>
         <div class="msg-card-ft">
           <a href="https://agendamentooab.com.br/staparnaiba/agendamento/area-admin" target="_blank" style="display:flex;align-items:center;gap:6px;padding:7px 14px;border-radius:7px;background:var(--blue);color:#fff;text-decoration:none;font-size:12px;font-weight:600;font-family:var(--ff);">🔗 Abrir Painel Administrativo</a>
         </div>
@@ -544,7 +441,6 @@ html,body{min-height:100%;font-family:var(--ff);background:var(--bg);color:var(-
     </div>
   </div>
 
-  <!-- ══ ABA: RAMAIS ══ -->
   <div class="tab-panel" id="tab-ramais">
     <div class="sec-title">Ramais OAB SP</div>
     <div class="sec-desc">Ramais internos por setor. Clique para expandir e copiar.</div>
@@ -558,9 +454,8 @@ html,body{min-height:100%;font-family:var(--ff);background:var(--bg);color:var(-
     <div class="sectors-grid" id="ramal-grid"></div>
   </div>
 
-</div><!-- /main -->
+</div>
 
-<!-- MODAL -->
 <div id="modal-overlay" onclick="closeModal(event)">
   <div id="modal">
     <div id="modal-hd">
@@ -570,9 +465,7 @@ html,body{min-height:100%;font-family:var(--ff);background:var(--bg);color:var(-
         <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
     </div>
-    <div id="modal-body">
-      <div id="modal-text"></div>
-    </div>
+    <div id="modal-body"><div id="modal-text"></div></div>
     <div id="modal-ft">
       <button class="btn-secondary" onclick="closeModal()">Fechar</button>
       <button class="btn-primary" id="modal-copy-btn" onclick="copyModal()">
@@ -583,215 +476,175 @@ html,body{min-height:100%;font-family:var(--ff);background:var(--bg);color:var(-
   </div>
 </div>
 
-<!-- TOAST -->
 <div id="toast">
   <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
   <span id="toast-msg">Copiado!</span>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 // ══════════════════════════════════════════
-// DATA — MENSAGENS
+// MENSAGENS — Reescritas: linguagem natural, sem emojis no corpo, sem formatação robótica
 // ══════════════════════════════════════════
-
 var MSGS = {
   mensagens: [
     {
-      id:'bv1',
-      icon:'👋',color:'c-blue',tag:'Primeiro Contato',tagColor:'tag-blue',
+      id:'bv1',icon:'👋',color:'c-blue',tag:'Primeiro Contato',tagColor:'tag-blue',
       title:'Boas-vindas — Primeiro Contato',
-      text:`Olá! Seja bem-vindo(a) à *OAB SP — Assistência Judiciária Gratuita*, Subseção Santana de Parnaíba. 😊
+      text:`Olá, seja bem-vindo à OAB SP — Assistência Judiciária Gratuita, Subseção Santana de Parnaíba.
 
-Para que possamos te ajudar da melhor forma, por favor nos conte: *sobre o que você gostaria de falar?* Como podemos te ajudar hoje?`
+Para que possamos orientá-lo da melhor forma, pode nos contar sobre o que você precisa de ajuda?`
     },
     {
-      id:'inf1',
-      icon:'📋',color:'c-green',tag:'Informativo',tagColor:'tag-green',
+      id:'inf1',icon:'📋',color:'c-green',tag:'Informativo',tagColor:'tag-green',
       title:'Informativo Completo — Documentos',
-      text:`*OAB – ASSISTÊNCIA JUDICIÁRIA GRATUITA*
-📍 Subseção Santana de Parnaíba
+      text:`OAB SP — Assistência Judiciária Gratuita
+Subseção Santana de Parnaíba
 
-━━━━━━━━━━━━━━━━━━━━
-🗓️ *Atendimento:* Segunda a Sexta-feira
-🕘 *Horário:* 09h00 às 12h00
-⚠️ *Limite:* 30 pessoas por dia
-_(Senhas apenas para as primeiras 30)_
-━━━━━━━━━━━━━━━━━━━━
+O atendimento presencial ocorre de segunda a sexta-feira, das 09h às 12h, com distribuição de até 30 senhas por dia, no local.
 
-📋 *DOCUMENTOS OBRIGATÓRIOS:*
+Para ser atendido, é necessário apresentar os seguintes documentos:
 
-✅ RG original + CPF
-✅ Comprovante de residência atualizado
-   _(água, luz, gás, telefone ou aluguel)_
-✅ Comprovante de renda de todos da família:
-   • *Registrado:* 3 últimos holerites
-   • *Não registrado:* carteira de trabalho, extrato bancário (3 meses), declaração do empregador ou carta de próprio punho reconhecida em cartório
-✅ Comprovante de patrimônio:
-   _(certidão do valor venal, IPTU, veículos, extrato de poupança – se houver)_
-✅ *Alimentos:* documento da criança + endereço da parte contrária
-✅ *Divórcio:* certidão de casamento atualizada
+RG original e CPF
+Comprovante de residência atualizado (água, luz, gás, telefone ou aluguel)
+Comprovante de renda de todos os membros da família — para trabalhador registrado: os 3 últimos holerites; para não registrado: carteira de trabalho, extrato bancário dos últimos 3 meses, declaração do empregador ou carta de próprio punho reconhecida em cartório
+Comprovante de patrimônio, se houver (certidão de valor venal, IPTU, veículos, extrato de poupança)
+Em casos de alimentos: documento da criança e endereço da parte contrária
+Em casos de divórcio: certidão de casamento atualizada
 
-━━━━━━━━━━━━━━━━━━━━
-❗ *Documentos complementares poderão ser solicitados conforme o caso.*
-🚫 *Sem algum documento acima, o atendimento NÃO será realizado.*
-━━━━━━━━━━━━━━━━━━━━
+Documentos complementares poderão ser solicitados conforme a necessidade do caso. O atendimento não será realizado sem a documentação listada acima.
 
-📍 Av. Tenente Marques, 5297
-   Jardim do Luar (Fazendinha) – Santana de Parnaíba/SP
-   _(Dentro do POUPATEMPO)_
-📞 (11) 4154-5191`
+Av. Tenente Marques, 5297 — Jardim do Luar (Fazendinha), Santana de Parnaíba/SP — dentro do Poupatempo
+Telefone: (11) 4154-5191`
     },
     {
-      id:'audio1',
-      icon:'🔇',color:'c-amber',tag:'Áudio',tagColor:'tag-amber',
+      id:'audio1',icon:'🔇',color:'c-amber',tag:'Áudio',tagColor:'tag-amber',
       title:'Não Recebemos Áudio',
-      text:`Olá! Informamos que *não recebemos mensagens de áudio* por este canal.
+      text:`Olá, tudo bem?
 
-Por favor, envie sua dúvida ou solicitação *por escrito* — texto, documento ou imagem. Assim conseguimos te atender com mais agilidade e eficiência. 📝
+Por este canal não recebemos mensagens de áudio. Por favor, envie sua dúvida ou solicitação por escrito — pode ser texto, imagem ou documento — e faremos o possível para orientá-lo com agilidade.
 
-Obrigado pela compreensão! 😊`
+Obrigado pela compreensão.`
     },
     {
-      id:'horario1',
-      icon:'🕘',color:'c-teal',tag:'Horário',tagColor:'tag-teal',
+      id:'horario1',icon:'🕘',color:'c-teal',tag:'Horário',tagColor:'tag-teal',
       title:'Informação de Horário',
-      text:`Olá! 😊
+      text:`Olá, tudo bem?
 
-Nosso atendimento presencial ocorre de *segunda a sexta-feira*, das *09h00 às 12h00*, com limite de *30 senhas por dia*.
+Nosso atendimento presencial acontece de segunda a sexta-feira, das 09h às 12h, com limite de 30 senhas por dia, distribuídas no local.
 
-As senhas são distribuídas no local, apenas para as primeiras 30 pessoas.
+Av. Tenente Marques, 5297 — Jardim do Luar (Fazendinha), Santana de Parnaíba/SP, dentro do Poupatempo.
+Telefone: (11) 4154-5191
 
-📍 Av. Tenente Marques, 5297 — Jardim do Luar (Fazendinha), Santana de Parnaíba/SP _(Dentro do POUPATEMPO)_
-📞 (11) 4154-5191
-
-Em caso de dúvidas, estamos à disposição! 🙏`
+Qualquer outra dúvida, estamos à disposição.`
     },
     {
-      id:'adv_site',
-      icon:'🌐',color:'c-navy',tag:'Advogado — Site',tagColor:'tag-blue',
+      id:'adv_site',icon:'🌐',color:'c-navy',tag:'Advogado — Site',tagColor:'tag-blue',
       title:'Orientar Advogado — Acessar Site OAB SP',
-      text:`Olá! 😊
+      text:`Olá, tudo bem?
 
-Para tratar do assunto em questão, orientamos que o acesso seja feito diretamente pelo *site oficial da OAB SP*:
+Para tratar do assunto em questão, orientamos que o acesso seja feito diretamente pelo site oficial da OAB SP: www.oabsp.org.br
 
-🔗 *www.oabsp.org.br*
+Lá você encontrará o campo específico referente ao seu assunto, com todas as informações e serviços disponíveis para advogados.
 
-No site, você encontrará o campo específico referente ao seu assunto, com todas as informações e serviços disponíveis para advogados.
-
-Qualquer dúvida que não seja resolvida pelo site, estamos à disposição! 🙏`
+Se a dúvida persistir após consultar o site, estamos à disposição para ajudar.`
     },
     {
-      id:'aguarda1',
-      icon:'⏳',color:'c-purple',tag:'Aguardo',tagColor:'tag-purple',
+      id:'aguarda1',icon:'⏳',color:'c-purple',tag:'Aguardo',tagColor:'tag-purple',
       title:'Aguardando Resposta / Retorno',
-      text:`Olá! 😊
+      text:`Olá, tudo bem?
 
 Seu contato foi recebido. Estamos verificando as informações e retornaremos em breve.
 
-Pedimos gentileza e paciência — nossa equipe está empenhada em oferecer o melhor atendimento possível. 🙏
-
-Obrigado!`
+Pedimos um pouco de paciência — nossa equipe está empenhada em oferecer o melhor atendimento possível. Obrigado.`
     },
   ],
 
   reclamacao: [
     {
-      id:'rec_cpf',
-      icon:'🔎',color:'c-blue',tag:'Passo 1',tagColor:'tag-blue',
+      id:'rec_cpf',icon:'🔎',color:'c-blue',tag:'Passo 1',tagColor:'tag-blue',
       title:'Solicitar CPF — Verificar Nomeação',
-      text:`Olá! Para analisarmos sua situação, por favor nos informe seu *CPF* para que possamos verificar o status da nomeação em nosso sistema.
+      text:`Olá, tudo bem?
 
-Aguardamos seu retorno! 😊`
+Para que possamos analisar sua situação, por favor nos informe seu CPF. Assim conseguimos verificar o status da nomeação vinculada ao seu caso em nosso sistema.
+
+Aguardamos seu retorno.`
     },
     {
-      id:'rec_recusada',
-      icon:'🔄',color:'c-amber',tag:'Nomeação Recusada',tagColor:'tag-amber',
+      id:'rec_recusada',icon:'🔄',color:'c-amber',tag:'Nomeação Recusada',tagColor:'tag-amber',
       title:'Nomeação Recusada — Retornar ao Atendimento',
-      text:`Olá! Verificamos em nosso sistema que a nomeação referente ao seu caso consta como *recusada*.
+      text:`Olá, tudo bem?
 
-Para darmos continuidade, é necessário que você compareça *presencialmente* à nossa unidade para nova triagem e encaminhamento.
+Verificamos em nosso sistema que a nomeação referente ao seu caso consta como recusada.
 
-🗓️ *Atendimento:* Segunda a Sexta-feira, das 09h00 às 12h00
-📍 Av. Tenente Marques, 5297 — Jardim do Luar, Santana de Parnaíba/SP _(POUPATEMPO)_
+Para darmos continuidade, é necessário que você compareça presencialmente à nossa unidade para nova triagem e encaminhamento. O atendimento ocorre de segunda a sexta-feira, das 09h às 12h.
 
-Por favor, traga seus documentos pessoais. Estamos à disposição! 🙏`
+Av. Tenente Marques, 5297 — Jardim do Luar (Fazendinha), Santana de Parnaíba/SP, dentro do Poupatempo.
+
+Por favor, traga seus documentos pessoais. Estamos à disposição.`
     },
     {
-      id:'rec_aceita',
-      icon:'📝',color:'c-red',tag:'Nomeação Aceita',tagColor:'tag-red',
+      id:'rec_aceita',icon:'📝',color:'c-red',tag:'Nomeação Aceita',tagColor:'tag-red',
       title:'Nomeação Aceita — Orientar Protocolo Presencial',
-      text:`Olá! Verificamos que a nomeação em seu processo consta como *aceita* pelo advogado.
+      text:`Olá, tudo bem?
 
-Para formalizar sua reclamação, é necessário que você compareça *presencialmente* à nossa Subseção para protocolar o pedido.
+Verificamos que a nomeação em seu processo consta como aceita pelo advogado.
 
-⚠️ *Reclamações NÃO são aceitas por WhatsApp, e-mail ou qualquer outro meio eletrônico.*
+Para formalizar sua reclamação, é necessário comparecer presencialmente à nossa Subseção. Reclamações não são aceitas por WhatsApp, e-mail ou qualquer outro meio eletrônico.
 
-📌 Ao comparecer, traga:
-• *Reclamação escrita de próprio punho*, descrevendo os fatos detalhadamente
-• *Número do processo*
-• *Senha do processo*
-• *Demais documentos* relacionados ao caso
+Ao comparecer, traga: reclamação escrita de próprio punho descrevendo os fatos, número do processo, senha do processo e demais documentos relacionados ao caso.
 
-🗓️ *Atendimento:* Segunda a Sexta-feira, das 09h00 às 12h00
-📍 Rua Alberto Frediani, 770 — Jardim Frediani, Santana de Parnaíba/SP
-   CEP: 06502-155
-📞 (11) 4154-5191
+Atendimento: segunda a sexta-feira, das 09h às 12h.
+Rua Alberto Frediani, 770 — Jardim Frediani, Santana de Parnaíba/SP — CEP 06502-155
+Telefone: (11) 4154-5191
 
-Estamos à disposição para auxiliá-lo(a)! 🙏`
+Estamos à disposição para auxiliá-lo.`
     },
     {
-      id:'rec_eletronica',
-      icon:'🚫',color:'c-red',tag:'Sem Meio Eletrônico',tagColor:'tag-red',
+      id:'rec_eletronica',icon:'🚫',color:'c-red',tag:'Sem Meio Eletrônico',tagColor:'tag-red',
       title:'Reclamação Eletrônica — Não Aceita',
-      text:`Olá! Informamos que *reclamações contra advogados não podem ser recebidas por este canal* nem por qualquer outro meio eletrônico (WhatsApp, e-mail, etc.).
+      text:`Olá, tudo bem?
 
-O protocolo da reclamação deve ser realizado *presencialmente* na Subseção, trazendo:
+Informamos que reclamações contra advogados não podem ser recebidas por este canal, nem por qualquer outro meio eletrônico como WhatsApp ou e-mail.
 
-📌 Reclamação escrita de próprio punho
-📌 Número e senha do processo
-📌 Documentos relacionados ao caso
+O protocolo deve ser realizado presencialmente na Subseção, com os seguintes documentos: reclamação escrita de próprio punho, número e senha do processo, e documentos relacionados ao caso.
 
-🗓️ *Atendimento:* Segunda a Sexta-feira, das 09h00 às 12h00
-📍 Rua Alberto Frediani, 770 — Jardim Frediani, Santana de Parnaíba/SP
-   CEP: 06502-155
-📞 (11) 4154-5191
+Atendimento: segunda a sexta-feira, das 09h às 12h.
+Rua Alberto Frediani, 770 — Jardim Frediani, Santana de Parnaíba/SP — CEP 06502-155
+Telefone: (11) 4154-5191
 
-Obrigado pela compreensão! 🙏`
+Obrigado pela compreensão.`
     },
     {
-      id:'rec_audio',
-      icon:'🔇',color:'c-amber',tag:'Sem Áudio',tagColor:'tag-amber',
+      id:'rec_audio',icon:'🔇',color:'c-amber',tag:'Sem Áudio',tagColor:'tag-amber',
       title:'Áudio — Reclamação (Solicitar Texto)',
-      text:`Olá! Informamos que *não recebemos mensagens de áudio* por este canal.
+      text:`Olá, tudo bem?
 
-Para que possamos orientá-lo(a) corretamente, pedimos que envie sua mensagem *por escrito*.
+Por este canal não recebemos mensagens de áudio. Para que possamos orientá-lo corretamente, pedimos que envie sua mensagem por escrito.
 
-Lembrando que reclamações contra advogados devem ser protocoladas *presencialmente* na Subseção — não aceitamos por meios eletrônicos. 📝
+Lembrando que reclamações contra advogados devem ser protocoladas presencialmente na Subseção — não aceitamos por meios eletrônicos.
 
-Obrigado pela compreensão!`
+Obrigado pela compreensão.`
     },
   ],
 
   oficios: [
     {
-      id:'of1',
-      icon:'📄',color:'c-navy',tag:'Resposta Padrão',tagColor:'tag-blue',
+      id:'of1',icon:'📄',color:'c-navy',tag:'Resposta Padrão',tagColor:'tag-blue',
       title:'Resposta ao Fórum — Ofício Recebido',
       text:`Prezada(o) Meritíssima(o),
 
-Cumprimentando-o(a) cordialmente, vimos, em atenção ao ofício recebido, apresentar as informações solicitadas e prestar os esclarecimentos necessários referentes ao caso em questão.
+Cumprimentando cordialmente, vimos, em atenção ao ofício recebido, apresentar as informações solicitadas e prestar os esclarecimentos necessários referentes ao caso em questão.
 
 Permanecemos à inteira disposição para quaisquer informações adicionais que se fizerem necessárias.
 
 Atenciosamente,
 
-*OAB SP — Assistência Judiciária Gratuita*
+OAB SP — Assistência Judiciária Gratuita
 Subseção Santana de Parnaíba
-📞 (11) 4154-5191`
+Telefone: (11) 4154-5191`
     },
     {
-      id:'of2',
-      icon:'📬',color:'c-teal',tag:'Acuse de Recebimento',tagColor:'tag-teal',
+      id:'of2',icon:'📬',color:'c-teal',tag:'Acuse de Recebimento',tagColor:'tag-teal',
       title:'Acuse de Recebimento de Ofício',
       text:`Prezado(a),
 
@@ -801,28 +654,26 @@ Qualquer atualização será comunicada oportunamente.
 
 Atenciosamente,
 
-*OAB SP — Assistência Judiciária Gratuita*
+OAB SP — Assistência Judiciária Gratuita
 Subseção Santana de Parnaíba`
     },
     {
-      id:'of4',
-      icon:'📎',color:'c-green',tag:'Curador Especial',tagColor:'tag-green',
+      id:'of4',icon:'📎',color:'c-green',tag:'Curador Especial',tagColor:'tag-green',
       title:'Envio — Ofício de Indicação de Curador Especial',
       text:`Prezado(a),
 
-Em atendimento à demanda de V.Sa., segue em anexo o *Ofício de Indicação de Curador Especial* para as devidas providências.
+Em atendimento à demanda de V.Sa., segue em anexo o Ofício de Indicação de Curador Especial para as devidas providências.
 
 Permanecemos à inteira disposição para quaisquer esclarecimentos adicionais.
 
 Atenciosamente,
 
-*Cássia Kelly*
-Central de Atendimento – CAD
+Cássia Kelly
+Central de Atendimento — CAD
 OAB Subseção Santana de Parnaíba`
     },
     {
-      id:'of3',
-      icon:'🔍',color:'c-purple',tag:'Diligência',tagColor:'tag-purple',
+      id:'of3',icon:'🔍',color:'c-purple',tag:'Diligência',tagColor:'tag-purple',
       title:'Retorno de Diligência ao Fórum',
       text:`Prezada(o) Meritíssima(o),
 
@@ -832,114 +683,100 @@ Colocamo-nos à disposição para quaisquer informações complementares.
 
 Respeitosamente,
 
-*OAB SP — Assistência Judiciária Gratuita*
+OAB SP — Assistência Judiciária Gratuita
 Subseção Santana de Parnaíba
-📞 (11) 4154-5191`
+Telefone: (11) 4154-5191`
     },
   ],
 
   secretaria: [
     {
-      id:'sec1',
-      icon:'📲',color:'c-green',tag:'Encaminhamento',tagColor:'tag-green',
+      id:'sec1',icon:'📲',color:'c-green',tag:'Encaminhamento',tagColor:'tag-green',
       title:'Encaminhar para a Secretaria',
-      text:`Olá! 😊
+      text:`Olá, tudo bem?
 
-Para melhor atendê-lo(a) em sua solicitação, encaminhamos seu contato diretamente à nossa *Secretaria*.
+Para melhor atendê-lo em sua solicitação, encaminhamos seu contato à nossa Secretaria, que poderá orientá-lo com mais precisão.
 
-📲 Por favor, entre em contato através do número:
-*+55 11 93724-8448* (WhatsApp)
-
-Nossa equipe estará pronta para auxiliá-lo(a) com toda atenção e cuidado que você merece. 🙏
+Entre em contato pelo WhatsApp: +55 11 93724-8448
 
 Atenciosamente,
-*OAB SP — Assistência Judiciária Gratuita*
+OAB SP — Assistência Judiciária Gratuita
 Subseção Santana de Parnaíba`
     },
     {
-      id:'sec2',
-      icon:'🗂️',color:'c-blue',tag:'Documentação',tagColor:'tag-blue',
+      id:'sec2',icon:'🗂️',color:'c-blue',tag:'Documentação',tagColor:'tag-blue',
       title:'Encaminhar — Questão Documental',
-      text:`Olá! 😊
+      text:`Olá, tudo bem?
 
-Sua solicitação requer tratamento específico junto à nossa Secretaria, que poderá orientá-lo(a) de forma mais precisa sobre a documentação necessária.
+Sua solicitação requer orientação específica junto à nossa Secretaria, que poderá indicar com precisão a documentação necessária para o seu caso.
 
-📲 Entre em contato diretamente pelo WhatsApp:
-*+55 11 93724-8448*
+Entre em contato pelo WhatsApp: +55 11 93724-8448
+Horário de atendimento: segunda a sexta-feira, das 09h às 12h.
 
-🕘 Horário de atendimento: Segunda a Sexta-feira, das 09h00 às 12h00.
-
-Estamos aqui para ajudar! 🙏`
+Estamos à disposição.`
     },
     {
-      id:'sec3',
-      icon:'⚖️',color:'c-purple',tag:'Processo',tagColor:'tag-purple',
+      id:'sec3',icon:'⚖️',color:'c-purple',tag:'Processo',tagColor:'tag-purple',
       title:'Encaminhar — Questão Processual',
-      text:`Olá! 😊
+      text:`Olá, tudo bem?
 
-Para tratar de questões relacionadas ao seu processo, precisamos encaminhá-lo(a) à nossa Secretaria, que dispõe das informações e acesso necessários para melhor orientá-lo(a).
+Para tratar de questões relacionadas ao seu processo, precisamos encaminhá-lo à nossa Secretaria, que dispõe das informações e do acesso necessários para orientá-lo da forma correta.
 
-📲 Entre em contato pelo WhatsApp:
-*+55 11 93724-8448*
+Entre em contato pelo WhatsApp: +55 11 93724-8448
 
-Pedimos que, ao entrar em contato, já tenha em mãos o *número do processo* e seus *documentos pessoais* para agilizar o atendimento.
+Ao entrar em contato, tenha em mãos o número do processo e seus documentos pessoais para agilizar o atendimento.
 
-Atenciosamente! 🙏`
+Atenciosamente.`
     },
   ],
 
   bravo: [
     {
-      id:'br1',
-      icon:'🛡️',color:'c-amber',tag:'Limite de Conduta',tagColor:'tag-amber',
+      id:'br1',icon:'🛡️',color:'c-amber',tag:'Limite de Conduta',tagColor:'tag-amber',
       title:'Estabelecer Limite — Tom Elevado',
-      text:`Olá! Compreendemos que sua situação pode ser difícil e lamentamos qualquer transtorno.
+      text:`Olá, tudo bem?
 
-No entanto, para que possamos continuar prestando assistência de qualidade, precisamos que a comunicação se mantenha *respeitosa e cordial*.
+Compreendemos que sua situação pode ser difícil e lamentamos qualquer transtorno que tenha enfrentado.
 
-Estamos aqui para ajudar, e faremos tudo ao nosso alcance dentro das nossas atribuições. Pedimos gentileza para que possamos avançar juntos na resolução do seu caso. 🙏`
+Para que possamos continuar prestando uma assistência de qualidade, precisamos que a comunicação se mantenha respeitosa e cordial. Estamos aqui para ajudar dentro de nossas atribuições e faremos tudo o que estiver ao nosso alcance.
+
+Contamos com sua colaboração para avançarmos juntos na resolução do seu caso.`
     },
     {
-      id:'br2',
-      icon:'⛔',color:'c-red',tag:'Encerramento',tagColor:'tag-red',
+      id:'br2',icon:'⛔',color:'c-red',tag:'Encerramento',tagColor:'tag-red',
       title:'Encerrar Atendimento — Conduta Inadequada',
       text:`Prezado(a),
 
 Infelizmente, diante da forma como este atendimento está sendo conduzido, não nos é possível dar continuidade à conversa neste momento.
 
-Nossa equipe está sempre disposta a ajudar, porém o atendimento somente poderá prosseguir com *respeito mútuo*.
-
-Quando desejar retomar o contato de forma cordial, estaremos à disposição.
+Nossa equipe está sempre disposta a ajudar, porém o atendimento só poderá prosseguir com respeito mútuo. Quando desejar retomar o contato de forma cordial, estaremos à disposição.
 
 Atenciosamente,
-*OAB SP — Assistência Judiciária Gratuita*`
+OAB SP — Assistência Judiciária Gratuita`
     },
     {
-      id:'br3',
-      icon:'🤝',color:'c-teal',tag:'Empatia Firme',tagColor:'tag-teal',
+      id:'br3',icon:'🤝',color:'c-teal',tag:'Empatia Firme',tagColor:'tag-teal',
       title:'Empatia com Firmeza',
-      text:`Olá! Entendemos sua frustração e sabemos que enfrentar questões jurídicas pode ser muito desgastante. 💙
+      text:`Olá, tudo bem?
 
-Nossa equipe está genuinamente comprometida em ajudá-lo(a). Mas para que isso seja possível, precisamos de colaboração e respeito durante o atendimento.
+Entendemos sua frustração e sabemos que enfrentar questões jurídicas pode ser muito desgastante.
 
-Podemos continuar? Estamos aqui para encontrar a melhor solução para o seu caso. 🙏`
+Nossa equipe está comprometida em ajudá-lo da melhor forma possível. Para que isso aconteça, precisamos de colaboração e respeito durante o atendimento. Podemos continuar? Estamos aqui para encontrar a melhor solução para o seu caso.`
     },
     {
-      id:'br4',
-      icon:'📌',color:'c-navy',tag:'Reforço de Regras',tagColor:'tag-blue',
+      id:'br4',icon:'📌',color:'c-navy',tag:'Reforço de Regras',tagColor:'tag-blue',
       title:'Informar Limitações do Serviço',
       text:`Prezado(a),
 
-Gostaríamos de esclarecer que nossa atuação segue as *normas e regulamentos da OAB SP*, e nem sempre é possível atender todas as solicitações fora dos procedimentos estabelecidos.
+Gostaríamos de esclarecer que nossa atuação segue as normas e regulamentos da OAB SP, e nem sempre é possível atender solicitações fora dos procedimentos estabelecidos.
 
-Compreendemos que isso pode gerar insatisfação, mas garantimos que trabalhamos com total dedicação dentro das nossas possibilidades.
+Compreendemos que isso pode gerar insatisfação, mas garantimos que trabalhamos com dedicação dentro das nossas possibilidades.
 
-Caso deseje orientação sobre os próximos passos, estamos à disposição. 🙏`
+Caso deseje orientação sobre os próximos passos, estamos à disposição.`
     },
   ]
 };
 
-// RAMAIS DATA
 var RAMAIS = {
   "AJ": ["(11) 3349-7603","(11) 3349-7617","(11) 3349-7620","(11) 3349-7606","(11) 3349-7609","(11) 3349-7600","(11) 3349-7616","(11) 3349-7611","(11) 3349-7608","(11) 3349-7604","(11) 3349-7614","(11) 3349-7605","(11) 3349-7610","(11) 3349-7619","(11) 3349-7618","(11) 3349-7615","(11) 3349-7601","(11) 3349-7607","(11) 3349-7613","(11) 3349-7612"],
   "Almoxarifado": ["(11) 3349-7558","(11) 3349-7597","(11) 3349-7599"],
@@ -997,10 +834,6 @@ var RAMAL_ICONS = {
   "Recepção MP88 - 01":["🚪","#fef3c7"],"Recepção MP88 - 02":["🚪","#fce7f3"],
   "Resgate":["🆘","#fee2e2"],"RH":["👥","#ede9fe"],"SINAD":["🔗","#dbeafe"]
 };
-
-// ══════════════════════════════════════════
-// RENDER
-// ══════════════════════════════════════════
 
 function renderMsgGrid(msgs, containerId) {
   var el = document.getElementById(containerId);
@@ -1066,7 +899,7 @@ function openModal(id) {
 }
 
 function closeModal(e) {
-  if(e && e.target !== document.getElementById('modal-overlay') && e.type==='click' && e.currentTarget === document.getElementById('modal-overlay')) return;
+  if(e && e.target !== document.getElementById('modal-overlay')) return;
   document.getElementById('modal-overlay').classList.remove('open');
   document.body.style.overflow = '';
 }
@@ -1084,10 +917,6 @@ function copyModal() {
     }, 1800);
   });
 }
-
-// ══════════════════════════════════════════
-// RAMAIS
-// ══════════════════════════════════════════
 
 function renderRamais() {
   var grid = document.getElementById('ramal-grid');
@@ -1149,20 +978,12 @@ function filtrarRamais(term) {
   document.getElementById('r-count').textContent=vis+' setor'+(vis!==1?'es':'');
 }
 
-// ══════════════════════════════════════════
-// TABS
-// ══════════════════════════════════════════
-
 function switchTab(name) {
   document.querySelectorAll('.nav-tab').forEach(function(t){ t.classList.remove('active'); });
   document.querySelectorAll('.tab-panel').forEach(function(p){ p.classList.remove('active'); });
   document.querySelector('[data-tab="'+name+'"]').classList.add('active');
   document.getElementById('tab-'+name).classList.add('active');
 }
-
-// ══════════════════════════════════════════
-// TOAST
-// ══════════════════════════════════════════
 
 var _tt;
 function showToast(msg) {
@@ -1172,10 +993,6 @@ function showToast(msg) {
   clearTimeout(_tt);
   _tt = setTimeout(function(){ el.classList.remove('show'); }, 2200);
 }
-
-// ══════════════════════════════════════════
-// CLOCK
-// ══════════════════════════════════════════
 
 function updateClock() {
   var now = new Date();
@@ -1187,17 +1004,7 @@ function updateClock() {
 setInterval(updateClock, 1000);
 updateClock();
 
-// ══════════════════════════════════════════
-// INIT
-// ══════════════════════════════════════════
-
-document.addEventListener('keydown', function(e){
-  if(e.key==='Escape') closeModal();
-});
-
-document.getElementById('modal-overlay').addEventListener('click', function(e){
-  if(e.target===this) closeModal();
-});
+document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeModal({}); });
 
 function toggleSenha() {
   var el = document.getElementById('senha-text');
@@ -1211,9 +1018,6 @@ function toggleSenha() {
     el.style.userSelect = 'text';
     btn.textContent = '🙈 Ocultar';
   }
-}
-function copiarSenha() {
-  // senha removida por segurança
 }
 
 renderMsgGrid(MSGS.mensagens, 'msg-grid');
