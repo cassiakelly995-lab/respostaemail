@@ -355,6 +355,7 @@ html,body{min-height:100%;font-family:var(--ff);background:var(--bg);color:var(-
   <div class="nav-tab" onclick="switchTab('secretaria')" data-tab="secretaria"><span class="ti">📲</span> Encaminhamento</div>
   <div class="nav-tab" onclick="switchTab('bravo')" data-tab="bravo"><span class="ti">🛡️</span> Assistido Exaltado</div>
   <div class="nav-tab" onclick="switchTab('agendamento')" data-tab="agendamento"><span class="ti">🗓️</span> Agendamento</div>
+  <div class="nav-tab" onclick="switchTab('cic')" data-tab="cic"><span class="ti">🏛️</span> CIC Pirapora</div>
   <div class="nav-tab" onclick="switchTab('ramais')" data-tab="ramais"><span class="ti">📞</span> Ramais</div>
 </div>
 
@@ -381,8 +382,9 @@ html,body{min-height:100%;font-family:var(--ff);background:var(--bg);color:var(-
       <div class="oficio-steps">
         <div class="oficio-step"><div class="step-num">1</div><div class="step-txt">Perguntar o CPF do assistido e verificar no sistema se há nomeação vinculada ao caso relatado.</div></div>
         <div class="oficio-step"><div class="step-num">2</div><div class="step-txt">Se a nomeação estiver RECUSADA: retornar o assistido ao atendimento presencial para nova triagem e encaminhamento.</div></div>
-        <div class="oficio-step"><div class="step-num">3</div><div class="step-txt">Se a nomeação estiver ACEITA: orientar o assistido a comparecer presencialmente à Subseção para protocolar a reclamação. Documentos necessários: reclamação escrita de próprio punho + número do processo + senha + demais documentos. NÃO aceitamos por meios eletrônicos.</div></div>
-        <div class="oficio-step"><div class="step-num">4</div><div class="step-txt">Lembrar: não recebemos áudio. Orientar sempre o assistido ou advogado a enviar mensagem em texto.</div></div>
+        <div class="oficio-step"><div class="step-num">3</div><div class="step-txt">Se a nomeação estiver ACEITA e o assistido relata que não consegue contato com o advogado por nenhum meio: solicitar que descreva a situação detalhadamente por escrito (tentativas realizadas, datas, meios utilizados) para que a Subseção possa encaminhar notificação ao advogado solicitando que entre em contato com o assistido.</div></div>
+        <div class="oficio-step"><div class="step-num">4</div><div class="step-txt">Se a nomeação estiver ACEITA e há reclamação sobre a conduta do advogado: orientar o assistido a comparecer presencialmente à Subseção para protocolar a reclamação. Documentos necessários: reclamação escrita de próprio punho + número do processo + senha + demais documentos. NÃO aceitamos por meios eletrônicos.</div></div>
+        <div class="oficio-step"><div class="step-num">5</div><div class="step-txt">Lembrar: não recebemos áudio. Orientar sempre o assistido ou advogado a enviar mensagem em texto.</div></div>
       </div>
     </div>
     <div class="msg-grid" id="rec-grid"></div>
@@ -441,6 +443,34 @@ html,body{min-height:100%;font-family:var(--ff);background:var(--bg);color:var(-
     </div>
   </div>
 
+  <!-- ═══════════════════════════════════════ -->
+  <!-- ABA CIC PIRAPORA DO BOM JESUS           -->
+  <!-- ═══════════════════════════════════════ -->
+  <div class="tab-panel" id="tab-cic">
+    <div class="sec-title">Atendimento — CIC Pirapora do Bom Jesus</div>
+    <div class="sec-desc">Informações e mensagens para o atendimento presencial no CIC de Pirapora do Bom Jesus.</div>
+
+    <div class="info-block">
+      <div class="info-block-title"><span>🏛️</span> Dados do CIC — Pirapora do Bom Jesus</div>
+      <div class="info-item"><div class="info-dot"></div><div class="info-text"><strong>Endereço:</strong> R. Bom Jesus, 106 — Centro, Pirapora do Bom Jesus — SP, CEP 06550-000</div></div>
+      <div class="info-item"><div class="info-dot"></div><div class="info-text"><strong>Atendimento:</strong> Segunda a Sexta-feira, das 09h às 12h, com distribuição de até 30 senhas por dia, no local.</div></div>
+      <div class="info-item"><div class="info-dot"></div><div class="info-text">O atendimento não será realizado sem a documentação completa listada abaixo.</div></div>
+    </div>
+
+    <div class="info-block">
+      <div class="info-block-title"><span>📋</span> Documentação Necessária</div>
+      <div class="info-item"><div class="info-dot"></div><div class="info-text"><strong>RG original e CPF</strong></div></div>
+      <div class="info-item"><div class="info-dot"></div><div class="info-text"><strong>Comprovante de residência atualizado</strong> — água, luz, gás, telefone ou aluguel</div></div>
+      <div class="info-item"><div class="info-dot"></div><div class="info-text"><strong>Comprovante de renda</strong> de todos os membros da família — trabalhador registrado: os 3 últimos holerites; não registrado: carteira de trabalho, extrato bancário dos últimos 3 meses, declaração do empregador ou carta de próprio punho reconhecida em cartório</div></div>
+      <div class="info-item"><div class="info-dot"></div><div class="info-text"><strong>Comprovante de patrimônio</strong>, se houver — certidão de valor venal, IPTU, veículos, extrato de poupança</div></div>
+      <div class="info-item"><div class="info-dot"></div><div class="info-text"><strong>Casos de alimentos:</strong> documento da criança e endereço da parte contrária</div></div>
+      <div class="info-item"><div class="info-dot"></div><div class="info-text"><strong>Casos de divórcio:</strong> certidão de casamento atualizada</div></div>
+      <div class="info-item"><div class="info-dot"></div><div class="info-text">Documentos complementares poderão ser solicitados conforme a necessidade do caso.</div></div>
+    </div>
+
+    <div class="msg-grid" id="cic-grid"></div>
+  </div>
+
   <div class="tab-panel" id="tab-ramais">
     <div class="sec-title">Ramais OAB SP</div>
     <div class="sec-desc">Ramais internos por setor. Clique para expandir e copiar.</div>
@@ -482,9 +512,6 @@ html,body{min-height:100%;font-family:var(--ff);background:var(--bg);color:var(-
 </div>
 
 <script>
-// ══════════════════════════════════════════
-// MENSAGENS — Reescritas: linguagem natural, sem emojis no corpo, sem formatação robótica
-// ══════════════════════════════════════════
 var MSGS = {
   mensagens: [
     {
@@ -581,6 +608,24 @@ Para darmos continuidade, é necessário que você compareça presencialmente à
 Av. Tenente Marques, 5297 — Jardim do Luar (Fazendinha), Santana de Parnaíba/SP, dentro do Poupatempo.
 
 Por favor, traga seus documentos pessoais. Estamos à disposição.`
+    },
+    {
+      id:'rec_aceita_sem_contato',icon:'📵',color:'c-purple',tag:'Sem Contato c/ Advogado',tagColor:'tag-purple',
+      title:'Nomeação Válida — Sem Contato com o Advogado',
+      text:`Olá, tudo bem?
+
+Verificamos que há uma nomeação válida vinculada ao seu processo.
+
+Como você relatou que não está conseguindo entrar em contato com o advogado por nenhum meio, precisamos que você nos descreva a situação com o máximo de detalhes possível, por escrito, informando:
+
+— Quais meios você utilizou para tentar contato (telefone, WhatsApp, e-mail, presencialmente no escritório)?
+— Em quais datas ou períodos você tentou o contato?
+— Houve alguma resposta, mesmo que parcial? Se sim, qual foi e quando?
+— Existe alguma audiência, prazo ou ato processual próximo que torna o contato urgente?
+
+Com essas informações, daremos encaminhamento ao caso e entraremos em contato com o advogado solicitando que o mesmo entre em contato com você para tratar do processo.
+
+Aguardamos seu relato por escrito.`
     },
     {
       id:'rec_aceita',icon:'📝',color:'c-red',tag:'Nomeação Aceita',tagColor:'tag-red',
@@ -774,6 +819,83 @@ Compreendemos que isso pode gerar insatisfação, mas garantimos que trabalhamos
 
 Caso deseje orientação sobre os próximos passos, estamos à disposição.`
     },
+  ],
+
+  cic: [
+    {
+      id:'cic_bv',icon:'👋',color:'c-blue',tag:'Primeiro Contato',tagColor:'tag-blue',
+      title:'Boas-vindas — CIC Pirapora',
+      text:`Olá, seja bem-vindo à OAB SP — Assistência Judiciária Gratuita.
+
+Nosso atendimento em Pirapora do Bom Jesus é realizado presencialmente no CIC, de segunda a sexta-feira, das 09h às 12h, com distribuição de até 30 senhas por dia, no local.
+
+R. Bom Jesus, 106 — Centro, Pirapora do Bom Jesus — SP, CEP 06550-000
+
+Pode nos contar sobre o que você precisa de ajuda?`
+    },
+    {
+      id:'cic_docs',icon:'📋',color:'c-green',tag:'Documentação',tagColor:'tag-green',
+      title:'Informativo Completo — Documentos CIC Pirapora',
+      text:`OAB SP — Assistência Judiciária Gratuita
+Atendimento CIC — Pirapora do Bom Jesus
+
+O atendimento presencial ocorre de segunda a sexta-feira, das 09h às 12h, com distribuição de até 30 senhas por dia, no local.
+
+Para ser atendido, é necessário apresentar os seguintes documentos:
+
+RG original e CPF
+Comprovante de residência atualizado (água, luz, gás, telefone ou aluguel)
+Comprovante de renda de todos os membros da família — para trabalhador registrado: os 3 últimos holerites; para não registrado: carteira de trabalho, extrato bancário dos últimos 3 meses, declaração do empregador ou carta de próprio punho reconhecida em cartório
+Comprovante de patrimônio, se houver (certidão de valor venal, IPTU, veículos, extrato de poupança)
+Em casos de alimentos: documento da criança e endereço da parte contrária
+Em casos de divórcio: certidão de casamento atualizada
+
+Documentos complementares poderão ser solicitados conforme a necessidade do caso. O atendimento não será realizado sem a documentação listada acima.
+
+R. Bom Jesus, 106 — Centro, Pirapora do Bom Jesus — SP, CEP 06550-000`
+    },
+    {
+      id:'cic_horario',icon:'🕘',color:'c-teal',tag:'Horário',tagColor:'tag-teal',
+      title:'Horário de Atendimento — CIC Pirapora',
+      text:`Olá, tudo bem?
+
+Nosso atendimento em Pirapora do Bom Jesus ocorre de segunda a sexta-feira, das 09h às 12h, com limite de 30 senhas por dia, distribuídas presencialmente no local.
+
+R. Bom Jesus, 106 — Centro, Pirapora do Bom Jesus — SP, CEP 06550-000
+
+Qualquer outra dúvida, estamos à disposição.`
+    },
+    {
+      id:'cic_audio',icon:'🔇',color:'c-amber',tag:'Áudio',tagColor:'tag-amber',
+      title:'Não Recebemos Áudio — CIC Pirapora',
+      text:`Olá, tudo bem?
+
+Por este canal não recebemos mensagens de áudio. Por favor, envie sua dúvida ou solicitação por escrito — pode ser texto, imagem ou documento — e faremos o possível para orientá-lo com agilidade.
+
+Obrigado pela compreensão.`
+    },
+    {
+      id:'cic_semDoc',icon:'⚠️',color:'c-amber',tag:'Sem Documentação',tagColor:'tag-amber',
+      title:'Orientar — Atendimento Não Realizado Sem Docs',
+      text:`Olá, tudo bem?
+
+Informamos que o atendimento presencial no CIC de Pirapora do Bom Jesus não poderá ser realizado sem a documentação completa.
+
+Por favor, providencie todos os documentos antes de comparecer, para evitar que o atendimento seja inviabilizado no dia.
+
+Lista de documentos necessários:
+— RG original e CPF
+— Comprovante de residência atualizado
+— Comprovante de renda de todos os membros da família
+— Comprovante de patrimônio, se houver
+— Em casos de alimentos: documento da criança e endereço da parte contrária
+— Em casos de divórcio: certidão de casamento atualizada
+
+Atendimento: segunda a sexta-feira, das 09h às 12h.
+R. Bom Jesus, 106 — Centro, Pirapora do Bom Jesus — SP, CEP 06550-000
+
+Estamos à disposição para esclarecer qualquer dúvida.`
+    },
   ]
 };
 
@@ -867,7 +989,7 @@ function escHtml(t){
 }
 
 function getMsgById(id) {
-  var all = [].concat(MSGS.mensagens, MSGS.reclamacao, MSGS.oficios, MSGS.secretaria, MSGS.bravo);
+  var all = [].concat(MSGS.mensagens, MSGS.reclamacao, MSGS.oficios, MSGS.secretaria, MSGS.bravo, MSGS.cic);
   return all.find(function(m){ return m.id === id; });
 }
 
@@ -1025,6 +1147,7 @@ renderMsgGrid(MSGS.reclamacao, 'rec-grid');
 renderMsgGrid(MSGS.oficios, 'oficio-grid');
 renderMsgGrid(MSGS.secretaria, 'sec-grid');
 renderMsgGrid(MSGS.bravo, 'bravo-grid');
+renderMsgGrid(MSGS.cic, 'cic-grid');
 renderRamais();
 </script>
 </body>
