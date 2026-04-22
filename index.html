@@ -30,6 +30,8 @@
   --purple-bg:#f5f3ff;
   --teal:#0f766e;
   --teal-bg:#f0fdfa;
+  --indigo:#3730a3;
+  --indigo-bg:#eef2ff;
   --ff:'Plus Jakarta Sans',sans-serif;
   --mono:'IBM Plex Mono',monospace;
   --r:12px;
@@ -93,6 +95,10 @@ html,body{min-height:100%;font-family:var(--ff);background:var(--bg);color:var(-
 .nav-tab:hover{color:var(--text2);background:var(--bg)}
 .nav-tab.active{color:var(--blue);border-bottom-color:var(--blue);background:var(--blue-light)}
 .nav-tab .ti{font-size:15px}
+/* Destaque especial na aba do advogado */
+.nav-tab.tab-adv{color:var(--indigo)}
+.nav-tab.tab-adv.active{color:var(--indigo);border-bottom-color:var(--indigo);background:var(--indigo-bg)}
+.nav-tab.tab-adv:not(.active):hover{background:var(--indigo-bg)}
 
 #main{padding:24px 28px 60px;max-width:1360px;margin:0 auto}
 .tab-panel{display:none}
@@ -111,6 +117,15 @@ html,body{min-height:100%;font-family:var(--ff);background:var(--bg);color:var(-
 .alert-banner-title{font-size:13px;font-weight:700;color:#c2410c;margin-bottom:3px}
 .alert-banner-text{font-size:12.5px;color:#7c2d12;line-height:1.55}
 
+/* Banner especial azul índigo para aba advogado */
+.alert-banner-indigo{
+  display:flex;align-items:flex-start;gap:12px;
+  background:#eef2ff;border:1.5px solid #818cf8;
+  border-radius:10px;padding:14px 16px;margin-bottom:20px;
+}
+.alert-banner-indigo .alert-banner-title{color:var(--indigo)}
+.alert-banner-indigo .alert-banner-text{color:#312e81;line-height:1.55;font-size:12.5px}
+
 .msg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px}
 
 .msg-card{
@@ -122,6 +137,10 @@ html,body{min-height:100%;font-family:var(--ff);background:var(--bg);color:var(-
   transition:box-shadow .2s,transform .15s;
 }
 .msg-card:hover{box-shadow:var(--sh2);transform:translateY(-1px)}
+
+/* Card especial para aba advogado — borda indigo sutil */
+.msg-card.card-adv{border-color:#c7d2fe}
+.msg-card.card-adv:hover{box-shadow:0 4px 24px rgba(55,48,163,.12);border-color:#a5b4fc}
 
 .msg-card-hd{
   padding:13px 16px 11px;
@@ -165,9 +184,23 @@ html,body{min-height:100%;font-family:var(--ff);background:var(--bg);color:var(-
 .btn-copy:hover{background:var(--blue-mid)}
 .btn-copy svg{width:13px;height:13px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
 .btn-copy.copied{background:var(--green-bg);color:var(--green)}
+/* Variante do botão copiar para aba advogado */
+.btn-copy-adv{background:var(--indigo-bg);color:var(--indigo)}
+.btn-copy-adv:hover{background:#c7d2fe}
+.btn-copy-adv svg{width:13px;height:13px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.btn-copy-adv.copied{background:var(--green-bg);color:var(--green)}
 .btn-expand{background:var(--surface2);color:var(--text2);border:1px solid var(--border)}
 .btn-expand:hover{background:var(--bg)}
 .btn-expand svg{width:13px;height:13px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+
+/* Indicador de abordagem numérica nos cards do advogado */
+.approach-badge{
+  display:flex;align-items:center;gap:6px;
+  font-size:11px;font-weight:700;color:var(--indigo);
+  background:var(--indigo-bg);border:1px solid #c7d2fe;
+  border-radius:6px;padding:3px 10px;margin-bottom:10px;
+  width:fit-content;
+}
 
 #modal-overlay{
   position:fixed;inset:0;background:rgba(13,21,38,.5);
@@ -219,6 +252,16 @@ html,body{min-height:100%;font-family:var(--ff);background:var(--bg);color:var(-
 .btn-primary:hover{background:#1347c5}
 .btn-primary:active{transform:scale(.97)}
 .btn-primary svg{width:14px;height:14px;stroke:#fff;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.btn-primary-adv{
+  background:var(--indigo);color:#fff;
+  padding:9px 20px;border-radius:8px;border:none;
+  font-family:var(--ff);font-size:13px;font-weight:700;cursor:pointer;
+  display:flex;align-items:center;gap:7px;
+  transition:background .15s,transform .1s;
+}
+.btn-primary-adv:hover{background:#312e81}
+.btn-primary-adv:active{transform:scale(.97)}
+.btn-primary-adv svg{width:14px;height:14px;stroke:#fff;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
 .btn-secondary{
   background:var(--surface2);color:var(--text2);
   padding:9px 16px;border-radius:8px;border:1px solid var(--border);
@@ -284,6 +327,7 @@ html,body{min-height:100%;font-family:var(--ff);background:var(--bg);color:var(-
 .info-item{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid var(--border)}
 .info-item:last-child{border-bottom:none;padding-bottom:0}
 .info-dot{width:7px;height:7px;border-radius:50%;background:var(--blue);flex-shrink:0;margin-top:5px}
+.info-dot-indigo{width:7px;height:7px;border-radius:50%;background:var(--indigo);flex-shrink:0;margin-top:5px}
 .info-text{font-size:13px;color:var(--text2);line-height:1.5}
 .info-text strong{color:var(--text);font-weight:600}
 
@@ -321,12 +365,14 @@ html,body{min-height:100%;font-family:var(--ff);background:var(--bg);color:var(-
 .c-purple{background:var(--purple-bg);color:var(--purple)}
 .c-teal{background:var(--teal-bg);color:var(--teal)}
 .c-navy{background:#eef2ff;color:var(--navy)}
+.c-indigo{background:var(--indigo-bg);color:var(--indigo)}
 .tag-blue{background:var(--blue-light);color:var(--blue)}
 .tag-green{background:var(--green-bg);color:var(--green)}
 .tag-amber{background:var(--amber-bg);color:var(--amber)}
 .tag-red{background:var(--red-bg);color:var(--red)}
 .tag-purple{background:var(--purple-bg);color:var(--purple)}
 .tag-teal{background:var(--teal-bg);color:var(--teal)}
+.tag-indigo{background:var(--indigo-bg);color:var(--indigo)}
 </style>
 </head>
 <body>
@@ -356,17 +402,24 @@ html,body{min-height:100%;font-family:var(--ff);background:var(--bg);color:var(-
   <div class="nav-tab" onclick="switchTab('bravo')" data-tab="bravo"><span class="ti">🛡️</span> Assistido Exaltado</div>
   <div class="nav-tab" onclick="switchTab('agendamento')" data-tab="agendamento"><span class="ti">🗓️</span> Agendamento</div>
   <div class="nav-tab" onclick="switchTab('cic')" data-tab="cic"><span class="ti">🏛️</span> CIC Pirapora</div>
+  <div class="nav-tab tab-adv" onclick="switchTab('advogado')" data-tab="advogado"><span class="ti">📨</span> Contato com Advogado</div>
   <div class="nav-tab" onclick="switchTab('ramais')" data-tab="ramais"><span class="ti">📞</span> Ramais</div>
 </div>
 
 <div id="main">
 
+  <!-- ═══════════════════════════════════════ -->
+  <!-- ABA MENSAGENS                           -->
+  <!-- ═══════════════════════════════════════ -->
   <div class="tab-panel active" id="tab-mensagens">
     <div class="sec-title">Mensagens de Atendimento</div>
     <div class="sec-desc">Copie e envie as mensagens conforme o tipo de atendimento ao assistido.</div>
     <div class="msg-grid" id="msg-grid"></div>
   </div>
 
+  <!-- ═══════════════════════════════════════ -->
+  <!-- ABA RECLAMAÇÃO                          -->
+  <!-- ═══════════════════════════════════════ -->
   <div class="tab-panel" id="tab-reclamacao">
     <div class="sec-title">Reclamação de Advogado</div>
     <div class="sec-desc">Fluxo completo para receber e tratar reclamações contra advogados nomeados.</div>
@@ -390,12 +443,18 @@ html,body{min-height:100%;font-family:var(--ff);background:var(--bg);color:var(-
     <div class="msg-grid" id="rec-grid"></div>
   </div>
 
+  <!-- ═══════════════════════════════════════ -->
+  <!-- ABA OFÍCIOS                             -->
+  <!-- ═══════════════════════════════════════ -->
   <div class="tab-panel" id="tab-oficios">
     <div class="sec-title">Controle de Ofícios</div>
     <div class="sec-desc">Quando o fórum envia ofício, você responde com o texto padrão abaixo.</div>
     <div class="msg-grid" id="oficio-grid"></div>
   </div>
 
+  <!-- ═══════════════════════════════════════ -->
+  <!-- ABA ENCAMINHAMENTO                      -->
+  <!-- ═══════════════════════════════════════ -->
   <div class="tab-panel" id="tab-secretaria">
     <div class="sec-title">Encaminhamento à Secretaria</div>
     <div class="sec-desc">Mensagens para direcionar o assistido ao contato direto com a secretaria.</div>
@@ -408,12 +467,18 @@ html,body{min-height:100%;font-family:var(--ff);background:var(--bg);color:var(-
     <div class="msg-grid" id="sec-grid"></div>
   </div>
 
+  <!-- ═══════════════════════════════════════ -->
+  <!-- ABA ASSISTIDO EXALTADO                  -->
+  <!-- ═══════════════════════════════════════ -->
   <div class="tab-panel" id="tab-bravo">
     <div class="sec-title">Assistido Exaltado</div>
     <div class="sec-desc">Mensagens firmes, educadas e profissionais para situações de tensão.</div>
     <div class="msg-grid" id="bravo-grid"></div>
   </div>
 
+  <!-- ═══════════════════════════════════════ -->
+  <!-- ABA AGENDAMENTO                         -->
+  <!-- ═══════════════════════════════════════ -->
   <div class="tab-panel" id="tab-agendamento">
     <div class="sec-title">Agendamento — Painel Administrativo</div>
     <div class="sec-desc">Acesso ao sistema de agendamento da Subseção Santana de Parnaíba.</div>
@@ -449,14 +514,12 @@ html,body{min-height:100%;font-family:var(--ff);background:var(--bg);color:var(-
   <div class="tab-panel" id="tab-cic">
     <div class="sec-title">Atendimento — CIC Pirapora do Bom Jesus</div>
     <div class="sec-desc">Informações e mensagens para o atendimento presencial no CIC de Pirapora do Bom Jesus.</div>
-
     <div class="info-block">
       <div class="info-block-title"><span>🏛️</span> Dados do CIC — Pirapora do Bom Jesus</div>
       <div class="info-item"><div class="info-dot"></div><div class="info-text"><strong>Endereço:</strong> R. Bom Jesus, 106 — Centro, Pirapora do Bom Jesus — SP, CEP 06550-000</div></div>
       <div class="info-item"><div class="info-dot"></div><div class="info-text"><strong>Atendimento:</strong> Segunda a Sexta-feira, das 09h às 12h, com distribuição de até 30 senhas por dia, no local.</div></div>
       <div class="info-item"><div class="info-dot"></div><div class="info-text">O atendimento não será realizado sem a documentação completa listada abaixo.</div></div>
     </div>
-
     <div class="info-block">
       <div class="info-block-title"><span>📋</span> Documentação Necessária</div>
       <div class="info-item"><div class="info-dot"></div><div class="info-text"><strong>RG original e CPF</strong></div></div>
@@ -467,10 +530,42 @@ html,body{min-height:100%;font-family:var(--ff);background:var(--bg);color:var(-
       <div class="info-item"><div class="info-dot"></div><div class="info-text"><strong>Casos de divórcio:</strong> certidão de casamento atualizada</div></div>
       <div class="info-item"><div class="info-dot"></div><div class="info-text">Documentos complementares poderão ser solicitados conforme a necessidade do caso.</div></div>
     </div>
-
     <div class="msg-grid" id="cic-grid"></div>
   </div>
 
+  <!-- ═══════════════════════════════════════ -->
+  <!-- ABA CONTATO COM ADVOGADO  (NOVA)        -->
+  <!-- ═══════════════════════════════════════ -->
+  <div class="tab-panel" id="tab-advogado">
+    <div class="sec-title">Contato com Advogado</div>
+    <div class="sec-desc">Mensagens institucionais para acionar o advogado nomeado em casos de reclamação ou ausência de contato com o assistido.</div>
+
+    <div class="alert-banner-indigo">
+      <div class="alert-banner-icon">📌</div>
+      <div>
+        <div class="alert-banner-title">Como usar estas mensagens</div>
+        <div class="alert-banner-text">
+          Estas mensagens são voltadas exclusivamente para comunicação da <strong>Subseção com o advogado nomeado</strong>. Substitua os campos em <strong>[colchetes]</strong> antes de enviar: nome do assistido, número do processo e, quando houver, a data da audiência ou prazo processual.<br><br>
+          Use as abordagens em ordem crescente de formalidade conforme a necessidade do caso — da notificação amigável à comunicação formal de providências.
+        </div>
+      </div>
+    </div>
+
+    <div class="info-block">
+      <div class="info-block-title"><span>📋</span> Guia Rápido — Quando usar cada abordagem</div>
+      <div class="info-item"><div class="info-dot-indigo"></div><div class="info-text"><strong>Abordagem 1 — Primeiro Contato:</strong> uso imediato ao receber a reclamação. Tom cordial, solicitação direta de retorno ao assistido.</div></div>
+      <div class="info-item"><div class="info-dot-indigo"></div><div class="info-text"><strong>Abordagem 2 — Pedido de Esclarecimento:</strong> quando o assistido relata situação mais grave ou ausência total de contato. Solicita explicação ao advogado.</div></div>
+      <div class="info-item"><div class="info-dot-indigo"></div><div class="info-text"><strong>Abordagem 3 — Urgência (Prazo/Audiência):</strong> há audiência ou prazo processual próximo. Caráter urgente, mas ainda respeitoso.</div></div>
+      <div class="info-item"><div class="info-dot-indigo"></div><div class="info-text"><strong>Abordagem 4 — Segundo Contato / Sem Retorno:</strong> advogado não respondeu ao primeiro contato. Tom mais firme, solicita posicionamento.</div></div>
+      <div class="info-item"><div class="info-dot-indigo"></div><div class="info-text"><strong>Abordagem 5 — Notificação Formal:</strong> último recurso antes de medidas administrativas. Tom formal e objetivo, registra ciência da situação.</div></div>
+    </div>
+
+    <div class="msg-grid" id="adv-grid"></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- ABA RAMAIS                              -->
+  <!-- ═══════════════════════════════════════ -->
   <div class="tab-panel" id="tab-ramais">
     <div class="sec-title">Ramais OAB SP</div>
     <div class="sec-desc">Ramais internos por setor. Clique para expandir e copiar.</div>
@@ -486,6 +581,7 @@ html,body{min-height:100%;font-family:var(--ff);background:var(--bg);color:var(-
 
 </div>
 
+<!-- ═══════ MODAL ═══════ -->
 <div id="modal-overlay" onclick="closeModal(event)">
   <div id="modal">
     <div id="modal-hd">
@@ -499,7 +595,7 @@ html,body{min-height:100%;font-family:var(--ff);background:var(--bg);color:var(-
     <div id="modal-ft">
       <button class="btn-secondary" onclick="closeModal()">Fechar</button>
       <button class="btn-primary" id="modal-copy-btn" onclick="copyModal()">
-        <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2v1"/></svg>
         Copiar mensagem
       </button>
     </div>
@@ -626,6 +722,29 @@ Como você relatou que não está conseguindo entrar em contato com o advogado p
 Com essas informações, daremos encaminhamento ao caso e entraremos em contato com o advogado solicitando que o mesmo entre em contato com você para tratar do processo.
 
 Aguardamos seu relato por escrito.`
+    },
+    {
+      id:'rec_semResposta_presencial',icon:'🏛️',color:'c-red',tag:'Sem Resposta — Presencial',tagColor:'tag-red',
+      title:'Advogado Não Responde — Orientar Protocolo Presencial',
+      text:`Olá, tudo bem?
+
+Registramos o relato de que o advogado nomeado para o seu caso não está respondendo às tentativas de contato.
+
+Após analisarmos a situação, orientamos que você compareça presencialmente à nossa Subseção para formalizar a reclamação, uma vez que esse tipo de registro não pode ser feito por meios eletrônicos.
+
+Ao comparecer, traga obrigatoriamente:
+
+— Reclamação escrita de próprio punho descrevendo os fatos detalhadamente
+— Número do processo
+— Senha do processo (gerada no momento do seu atendimento na Subseção)
+— Documentos pessoais (RG e CPF)
+— Demais documentos relacionados ao caso, se houver
+
+O atendimento ocorre de segunda a sexta-feira, das 09h às 12h.
+Rua Alberto Frediani, 770 — Jardim Frediani, Santana de Parnaíba/SP — CEP 06502-155
+Telefone: (11) 4154-5191
+
+Caso não possua a senha do processo, ela pode ser obtida na própria Subseção no momento do atendimento presencial. Estamos à disposição.`
     },
     {
       id:'rec_aceita',icon:'📝',color:'c-red',tag:'Nomeação Aceita',tagColor:'tag-red',
@@ -896,6 +1015,96 @@ R. Bom Jesus, 106 — Centro, Pirapora do Bom Jesus — SP, CEP 06550-000
 
 Estamos à disposição para esclarecer qualquer dúvida.`
     },
+  ],
+
+  /* ══════════════════════════════════════════
+     MENSAGENS — CONTATO COM ADVOGADO (NOVA)
+     ══════════════════════════════════════════ */
+  advogado: [
+    {
+      id:'adv1',icon:'📩',color:'c-indigo',tag:'Abordagem 1 — Primeiro Contato',tagColor:'tag-indigo',
+      title:'Primeiro Contato — Solicitar Retorno ao Assistido',
+      text:`Prezado(a) Dr.(a) [Nome do Advogado],
+
+Cumprimentando cordialmente, informamos que o(a) assistido(a) [Nome do Assistido], vinculado(a) ao processo nº [Número do Processo], esteve em contato com esta Subseção informando dificuldade em obter retorno de sua parte.
+
+Solicitamos, com a devida cortesia, que entre em contato com o(a) assistido(a) o mais breve possível para tratar das questões relacionadas ao processo.
+
+Permanecemos à disposição para qualquer esclarecimento.
+
+Atenciosamente,
+OAB SP — Assistência Judiciária Gratuita
+Subseção Santana de Parnaíba
+Telefone: (11) 4154-5191`
+    },
+    {
+      id:'adv2',icon:'🔍',color:'c-indigo',tag:'Abordagem 2 — Pedido de Esclarecimento',tagColor:'tag-indigo',
+      title:'Pedido de Esclarecimento — Situação do Assistido',
+      text:`Prezado(a) Dr.(a) [Nome do Advogado],
+
+Esta Subseção recebeu relato do(a) assistido(a) [Nome do Assistido], referente ao processo nº [Número do Processo], informando que, até a presente data, não houve contato ou retorno por parte do(a) senhor(a).
+
+Gostaríamos de compreender melhor a situação. Pedimos, portanto, que nos informe sobre o andamento do caso e que entre em contato com o(a) assistido(a) para os devidos esclarecimentos.
+
+Contamos com sua colaboração.
+
+Atenciosamente,
+OAB SP — Assistência Judiciária Gratuita
+Subseção Santana de Parnaíba
+Telefone: (11) 4154-5191`
+    },
+    {
+      id:'adv3',icon:'⚡',color:'c-indigo',tag:'Abordagem 3 — Urgência',tagColor:'tag-indigo',
+      title:'Contato Urgente — Prazo ou Audiência Próxima',
+      text:`Prezado(a) Dr.(a) [Nome do Advogado],
+
+Entramos em contato com caráter urgente.
+
+O(A) assistido(a) [Nome do Assistido], processo nº [Número do Processo], relatou a esta Subseção que não está conseguindo contato com o(a) senhor(a). Informamos que há [audiência/prazo processual] agendado(a) para o dia [Data], o que torna o contato com o(a) assistido(a) uma necessidade imediata.
+
+Solicitamos que entre em contato com o(a) assistido(a) com a máxima brevidade possível para tratar das providências necessárias.
+
+Caso haja algum impedimento ou necessidade de suporte por parte desta Subseção, pedimos que nos comunique imediatamente.
+
+Atenciosamente,
+OAB SP — Assistência Judiciária Gratuita
+Subseção Santana de Parnaíba
+Telefone: (11) 4154-5191`
+    },
+    {
+      id:'adv4',icon:'🔔',color:'c-indigo',tag:'Abordagem 4 — Segundo Contato',tagColor:'tag-indigo',
+      title:'Segundo Contato — Sem Retorno ao Primeiro Acionamento',
+      text:`Prezado(a) Dr.(a) [Nome do Advogado],
+
+Esta Subseção realizou contato anterior solicitando retorno ao(à) assistido(a) [Nome do Assistido], vinculado(a) ao processo nº [Número do Processo], porém não identificamos qualquer comunicação até o momento.
+
+Reiteramos a solicitação e informamos que o(a) assistido(a) permanece sem atendimento, o que nos preocupa quanto ao andamento do caso e à continuidade da representação.
+
+Aguardamos seu posicionamento com a maior brevidade possível, a fim de que possamos dar o encaminhamento adequado à situação.
+
+Atenciosamente,
+OAB SP — Assistência Judiciária Gratuita
+Subseção Santana de Parnaíba
+Telefone: (11) 4154-5191`
+    },
+    {
+      id:'adv5',icon:'📋',color:'c-indigo',tag:'Abordagem 5 — Notificação Formal',tagColor:'tag-indigo',
+      title:'Notificação Formal — Ciência da Situação e Providências',
+      text:`Prezado(a) Dr.(a) [Nome do Advogado],
+
+Esta Subseção vem, por meio desta comunicação formal, notificá-lo(a) acerca da situação do(a) assistido(a) [Nome do Assistido], vinculado(a) ao processo nº [Número do Processo].
+
+Conforme registros desta Subseção, o(a) assistido(a) relatou, em [data ou período], a ausência total de contato ou retorno da parte do(a) senhor(a), apesar de múltiplas tentativas realizadas por diferentes meios.
+
+Diante do exposto, notificamos para que adote as providências necessárias e entre em contato com o(a) assistido(a) no prazo de [X dias úteis], sob pena de encaminhamento do caso às instâncias competentes da OAB SP para as medidas administrativas cabíveis.
+
+Registramos que este comunicado está sendo arquivado como parte do histórico do caso.
+
+Atenciosamente,
+OAB SP — Assistência Judiciária Gratuita
+Subseção Santana de Parnaíba
+Telefone: (11) 4154-5191`
+    },
   ]
 };
 
@@ -957,21 +1166,27 @@ var RAMAL_ICONS = {
   "Resgate":["🆘","#fee2e2"],"RH":["👥","#ede9fe"],"SINAD":["🔗","#dbeafe"]
 };
 
-function renderMsgGrid(msgs, containerId) {
+function renderMsgGrid(msgs, containerId, isAdv) {
   var el = document.getElementById(containerId);
   if(!el) return;
-  el.innerHTML = msgs.map(function(m){
-    return '<div class="msg-card">'
+  el.innerHTML = msgs.map(function(m, idx){
+    var cardClass = isAdv ? 'msg-card card-adv' : 'msg-card';
+    var btnClass = isAdv ? 'btn btn-copy-adv' : 'btn btn-copy';
+    var approachBadge = isAdv
+      ? '<div class="approach-badge">📨 Abordagem '+(idx+1)+' de 5</div>'
+      : '';
+    return '<div class="'+cardClass+'">'
       +'<div class="msg-card-hd">'
       +'<div class="msg-card-icon '+m.color+'">'+m.icon+'</div>'
       +'<div class="msg-card-title">'+m.title+'</div>'
       +'<span class="msg-card-tag '+m.tagColor+'">'+m.tag+'</span>'
       +'</div>'
       +'<div class="msg-card-body">'
+      + approachBadge
       +'<div class="msg-text">'+escHtml(m.text)+'</div>'
       +'</div>'
       +'<div class="msg-card-ft">'
-      +'<button class="btn btn-copy" onclick="copyMsg(this,\''+m.id+'\')">'
+      +'<button class="'+btnClass+'" onclick="copyMsg(this,\''+m.id+'\')">'
       +'<svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>'
       +'Copiar'
       +'</button>'
@@ -989,7 +1204,10 @@ function escHtml(t){
 }
 
 function getMsgById(id) {
-  var all = [].concat(MSGS.mensagens, MSGS.reclamacao, MSGS.oficios, MSGS.secretaria, MSGS.bravo, MSGS.cic);
+  var all = [].concat(
+    MSGS.mensagens, MSGS.reclamacao, MSGS.oficios,
+    MSGS.secretaria, MSGS.bravo, MSGS.cic, MSGS.advogado
+  );
   return all.find(function(m){ return m.id === id; });
 }
 
@@ -1002,6 +1220,7 @@ function copyMsg(btn, id) {
     showToast('Mensagem copiada!');
     setTimeout(function(){
       btn.classList.remove('copied');
+      var isAdv = btn.classList.contains('btn-copy-adv');
       btn.innerHTML = '<svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copiar';
     }, 1800);
   });
@@ -1016,6 +1235,10 @@ function openModal(id) {
   document.getElementById('modal-icon').textContent = m.icon;
   document.getElementById('modal-title').textContent = m.title;
   document.getElementById('modal-text').textContent = m.text;
+  // Trocar botão primário para indigo se for mensagem de advogado
+  var copyBtn = document.getElementById('modal-copy-btn');
+  var isAdv = MSGS.advogado.find(function(x){return x.id===id;});
+  copyBtn.className = isAdv ? 'btn-primary-adv' : 'btn-primary';
   document.getElementById('modal-overlay').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
@@ -1032,10 +1255,11 @@ function copyModal() {
   if(!m) return;
   navigator.clipboard.writeText(m.text).then(function(){
     var btn = document.getElementById('modal-copy-btn');
+    var isAdv = MSGS.advogado.find(function(x){return x.id===_curModalId;});
     btn.innerHTML = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Copiado!';
     showToast('Mensagem copiada!');
     setTimeout(function(){
-      btn.innerHTML = '<svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copiar mensagem';
+      btn.innerHTML = '<svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2v1"/></svg>Copiar mensagem';
     }, 1800);
   });
 }
@@ -1142,12 +1366,13 @@ function toggleSenha() {
   }
 }
 
-renderMsgGrid(MSGS.mensagens, 'msg-grid');
-renderMsgGrid(MSGS.reclamacao, 'rec-grid');
-renderMsgGrid(MSGS.oficios, 'oficio-grid');
-renderMsgGrid(MSGS.secretaria, 'sec-grid');
-renderMsgGrid(MSGS.bravo, 'bravo-grid');
-renderMsgGrid(MSGS.cic, 'cic-grid');
+renderMsgGrid(MSGS.mensagens, 'msg-grid', false);
+renderMsgGrid(MSGS.reclamacao, 'rec-grid', false);
+renderMsgGrid(MSGS.oficios, 'oficio-grid', false);
+renderMsgGrid(MSGS.secretaria, 'sec-grid', false);
+renderMsgGrid(MSGS.bravo, 'bravo-grid', false);
+renderMsgGrid(MSGS.cic, 'cic-grid', false);
+renderMsgGrid(MSGS.advogado, 'adv-grid', true);
 renderRamais();
 </script>
 </body>
