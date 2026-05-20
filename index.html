@@ -98,6 +98,9 @@ html,body{min-height:100%;font-family:var(--ff);background:var(--bg);color:var(-
 .nav-tab.tab-adv{color:var(--indigo)}
 .nav-tab.tab-adv.active{color:var(--indigo);border-bottom-color:var(--indigo);background:var(--indigo-bg)}
 .nav-tab.tab-adv:not(.active):hover{background:var(--indigo-bg)}
+.nav-tab.tab-cert{color:#0f766e}
+.nav-tab.tab-cert.active{color:#0f766e;border-bottom-color:#0f766e;background:#f0fdfa}
+.nav-tab.tab-cert:not(.active):hover{background:#f0fdfa}
 
 #main{padding:24px 28px 60px;max-width:1360px;margin:0 auto}
 .tab-panel{display:none}
@@ -123,6 +126,14 @@ html,body{min-height:100%;font-family:var(--ff);background:var(--bg);color:var(-
 }
 .alert-banner-indigo .alert-banner-title{color:var(--indigo)}
 .alert-banner-indigo .alert-banner-text{color:#312e81;line-height:1.55;font-size:12.5px}
+
+.alert-banner-teal{
+  display:flex;align-items:flex-start;gap:12px;
+  background:#f0fdfa;border:1.5px solid #5eead4;
+  border-radius:10px;padding:14px 16px;margin-bottom:20px;
+}
+.alert-banner-teal .alert-banner-title{color:#0f766e;font-size:13px;font-weight:700;margin-bottom:3px}
+.alert-banner-teal .alert-banner-text{color:#134e4a;line-height:1.55;font-size:12.5px}
 
 .msg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px}
 
@@ -322,6 +333,7 @@ html,body{min-height:100%;font-family:var(--ff);background:var(--bg);color:var(-
 .info-item:last-child{border-bottom:none;padding-bottom:0}
 .info-dot{width:7px;height:7px;border-radius:50%;background:var(--blue);flex-shrink:0;margin-top:5px}
 .info-dot-indigo{width:7px;height:7px;border-radius:50%;background:var(--indigo);flex-shrink:0;margin-top:5px}
+.info-dot-teal{width:7px;height:7px;border-radius:50%;background:#0f766e;flex-shrink:0;margin-top:5px}
 .info-text{font-size:13px;color:var(--text2);line-height:1.5}
 .info-text strong{color:var(--text);font-weight:600}
 
@@ -337,7 +349,15 @@ html,body{min-height:100%;font-family:var(--ff);background:var(--bg);color:var(-
   font-size:11px;font-weight:700;
   display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;
 }
+.step-num-teal{
+  width:22px;height:22px;border-radius:50%;
+  background:#0f766e;color:#fff;
+  font-size:11px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;
+}
 .step-txt{font-size:12.5px;color:var(--text2);line-height:1.55}
+.step-txt strong{color:var(--text);font-weight:700}
+.step-txt a{color:#0f766e;font-weight:600;word-break:break-all}
 
 #toast{
   position:fixed;bottom:28px;left:50%;
@@ -369,7 +389,7 @@ html,body{min-height:100%;font-family:var(--ff);background:var(--bg);color:var(-
 .tag-indigo{background:var(--indigo-bg);color:var(--indigo)}
 
 /* ═══════════════════════════════════
-   ESTILOS NOVOS — Telefones do Fórum
+   ESTILOS — Telefones do Fórum
    ═══════════════════════════════════ */
 .forum-grid{
   display:grid;
@@ -438,7 +458,7 @@ html,body{min-height:100%;font-family:var(--ff);background:var(--bg);color:var(-
 }
 
 /* ═══════════════════════════════════
-   ESTILOS NOVOS — Endereços Úteis
+   ESTILOS — Endereços Úteis
    ═══════════════════════════════════ */
 .endereco-section{margin-bottom:28px}
 .endereco-section-title{
@@ -501,6 +521,80 @@ html,body{min-height:100%;font-family:var(--ff);background:var(--bg);color:var(-
 .end-open-24{
   background:var(--green-bg);color:var(--green);
 }
+
+/* ═══════════════════════════════════
+   ESTILOS — Certificado Digital
+   ═══════════════════════════════════ */
+.cert-section-label{
+  font-size:10px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;
+  color:#0f766e;margin-bottom:12px;margin-top:20px;padding-left:2px;
+  display:flex;align-items:center;gap:6px;
+}
+.cert-section-label::before{
+  content:'';display:block;
+  width:3px;height:14px;border-radius:2px;
+  background:#0f766e;flex-shrink:0;
+}
+
+
+
+.cert-steps-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+  gap:12px;
+  margin-bottom:20px;
+}
+.cert-step-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r);overflow:hidden;
+  box-shadow:var(--sh);
+  transition:box-shadow .15s;
+}
+.cert-step-card:hover{box-shadow:var(--sh2)}
+.cert-step-hd{
+  padding:12px 14px 10px;
+  display:flex;align-items:center;gap:9px;
+  background:var(--surface2);border-bottom:1px solid var(--border);
+}
+.cert-step-num{
+  width:28px;height:28px;border-radius:50%;
+  background:#0f766e;color:#fff;
+  font-size:13px;font-weight:800;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.cert-step-title{font-size:13px;font-weight:700;color:var(--text);flex:1}
+.cert-step-tag{
+  font-size:9.5px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;
+  padding:2px 7px;border-radius:20px;white-space:nowrap;
+  background:var(--teal-bg);color:var(--teal);
+}
+.cert-step-body{padding:12px 14px;font-size:12.5px;color:var(--text2);line-height:1.55}
+.cert-step-body strong{color:var(--text);font-weight:600}
+.cert-step-body a{color:#0f766e;font-weight:600;word-break:break-all}
+.cert-step-note{
+  margin-top:8px;padding:8px 10px;
+  background:var(--amber-bg);border:1px solid #fcd34d;
+  border-radius:7px;font-size:11.5px;color:var(--amber);
+}
+
+.cert-link-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  background:#0f766e;color:#fff;
+  border:none;border-radius:8px;padding:8px 16px;
+  font-family:var(--ff);font-size:12px;font-weight:700;
+  cursor:pointer;transition:background .15s;text-decoration:none;
+  margin-top:8px;
+}
+.cert-link-btn:hover{background:#115e59}
+
+.cert-modal-card{
+  background:var(--surface);border:1.5px solid #99f6e4;
+  border-radius:var(--r);padding:16px;
+  box-shadow:var(--sh);margin-bottom:14px;
+}
+.cert-modal-hd{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.cert-modal-icon{font-size:20px}
+.cert-modal-title{font-size:13px;font-weight:700;color:#0f766e}
 </style>
 </head>
 <body>
@@ -531,6 +625,7 @@ html,body{min-height:100%;font-family:var(--ff);background:var(--bg);color:var(-
   <div class="nav-tab" onclick="switchTab('agendamento')" data-tab="agendamento"><span class="ti">🗓️</span> Agendamento</div>
   <div class="nav-tab" onclick="switchTab('cic')" data-tab="cic"><span class="ti">🏛️</span> CIC Pirapora</div>
   <div class="nav-tab tab-adv" onclick="switchTab('advogado')" data-tab="advogado"><span class="ti">📨</span> Contato com Advogado</div>
+  <div class="nav-tab tab-cert" onclick="switchTab('certdigital')" data-tab="certdigital"><span class="ti">🔐</span> Certificado Digital</div>
   <div class="nav-tab" onclick="switchTab('ramais')" data-tab="ramais"><span class="ti">📞</span> Ramais</div>
   <div class="nav-tab" onclick="switchTab('forum')" data-tab="forum"><span class="ti">🏛️</span> Telefones do Fórum</div>
   <div class="nav-tab" onclick="switchTab('enderecos')" data-tab="enderecos"><span class="ti">📍</span> Endereços Úteis</div>
@@ -690,6 +785,27 @@ html,body{min-height:100%;font-family:var(--ff);background:var(--bg);color:var(-
     <div class="msg-grid" id="adv-grid"></div>
   </div>
 
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- ABA CERTIFICADO DIGITAL  ✦ NOVA                           -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <div class="tab-panel" id="tab-certdigital">
+    <div class="sec-title">Certificado Digital — OAB SP</div>
+    <div class="sec-desc">Tudo sobre emissão, modalidades, valores e passo a passo para orientar o advogado.</div>
+
+    <div class="info-block">
+      <div class="info-block-title"><span>🔐</span> Orientação — Certificado Digital OAB SP</div>
+      <div class="info-item"><div class="info-dot-teal"></div><div class="info-text"><strong>Onde encontrar as informações:</strong> todas as informações sobre o Certificado Digital OAB SP — modalidades disponíveis, valores, requisitos e certificadoras parceiras — estão centralizadas no site oficial da OAB SP. O caminho é: <strong>oabsp.org.br → Serviços → Certificado Digital</strong>. É sempre o ponto de partida correto para orientar o advogado.</div></div>
+      <div class="info-item"><div class="info-dot-teal"></div><div class="info-text"><strong>Como funciona o processo:</strong> após consultar o site da OAB SP, o advogado escolhe uma das duas certificadoras parceiras e realiza a compra diretamente pelo site de cada uma. Todo o processo é online — compra, pagamento e agendamento da validação. As certificadoras parceiras são <strong>Certdata</strong> e <strong>Certisign</strong>.</div></div>
+      <div class="info-item"><div class="info-dot-teal"></div><div class="info-text"><strong>Validação:</strong> após a compra, o advogado agenda a validação diretamente pelo site da certificadora escolhida. A validação pode ser feita presencialmente em um ponto de atendimento da certificadora, por videoconferência ou de forma totalmente online — no caso de renovação de certificado ainda válido.</div></div>
+      <div class="info-item"><div class="info-dot-teal"></div><div class="info-text"><strong>⚠️ Importante:</strong> a Subseção <strong>não realiza emissão de certificados digitais</strong> e não possui ponto de atendimento das certificadoras. Oriente sempre o advogado a acessar o site da OAB SP ou contatar diretamente a certificadora de sua preferência para dúvidas específicas sobre o processo.</div></div>
+    </div>
+
+    <!-- Mensagem copiável -->
+    <div class="cert-section-label" style="margin-top:4px">💬 Mensagem para Orientar o Advogado</div>
+    <div class="msg-grid" id="cert-grid"></div>
+
+  </div><!-- fim tab-certdigital -->
+
   <!-- ═══════════════════════════════════════ -->
   <!-- ABA RAMAIS                              -->
   <!-- ═══════════════════════════════════════ -->
@@ -707,7 +823,7 @@ html,body{min-height:100%;font-family:var(--ff);background:var(--bg);color:var(-
   </div>
 
   <!-- ═══════════════════════════════════════════════════ -->
-  <!-- ABA TELEFONES DO FÓRUM  (NOVA)                     -->
+  <!-- ABA TELEFONES DO FÓRUM                             -->
   <!-- ═══════════════════════════════════════════════════ -->
   <div class="tab-panel" id="tab-forum">
     <div class="sec-title">Telefones do Fórum da Comarca</div>
@@ -722,410 +838,160 @@ html,body{min-height:100%;font-family:var(--ff);background:var(--bg);color:var(-
       <div class="info-item"><div class="info-dot"></div><div class="info-text"><strong>Administração — Renata Del Negro:</strong> <span style="font-family:var(--mono);font-size:12px;">(11) 4322-9836</span> &nbsp;·&nbsp; santanaprnbadm@tjsp.jus.br</div></div>
     </div>
 
-    <!-- Varas Cíveis -->
     <div class="forum-section-label">⚖️ Varas Cíveis</div>
     <div class="forum-grid">
       <div class="forum-card">
-        <div class="forum-card-hd">
-          <div class="forum-card-icon c-blue">⚖️</div>
-          <div class="forum-card-title">1ª e 2ª Vara Cível</div>
-          <span class="forum-card-tag tag-blue">Cível</span>
-        </div>
+        <div class="forum-card-hd"><div class="forum-card-icon c-blue">⚖️</div><div class="forum-card-title">1ª e 2ª Vara Cível</div><span class="forum-card-tag tag-blue">Cível</span></div>
         <div class="forum-card-body">
-          <div class="forum-phone-row">
-            <div>
-              <div class="forum-phone-label">Ramal</div>
-              <div class="forum-phone-num">(11) 4322-9839</div>
-            </div>
-            <button class="forum-copy-btn" onclick="copiarForum(this,'(11) 4322-9839')">
-              <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copiar
-            </button>
-          </div>
+          <div class="forum-phone-row"><div><div class="forum-phone-label">Ramal</div><div class="forum-phone-num">(11) 4322-9839</div></div><button class="forum-copy-btn" onclick="copiarForum(this,'(11) 4322-9839')"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copiar</button></div>
           <div class="forum-horario">🕐 <span class="forum-horario-badge">Seg a Sex — 13h às 17h (público) / 09h às 17h (advogado)</span></div>
         </div>
       </div>
-
       <div class="forum-card">
-        <div class="forum-card-hd">
-          <div class="forum-card-icon c-teal">🏛️</div>
-          <div class="forum-card-title">Juizado Especial Cível</div>
-          <span class="forum-card-tag tag-teal">JEC</span>
-        </div>
+        <div class="forum-card-hd"><div class="forum-card-icon c-teal">🏛️</div><div class="forum-card-title">Juizado Especial Cível</div><span class="forum-card-tag tag-teal">JEC</span></div>
         <div class="forum-card-body">
-          <div class="forum-phone-row">
-            <div>
-              <div class="forum-phone-label">Ramal</div>
-              <div class="forum-phone-num">(11) 4322-9822</div>
-            </div>
-            <button class="forum-copy-btn" onclick="copiarForum(this,'(11) 4322-9822')">
-              <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copiar
-            </button>
-          </div>
+          <div class="forum-phone-row"><div><div class="forum-phone-label">Ramal</div><div class="forum-phone-num">(11) 4322-9822</div></div><button class="forum-copy-btn" onclick="copiarForum(this,'(11) 4322-9822')"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copiar</button></div>
           <div class="forum-horario">🕐 <span class="forum-horario-badge">Seg a Sex — 13h às 16h</span></div>
         </div>
       </div>
-
       <div class="forum-card">
-        <div class="forum-card-hd">
-          <div class="forum-card-icon c-indigo">🤝</div>
-          <div class="forum-card-title">CEJUSC — Conciliação e Mediação</div>
-          <span class="forum-card-tag tag-indigo">CEJUSC</span>
-        </div>
+        <div class="forum-card-hd"><div class="forum-card-icon c-indigo">🤝</div><div class="forum-card-title">CEJUSC — Conciliação e Mediação</div><span class="forum-card-tag tag-indigo">CEJUSC</span></div>
         <div class="forum-card-body">
-          <div class="forum-phone-row">
-            <div>
-              <div class="forum-phone-label">Ramal</div>
-              <div class="forum-phone-num">(11) 4322-9833</div>
-            </div>
-            <button class="forum-copy-btn" onclick="copiarForum(this,'(11) 4322-9833')">
-              <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copiar
-            </button>
-          </div>
+          <div class="forum-phone-row"><div><div class="forum-phone-label">Ramal</div><div class="forum-phone-num">(11) 4322-9833</div></div><button class="forum-copy-btn" onclick="copiarForum(this,'(11) 4322-9833')"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copiar</button></div>
         </div>
       </div>
     </div>
 
-    <!-- Criminal e Família -->
     <div class="forum-section-label" style="margin-top:8px">🔴 Criminal, Família e Violência Doméstica</div>
     <div class="forum-grid">
       <div class="forum-card">
-        <div class="forum-card-hd">
-          <div class="forum-card-icon c-red">⚖️</div>
-          <div class="forum-card-title">Vara Criminal / Ofício Criminal</div>
-          <span class="forum-card-tag tag-red">Criminal</span>
-        </div>
-        <div class="forum-card-body">
-          <div class="forum-phone-row">
-            <div>
-              <div class="forum-phone-label">Ramal</div>
-              <div class="forum-phone-num">(11) 4322-9830</div>
-            </div>
-            <button class="forum-copy-btn" onclick="copiarForum(this,'(11) 4322-9830')">
-              <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copiar
-            </button>
-          </div>
-        </div>
+        <div class="forum-card-hd"><div class="forum-card-icon c-red">⚖️</div><div class="forum-card-title">Vara Criminal / Ofício Criminal</div><span class="forum-card-tag tag-red">Criminal</span></div>
+        <div class="forum-card-body"><div class="forum-phone-row"><div><div class="forum-phone-label">Ramal</div><div class="forum-phone-num">(11) 4322-9830</div></div><button class="forum-copy-btn" onclick="copiarForum(this,'(11) 4322-9830')"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copiar</button></div></div>
       </div>
-
       <div class="forum-card">
-        <div class="forum-card-hd">
-          <div class="forum-card-icon c-purple">👨‍👩‍👧</div>
-          <div class="forum-card-title">Vara da Família e das Sucessões</div>
-          <span class="forum-card-tag tag-purple">Família</span>
-        </div>
-        <div class="forum-card-body">
-          <div class="forum-phone-row">
-            <div>
-              <div class="forum-phone-label">Ramal</div>
-              <div class="forum-phone-num">(11) 4322-9839</div>
-            </div>
-            <button class="forum-copy-btn" onclick="copiarForum(this,'(11) 4322-9839')">
-              <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copiar
-            </button>
-          </div>
-        </div>
+        <div class="forum-card-hd"><div class="forum-card-icon c-purple">👨‍👩‍👧</div><div class="forum-card-title">Vara da Família e das Sucessões</div><span class="forum-card-tag tag-purple">Família</span></div>
+        <div class="forum-card-body"><div class="forum-phone-row"><div><div class="forum-phone-label">Ramal</div><div class="forum-phone-num">(11) 4322-9839</div></div><button class="forum-copy-btn" onclick="copiarForum(this,'(11) 4322-9839')"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copiar</button></div></div>
       </div>
-
       <div class="forum-card">
-        <div class="forum-card-hd">
-          <div class="forum-card-icon c-red">🚨</div>
-          <div class="forum-card-title">Anexo — Violência Doméstica e Familiar contra a Mulher</div>
-          <span class="forum-card-tag tag-red">VD</span>
-        </div>
-        <div class="forum-card-body">
-          <div class="forum-phone-row">
-            <div>
-              <div class="forum-phone-label">Ramal</div>
-              <div class="forum-phone-num">(11) 4322-9823</div>
-            </div>
-            <button class="forum-copy-btn" onclick="copiarForum(this,'(11) 4322-9823')">
-              <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copiar
-            </button>
-          </div>
-        </div>
+        <div class="forum-card-hd"><div class="forum-card-icon c-red">🚨</div><div class="forum-card-title">Anexo — Violência Doméstica e Familiar contra a Mulher</div><span class="forum-card-tag tag-red">VD</span></div>
+        <div class="forum-card-body"><div class="forum-phone-row"><div><div class="forum-phone-label">Ramal</div><div class="forum-phone-num">(11) 4322-9823</div></div><button class="forum-copy-btn" onclick="copiarForum(this,'(11) 4322-9823')"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copiar</button></div></div>
       </div>
-
       <div class="forum-card">
-        <div class="forum-card-hd">
-          <div class="forum-card-icon c-purple">📁</div>
-          <div class="forum-card-title">UPJ 1 e 2 CVFAM</div>
-          <span class="forum-card-tag tag-purple">UPJ/CVFAM</span>
-        </div>
-        <div class="forum-card-body">
-          <div class="forum-phone-row">
-            <div>
-              <div class="forum-phone-label">Ramal</div>
-              <div class="forum-phone-num">(11) 4322-9839</div>
-            </div>
-            <button class="forum-copy-btn" onclick="copiarForum(this,'(11) 4322-9839')">
-              <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copiar
-            </button>
-          </div>
-        </div>
+        <div class="forum-card-hd"><div class="forum-card-icon c-purple">📁</div><div class="forum-card-title">UPJ 1 e 2 CVFAM</div><span class="forum-card-tag tag-purple">UPJ/CVFAM</span></div>
+        <div class="forum-card-body"><div class="forum-phone-row"><div><div class="forum-phone-label">Ramal</div><div class="forum-phone-num">(11) 4322-9839</div></div><button class="forum-copy-btn" onclick="copiarForum(this,'(11) 4322-9839')"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copiar</button></div></div>
       </div>
     </div>
 
-    <!-- Administrativo -->
     <div class="forum-section-label" style="margin-top:8px">🟢 Setores Administrativos e Distribuição</div>
     <div class="forum-grid">
       <div class="forum-card">
-        <div class="forum-card-hd">
-          <div class="forum-card-icon c-green">🏢</div>
-          <div class="forum-card-title">Administração</div>
-          <span class="forum-card-tag tag-green">Admin</span>
-        </div>
-        <div class="forum-card-body">
-          <div class="forum-phone-row">
-            <div>
-              <div class="forum-phone-label">Ramal · Renata Del Negro (Mat. 359593)</div>
-              <div class="forum-phone-num">(11) 4322-9836</div>
-            </div>
-            <button class="forum-copy-btn" onclick="copiarForum(this,'(11) 4322-9836')">
-              <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copiar
-            </button>
-          </div>
-        </div>
+        <div class="forum-card-hd"><div class="forum-card-icon c-green">🏢</div><div class="forum-card-title">Administração</div><span class="forum-card-tag tag-green">Admin</span></div>
+        <div class="forum-card-body"><div class="forum-phone-row"><div><div class="forum-phone-label">Ramal · Renata Del Negro (Mat. 359593)</div><div class="forum-phone-num">(11) 4322-9836</div></div><button class="forum-copy-btn" onclick="copiarForum(this,'(11) 4322-9836')"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copiar</button></div></div>
       </div>
-
       <div class="forum-card">
-        <div class="forum-card-hd">
-          <div class="forum-card-icon c-green">📬</div>
-          <div class="forum-card-title">Seção de Distribuição Judicial</div>
-          <span class="forum-card-tag tag-green">Distribuição</span>
-        </div>
-        <div class="forum-card-body">
-          <div class="forum-phone-row">
-            <div>
-              <div class="forum-phone-label">Ramal</div>
-              <div class="forum-phone-num">(11) 4322-9841</div>
-            </div>
-            <button class="forum-copy-btn" onclick="copiarForum(this,'(11) 4322-9841')">
-              <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copiar
-            </button>
-          </div>
-        </div>
+        <div class="forum-card-hd"><div class="forum-card-icon c-green">📬</div><div class="forum-card-title">Seção de Distribuição Judicial</div><span class="forum-card-tag tag-green">Distribuição</span></div>
+        <div class="forum-card-body"><div class="forum-phone-row"><div><div class="forum-phone-label">Ramal</div><div class="forum-phone-num">(11) 4322-9841</div></div><button class="forum-copy-btn" onclick="copiarForum(this,'(11) 4322-9841')"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copiar</button></div></div>
       </div>
-
       <div class="forum-card">
-        <div class="forum-card-hd">
-          <div class="forum-card-icon c-amber">📋</div>
-          <div class="forum-card-title">Seção Adm. de Distribuição de Mandados</div>
-          <span class="forum-card-tag tag-amber">Mandados</span>
-        </div>
-        <div class="forum-card-body">
-          <div class="forum-phone-row">
-            <div>
-              <div class="forum-phone-label">Ramal</div>
-              <div class="forum-phone-num">(11) 4322-9824</div>
-            </div>
-            <button class="forum-copy-btn" onclick="copiarForum(this,'(11) 4322-9824')">
-              <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copiar
-            </button>
-          </div>
-        </div>
+        <div class="forum-card-hd"><div class="forum-card-icon c-amber">📋</div><div class="forum-card-title">Seção Adm. de Distribuição de Mandados</div><span class="forum-card-tag tag-amber">Mandados</span></div>
+        <div class="forum-card-body"><div class="forum-phone-row"><div><div class="forum-phone-label">Ramal</div><div class="forum-phone-num">(11) 4322-9824</div></div><button class="forum-copy-btn" onclick="copiarForum(this,'(11) 4322-9824')"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copiar</button></div></div>
       </div>
-
       <div class="forum-card">
-        <div class="forum-card-hd">
-          <div class="forum-card-icon c-amber">💼</div>
-          <div class="forum-card-title">Setor das Execuções Fiscais</div>
-          <span class="forum-card-tag tag-amber">Fiscal</span>
-        </div>
-        <div class="forum-card-body">
-          <div class="forum-phone-row">
-            <div>
-              <div class="forum-phone-label">Ramal</div>
-              <div class="forum-phone-num">(11) 4322-9831</div>
-            </div>
-            <button class="forum-copy-btn" onclick="copiarForum(this,'(11) 4322-9831')">
-              <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copiar
-            </button>
-          </div>
-        </div>
+        <div class="forum-card-hd"><div class="forum-card-icon c-amber">💼</div><div class="forum-card-title">Setor das Execuções Fiscais</div><span class="forum-card-tag tag-amber">Fiscal</span></div>
+        <div class="forum-card-body"><div class="forum-phone-row"><div><div class="forum-phone-label">Ramal</div><div class="forum-phone-num">(11) 4322-9831</div></div><button class="forum-copy-btn" onclick="copiarForum(this,'(11) 4322-9831')"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copiar</button></div></div>
       </div>
-
       <div class="forum-card">
-        <div class="forum-card-hd">
-          <div class="forum-card-icon c-teal">🧠</div>
-          <div class="forum-card-title">Setor Técnico — Psicólogo e Assistente Social</div>
-          <span class="forum-card-tag tag-teal">Técnico</span>
-        </div>
-        <div class="forum-card-body">
-          <div class="forum-phone-row">
-            <div>
-              <div class="forum-phone-label">Ramal</div>
-              <div class="forum-phone-num">(11) 4322-9832</div>
-            </div>
-            <button class="forum-copy-btn" onclick="copiarForum(this,'(11) 4322-9832')">
-              <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copiar
-            </button>
-          </div>
-        </div>
+        <div class="forum-card-hd"><div class="forum-card-icon c-teal">🧠</div><div class="forum-card-title">Setor Técnico — Psicólogo e Assistente Social</div><span class="forum-card-tag tag-teal">Técnico</span></div>
+        <div class="forum-card-body"><div class="forum-phone-row"><div><div class="forum-phone-label">Ramal</div><div class="forum-phone-num">(11) 4322-9832</div></div><button class="forum-copy-btn" onclick="copiarForum(this,'(11) 4322-9832')"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copiar</button></div></div>
       </div>
     </div>
   </div>
 
   <!-- ═══════════════════════════════════════════════════ -->
-  <!-- ABA ENDEREÇOS ÚTEIS  (NOVA)                        -->
+  <!-- ABA ENDEREÇOS ÚTEIS                                -->
   <!-- ═══════════════════════════════════════════════════ -->
   <div class="tab-panel" id="tab-enderecos">
     <div class="sec-title">Endereços Úteis</div>
     <div class="sec-desc">Órgãos e instituições da região para encaminhamento e referência.</div>
 
-    <!-- SANTANA DE PARNAÍBA -->
     <div class="endereco-section">
       <div class="endereco-section-title">Santana de Parnaíba</div>
       <div class="endereco-grid">
-
         <div class="endereco-card">
-          <div class="endereco-card-hd">
-            <div class="endereco-card-icon c-blue">🏛️</div>
-            <div class="endereco-card-title">Fórum da Comarca</div>
-          </div>
+          <div class="endereco-card-hd"><div class="endereco-card-icon c-blue">🏛️</div><div class="endereco-card-title">Fórum da Comarca</div></div>
           <div class="endereco-card-body">
             <div class="end-row"><span class="end-row-icon">📍</span><div class="end-row-text">R. Prof. Eugênio Teani, 215 — Jardim Prof. Benoa, Santana de Parnaíba/SP</div></div>
             <div class="end-row"><span class="end-row-icon">🕐</span><div class="end-row-text"><span class="end-horario">Seg a Sex — 13h às 17h</span></div></div>
-            <div class="end-row"><span class="end-row-icon">📞</span>
-              <button class="end-copy-phone" onclick="copiarEndereco(this,'(11) 4322-9839')">
-                <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                (11) 4322-9839
-              </button>
-            </div>
+            <div class="end-row"><span class="end-row-icon">📞</span><button class="end-copy-phone" onclick="copiarEndereco(this,'(11) 4322-9839')"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>(11) 4322-9839</button></div>
           </div>
         </div>
-
         <div class="endereco-card">
-          <div class="endereco-card-hd">
-            <div class="endereco-card-icon c-red">🚔</div>
-            <div class="endereco-card-title">Delegacia de Polícia Civil</div>
-          </div>
+          <div class="endereco-card-hd"><div class="endereco-card-icon c-red">🚔</div><div class="endereco-card-title">Delegacia de Polícia Civil</div></div>
           <div class="endereco-card-body">
             <div class="end-row"><span class="end-row-icon">📍</span><div class="end-row-text">R. Álvares de Azevedo, 21 — Jardim Anhembi (Complexo de Segurança), Santana de Parnaíba/SP</div></div>
             <div class="end-row"><span class="end-row-icon">🕐</span><div class="end-row-text"><span class="end-horario end-open-24">Aberta 24 horas</span></div></div>
-            <div class="end-row"><span class="end-row-icon">📞</span>
-              <button class="end-copy-phone" onclick="copiarEndereco(this,'(11) 4154-5053')">
-                <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                (11) 4154-5053
-              </button>
-            </div>
+            <div class="end-row"><span class="end-row-icon">📞</span><button class="end-copy-phone" onclick="copiarEndereco(this,'(11) 4154-5053')"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>(11) 4154-5053</button></div>
           </div>
         </div>
-
         <div class="endereco-card">
-          <div class="endereco-card-hd">
-            <div class="endereco-card-icon c-red">🚨</div>
-            <div class="endereco-card-title">Delegacia de Defesa da Mulher (DDM)</div>
-          </div>
+          <div class="endereco-card-hd"><div class="endereco-card-icon c-red">🚨</div><div class="endereco-card-title">Delegacia de Defesa da Mulher (DDM)</div></div>
           <div class="endereco-card-body">
             <div class="end-row"><span class="end-row-icon">📍</span><div class="end-row-text">R. Álvares de Azevedo, 21 — Jardim Anhembi (prédio vizinho à Delegacia Civil), Santana de Parnaíba/SP</div></div>
             <div class="end-row"><span class="end-row-icon">🕐</span><div class="end-row-text"><span class="end-horario">Seg a Sex — 8h às 18h</span></div></div>
-            <div class="end-row"><span class="end-row-icon">📞</span>
-              <button class="end-copy-phone" onclick="copiarEndereco(this,'(11) 4154-4157')">
-                <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                (11) 4154-4157
-              </button>
-            </div>
+            <div class="end-row"><span class="end-row-icon">📞</span><button class="end-copy-phone" onclick="copiarEndereco(this,'(11) 4154-4157')"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>(11) 4154-4157</button></div>
           </div>
         </div>
-
         <div class="endereco-card">
-          <div class="endereco-card-hd">
-            <div class="endereco-card-icon c-purple">⚖️</div>
-            <div class="endereco-card-title">Promotoria de Justiça</div>
-          </div>
+          <div class="endereco-card-hd"><div class="endereco-card-icon c-purple">⚖️</div><div class="endereco-card-title">Promotoria de Justiça</div></div>
           <div class="endereco-card-body">
             <div class="end-row"><span class="end-row-icon">📍</span><div class="end-row-text">R. Prof. Antônio Olegário Cardoso Filho, 147 — Jardim Prof. Benoa, Santana de Parnaíba/SP</div></div>
             <div class="end-row"><span class="end-row-icon">🕐</span><div class="end-row-text"><span class="end-horario">Ter a Qui — 13h às 17h</span></div></div>
-            <div class="end-row"><span class="end-row-icon">📞</span>
-              <button class="end-copy-phone" onclick="copiarEndereco(this,'(11) 3119-7205')">
-                <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                (11) 3119-7205
-              </button>
-            </div>
+            <div class="end-row"><span class="end-row-icon">📞</span><button class="end-copy-phone" onclick="copiarEndereco(this,'(11) 3119-7205')"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>(11) 3119-7205</button></div>
           </div>
         </div>
-
         <div class="endereco-card">
-          <div class="endereco-card-hd">
-            <div class="endereco-card-icon c-amber">👶</div>
-            <div class="endereco-card-title">Conselho Tutelar</div>
-          </div>
+          <div class="endereco-card-hd"><div class="endereco-card-icon c-amber">👶</div><div class="endereco-card-title">Conselho Tutelar</div></div>
           <div class="endereco-card-body">
             <div class="end-row"><span class="end-row-icon">📍</span><div class="end-row-text">R. José de Alencar, 56 — Centro, Santana de Parnaíba/SP</div></div>
             <div class="end-row"><span class="end-row-icon">🕐</span><div class="end-row-text"><span class="end-horario">Seg a Sex — 8h às 17h</span></div></div>
-            <div class="end-row"><span class="end-row-icon">📞</span>
-              <button class="end-copy-phone" onclick="copiarEndereco(this,'(11) 4156-1113')">
-                <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                (11) 4156-1113
-              </button>
-            </div>
+            <div class="end-row"><span class="end-row-icon">📞</span><button class="end-copy-phone" onclick="copiarEndereco(this,'(11) 4156-1113')"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>(11) 4156-1113</button></div>
           </div>
         </div>
-
         <div class="endereco-card">
-          <div class="endereco-card-hd">
-            <div class="endereco-card-icon c-green">🏙️</div>
-            <div class="endereco-card-title">Prefeitura Municipal</div>
-          </div>
+          <div class="endereco-card-hd"><div class="endereco-card-icon c-green">🏙️</div><div class="endereco-card-title">Prefeitura Municipal</div></div>
           <div class="endereco-card-body">
             <div class="end-row"><span class="end-row-icon">📍</span><div class="end-row-text">Av. Mal. Mascarenhas de Moraes, 1283 — Sítio do Morro, Santana de Parnaíba/SP</div></div>
             <div class="end-row"><span class="end-row-icon">🕐</span><div class="end-row-text"><span class="end-horario">Seg a Sex — 8h às 17h</span></div></div>
-            <div class="end-row"><span class="end-row-icon">📞</span>
-              <button class="end-copy-phone" onclick="copiarEndereco(this,'(11) 4622-7500')">
-                <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                (11) 4622-7500
-              </button>
-            </div>
+            <div class="end-row"><span class="end-row-icon">📞</span><button class="end-copy-phone" onclick="copiarEndereco(this,'(11) 4622-7500')"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>(11) 4622-7500</button></div>
           </div>
         </div>
-
       </div>
     </div>
 
-    <!-- PIRAPORA DO BOM JESUS -->
     <div class="endereco-section">
-      <div class="endereco-section-title" style="--blue:#0f766e">Pirapora do Bom Jesus</div>
+      <div class="endereco-section-title">Pirapora do Bom Jesus</div>
       <div class="endereco-grid">
-
         <div class="endereco-card">
-          <div class="endereco-card-hd">
-            <div class="endereco-card-icon c-red">🚔</div>
-            <div class="endereco-card-title">Delegacia de Polícia Civil — Pirapora</div>
-          </div>
+          <div class="endereco-card-hd"><div class="endereco-card-icon c-red">🚔</div><div class="endereco-card-title">Delegacia de Polícia Civil — Pirapora</div></div>
           <div class="endereco-card-body">
             <div class="end-row"><span class="end-row-icon">📍</span><div class="end-row-text">R. Cônego Henrique, 300 — Jardim Bom Jesus, Pirapora do Bom Jesus/SP</div></div>
             <div class="end-row"><span class="end-row-icon">🕐</span><div class="end-row-text"><span class="end-horario">Seg a Sex — 9h às 19h</span></div></div>
-            <div class="end-row"><span class="end-row-icon">📞</span>
-              <button class="end-copy-phone" onclick="copiarEndereco(this,'(11) 4131-1894')">
-                <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                (11) 4131-1894
-              </button>
-            </div>
+            <div class="end-row"><span class="end-row-icon">📞</span><button class="end-copy-phone" onclick="copiarEndereco(this,'(11) 4131-1894')"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>(11) 4131-1894</button></div>
           </div>
         </div>
-
         <div class="endereco-card">
-          <div class="endereco-card-hd">
-            <div class="endereco-card-icon c-green">🏙️</div>
-            <div class="endereco-card-title">Prefeitura Municipal — Pirapora</div>
-          </div>
+          <div class="endereco-card-hd"><div class="endereco-card-icon c-green">🏙️</div><div class="endereco-card-title">Prefeitura Municipal — Pirapora</div></div>
           <div class="endereco-card-body">
             <div class="end-row"><span class="end-row-icon">📍</span><div class="end-row-text">Jardim Bom Jesus, Pirapora do Bom Jesus/SP</div></div>
             <div class="end-row"><span class="end-row-icon">🕐</span><div class="end-row-text"><span class="end-horario">Seg a Sex — 8h às 17h</span></div></div>
-            <div class="end-row"><span class="end-row-icon">📞</span>
-              <button class="end-copy-phone" onclick="copiarEndereco(this,'(11) 4131-2143')">
-                <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                (11) 4131-2143
-              </button>
-            </div>
+            <div class="end-row"><span class="end-row-icon">📞</span><button class="end-copy-phone" onclick="copiarEndereco(this,'(11) 4131-2143')"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>(11) 4131-2143</button></div>
           </div>
         </div>
-
       </div>
     </div>
   </div>
 
-</div>
+</div><!-- fim #main -->
 
 <!-- MODAL -->
 <div id="modal-overlay" onclick="closeModal(event)">
@@ -1202,6 +1068,9 @@ var MSGS = {
     {id:'adv3',icon:'⚡',color:'c-indigo',tag:'Abordagem 3 — Urgência',tagColor:'tag-indigo',title:'Contato Urgente — Prazo ou Audiência Próxima',text:`Prezado(a) Dr.(a) [Nome do Advogado],\n\nEntramos em contato com caráter urgente.\n\nO(A) assistido(a) [Nome do Assistido], processo nº [Número do Processo], relatou a esta Subseção que não está conseguindo contato com o(a) senhor(a). Informamos que há [audiência/prazo processual] agendado(a) para o dia [Data], o que torna o contato com o(a) assistido(a) uma necessidade imediata.\n\nSolicitamos que entre em contato com o(a) assistido(a) com a máxima brevidade possível para tratar das providências necessárias.\n\nCaso haja algum impedimento ou necessidade de suporte por parte desta Subseção, pedimos que nos comunique imediatamente.\n\nAtenciosamente,\nOAB SP — Assistência Judiciária Gratuita\nSubseção Santana de Parnaíba\nTelefone: (11) 4154-5191`},
     {id:'adv4',icon:'🔔',color:'c-indigo',tag:'Abordagem 4 — Segundo Contato',tagColor:'tag-indigo',title:'Segundo Contato — Sem Retorno ao Primeiro Acionamento',text:`Prezado(a) Dr.(a) [Nome do Advogado],\n\nEsta Subseção realizou contato anterior solicitando retorno ao(à) assistido(a) [Nome do Assistido], vinculado(a) ao processo nº [Número do Processo], porém não identificamos qualquer comunicação até o momento.\n\nReiteramos a solicitação e informamos que o(a) assistido(a) permanece sem atendimento, o que nos preocupa quanto ao andamento do caso e à continuidade da representação.\n\nAguardamos seu posicionamento com a maior brevidade possível, a fim de que possamos dar o encaminhamento adequado à situação.\n\nAtenciosamente,\nOAB SP — Assistência Judiciária Gratuita\nSubseção Santana de Parnaíba\nTelefone: (11) 4154-5191`},
     {id:'adv5',icon:'📋',color:'c-indigo',tag:'Abordagem 5 — Notificação Formal',tagColor:'tag-indigo',title:'Notificação Formal — Ciência da Situação e Providências',text:`Prezado(a) Dr.(a) [Nome do Advogado],\n\nEsta Subseção vem, por meio desta comunicação formal, notificá-lo(a) acerca da situação do(a) assistido(a) [Nome do Assistido], vinculado(a) ao processo nº [Número do Processo].\n\nConforme registros desta Subseção, o(a) assistido(a) relatou, em [data ou período], a ausência total de contato ou retorno da parte do(a) senhor(a), apesar de múltiplas tentativas realizadas por diferentes meios.\n\nDiante do exposto, notificamos para que adote as providências necessárias e entre em contato com o(a) assistido(a) no prazo de [X dias úteis], sob pena de encaminhamento do caso às instâncias competentes da OAB SP para as medidas administrativas cabíveis.\n\nRegistramos que este comunicado está sendo arquivado como parte do histórico do caso.\n\nAtenciosamente,\nOAB SP — Assistência Judiciária Gratuita\nSubseção Santana de Parnaíba\nTelefone: (11) 4154-5191`},
+  ],
+  certdigital: [
+    {id:'cert1',icon:'🔐',color:'c-teal',tag:'Orientação',tagColor:'tag-teal',title:'Certificado Digital — Orientar Advogado',text:`Olá, Dr.(a), tudo bem?\n\nPara informações sobre o Certificado Digital OAB SP, o primeiro passo é acessar o site oficial da OAB SP:\n\n🌐 oabsp.org.br → Serviços → Certificado Digital\n\nNessa página você encontra todas as informações sobre modalidades disponíveis, valores e as certificadoras parceiras. O processo é 100% online — a compra e o agendamento da validação são feitos diretamente pelo site da certificadora de sua preferência, conforme indicado na página.\n\nA validação pode ser presencial em um ponto de atendimento da certificadora, por videoconferência ou online (apenas para renovações de certificados ainda válidos).\n\nImportante: a Subseção não realiza emissão de certificados digitais. Para dúvidas específicas sobre o processo, entre em contato diretamente com a certificadora escolhida.\n\nQualquer outra dúvida, estamos à disposição.`},
   ]
 };
 
@@ -1291,7 +1160,7 @@ function renderMsgGrid(msgs, containerId, isAdv) {
 function escHtml(t){return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 
 function getMsgById(id) {
-  var all=[].concat(MSGS.mensagens,MSGS.reclamacao,MSGS.oficios,MSGS.secretaria,MSGS.bravo,MSGS.cic,MSGS.advogado);
+  var all=[].concat(MSGS.mensagens,MSGS.reclamacao,MSGS.oficios,MSGS.secretaria,MSGS.bravo,MSGS.cic,MSGS.advogado,MSGS.certdigital);
   return all.find(function(m){return m.id===id;});
 }
 
@@ -1479,6 +1348,7 @@ renderMsgGrid(MSGS.secretaria, 'sec-grid', false);
 renderMsgGrid(MSGS.bravo, 'bravo-grid', false);
 renderMsgGrid(MSGS.cic, 'cic-grid', false);
 renderMsgGrid(MSGS.advogado, 'adv-grid', true);
+renderMsgGrid(MSGS.certdigital, 'cert-grid', false);
 renderRamais();
 </script>
 </body>
