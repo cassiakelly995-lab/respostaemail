@@ -135,6 +135,52 @@ html,body{min-height:100%;font-family:var(--ff);background:var(--bg);color:var(-
 .alert-banner-teal .alert-banner-title{color:#0f766e;font-size:13px;font-weight:700;margin-bottom:3px}
 .alert-banner-teal .alert-banner-text{color:#134e4a;line-height:1.55;font-size:12.5px}
 
+/* ── BUSCA GLOBAL ── */
+#global-search-wrap{
+  background:var(--surface);
+  border-bottom:1px solid var(--border);
+  padding:10px 28px;
+}
+.gs-inner{display:flex;align-items:center;gap:10px;max-width:520px}
+#gs-count{font-size:12px;color:var(--text3);font-weight:500;white-space:nowrap}
+.msg-card.gs-hidden{display:none}
+
+/* ── RODAPÉ ── */
+#footer{
+  background:var(--surface);border-top:1px solid var(--border);
+  padding:13px 28px;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:8px;
+}
+.footer-left{font-size:11.5px;color:var(--text3)}
+.footer-left strong{color:var(--navy);font-weight:700}
+.footer-right{font-size:11px;color:var(--text3);font-family:var(--mono)}
+
+/* ── MOBILE ── */
+@media(max-width:640px){
+  #topbar{padding:0 14px;gap:10px;height:52px}
+  .tb-sub,.tb-div,.tb-badge{display:none}
+  .tb-name{font-size:13px}
+  #nav{padding:0 8px}
+  .nav-tab{padding:11px 11px 10px;font-size:12px;gap:5px}
+  .nav-tab .ti{font-size:13px}
+  #global-search-wrap{padding:10px 14px}
+  #main{padding:16px 14px 60px}
+  .msg-grid{grid-template-columns:1fr !important}
+  .sectors-grid{grid-template-columns:1fr}
+  .forum-grid{grid-template-columns:1fr}
+  .endereco-grid{grid-template-columns:1fr}
+  .cert-steps-grid{grid-template-columns:1fr}
+  .sec-title{font-size:16px}
+  #modal{max-height:95vh;border-radius:12px}
+  #modal-hd{padding:14px 16px}
+  #modal-body{padding:14px 16px}
+  #modal-ft{padding:10px 16px;flex-wrap:wrap}
+  .btn-primary,.btn-secondary,.btn-primary-adv{font-size:12px;padding:8px 14px}
+  #footer{padding:10px 14px}
+  .info-block{padding:14px 16px}
+}
+
 .msg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px}
 
 .msg-card{
@@ -480,6 +526,17 @@ html,body{min-height:100%;font-family:var(--ff);background:var(--bg);color:var(-
   <div class="nav-tab" onclick="switchTab('enderecos')" data-tab="enderecos"><span class="ti">📍</span> Endereços Úteis</div>
 </div>
 
+<div id="global-search-wrap">
+  <div class="gs-inner">
+    <div class="sw" style="width:100%;max-width:420px">
+      <svg class="si" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="text" id="gs-input" placeholder="Buscar mensagem em todas as abas..." oninput="buscaGlobal(this.value)" autocomplete="off">
+    </div>
+    <span id="gs-count"></span>
+    <button id="gs-clear" onclick="limparBusca()" style="display:none;background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:6px 12px;font-size:12px;font-weight:600;color:var(--text2);cursor:pointer;font-family:var(--ff);">✕ Limpar</button>
+  </div>
+</div>
+
 <div id="main">
 
   <!-- MENSAGENS -->
@@ -550,7 +607,11 @@ html,body{min-height:100%;font-family:var(--ff);background:var(--bg);color:var(-
       <div class="info-item"><div class="info-dot"></div><div class="info-text"><strong>Login:</strong> santana.parnaiba@oabsp.org.br</div></div>
       <div class="info-item"><div class="info-dot"></div>
         <div class="info-text" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-          <span><strong>Senha:</strong> <span id="senha-text" style="filter:blur(5px);transition:filter .2s;user-select:none;">••••••••••••</span></span>
+          <span><strong>Senha:</strong> 
+            <input id="senha-input" type="password" placeholder="Digite a senha aqui" 
+              style="border:1.5px solid var(--border);border-radius:7px;padding:5px 10px;font-family:var(--mono);font-size:13px;color:var(--text);background:var(--surface2);outline:none;width:180px;transition:border-color .15s;"
+              onfocus="this.style.borderColor='var(--blue)'" onblur="this.style.borderColor='var(--border)'">
+          </span>
           <button onclick="toggleSenha()" id="senha-btn" style="background:var(--blue-light);color:var(--blue);border:none;border-radius:6px;padding:4px 12px;font-size:12px;font-weight:600;cursor:pointer;font-family:var(--ff);">👁 Mostrar</button>
         </div>
       </div>
@@ -726,6 +787,11 @@ html,body{min-height:100%;font-family:var(--ff);background:var(--bg);color:var(-
       </button>
     </div>
   </div>
+</div>
+
+<div id="footer">
+  <div class="footer-left">🏛️ <strong>OAB SP — 247ª Subseção Santana de Parnaíba</strong> &nbsp;·&nbsp; Painel de Atendimento Interno &nbsp;·&nbsp; Última atualização: <strong>junho / 2026</strong></div>
+  <div class="footer-right">v3.0 · uso restrito à equipe</div>
 </div>
 
 <div id="toast">
@@ -1048,17 +1114,63 @@ updateClock();
 document.addEventListener('keydown', function(e){if(e.key==='Escape') closeModal({});});
 
 function toggleSenha() {
-  var el = document.getElementById('senha-text');
+  var el = document.getElementById('senha-input');
   var btn = document.getElementById('senha-btn');
-  if(el.style.filter === 'none') {
-    el.style.filter = 'blur(5px)';
-    el.style.userSelect = 'none';
-    btn.textContent = '👁 Mostrar';
-  } else {
-    el.style.filter = 'none';
-    el.style.userSelect = 'text';
+  if(el.type === 'password') {
+    el.type = 'text';
     btn.textContent = '🙈 Ocultar';
+  } else {
+    el.type = 'password';
+    btn.textContent = '👁 Mostrar';
   }
+}
+
+// ── BUSCA GLOBAL ──
+var _gsAbas = ['mensagens','reclamacao','oficios','secretaria','bravo','cic','advogado','certdigital'];
+var _gsGrids = {'mensagens':'msg-grid','reclamacao':'rec-grid','oficios':'oficio-grid','secretaria':'sec-grid','bravo':'bravo-grid','cic':'cic-grid','advogado':'adv-grid','certdigital':'cert-grid'};
+
+function buscaGlobal(term) {
+  term = (term||'').toLowerCase().trim();
+  var clearBtn = document.getElementById('gs-clear');
+  var countEl  = document.getElementById('gs-count');
+  clearBtn.style.display = term ? 'block' : 'none';
+  if(!term){ countEl.textContent=''; restoreAbas(); return; }
+  var total=0, abasAtivas=[];
+  _gsAbas.forEach(function(aba){
+    var grid = document.getElementById(_gsGrids[aba]);
+    if(!grid) return;
+    var cards = grid.querySelectorAll('.msg-card');
+    var visiveis=0;
+    cards.forEach(function(card){
+      var txt = card.textContent.toLowerCase();
+      var match = txt.indexOf(term)>=0;
+      card.classList.toggle('gs-hidden',!match);
+      if(match){ visiveis++; total++; }
+    });
+    if(visiveis>0) abasAtivas.push(aba);
+  });
+  // Ativar primeira aba com resultado
+  if(abasAtivas.length>0){
+    document.querySelectorAll('.nav-tab').forEach(function(t){t.classList.remove('active');});
+    document.querySelectorAll('.tab-panel').forEach(function(p){p.classList.remove('active');});
+    document.querySelector('[data-tab="'+abasAtivas[0]+'"]').classList.add('active');
+    document.getElementById('tab-'+abasAtivas[0]).classList.add('active');
+  }
+  countEl.textContent = total>0 ? total+' resultado'+(total!==1?'s':'') : 'Nenhum resultado';
+  countEl.style.color = total>0 ? 'var(--green)' : 'var(--red)';
+}
+
+function restoreAbas(){
+  _gsAbas.forEach(function(aba){
+    var grid = document.getElementById(_gsGrids[aba]);
+    if(!grid) return;
+    grid.querySelectorAll('.msg-card').forEach(function(c){c.classList.remove('gs-hidden');});
+  });
+}
+
+function limparBusca(){
+  document.getElementById('gs-input').value='';
+  buscaGlobal('');
 }
 
 renderMsgGrid(MSGS.mensagens, 'msg-grid', false);
