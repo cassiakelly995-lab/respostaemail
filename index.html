@@ -1071,17 +1071,25 @@ function compartilharCartao(btn) {
   if(d.horario) texto += '🕐 '+d.horario+'\n';
   texto += '\nOAB SP — 247ª Subseção Santana de Parnaíba';
 
-  if(navigator.share) {
-    navigator.share({title: d.nome, text: texto}).catch(function(){});
-  } else {
-    navigator.clipboard.writeText(texto).then(function(){
-      var orig = btn.innerHTML;
-      btn.classList.add('copied');
-      btn.innerHTML = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Copiado!';
-      showToast('Cartão copiado — cole para compartilhar');
-      setTimeout(function(){ btn.classList.remove('copied'); btn.innerHTML = orig; }, 1800);
-    });
+  var orig = btn.innerHTML;
+  function feedback(msg){
+    btn.classList.add('copied');
+    btn.innerHTML = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Copiado!';
+    showToast(msg);
+    setTimeout(function(){ btn.classList.remove('copied'); btn.innerHTML = orig; }, 1800);
   }
+
+  // Copia sempre para a área de transferência, independente do dispositivo
+  var copiaPromise = (navigator.clipboard && navigator.clipboard.writeText)
+    ? navigator.clipboard.writeText(texto).catch(function(){})
+    : Promise.resolve();
+
+  copiaPromise.then(function(){
+    // Abre o WhatsApp já com a mensagem pronta para escolher o contato
+    var urlZap = 'https://wa.me/?text=' + encodeURIComponent(texto);
+    window.open(urlZap, '_blank');
+    feedback('Cartão copiado e WhatsApp aberto');
+  });
 }
 
 function baixarVCard(btn) {
